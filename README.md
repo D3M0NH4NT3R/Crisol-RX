@@ -2,9 +2,9 @@
 
 **Gestor portable de vulnerabilidades para pentesters** — por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
 
-🌐 **Web del proyecto:** https://d3m0nh4nt3r.github.io/Crisol-RX/
+🌐 **Web del proyecto:** https://d3m0nh4nt3r.github.io/crisol-rx/
 
-⤓ **Descarga:** [última versión](https://github.com/D3M0NH4NT3R/crisol-rx/releases/latest) (Windows · Linux · macOS)
+⤓ **Descarga:** [última versión](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest) (Windows · Linux · macOS)
 
 ## ¿Qué es?
 
@@ -24,7 +24,7 @@ Una herramienta para gestionar hallazgos de pentesting sin fricción: binario ú
 
 ## Uso rápido
 
-1. Descarga el binario de tu sistema desde [Releases](https://github.com/D3M0NH4NT3R/crisol-rx/releases/latest)
+1. Descarga el binario de tu sistema desde [Releases](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
 2. Ejecútalo (`chmod +x crisol-*` en macOS/Linux) — se abre en `http://127.0.0.1:8723`
 3. Entra como `admin` con la contraseña que muestra la consola en el primer arranque
 

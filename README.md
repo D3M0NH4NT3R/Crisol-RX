@@ -2,7 +2,7 @@
 
 **Gestor portable de vulnerabilidades para pentesters** — por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
 
-🌐 **Web del proyecto:** https://d3m0nh4nt3r.github.io/crisol-rx/
+🌐 **Web del proyecto:** https://d3m0nh4nt3r.github.io/Crisol-RX/
 
 ⤓ **Descarga:** [última versión](https://github.com/D3M0NH4NT3R/crisol-rx/releases/latest) (Windows · Linux · macOS)
 

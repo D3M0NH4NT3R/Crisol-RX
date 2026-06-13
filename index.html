@@ -414,11 +414,13 @@
         justify-content: center
       }
 
-      .nav-links .theme-btn {
+      .nav-links .theme-btn,
+      .nav-links .lang-btn {
         display: none
       }
 
-      #themeBtnM {
+      #themeBtnM,
+      #langBtnM {
         display: flex !important
       }
     }
@@ -445,6 +447,34 @@
     }
 
     .theme-btn:active {
+      transform: scale(.92)
+    }
+
+    /* language toggle */
+    .lang-btn {
+      height: 38px;
+      min-width: 42px;
+      padding: 0 10px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: transform .2s var(--spring), border-color .15s, background .3s
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent-dim);
+      transform: scale(1.06)
+    }
+
+    .lang-btn:active {
       transform: scale(.92)
     }
 
@@ -1872,13 +1902,16 @@
       </a>
       <div class="nav-right" style="display:flex;align-items:center;gap:10px">
         <div class="nav-links" id="navLinks">
-          <a href="#features">Características</a>
-          <a href="#roles">Roles</a>
-          <a href="cheatsheet.html">Guía rápida</a>
-          <a href="#contact">Reportar bug</a>
-          <a href="#download" class="btn btn-primary"><span class="btn-label">⤓ Descargar</span></a>
+          <a href="#features" data-i18n="nav.features">Características</a>
+          <a href="#roles" data-i18n="nav.roles">Roles</a>
+          <a href="cheatsheet.html" data-i18n="nav.quickguide">Guía rápida</a>
+          <a href="#contact" data-i18n="nav.report">Reportar bug</a>
+          <a href="#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓ Descargar</span></a>
+          <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
           <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
         </div>
+        <button class="lang-btn" id="langBtnM" title="Idioma / Language" aria-label="Idioma / Language"
+          style="display:none">ES</button>
         <button class="theme-btn" id="themeBtnM" title="Cambiar tema" aria-label="Cambiar tema"
           style="display:none">🌙</button>
         <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
@@ -1909,65 +1942,65 @@
           <circle cx="24" cy="17.5" r="2.1" fill="#15e6a0" />
           <path d="M24 4 L24 1" stroke="#15e6a0" stroke-width="2" stroke-linecap="round" />
         </svg></div>
-      <h1>Gestiona vulnerabilidades,<br><span class="grad">sin fricción.</span></h1>
-      <p class="tag"><b>Crisol-RX</b> es un gestor de vulnerabilidades <b>portable</b> para pentesters: un solo archivo,
+      <h1 data-i18n="hero.title">Gestiona vulnerabilidades,<br><span class="grad">sin fricción.</span></h1>
+      <p class="tag" data-i18n="hero.tag"><b>Crisol-RX</b> es un gestor de vulnerabilidades <b>portable</b> para pentesters: un solo archivo,
         cero instalación y tus datos viajan contigo. Workspaces por cliente, roles, ciclo de retest e informes listos
         para entregar.</p>
       <div class="cta">
-        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload"><span class="btn-label">⤓
+        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload"><span class="btn-label" data-i18n="btn.download">⤓
             Descargar</span></a>
-        <a href="cheatsheet.html" class="btn btn-ghost btn-lg">📋 Guía rápida</a>
+        <a href="cheatsheet.html" class="btn btn-ghost btn-lg" data-i18n="btn.quickguide">📋 Guía rápida</a>
       </div>
-      <div class="os-note" id="osNote">Detectando tu sistema…</div>
+      <div class="os-note" id="osNote" data-i18n="hero.osDetecting">Detectando tu sistema…</div>
       <div class="badges">
-        <div class="badge"><b>1</b> solo archivo</div>
-        <div class="badge"><b>0</b> instalación · 0 dependencias</div>
-        <div class="badge"><b>100%</b> offline</div>
-        <div class="badge">Windows · Linux · macOS</div>
+        <div class="badge" data-i18n="badge.oneFile"><b>1</b> solo archivo</div>
+        <div class="badge" data-i18n="badge.zeroInstall"><b>0</b> instalación · 0 dependencias</div>
+        <div class="badge" data-i18n="badge.offline"><b>100%</b> offline</div>
+        <div class="badge" data-i18n="badge.platforms">Windows · Linux · macOS</div>
       </div>
 
       <div class="shot reveal">
         <div class="bar"><i></i><i></i><i></i><span class="bar-url">crisol-rx · 127.0.0.1:8723</span></div>
         <div class="body">
           <div class="side">
-            <div class="side-h">Workspaces</div>
+            <div class="side-h" data-i18n="shot.workspaces">Workspaces</div>
             <div class="ws on"><span class="dot" style="background:var(--accent)"></span>Acme Corp</div>
             <div class="ws"><span class="dot" style="background:var(--accent2)"></span>FinBank</div>
             <div class="ws"><span class="dot" style="background:var(--high)"></span>RetailX</div>
             <div class="ws"><span class="dot" style="background:var(--low)"></span>HealthNet</div>
-            <div class="side-h" style="margin-top:14px">Estado</div>
-            <div class="ws sm"><span class="dot" style="background:var(--crit)"></span>Abiertas</div>
-            <div class="ws sm"><span class="dot" style="background:var(--med)"></span>En retest</div>
+            <div class="side-h" style="margin-top:14px" data-i18n="shot.status">Estado</div>
+            <div class="ws sm"><span class="dot" style="background:var(--crit)"></span><span data-i18n="shot.open">Abiertas</span></div>
+            <div class="ws sm"><span class="dot" style="background:var(--med)"></span><span data-i18n="shot.inRetest">En retest</span></div>
           </div>
           <div class="main">
             <div class="stats">
-              <div class="st"><b data-count="42">0</b><small>Activas</small></div>
-              <div class="st c"><b data-count="7">0</b><small>Críticas</small></div>
-              <div class="st h"><b data-count="12">0</b><small>Altas</small></div>
-              <div class="st s"><b data-count="18">0</b><small>Resueltas</small></div>
+              <div class="st"><b data-count="42">0</b><small data-i18n="shot.active">Activas</small></div>
+              <div class="st c"><b data-count="7">0</b><small data-i18n="shot.critical">Críticas</small></div>
+              <div class="st h"><b data-count="12">0</b><small data-i18n="shot.high">Altas</small></div>
+              <div class="st s"><b data-count="18">0</b><small data-i18n="shot.resolved">Resueltas</small></div>
             </div>
             <div class="charts">
-              <div class="donut"><span class="donut-c"><b id="donutPct">77</b><small>cobertura</small></span></div>
+              <div class="donut"><span class="donut-c"><b id="donutPct">77</b><small data-i18n="shot.coverage">cobertura</small></span></div>
               <div class="bars">
-                <div class="barwrap"><span class="barlbl">Crítica</span>
+                <div class="barwrap"><span class="barlbl" data-i18n="shot.sevCritical">Crítica</span>
                   <div class="barline"></div>
                 </div>
-                <div class="barwrap"><span class="barlbl">Alta</span>
+                <div class="barwrap"><span class="barlbl" data-i18n="shot.sevHigh">Alta</span>
                   <div class="barline"></div>
                 </div>
-                <div class="barwrap"><span class="barlbl">Media</span>
+                <div class="barwrap"><span class="barlbl" data-i18n="shot.sevMedium">Media</span>
                   <div class="barline"></div>
                 </div>
               </div>
             </div>
             <div class="vlist">
-              <div class="vrow"><span class="sev crit">CRIT</span><span class="vname">SQLi en /api/login</span><span
+              <div class="vrow"><span class="sev crit" data-i18n="shot.tagCrit">CRIT</span><span class="vname" data-i18n="shot.v1">SQLi en /api/login</span><span
                   class="vid">ACM-014</span></div>
-              <div class="vrow"><span class="sev high">ALTA</span><span class="vname">XSS reflejado en
+              <div class="vrow"><span class="sev high" data-i18n="shot.tagHigh">ALTA</span><span class="vname" data-i18n="shot.v2">XSS reflejado en
                   buscador</span><span class="vid">ACM-021</span></div>
-              <div class="vrow"><span class="sev med">MEDIA</span><span class="vname">Cabeceras de seguridad
+              <div class="vrow"><span class="sev med" data-i18n="shot.tagMed">MEDIA</span><span class="vname" data-i18n="shot.v3">Cabeceras de seguridad
                   ausentes</span><span class="vid">ACM-027</span></div>
-              <div class="vrow done"><span class="sev ok">OK</span><span class="vname">IDOR en exportación</span><span
+              <div class="vrow done"><span class="sev ok">OK</span><span class="vname" data-i18n="shot.v4">IDOR en exportación</span><span
                   class="vid">ACM-009</span></div>
             </div>
           </div>
@@ -1978,67 +2011,67 @@
 
   <section id="features">
     <div class="wrap">
-      <h2 class="reveal">Todo lo que necesita un engagement</h2>
-      <p class="sub reveal">Desde el primer hallazgo hasta el informe final, en una herramienta que te llevas a
+      <h2 class="reveal" data-i18n="feat.title">Todo lo que necesita un engagement</h2>
+      <p class="sub reveal" data-i18n="feat.sub">Desde el primer hallazgo hasta el informe final, en una herramienta que te llevas a
         cualquier máquina.</p>
       <div class="feat">
         <div class="card reveal" style="--i:0">
           <div class="ico">🗂️</div>
-          <h3>Workspaces y proyectos</h3>
-          <p>Separa cada cliente o engagement en su propio workspace, con proyectos y alcance independientes.</p>
+          <h3 data-i18n="feat.f1.t">Workspaces y proyectos</h3>
+          <p data-i18n="feat.f1.d">Separa cada cliente o engagement en su propio workspace, con proyectos y alcance independientes.</p>
         </div>
         <div class="card reveal" style="--i:1">
           <div class="ico">🐛</div>
-          <h3>Vulnerabilidades completas</h3>
-          <p>Severidad, CVSS, CWE, estado, activo, descripción, impacto, remediación y evidencia técnica.</p>
+          <h3 data-i18n="feat.f2.t">Vulnerabilidades completas</h3>
+          <p data-i18n="feat.f2.d">Severidad, CVSS, CWE, estado, activo, descripción, impacto, remediación y evidencia técnica.</p>
         </div>
         <div class="card reveal" style="--i:2">
           <div class="ico">📸</div>
-          <h3>Pruebas de concepto</h3>
-          <p>Adjunta capturas con su descripción a cada hallazgo. Viajan contigo y se incrustan en el informe.</p>
+          <h3 data-i18n="feat.f3.t">Pruebas de concepto</h3>
+          <p data-i18n="feat.f3.d">Adjunta capturas con su descripción a cada hallazgo. Viajan contigo y se incrustan en el informe.</p>
         </div>
         <div class="card reveal" style="--i:0">
           <div class="ico">📊</div>
-          <h3>Panel global</h3>
-          <p>Métricas de severidad y por workspace, filtros en vivo y vista agrupada por activo afectado.</p>
+          <h3 data-i18n="feat.f4.t">Panel global</h3>
+          <p data-i18n="feat.f4.d">Métricas de severidad y por workspace, filtros en vivo y vista agrupada por activo afectado.</p>
         </div>
         <div class="card reveal" style="--i:1">
           <div class="ico">🔄</div>
-          <h3>Ciclo de retest</h3>
-          <p>El cliente marca remediada → <i>pendiente de retest</i>. Solo quien la subió confirma la resolución.</p>
+          <h3 data-i18n="feat.f5.t">Ciclo de retest</h3>
+          <p data-i18n="feat.f5.d">El cliente marca remediada → <i>pendiente de retest</i>. Solo quien la subió confirma la resolución.</p>
         </div>
         <div class="card reveal" style="--i:2">
           <div class="ico">📄</div>
-          <h3>Informes listos</h3>
-          <p>Informe por proyecto con la evidencia incrustada, listo para entregar o exportar a PDF.</p>
+          <h3 data-i18n="feat.f6.t">Informes listos</h3>
+          <p data-i18n="feat.f6.d">Informe por proyecto con la evidencia incrustada, listo para entregar o exportar a PDF.</p>
         </div>
         <div class="card reveal" style="--i:0">
           <div class="ico">🧳</div>
-          <h3>100% portable</h3>
-          <p>Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e impórtalo donde quieras.</p>
+          <h3 data-i18n="feat.f7.t">100% portable</h3>
+          <p data-i18n="feat.f7.d">Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e impórtalo donde quieras.</p>
         </div>
         <div class="card reveal" style="--i:1">
           <div class="ico">🛡️</div>
-          <h3>Seguro por diseño</h3>
-          <p>Control de acceso por rol verificado siempre en el servidor, protección frente a fuerza bruta y sesiones
+          <h3 data-i18n="feat.f8.t">Seguro por diseño</h3>
+          <p data-i18n="feat.f8.d">Control de acceso por rol verificado siempre en el servidor, protección frente a fuerza bruta y sesiones
             endurecidas. Privado por defecto.</p>
         </div>
         <div class="card reveal" style="--i:2">
           <div class="ico">🔒</div>
-          <h3>Tus datos cifrados</h3>
-          <p>Opción de cifrar tu información en reposo: con la app cerrada, tus datos quedan ilegibles para terceros.
+          <h3 data-i18n="feat.f9.t">Tus datos cifrados</h3>
+          <p data-i18n="feat.f9.d">Opción de cifrar tu información en reposo: con la app cerrada, tus datos quedan ilegibles para terceros.
           </p>
         </div>
         <div class="card wide reveal" style="--i:0">
           <div class="ico">🌐</div>
-          <h3>Modo servidor con HTTPS</h3>
-          <p>Úsalo solo para ti o levántalo para todo tu equipo en red local, con las comunicaciones cifradas de extremo
+          <h3 data-i18n="feat.f10.t">Modo servidor con HTTPS</h3>
+          <p data-i18n="feat.f10.d">Úsalo solo para ti o levántalo para todo tu equipo en red local, con las comunicaciones cifradas de extremo
             a extremo.</p>
         </div>
         <div class="card wide reveal" style="--i:1">
           <div class="ico">🎨</div>
-          <h3>Diseño cuidado</h3>
-          <p>Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu entidad en informes y
+          <h3 data-i18n="feat.f11.t">Diseño cuidado</h3>
+          <p data-i18n="feat.f11.d">Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu entidad en informes y
             pantalla.</p>
         </div>
       </div>
@@ -2047,28 +2080,28 @@
 
   <section id="flow">
     <div class="wrap">
-      <h2 class="reveal">Del hallazgo al informe, sin salir de la app</h2>
-      <p class="sub reveal">Un flujo pensado para el día a día del pentester: documenta, prueba, verifica y entrega.</p>
+      <h2 class="reveal" data-i18n="flow.title">Del hallazgo al informe, sin salir de la app</h2>
+      <p class="sub reveal" data-i18n="flow.sub">Un flujo pensado para el día a día del pentester: documenta, prueba, verifica y entrega.</p>
       <div class="flow reveal" id="flow">
         <div class="flow-step">
           <div class="flow-ico">🐛</div>
-          <h4>Documenta</h4>
-          <p>Crea la vuln con severidad, CVSS y remediación.</p>
+          <h4 data-i18n="flow.s1.t">Documenta</h4>
+          <p data-i18n="flow.s1.d">Crea la vuln con severidad, CVSS y remediación.</p>
         </div>
         <div class="flow-step">
           <div class="flow-ico">📸</div>
-          <h4>Adjunta PoC</h4>
-          <p>Capturas con descripción, guardadas en la BD.</p>
+          <h4 data-i18n="flow.s2.t">Adjunta PoC</h4>
+          <p data-i18n="flow.s2.d">Capturas con descripción, guardadas en la BD.</p>
         </div>
         <div class="flow-step">
           <div class="flow-ico">🔄</div>
-          <h4>Retest</h4>
-          <p>El cliente marca remediada; tú confirmas.</p>
+          <h4 data-i18n="flow.s3.t">Retest</h4>
+          <p data-i18n="flow.s3.d">El cliente marca remediada; tú confirmas.</p>
         </div>
         <div class="flow-step">
           <div class="flow-ico">📄</div>
-          <h4>Informe</h4>
-          <p>HTML autocontenido, listo para entregar.</p>
+          <h4 data-i18n="flow.s4.t">Informe</h4>
+          <p data-i18n="flow.s4.d">HTML autocontenido, listo para entregar.</p>
         </div>
       </div>
     </div>
@@ -2076,32 +2109,32 @@
 
   <section id="metrics">
     <div class="wrap">
-      <h2 class="reveal">Una herramienta, cero fricción</h2>
-      <p class="sub reveal">Pensada para ser ligera, portable y lista para producción.</p>
+      <h2 class="reveal" data-i18n="metrics.title">Una herramienta, cero fricción</h2>
+      <p class="sub reveal" data-i18n="metrics.sub">Pensada para ser ligera, portable y lista para producción.</p>
       <div class="metrics reveal">
-        <div class="metric"><b data-count="1" data-suffix=" ">1</b><small>solo archivo, sin instalación</small></div>
-        <div class="metric"><b data-count="0">0</b><small>dependencias · 0 nube</small></div>
-        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small>plataformas: Win · Linux · macOS</small></div>
-        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small>roles con permisos por workspace</small></div>
+        <div class="metric"><b data-count="1" data-suffix=" ">1</b><small data-i18n="metrics.m1">solo archivo, sin instalación</small></div>
+        <div class="metric"><b data-count="0">0</b><small data-i18n="metrics.m2">dependencias · 0 nube</small></div>
+        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m3">plataformas: Win · Linux · macOS</small></div>
+        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m4">roles con permisos por workspace</small></div>
       </div>
     </div>
   </section>
 
   <section id="roles">
     <div class="wrap">
-      <h2 class="reveal">Tres roles, permisos claros</h2>
-      <p class="sub reveal">Control de acceso por rol y por workspace, verificado siempre en el servidor.</p>
+      <h2 class="reveal" data-i18n="roles.title">Tres roles, permisos claros</h2>
+      <p class="sub reveal" data-i18n="roles.sub">Control de acceso por rol y por workspace, verificado siempre en el servidor.</p>
       <div class="roles">
-        <div class="role reveal"><span class="tag2 admin">Admin</span>
-          <p><b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede permisos. Ve toda la
+        <div class="role reveal"><span class="tag2 admin" data-i18n="roles.admin.tag">Admin</span>
+          <p data-i18n="roles.admin.d"><b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede permisos. Ve toda la
             instalación.</p>
         </div>
-        <div class="role reveal"><span class="tag2 pen">Pentester</span>
-          <p><b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en los workspaces que se le
+        <div class="role reveal"><span class="tag2 pen" data-i18n="roles.pen.tag">Pentester</span>
+          <p data-i18n="roles.pen.d"><b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en los workspaces que se le
             comparten con permiso de edición.</p>
         </div>
-        <div class="role reveal"><span class="tag2 cli">Cliente</span>
-          <p><b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades como remediadas para su
+        <div class="role reveal"><span class="tag2 cli" data-i18n="roles.cli.tag">Cliente</span>
+          <p data-i18n="roles.cli.d"><b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades como remediadas para su
             verificación.</p>
         </div>
       </div>
@@ -2110,14 +2143,14 @@
 
   <section id="why">
     <div class="wrap">
-      <h2 class="reveal">Por qué Crisol-RX</h2>
-      <p class="sub reveal">Pensado para el trabajo real del pentester: rápido, privado y sin fricción.</p>
+      <h2 class="reveal" data-i18n="why.title">Por qué Crisol-RX</h2>
+      <p class="sub reveal" data-i18n="why.sub">Pensado para el trabajo real del pentester: rápido, privado y sin fricción.</p>
       <div class="stack reveal">
-        <div class="chip">Cero instalación <span>· descarga y ejecuta</span></div>
-        <div class="chip">Funciona offline <span>· sin nube, sin terceros</span></div>
-        <div class="chip">Tus datos contigo <span>· nada sale de tu equipo</span></div>
-        <div class="chip">Multiplataforma <span>· Windows · Linux · macOS</span></div>
-        <div class="chip">Ligero y veloz <span>· arranca al instante</span></div>
+        <div class="chip" data-i18n="why.c1">Cero instalación <span>· descarga y ejecuta</span></div>
+        <div class="chip" data-i18n="why.c2">Funciona offline <span>· sin nube, sin terceros</span></div>
+        <div class="chip" data-i18n="why.c3">Tus datos contigo <span>· nada sale de tu equipo</span></div>
+        <div class="chip" data-i18n="why.c4">Multiplataforma <span>· Windows · Linux · macOS</span></div>
+        <div class="chip" data-i18n="why.c5">Ligero y veloz <span>· arranca al instante</span></div>
       </div>
     </div>
   </section>
@@ -2125,10 +2158,10 @@
   <section id="download">
     <div class="wrap">
       <div class="dl reveal">
-        <h2>Descarga Crisol-RX</h2>
-        <p class="sub" style="margin-bottom:0">Un solo archivo, sin instalación ni dependencias.</p>
+        <h2 data-i18n="dl.title">Descarga Crisol-RX</h2>
+        <p class="sub" style="margin-bottom:0" data-i18n="dl.sub">Un solo archivo, sin instalación ni dependencias.</p>
         <div class="big-dl">
-          <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label">⤓ Descargar</span></a>
+          <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label" data-i18n="btn.download">⤓ Descargar</span></a>
         </div>
         <div class="os-note" id="osNote2"></div>
 
@@ -2136,20 +2169,20 @@
 
         <div class="steps">
           <div class="step"><span class="n">1</span>
-            <p><b>Descarga</b> el ejecutable de tu sistema.</p>
+            <p data-i18n="dl.step1"><b>Descarga</b> el ejecutable de tu sistema.</p>
           </div>
           <div class="step"><span class="n">2</span>
-            <p><b>Ejecútalo</b> (en macOS/Linux: <code>chmod +x crisol-*</code> y luego <code>./crisol-*</code>). Se
-              abre solo en <code>http://127.0.0.1:8723</code>.</p>
+            <p><span data-i18n="dl.step2a"><b>Ejecútalo</b> (en macOS/Linux: </span><code>chmod +x crisol-*</code><span data-i18n="dl.step2b"> y luego </span><code>./crisol-*</code><span data-i18n="dl.step2c">). Se
+              abre solo en </span><code>http://127.0.0.1:8723</code><span data-i18n="dl.step2d">.</span></p>
           </div>
           <div class="step"><span class="n">3</span>
-            <p><b>Entra</b> como <b>admin</b> — la contraseña inicial aparece en la consola la primera vez. Cámbiala
+            <p data-i18n="dl.step3"><b>Entra</b> como <b>admin</b> — la contraseña inicial aparece en la consola la primera vez. Cámbiala
               desde tu perfil.</p>
           </div>
         </div>
         <p style="font-size:12.5px;color:var(--muted);margin-top:22px">
-          ¿No es tu sistema? <a href="https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest" target="_blank"
-            rel="noopener noreferrer">Elige otro binario en GitHub →</a>
+          <span data-i18n="dl.other">¿No es tu sistema? </span><a href="https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest" target="_blank"
+            rel="noopener noreferrer" data-i18n="dl.otherLink">Elige otro binario en GitHub →</a>
         </p>
       </div>
     </div>
@@ -2157,8 +2190,8 @@
 
   <section id="contact">
     <div class="wrap">
-      <h2 class="reveal">¿Encontraste un bug?</h2>
-      <p class="sub reveal">Crisol-RX lo mantengo yo, <b>D3M0NH4NT3R</b>. Si das con un fallo o tienes una idea, dímelo
+      <h2 class="reveal" data-i18n="contact.title">¿Encontraste un bug?</h2>
+      <p class="sub reveal" data-i18n="contact.sub">Crisol-RX lo mantengo yo, <b>D3M0NH4NT3R</b>. Si das con un fallo o tienes una idea, dímelo
         y lo arreglo.</p>
       <div class="contact contact-solo">
         <a class="contact-card reveal" href="https://x.com/D3M0NH4NT3R" target="_blank" rel="noopener noreferrer">
@@ -2167,8 +2200,8 @@
                 d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817-5.967 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z" />
             </svg></span>
           <div>
-            <h3>Escríbeme en X</h3>
-            <p>@D3M0NH4NT3R — cuéntame el fallo o tu idea y lo reviso.</p>
+            <h3 data-i18n="contact.x.t">Escríbeme en X</h3>
+            <p data-i18n="contact.x.d">@D3M0NH4NT3R — cuéntame el fallo o tu idea y lo reviso.</p>
           </div>
           <span class="arr">→</span>
         </a>
@@ -2194,10 +2227,10 @@
           </svg>
         </a>
       </div>
-      <div style="margin-bottom:10px"><a href="cheatsheet.html">Guía rápida de configuración</a></div>
-      Crisol-RX · creado por <a href="https://github.com/D3M0NH4NT3R" target="_blank"
+      <div style="margin-bottom:10px"><a href="cheatsheet.html" data-i18n="footer.cheatsheet">Guía rápida de configuración</a></div>
+      <span data-i18n="footer.madeBy">Crisol-RX · creado por </span><a href="https://github.com/D3M0NH4NT3R" target="_blank"
         rel="noopener noreferrer">D3M0NH4NT3R</a>
-      <div class="note">Herramienta para uso ético y autorizado de seguridad ofensiva.</div>
+      <div class="note" data-i18n="footer.note">Herramienta para uso ético y autorizado de seguridad ofensiva.</div>
     </div>
   </footer>
 
@@ -2235,7 +2268,26 @@
       if (!lbl) { lbl = document.createElement("span"); lbl.className = "btn-label"; btn.textContent = ""; btn.appendChild(lbl); }
       lbl.textContent = text;
     }
+    var DL_STR = {
+      es: {
+        forOS: "⤓ Descargar para ", arch: function (a) { return " (" + a + ")"; },
+        detected: function (o) { return "Detectado: <b>" + o.label + " · " + o.arch + "</b>. ¿No es correcto? Elige abajo."; },
+        seeHero: "⤓ Ver descargas", seeMain: "⤓ Ver todas las descargas",
+        noDetect: "No pudimos detectar tu sistema. Elige tu binario abajo.",
+        yourSystem: "tu sistema"
+      },
+      en: {
+        forOS: "⤓ Download for ", arch: function (a) { return " (" + a + ")"; },
+        detected: function (o) { return "Detected: <b>" + o.label + " · " + o.arch + "</b>. Not right? Pick below."; },
+        seeHero: "⤓ See downloads", seeMain: "⤓ See all downloads",
+        noDetect: "We couldn't detect your system. Pick your binary below.",
+        yourSystem: "your system"
+      }
+    };
+    function dlStr() { return DL_STR[window.__lang === "en" ? "en" : "es"]; }
+
     function applyDownload() {
+      var s = dlStr();
       var heroBtn = document.getElementById("heroDownload");
       var mainBtn = document.getElementById("mainDownload");
       var note = document.getElementById("osNote"), note2 = document.getElementById("osNote2");
@@ -2243,20 +2295,21 @@
         var o = OSES[detected], href = dl(o.asset);
         heroBtn.href = href; mainBtn.href = href;
         heroBtn.setAttribute("download", ""); mainBtn.setAttribute("download", "");
-        setBtnLabel(heroBtn, "⤓ Descargar para " + o.label);
-        setBtnLabel(mainBtn, "⤓ Descargar para " + o.label + " (" + o.arch + ")");
-        note.innerHTML = "Detectado: <b>" + o.label + " · " + o.arch + "</b>. ¿No es correcto? Elige abajo.";
+        setBtnLabel(heroBtn, s.forOS + o.label);
+        setBtnLabel(mainBtn, s.forOS + o.label + s.arch(o.arch));
+        note.innerHTML = s.detected(o);
         note2.innerHTML = "";
       } else {
         heroBtn.href = RELEASES; mainBtn.href = RELEASES;
-        setBtnLabel(heroBtn, "⤓ Ver descargas");
-        setBtnLabel(mainBtn, "⤓ Ver todas las descargas");
-        note.innerHTML = "No pudimos detectar tu sistema. Elige tu binario abajo.";
+        setBtnLabel(heroBtn, s.seeHero);
+        setBtnLabel(mainBtn, s.seeMain);
+        note.innerHTML = s.noDetect;
         note2.innerHTML = "";
       }
     }
 
     function buildGrid() {
+      var s = dlStr();
       var grid = document.getElementById("osGrid");
       var order = ["windows", "mac_arm", "mac_intel", "linux"];
       grid.innerHTML = "";
@@ -2265,12 +2318,10 @@
         var a = document.createElement("a");
         a.href = dl(o.asset); a.className = "os" + (k === detected ? " detected" : ""); a.setAttribute("download", "");
         a.innerHTML = '<span class="osico">' + o.ico + '</span>' + o.label +
-          '<small>' + o.arch + '</small>' + (k === detected ? '<span class="pill">tu sistema</span>' : '');
+          '<small>' + o.arch + '</small>' + (k === detected ? '<span class="pill">' + s.yourSystem + '</span>' : '');
         grid.appendChild(a);
       });
     }
-
-    applyDownload(); buildGrid();
 
     var root = document.documentElement;
     var themeBtns = [document.getElementById("themeBtn"), document.getElementById("themeBtnM")].filter(Boolean);
@@ -2400,6 +2451,265 @@
         }
       }, { passive: true });
     }
+  </script>
+
+  <script>
+    /* ---------- internacionalización (ES por defecto, EN si el navegador no es ES) ---------- */
+    var I18N = {
+      es: {
+        "nav.features": "Características",
+        "nav.roles": "Roles",
+        "nav.quickguide": "Guía rápida",
+        "nav.report": "Reportar bug",
+        "btn.download": "⤓ Descargar",
+        "btn.quickguide": "📋 Guía rápida",
+        "hero.title": "Gestiona vulnerabilidades,<br><span class=\"grad\">sin fricción.</span>",
+        "hero.tag": "<b>Crisol-RX</b> es un gestor de vulnerabilidades <b>portable</b> para pentesters: un solo archivo, cero instalación y tus datos viajan contigo. Workspaces por cliente, roles, ciclo de retest e informes listos para entregar.",
+        "hero.osDetecting": "Detectando tu sistema…",
+        "badge.oneFile": "<b>1</b> solo archivo",
+        "badge.zeroInstall": "<b>0</b> instalación · 0 dependencias",
+        "badge.offline": "<b>100%</b> offline",
+        "badge.platforms": "Windows · Linux · macOS",
+        "shot.workspaces": "Workspaces",
+        "shot.status": "Estado",
+        "shot.open": "Abiertas",
+        "shot.inRetest": "En retest",
+        "shot.active": "Activas",
+        "shot.critical": "Críticas",
+        "shot.high": "Altas",
+        "shot.resolved": "Resueltas",
+        "shot.coverage": "cobertura",
+        "shot.sevCritical": "Crítica",
+        "shot.sevHigh": "Alta",
+        "shot.sevMedium": "Media",
+        "shot.tagCrit": "CRIT",
+        "shot.tagHigh": "ALTA",
+        "shot.tagMed": "MEDIA",
+        "shot.v1": "SQLi en /api/login",
+        "shot.v2": "XSS reflejado en buscador",
+        "shot.v3": "Cabeceras de seguridad ausentes",
+        "shot.v4": "IDOR en exportación",
+        "feat.title": "Todo lo que necesita un engagement",
+        "feat.sub": "Desde el primer hallazgo hasta el informe final, en una herramienta que te llevas a cualquier máquina.",
+        "feat.f1.t": "Workspaces y proyectos",
+        "feat.f1.d": "Separa cada cliente o engagement en su propio workspace, con proyectos y alcance independientes.",
+        "feat.f2.t": "Vulnerabilidades completas",
+        "feat.f2.d": "Severidad, CVSS, CWE, estado, activo, descripción, impacto, remediación y evidencia técnica.",
+        "feat.f3.t": "Pruebas de concepto",
+        "feat.f3.d": "Adjunta capturas con su descripción a cada hallazgo. Viajan contigo y se incrustan en el informe.",
+        "feat.f4.t": "Panel global",
+        "feat.f4.d": "Métricas de severidad y por workspace, filtros en vivo y vista agrupada por activo afectado.",
+        "feat.f5.t": "Ciclo de retest",
+        "feat.f5.d": "El cliente marca remediada → <i>pendiente de retest</i>. Solo quien la subió confirma la resolución.",
+        "feat.f6.t": "Informes listos",
+        "feat.f6.d": "Informe por proyecto con la evidencia incrustada, listo para entregar o exportar a PDF.",
+        "feat.f7.t": "100% portable",
+        "feat.f7.d": "Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e impórtalo donde quieras.",
+        "feat.f8.t": "Seguro por diseño",
+        "feat.f8.d": "Control de acceso por rol verificado siempre en el servidor, protección frente a fuerza bruta y sesiones endurecidas. Privado por defecto.",
+        "feat.f9.t": "Tus datos cifrados",
+        "feat.f9.d": "Opción de cifrar tu información en reposo: con la app cerrada, tus datos quedan ilegibles para terceros.",
+        "feat.f10.t": "Modo servidor con HTTPS",
+        "feat.f10.d": "Úsalo solo para ti o levántalo para todo tu equipo en red local, con las comunicaciones cifradas de extremo a extremo.",
+        "feat.f11.t": "Diseño cuidado",
+        "feat.f11.d": "Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu entidad en informes y pantalla.",
+        "flow.title": "Del hallazgo al informe, sin salir de la app",
+        "flow.sub": "Un flujo pensado para el día a día del pentester: documenta, prueba, verifica y entrega.",
+        "flow.s1.t": "Documenta",
+        "flow.s1.d": "Crea la vuln con severidad, CVSS y remediación.",
+        "flow.s2.t": "Adjunta PoC",
+        "flow.s2.d": "Capturas con descripción, guardadas en la BD.",
+        "flow.s3.t": "Retest",
+        "flow.s3.d": "El cliente marca remediada; tú confirmas.",
+        "flow.s4.t": "Informe",
+        "flow.s4.d": "HTML autocontenido, listo para entregar.",
+        "metrics.title": "Una herramienta, cero fricción",
+        "metrics.sub": "Pensada para ser ligera, portable y lista para producción.",
+        "metrics.m1": "solo archivo, sin instalación",
+        "metrics.m2": "dependencias · 0 nube",
+        "metrics.m3": "plataformas: Win · Linux · macOS",
+        "metrics.m4": "roles con permisos por workspace",
+        "roles.title": "Tres roles, permisos claros",
+        "roles.sub": "Control de acceso por rol y por workspace, verificado siempre en el servidor.",
+        "roles.admin.tag": "Admin",
+        "roles.admin.d": "<b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede permisos. Ve toda la instalación.",
+        "roles.pen.tag": "Pentester",
+        "roles.pen.d": "<b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en los workspaces que se le comparten con permiso de edición.",
+        "roles.cli.tag": "Cliente",
+        "roles.cli.d": "<b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades como remediadas para su verificación.",
+        "why.title": "Por qué Crisol-RX",
+        "why.sub": "Pensado para el trabajo real del pentester: rápido, privado y sin fricción.",
+        "why.c1": "Cero instalación <span>· descarga y ejecuta</span>",
+        "why.c2": "Funciona offline <span>· sin nube, sin terceros</span>",
+        "why.c3": "Tus datos contigo <span>· nada sale de tu equipo</span>",
+        "why.c4": "Multiplataforma <span>· Windows · Linux · macOS</span>",
+        "why.c5": "Ligero y veloz <span>· arranca al instante</span>",
+        "dl.title": "Descarga Crisol-RX",
+        "dl.sub": "Un solo archivo, sin instalación ni dependencias.",
+        "dl.step1": "<b>Descarga</b> el ejecutable de tu sistema.",
+        "dl.step2a": "<b>Ejecútalo</b> (en macOS/Linux: ",
+        "dl.step2b": " y luego ",
+        "dl.step2c": "). Se abre solo en ",
+        "dl.step2d": ".",
+        "dl.step3": "<b>Entra</b> como <b>admin</b> — la contraseña inicial aparece en la consola la primera vez. Cámbiala desde tu perfil.",
+        "dl.other": "¿No es tu sistema? ",
+        "dl.otherLink": "Elige otro binario en GitHub →",
+        "contact.title": "¿Encontraste un bug?",
+        "contact.sub": "Crisol-RX lo mantengo yo, <b>D3M0NH4NT3R</b>. Si das con un fallo o tienes una idea, dímelo y lo arreglo.",
+        "contact.x.t": "Escríbeme en X",
+        "contact.x.d": "@D3M0NH4NT3R — cuéntame el fallo o tu idea y lo reviso.",
+        "footer.cheatsheet": "Guía rápida de configuración",
+        "footer.madeBy": "Crisol-RX · creado por ",
+        "footer.note": "Herramienta para uso ético y autorizado de seguridad ofensiva."
+      },
+      en: {
+        "nav.features": "Features",
+        "nav.roles": "Roles",
+        "nav.quickguide": "Quick guide",
+        "nav.report": "Report a bug",
+        "btn.download": "⤓ Download",
+        "btn.quickguide": "📋 Quick guide",
+        "hero.title": "Manage vulnerabilities,<br><span class=\"grad\">friction-free.</span>",
+        "hero.tag": "<b>Crisol-RX</b> is a <b>portable</b> vulnerability manager for pentesters: a single file, zero installation, and your data travels with you. Per-client workspaces, roles, a retest cycle, and delivery-ready reports.",
+        "hero.osDetecting": "Detecting your system…",
+        "badge.oneFile": "<b>1</b> single file",
+        "badge.zeroInstall": "<b>0</b> install · 0 dependencies",
+        "badge.offline": "<b>100%</b> offline",
+        "badge.platforms": "Windows · Linux · macOS",
+        "shot.workspaces": "Workspaces",
+        "shot.status": "Status",
+        "shot.open": "Open",
+        "shot.inRetest": "In retest",
+        "shot.active": "Active",
+        "shot.critical": "Critical",
+        "shot.high": "High",
+        "shot.resolved": "Resolved",
+        "shot.coverage": "coverage",
+        "shot.sevCritical": "Critical",
+        "shot.sevHigh": "High",
+        "shot.sevMedium": "Medium",
+        "shot.tagCrit": "CRIT",
+        "shot.tagHigh": "HIGH",
+        "shot.tagMed": "MED",
+        "shot.v1": "SQLi in /api/login",
+        "shot.v2": "Reflected XSS in search",
+        "shot.v3": "Missing security headers",
+        "shot.v4": "IDOR in export",
+        "feat.title": "Everything an engagement needs",
+        "feat.sub": "From the first finding to the final report, in a tool you carry to any machine.",
+        "feat.f1.t": "Workspaces and projects",
+        "feat.f1.d": "Separate each client or engagement into its own workspace, with independent projects and scope.",
+        "feat.f2.t": "Complete vulnerabilities",
+        "feat.f2.d": "Severity, CVSS, CWE, status, asset, description, impact, remediation, and technical evidence.",
+        "feat.f3.t": "Proof of concept",
+        "feat.f3.d": "Attach screenshots with their description to each finding. They travel with you and are embedded in the report.",
+        "feat.f4.t": "Global dashboard",
+        "feat.f4.d": "Severity and per-workspace metrics, live filters, and a view grouped by affected asset.",
+        "feat.f5.t": "Retest cycle",
+        "feat.f5.d": "The client marks it remediated → <i>pending retest</i>. Only the person who reported it confirms the fix.",
+        "feat.f6.t": "Delivery-ready reports",
+        "feat.f6.d": "Per-project report with embedded evidence, ready to deliver or export to PDF.",
+        "feat.f7.t": "100% portable",
+        "feat.f7.d": "Copy the folder to another machine and it keeps working. Or export a workspace and import it anywhere.",
+        "feat.f8.t": "Secure by design",
+        "feat.f8.d": "Role-based access control always verified on the server, brute-force protection, and hardened sessions. Private by default.",
+        "feat.f9.t": "Your data encrypted",
+        "feat.f9.d": "Option to encrypt your data at rest: with the app closed, your data is unreadable to third parties.",
+        "feat.f10.t": "Server mode with HTTPS",
+        "feat.f10.d": "Use it just for yourself or stand it up for your whole team on the local network, with end-to-end encrypted communications.",
+        "feat.f11.t": "Polished design",
+        "feat.f11.d": "A modern interface with light and dark mode, smooth animations, and your organization's branding on screen and in reports.",
+        "flow.title": "From finding to report, without leaving the app",
+        "flow.sub": "A workflow built for the pentester's day-to-day: document, test, verify, and deliver.",
+        "flow.s1.t": "Document",
+        "flow.s1.d": "Create the vuln with severity, CVSS, and remediation.",
+        "flow.s2.t": "Attach PoC",
+        "flow.s2.d": "Screenshots with descriptions, stored in the DB.",
+        "flow.s3.t": "Retest",
+        "flow.s3.d": "The client marks it remediated; you confirm.",
+        "flow.s4.t": "Report",
+        "flow.s4.d": "Self-contained HTML, ready to deliver.",
+        "metrics.title": "One tool, zero friction",
+        "metrics.sub": "Built to be lightweight, portable, and production-ready.",
+        "metrics.m1": "single file, no installation",
+        "metrics.m2": "dependencies · 0 cloud",
+        "metrics.m3": "platforms: Win · Linux · macOS",
+        "metrics.m4": "roles with per-workspace permissions",
+        "roles.title": "Three roles, clear permissions",
+        "roles.sub": "Role- and workspace-based access control, always verified on the server.",
+        "roles.admin.tag": "Admin",
+        "roles.admin.d": "<b>Full control.</b> The only one who creates workspaces, manages users, and grants permissions. Sees the whole installation.",
+        "roles.pen.tag": "Pentester",
+        "roles.pen.d": "<b>Uploads and documents.</b> Creates vulnerabilities, attaches PoCs, and generates reports in the workspaces shared with edit permission.",
+        "roles.cli.tag": "Client",
+        "roles.cli.d": "<b>Reviews and retests.</b> Sees shared workspaces and marks vulnerabilities as remediated for verification.",
+        "why.title": "Why Crisol-RX",
+        "why.sub": "Built for the pentester's real work: fast, private, and friction-free.",
+        "why.c1": "Zero installation <span>· download and run</span>",
+        "why.c2": "Works offline <span>· no cloud, no third parties</span>",
+        "why.c3": "Your data with you <span>· nothing leaves your machine</span>",
+        "why.c4": "Cross-platform <span>· Windows · Linux · macOS</span>",
+        "why.c5": "Light and fast <span>· starts instantly</span>",
+        "dl.title": "Download Crisol-RX",
+        "dl.sub": "A single file, no installation or dependencies.",
+        "dl.step1": "<b>Download</b> the executable for your system.",
+        "dl.step2a": "<b>Run it</b> (on macOS/Linux: ",
+        "dl.step2b": " then ",
+        "dl.step2c": "). It opens by itself at ",
+        "dl.step2d": ".",
+        "dl.step3": "<b>Sign in</b> as <b>admin</b> — the initial password is shown in the console the first time. Change it from your profile.",
+        "dl.other": "Not your system? ",
+        "dl.otherLink": "Pick another binary on GitHub →",
+        "contact.title": "Found a bug?",
+        "contact.sub": "Crisol-RX is maintained by me, <b>D3M0NH4NT3R</b>. If you hit a bug or have an idea, tell me and I'll fix it.",
+        "contact.x.t": "Message me on X",
+        "contact.x.d": "@D3M0NH4NT3R — tell me about the bug or your idea and I'll look into it.",
+        "footer.cheatsheet": "Configuration quick guide",
+        "footer.madeBy": "Crisol-RX · created by ",
+        "footer.note": "Tool for ethical and authorized offensive security use."
+      }
+    };
+
+    function detectLang() {
+      try {
+        var saved = localStorage.getItem("vv_site_lang");
+        if (saved === "es" || saved === "en") return saved;
+      } catch (e) { }
+      var n = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+      return n.indexOf("es") === 0 ? "es" : "en";
+    }
+
+    function applyLang(lang) {
+      lang = (lang === "en") ? "en" : "es";
+      window.__lang = lang;
+      var dict = I18N[lang] || I18N.es;
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var key = el.getAttribute("data-i18n");
+        if (dict[key] != null) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
+        el.getAttribute("data-i18n-attr").split(",").forEach(function (pair) {
+          var p = pair.split(":"); if (p.length !== 2) return;
+          var attr = p[0].trim(), k = p[1].trim();
+          if (dict[k] != null) el.setAttribute(attr, dict[k]);
+        });
+      });
+      var langBtns = [document.getElementById("langBtn"), document.getElementById("langBtnM")].filter(Boolean);
+      langBtns.forEach(function (b) { b.textContent = lang === "es" ? "ES" : "EN"; });
+      if (typeof applyDownload === "function") applyDownload();
+      if (typeof buildGrid === "function") buildGrid();
+    }
+
+    applyLang(detectLang());
+
+    [document.getElementById("langBtn"), document.getElementById("langBtnM")].filter(Boolean).forEach(function (b) {
+      b.addEventListener("click", function () {
+        var next = (window.__lang === "es") ? "en" : "es";
+        try { localStorage.setItem("vv_site_lang", next); } catch (e) { }
+        applyLang(next);
+      });
+    });
   </script>
 </body>
 

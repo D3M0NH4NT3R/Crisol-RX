@@ -472,10 +472,22 @@
     }
 
     .btn-primary {
-      background: linear-gradient(160deg, var(--accent), var(--accent-dim));
-      color: var(--accent-contrast);
+      background: linear-gradient(160deg, #8a4ae8, #6230c4);
+      /* texto con degradado lila claro → verde menta */
+      color: #ede4ff;
+      background-clip: padding-box;
+      font-weight: 700;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      transition: transform .12s var(--spring), filter .15s, box-shadow .25s
+    }
+
+    .btn-primary .btn-label {
+      background: linear-gradient(95deg, #ede4ff, #4dffc0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent
     }
 
     .btn-primary::after {
@@ -495,7 +507,9 @@
     }
 
     .btn-primary:hover {
-      filter: brightness(1.08)
+      filter: brightness(1.08);
+      box-shadow: 0 6px 22px -4px color-mix(in srgb, var(--accent) 65%, transparent),
+        0 0 0 1px color-mix(in srgb, var(--accent2) 50%, transparent)
     }
 
     .btn-ghost {
@@ -1862,7 +1876,7 @@
           <a href="#roles">Roles</a>
           <a href="cheatsheet.html">Guía rápida</a>
           <a href="#contact">Reportar bug</a>
-          <a href="#download" class="btn btn-primary">⤓ Descargar</a>
+          <a href="#download" class="btn btn-primary"><span class="btn-label">⤓ Descargar</span></a>
           <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
         </div>
         <button class="theme-btn" id="themeBtnM" title="Cambiar tema" aria-label="Cambiar tema"
@@ -1900,7 +1914,8 @@
         cero instalación y tus datos viajan contigo. Workspaces por cliente, roles, ciclo de retest e informes listos
         para entregar.</p>
       <div class="cta">
-        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload">⤓ Descargar</a>
+        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload"><span class="btn-label">⤓
+            Descargar</span></a>
         <a href="cheatsheet.html" class="btn btn-ghost btn-lg">📋 Guía rápida</a>
       </div>
       <div class="os-note" id="osNote">Detectando tu sistema…</div>
@@ -2113,7 +2128,7 @@
         <h2>Descarga Crisol-RX</h2>
         <p class="sub" style="margin-bottom:0">Un solo archivo, sin instalación ni dependencias.</p>
         <div class="big-dl">
-          <a href="#" class="btn btn-primary btn-lg" id="mainDownload">⤓ Descargar</a>
+          <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label">⤓ Descargar</span></a>
         </div>
         <div class="os-note" id="osNote2"></div>
 
@@ -2215,6 +2230,11 @@
     }
     var detected = detectOS();
 
+    function setBtnLabel(btn, text) {
+      var lbl = btn.querySelector(".btn-label");
+      if (!lbl) { lbl = document.createElement("span"); lbl.className = "btn-label"; btn.textContent = ""; btn.appendChild(lbl); }
+      lbl.textContent = text;
+    }
     function applyDownload() {
       var heroBtn = document.getElementById("heroDownload");
       var mainBtn = document.getElementById("mainDownload");
@@ -2223,14 +2243,14 @@
         var o = OSES[detected], href = dl(o.asset);
         heroBtn.href = href; mainBtn.href = href;
         heroBtn.setAttribute("download", ""); mainBtn.setAttribute("download", "");
-        heroBtn.textContent = "⤓ Descargar para " + o.label;
-        mainBtn.textContent = "⤓ Descargar para " + o.label + " (" + o.arch + ")";
+        setBtnLabel(heroBtn, "⤓ Descargar para " + o.label);
+        setBtnLabel(mainBtn, "⤓ Descargar para " + o.label + " (" + o.arch + ")");
         note.innerHTML = "Detectado: <b>" + o.label + " · " + o.arch + "</b>. ¿No es correcto? Elige abajo.";
         note2.innerHTML = "";
       } else {
         heroBtn.href = RELEASES; mainBtn.href = RELEASES;
-        heroBtn.textContent = "⤓ Ver descargas";
-        mainBtn.textContent = "⤓ Ver todas las descargas";
+        setBtnLabel(heroBtn, "⤓ Ver descargas");
+        setBtnLabel(mainBtn, "⤓ Ver todas las descargas");
         note.innerHTML = "No pudimos detectar tu sistema. Elige tu binario abajo.";
         note2.innerHTML = "";
       }

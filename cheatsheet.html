@@ -267,7 +267,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px
+      height: 64px;
+      position: relative
     }
 
     .brand {
@@ -323,17 +324,94 @@
       color: var(--text)
     }
 
-    @media(max-width:560px) {
+    /* botón hamburguesa (oculto en escritorio) */
+    .nav-burger {
+      display: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color .15s, transform .12s var(--spring)
+    }
 
-      /* en móvil, el botón "Descargar" muestra solo el icono para ahorrar espacio */
-      .nav-links .btn-primary {
-        font-size: 0;
-        padding: 11px 14px
+    .nav-burger:hover {
+      border-color: var(--accent-dim)
+    }
+
+    .nav-burger span {
+      width: 17px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .25s var(--ease), opacity .2s
+    }
+
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg)
+    }
+
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg)
+    }
+
+    @media(max-width:720px) {
+      .nav-burger {
+        display: flex
       }
 
-      .nav-links .btn-primary::before {
-        content: "⤓";
-        font-size: 16px
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 12px 22px 18px;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .25s var(--ease), opacity .25s
+      }
+
+      .nav-links.open {
+        transform: none;
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .nav-links a:not(.btn) {
+        padding: 11px 6px;
+        font-size: 15px;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .nav-links .btn {
+        margin-top: 8px;
+        justify-content: center
+      }
+
+      .nav-links .theme-btn {
+        display: none
+      }
+
+      #themeBtnM {
+        display: flex !important
       }
     }
 
@@ -385,10 +463,20 @@
     }
 
     .btn-primary {
-      background: linear-gradient(160deg, var(--accent), var(--accent-dim));
-      color: var(--accent-contrast);
+      background: linear-gradient(160deg, #8a4ae8, #6230c4);
+      color: #ede4ff;
+      font-weight: 700;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      transition: transform .12s var(--spring), filter .15s, box-shadow .25s
+    }
+
+    .btn-primary .btn-label {
+      background: linear-gradient(95deg, #ede4ff, #4dffc0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent
     }
 
     .btn-primary::after {
@@ -405,6 +493,12 @@
 
     .btn-primary:hover::after {
       left: 140%
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 22px -4px color-mix(in srgb, var(--accent) 65%, transparent),
+        0 0 0 1px color-mix(in srgb, var(--accent2) 50%, transparent)
     }
 
     .btn-ghost {
@@ -913,10 +1007,19 @@
           </svg></span>
         <span class="name">Crisol-RX</span>
       </a>
-      <div class="nav-links">
-        <a href="index.html">Inicio</a>
-        <a href="index.html#download" class="btn btn-primary">⤓ Descargar</a>
-        <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+      <div class="nav-right" style="display:flex;align-items:center;gap:10px">
+        <div class="nav-links" id="navLinks">
+          <a href="index.html">Inicio</a>
+          <a href="index.html#features">Características</a>
+          <a href="index.html#contact">Reportar bug</a>
+          <a href="index.html#download" class="btn btn-primary"><span class="btn-label">⤓ Descargar</span></a>
+          <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+        </div>
+        <button class="theme-btn" id="themeBtnM" title="Cambiar tema" aria-label="Cambiar tema"
+          style="display:none">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -964,7 +1067,7 @@ chmod +x crisol-*
           </p>
           <div class="note tip"><span class="ni">💡</span>
             <div><b>Tip:</b> ejecútalo desde una carpeta tuya (no desde Descargas ni una carpeta sincronizada en la
-              nube).</div>
+              nube), para que pueda crear su base de datos sin problemas.</div>
           </div>
         </section>
 
@@ -1244,17 +1347,35 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
       }
     })();
 
-    var root = document.documentElement, tb = document.getElementById("themeBtn");
+    var root = document.documentElement;
+    var themeBtns = [document.getElementById("themeBtn"), document.getElementById("themeBtnM")].filter(Boolean);
     function curTheme() { return root.getAttribute("data-theme") || "dark"; }
-    function setIcon() { tb.textContent = curTheme() === "dark" ? "🌙" : "☀️"; }
-    tb.addEventListener("click", function () {
-      var t = curTheme() === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", t);
-      try { localStorage.setItem("vv_site_theme", t); } catch (e) { }
-      setIcon();
+    function setIcon() { var ic = curTheme() === "dark" ? "🌙" : "☀️"; themeBtns.forEach(function (b) { b.textContent = ic; }); }
+    themeBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var t = curTheme() === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", t);
+        try { localStorage.setItem("vv_site_theme", t); } catch (e) { }
+        setIcon();
+      });
     });
     try { if (!localStorage.getItem("vv_site_theme") && window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) { root.setAttribute("data-theme", "light"); } } catch (e) { }
     setIcon();
+
+    var burger = document.getElementById("navBurger");
+    var navLinks = document.getElementById("navLinks");
+    if (burger && navLinks) {
+      function closeMenu() { navLinks.classList.remove("open"); burger.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
+      burger.addEventListener("click", function () {
+        var open = navLinks.classList.toggle("open");
+        burger.classList.toggle("open", open);
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      navLinks.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+      document.addEventListener("click", function (e) {
+        if (navLinks.classList.contains("open") && !navLinks.contains(e.target) && !burger.contains(e.target)) closeMenu();
+      });
+    }
 
     document.querySelectorAll(".copy-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {

@@ -6,7 +6,7 @@
 
 por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
 
-[**🌐 Web del proyecto**](https://d3m0nh4nt3r.github.io/Crisol-RX/) · [**📋 Guía rápida**](https://d3m0nh4nt3r.github.io/Crisol-RX/cheatsheet.html) · [**⤓ Descargar**](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
+[**🌐 Web del proyecto**](https://crisol-rx.com/) · [**📋 Guía rápida**](https://crisol-rx.com/cheatsheet.html) · [**⤓ Descargar**](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
 
 </div>
 

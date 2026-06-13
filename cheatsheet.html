@@ -1089,11 +1089,11 @@
           <h2><span class="ico">🚀</span> <span data-i18n="sec.start.h">Primer arranque</span></h2>
           <p class="lead" data-i18n="sec.start.lead">Descarga el archivo de tu sistema y ejecútalo. No hay instalación.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-            <pre><span class="c"># macOS / Linux: dar permiso de ejecución y arrancar</span>
+            <pre><span class="c" data-i18n="cmt.start1"># macOS / Linux: dar permiso de ejecución y arrancar</span>
 chmod +x crisol-*
 ./crisol-*
 
-<span class="c"># Windows: doble clic en crisol-windows-amd64.exe</span></pre>
+<span class="c" data-i18n="cmt.start2"># Windows: doble clic en crisol-windows-amd64.exe</span></pre>
           </div>
           <p style="font-size:13.5px;color:var(--muted);margin-top:12px" data-i18n="sec.start.p">Se abre solo en el navegador. Entra como
             <b>admin</b>: la contraseña inicial aparece <b>una sola vez</b> en la consola al arrancar por primera vez.
@@ -1179,11 +1179,11 @@ chmod +x crisol-*
           <h2><span class="ico">⌨️</span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
           <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad sobre el </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-            <pre>./crisol                          <span class="c"># arranca según crisol.json</span>
-./crisol -addr 127.0.0.1:9000     <span class="c"># otra dirección/puerto</span>
-./crisol -db /ruta/otra.db        <span class="c"># otra base de datos</span>
-./crisol -config /ruta/otra.json  <span class="c"># otra configuración</span>
-./crisol -no-open                 <span class="c"># no abrir el navegador</span></pre>
+            <pre>./crisol                          <span class="c" data-i18n="cmt.flag1"># arranca según crisol.json</span>
+./crisol -addr 127.0.0.1:9000     <span class="c" data-i18n="cmt.flag2"># otra dirección/puerto</span>
+./crisol -db /ruta/otra.db        <span class="c" data-i18n="cmt.flag3"># otra base de datos</span>
+./crisol -config /ruta/otra.json  <span class="c" data-i18n="cmt.flag4"># otra configuración</span>
+./crisol -no-open                 <span class="c" data-i18n="cmt.flag5"># no abrir el navegador</span></pre>
           </div>
         </section>
 
@@ -1268,13 +1268,13 @@ chmod +x crisol-*
           </div>
           <h3 data-i18n="enc.h3">Abrir y consultar tus datos a mano</h3>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-            <pre><span class="c"># Descifrar (pide la passphrase o usa la variable CRISOL_KEY)</span>
+            <pre><span class="c" data-i18n="cmt.dec1"># Descifrar (pide la passphrase o usa la variable CRISOL_KEY)</span>
 CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -decrypt crisol.db.enc -out crisol.db
 
-<span class="c"># Consultar con cualquier cliente SQLite</span>
+<span class="c" data-i18n="cmt.dec2"># Consultar con cualquier cliente SQLite</span>
 sqlite3 crisol.db <span class="s">".tables"</span>
 
-<span class="c"># Volver a cifrar y borrar la copia en claro</span>
+<span class="c" data-i18n="cmt.dec3"># Volver a cifrar y borrar la copia en claro</span>
 CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -encrypt crisol.db -out crisol.db.enc
 rm -f crisol.db crisol.db-wal crisol.db-shm</pre>
           </div>
@@ -1286,17 +1286,17 @@ rm -f crisol.db crisol.db-wal crisol.db-shm</pre>
           <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el </span><code>crisol.json</code><span data-i18n="sec.pass.leadB"> no basta si ya hay datos cifrados: el archivo
             sigue cerrado con la frase anterior.</span></p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-            <pre><span class="c"># Con el servidor PARADO:</span>
-<span class="c"># 1) Descifra con la frase VIEJA</span>
+            <pre><span class="c" data-i18n="cmt.pass0"># Con el servidor PARADO:</span>
+<span class="c" data-i18n="cmt.pass1"># 1) Descifra con la frase VIEJA</span>
 CRISOL_KEY=<span class="s">'frase-vieja'</span> ./crisol -decrypt crisol.db.enc -out crisol.db
 
-<span class="c"># 2) Re-cifra con la frase NUEVA</span>
+<span class="c" data-i18n="cmt.pass2"># 2) Re-cifra con la frase NUEVA</span>
 CRISOL_KEY=<span class="s">'frase-nueva'</span> ./crisol -encrypt crisol.db -out crisol.db.enc
 
-<span class="c"># 3) Borra la copia en claro</span>
+<span class="c" data-i18n="cmt.pass3"># 3) Borra la copia en claro</span>
 rm -f crisol.db crisol.db-wal crisol.db-shm
 
-<span class="c"># 4) Pon la frase NUEVA en crisol.json</span></pre>
+<span class="c" data-i18n="cmt.pass4"># 4) Pon la frase NUEVA en crisol.json</span></pre>
           </div>
           <div class="note tip"><span class="ni">💡</span>
             <div><span data-i18n="pass.tipA">Si <b>todavía no has generado</b> el archivo cifrado (no has cerrado con Ctrl-C con el cifrado activo),
@@ -1451,6 +1451,21 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "nav.report": "Reportar bug",
         "btn.download": "⤓ Descargar",
         "copy": "Copiar",
+        "cmt.start1": "# macOS / Linux: dar permiso de ejecución y arrancar",
+        "cmt.start2": "# Windows: doble clic en crisol-windows-amd64.exe",
+        "cmt.flag1": "# arranca según crisol.json",
+        "cmt.flag2": "# otra dirección/puerto",
+        "cmt.flag3": "# otra base de datos",
+        "cmt.flag4": "# otra configuración",
+        "cmt.flag5": "# no abrir el navegador",
+        "cmt.dec1": "# Descifrar (pide la passphrase o usa la variable CRISOL_KEY)",
+        "cmt.dec2": "# Consultar con cualquier cliente SQLite",
+        "cmt.dec3": "# Volver a cifrar y borrar la copia en claro",
+        "cmt.pass0": "# Con el servidor PARADO:",
+        "cmt.pass1": "# 1) Descifra con la frase VIEJA",
+        "cmt.pass2": "# 2) Re-cifra con la frase NUEVA",
+        "cmt.pass3": "# 3) Borra la copia en claro",
+        "cmt.pass4": "# 4) Pon la frase NUEVA en crisol.json",
         "pill.optional": "opcional",
         "head.title": "Cheat Sheet de <span class=\"grad\">configuración</span>",
         "head.subA": "Todo lo que necesitas para configurar Crisol-RX: el archivo ",
@@ -1537,6 +1552,21 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "nav.report": "Report a bug",
         "btn.download": "⤓ Download",
         "copy": "Copy",
+        "cmt.start1": "# macOS / Linux: make it executable and run",
+        "cmt.start2": "# Windows: double-click crisol-windows-amd64.exe",
+        "cmt.flag1": "# starts using crisol.json",
+        "cmt.flag2": "# different address/port",
+        "cmt.flag3": "# different database",
+        "cmt.flag4": "# different config file",
+        "cmt.flag5": "# don't open the browser",
+        "cmt.dec1": "# Decrypt (prompts for the passphrase or uses CRISOL_KEY)",
+        "cmt.dec2": "# Inspect with any SQLite client",
+        "cmt.dec3": "# Re-encrypt and delete the cleartext copy",
+        "cmt.pass0": "# With the server STOPPED:",
+        "cmt.pass1": "# 1) Decrypt with the OLD passphrase",
+        "cmt.pass2": "# 2) Re-encrypt with the NEW passphrase",
+        "cmt.pass3": "# 3) Delete the cleartext copy",
+        "cmt.pass4": "# 4) Set the NEW passphrase in crisol.json",
         "pill.optional": "optional",
         "head.title": "Configuration <span class=\"grad\">cheat sheet</span>",
         "head.subA": "Everything you need to configure Crisol-RX: the ",

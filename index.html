@@ -11,6 +11,15 @@
   <meta property="og:description"
     content="Un solo archivo, cero instalación. Workspaces, roles, ciclo de retest e informes para pentesters.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Crisol-RX — Gestor portable de vulnerabilidades">
+  <meta name="twitter:description"
+    content="Un solo archivo, cero instalación. Workspaces, roles, ciclo de retest e informes para pentesters.">
+  <meta name="twitter:image" content="og-image.png">
+  <meta name="twitter:site" content="@D3M0NH4NT3R">
+  <meta name="theme-color" content="#12161f">
+  <link rel="canonical" href="index.html">
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239d5cff'/%3E%3Cstop offset='1' stop-color='%237e3fe0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2315131c'/%3E%3Cpath d='M32 8 L50 22 H14 Z' fill='url(%23a)'/%3E%3Cpath d='M14 22 H50 L32 56 Z' fill='url(%23a)' opacity='0.82'/%3E%3Cpath d='M23 22 L32 35 L41 22 L32 19 Z' fill='%2315e6a0'/%3E%3Ccircle cx='32' cy='24' r='2.8' fill='%2315e6a0'/%3E%3Cpath d='M32 8 L32 3' stroke='%2315e6a0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
   <script>
@@ -80,7 +89,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -261,7 +270,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px
+      height: 64px;
+      position: relative
     }
 
     .brand {
@@ -321,9 +331,95 @@
       color: var(--text)
     }
 
+    /* botón hamburguesa (oculto en escritorio) */
+    .nav-burger {
+      display: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color .15s, transform .12s var(--spring)
+    }
+
+    .nav-burger:hover {
+      border-color: var(--accent-dim)
+    }
+
+    .nav-burger span {
+      width: 17px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .25s var(--ease), opacity .2s
+    }
+
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg)
+    }
+
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg)
+    }
+
     @media(max-width:720px) {
-      .nav-links a:not(.btn):not(.theme-btn) {
+      .nav-burger {
+        display: flex
+      }
+
+      /* el panel de enlaces se despliega bajo la barra */
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 12px 22px 18px;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .25s var(--ease), opacity .25s
+      }
+
+      .nav-links.open {
+        transform: none;
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .nav-links a:not(.btn) {
+        padding: 11px 6px;
+        font-size: 15px;
+        border-bottom: 1px solid var(--border)
+      }
+
+      .nav-links .btn {
+        margin-top: 8px;
+        justify-content: center
+      }
+
+      .nav-links .theme-btn {
         display: none
+      }
+
+      #themeBtnM {
+        display: flex !important
       }
     }
 
@@ -882,12 +978,22 @@
       .shot .bar-url {
         display: none
       }
+
+      /* en móvil, las 4 cifras del mockup a 2 columnas para que respiren */
+      .shot .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .shot .charts {
+        grid-template-columns: 1fr
+      }
     }
 
     /* sections */
     section {
       padding: 66px 0;
-      border-top: 1px solid var(--border)
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 72px
     }
 
     section h2 {
@@ -1750,13 +1856,20 @@
           </svg></span>
         <span class="name">Crisol-RX</span>
       </a>
-      <div class="nav-links">
-        <a href="#features">Características</a>
-        <a href="#roles">Roles</a>
-        <a href="cheatsheet.html">Guía rápida</a>
-        <a href="#contact">Reportar bug</a>
-        <a href="#download" class="btn btn-primary">⤓ Descargar</a>
-        <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+      <div class="nav-right" style="display:flex;align-items:center;gap:10px">
+        <div class="nav-links" id="navLinks">
+          <a href="#features">Características</a>
+          <a href="#roles">Roles</a>
+          <a href="cheatsheet.html">Guía rápida</a>
+          <a href="#contact">Reportar bug</a>
+          <a href="#download" class="btn btn-primary">⤓ Descargar</a>
+          <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+        </div>
+        <button class="theme-btn" id="themeBtnM" title="Cambiar tema" aria-label="Cambiar tema"
+          style="display:none">🌙</button>
+        <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -2066,6 +2179,7 @@
           </svg>
         </a>
       </div>
+      <div style="margin-bottom:10px"><a href="cheatsheet.html">Guía rápida de configuración</a></div>
       Crisol-RX · creado por <a href="https://github.com/D3M0NH4NT3R" target="_blank"
         rel="noopener noreferrer">D3M0NH4NT3R</a>
       <div class="note">Herramienta para uso ético y autorizado de seguridad ofensiva.</div>
@@ -2138,9 +2252,10 @@
 
     applyDownload(); buildGrid();
 
-    var root = document.documentElement, tb = document.getElementById("themeBtn");
+    var root = document.documentElement;
+    var themeBtns = [document.getElementById("themeBtn"), document.getElementById("themeBtnM")].filter(Boolean);
     function curTheme() { return root.getAttribute("data-theme") || "dark"; }
-    function setIcon() { tb.textContent = curTheme() === "dark" ? "🌙" : "☀️"; }
+    function setIcon() { var ic = curTheme() === "dark" ? "🌙" : "☀️"; themeBtns.forEach(function (b) { b.textContent = ic; }); }
     function toggleTheme() {
       var t = curTheme() === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", t);
@@ -2153,7 +2268,23 @@
       }
     } catch (e) { }
     setIcon();
-    tb.addEventListener("click", toggleTheme);
+    themeBtns.forEach(function (b) { b.addEventListener("click", toggleTheme); });
+
+
+    var burger = document.getElementById("navBurger");
+    var navLinks = document.getElementById("navLinks");
+    if (burger && navLinks) {
+      function closeMenu() { navLinks.classList.remove("open"); burger.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); }
+      burger.addEventListener("click", function () {
+        var open = navLinks.classList.toggle("open");
+        burger.classList.toggle("open", open);
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      navLinks.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+      document.addEventListener("click", function (e) {
+        if (navLinks.classList.contains("open") && !navLinks.contains(e.target) && !burger.contains(e.target)) closeMenu();
+      });
+    }
 
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });

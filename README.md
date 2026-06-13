@@ -1,35 +1,31 @@
+<div align="center">
+
 # Crisol-RX
 
-**Gestor portable de vulnerabilidades para pentesters** — por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
+**Gestor portable de vulnerabilidades para pentesters**
 
-🌐 **Web del proyecto:** https://d3m0nh4nt3r.github.io/Crisol-RX/
+por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
 
-⤓ **Descarga:** [última versión](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest) (Windows · Linux · macOS)
+[**🌐 Web del proyecto**](https://d3m0nh4nt3r.github.io/Crisol-RX/) · [**📋 Guía rápida**](https://d3m0nh4nt3r.github.io/Crisol-RX/cheatsheet.html) · [**⤓ Descargar**](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
 
-## ¿Qué es?
+</div>
 
-Una herramienta para gestionar hallazgos de pentesting sin fricción: binario único en Go, sin instalación, sin dependencias y 100% portable — la base de datos viaja junto al ejecutable.
+---
 
-- 🗂️ Workspaces por cliente/engagement, organizables en carpetas con color
-- 🐛 Vulnerabilidades con ID propio, severidad, CVSS, CWE, estado, impacto y remediación
-- 📸 Pruebas de concepto con imagen y descripción por captura
-- 📊 Panel global con gráficos, filtros y agrupación por activo
-- 🔄 Ciclo de retest: el cliente marca remediada → solo el autor confirma resuelta
-- 📄 Informes HTML autocontenidos con tabla resumen y gráfica
-- 👥 Tres roles: Admin, Pentester y Cliente, con permisos por workspace
-- ⧉ Duplicar vulnerabilidades entre proyectos
-- 🛡️ Seguridad: bcrypt, sesiones con token hasheado, anti DNS-rebinding, rate-limit, CSP
-- 🧳 Export/import de workspaces (con PoC incluidas) entre instalaciones
-- 🌗 Interfaz moderna con modo claro/oscuro
+Crisol-RX cubre todo el ciclo de un engagement —del primer hallazgo al informe final— en una herramienta que cabe en **un solo archivo**: cero instalación, cero dependencias y tus datos siempre contigo.
 
-## Uso rápido
+Workspaces por cliente, roles, ciclo de retest, pruebas de concepto e informes listos para entregar. Funciona en **Windows, Linux y macOS**.
 
-1. Descarga el binario de tu sistema desde [Releases](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
-2. Ejecútalo (`chmod +x crisol-*` en macOS/Linux) — se abre en `http://127.0.0.1:8723`
-3. Entra como `admin` con la contraseña que muestra la consola en el primer arranque
+### 👉 Toda la información, capturas y guía de uso están en la web
 
-La configuración (`crisol.json`, junto al binario) permite exponerlo en tu LAN, poner el nombre de tu empresa junto al logo y más.
+**[d3m0nh4nt3r.github.io/Crisol-RX](https://d3m0nh4nt3r.github.io/Crisol-RX/)**
 
-## Licencia
+Para configurar el archivo `crisol.json`, levantarlo en red con HTTPS o cifrar tus datos, consulta la **[Guía rápida](https://d3m0nh4nt3r.github.io/Crisol-RX/cheatsheet.html)**.
 
-Software propietario © 2026 D3M0NH4NT3R. Uso permitido para fines éticos y autorizados de seguridad ofensiva. Queda prohibida la eliminación del crédito del autor y la redistribución modificada.
+---
+
+<div align="center">
+
+Software propietario © 2026 D3M0NH4NT3R · Uso ético y autorizado de seguridad ofensiva
+
+</div>

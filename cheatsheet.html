@@ -1679,7 +1679,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
     }
 
     applyLang(detectLang());
-
+    
     [document.getElementById("langBtn"), document.getElementById("langBtnM")].filter(Boolean).forEach(function (b) {
       b.addEventListener("click", function () {
         var next = (window.__lang === "es") ? "en" : "es";

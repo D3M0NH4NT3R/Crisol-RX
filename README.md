@@ -2,19 +2,23 @@
 
 # Crisol-RX
 
-**Gestor portable de vulnerabilidades para pentesters**
+**Gestor portable de vulnerabilidades para pentesters** · **Portable vulnerability manager for pentesters**
 
-por [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
+por / by [D3M0NH4NT3R](https://github.com/D3M0NH4NT3R)
 
-[**🌐 Web del proyecto**](https://crisol-rx.com/) · [**📋 Guía rápida**](https://crisol-rx.com/cheatsheet.html) · [**⤓ Descargar**](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
+[**🌐 Web**](https://crisol-rx.com/Crisol-RX/) · [**📋 Guía rápida / Quick guide**](https://crisol-rx.com/cheatsheet.html) · [**⤓ Descargar / Download**](https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest)
+
+**[Español](#-español)** · **[English](#-english)**
 
 </div>
 
 ---
 
+## 🇪🇸 Español
+
 Crisol-RX cubre todo el ciclo de un engagement —del primer hallazgo al informe final— en una herramienta que cabe en **un solo archivo**: cero instalación, cero dependencias y tus datos siempre contigo.
 
-Workspaces por cliente, roles, ciclo de retest, pruebas de concepto e informes listos para entregar. Funciona en **Windows, Linux y macOS**.
+Workspaces por cliente, roles, ciclo de retest, pruebas de concepto e informes listos para entregar. **Interfaz y informes bilingües (Español / Inglés)**. Funciona en **Windows, Linux y macOS**.
 
 ### 👉 Toda la información, capturas y guía de uso están en la web
 
@@ -24,8 +28,22 @@ Para configurar el archivo `crisol.json`, levantarlo en red con HTTPS o cifrar t
 
 ---
 
+## 🇺🇸 English
+
+Crisol-RX covers the whole engagement cycle —from the first finding to the final report— in a tool that fits in **a single file**: zero installation, zero dependencies and your data always with you.
+
+Per-client workspaces, roles, retest cycle, proof-of-concept and ready-to-deliver reports. **Bilingual interface and reports (Spanish / English)**. Runs on **Windows, Linux and macOS**.
+
+### 👉 All the information, screenshots and usage guide are on the website
+
+**[d3m0nh4nt3r.github.io/Crisol-RX](https://d3m0nh4nt3r.github.io/Crisol-RX/)**
+
+To configure the `crisol.json` file, run it on your network over HTTPS or encrypt your data, check the **[Quick guide](https://d3m0nh4nt3r.github.io/Crisol-RX/cheatsheet.html)**.
+
+---
+
 <div align="center">
 
-Software propietario © 2026 D3M0NH4NT3R · Uso ético y autorizado de seguridad ofensiva
+Software propietario / Proprietary software © 2026 D3M0NH4NT3R · Uso ético y autorizado de seguridad ofensiva / Ethical and authorized offensive-security use only
 
 </div>

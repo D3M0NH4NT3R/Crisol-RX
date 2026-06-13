@@ -7,6 +7,15 @@
   <title>Crisol-RX — Cheat Sheet de configuración</title>
   <meta name="description"
     content="Guía rápida de Crisol-RX: cómo configurar crisol.json, levantarlo en red con HTTPS, cifrar tus datos y comandos esenciales.">
+  <meta property="og:title" content="Crisol-RX — Cheat Sheet de configuración">
+  <meta property="og:description"
+    content="Guía rápida: crisol.json, modo servidor, HTTPS, cifrado y comandos esenciales.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="og-image.png">
+  <meta name="theme-color" content="#12161f">
+  <link rel="canonical" href="cheatsheet.html">
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239d5cff'/%3E%3Cstop offset='1' stop-color='%237e3fe0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2315131c'/%3E%3Cpath d='M32 8 L50 22 H14 Z' fill='url(%23a)'/%3E%3Cpath d='M14 22 H50 L32 56 Z' fill='url(%23a)' opacity='0.82'/%3E%3Cpath d='M23 22 L32 35 L41 22 L32 19 Z' fill='%2315e6a0'/%3E%3Ccircle cx='32' cy='24' r='2.8' fill='%2315e6a0'/%3E%3Cpath d='M32 8 L32 3' stroke='%2315e6a0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
   <script>
@@ -78,7 +87,7 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -199,9 +208,47 @@
       opacity: .6
     }
 
+    /* capa de partículas flotantes (idéntico a la landing) */
+    .bg-fx .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 8px 1px color-mix(in srgb, var(--accent2) 70%, transparent);
+      opacity: 0;
+      animation: floatUp linear infinite
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(20px) scale(.6);
+        opacity: 0
+      }
+
+      12% {
+        opacity: .9
+      }
+
+      88% {
+        opacity: .7
+      }
+
+      100% {
+        transform: translateY(-110px) scale(1);
+        opacity: 0
+      }
+    }
+
     @media (prefers-reduced-motion:reduce) {
-      .bg-fx .orb {
+
+      .bg-fx .orb,
+      .bg-fx .spark {
         animation: none
+      }
+
+      .bg-fx .spark {
+        display: none
       }
     }
 
@@ -276,9 +323,17 @@
       color: var(--text)
     }
 
-    @media(max-width:720px) {
-      .nav-links a:not(.btn):not(.theme-btn) {
-        display: none
+    @media(max-width:560px) {
+
+      /* en móvil, el botón "Descargar" muestra solo el icono para ahorrar espacio */
+      .nav-links .btn-primary {
+        font-size: 0;
+        padding: 11px 14px
+      }
+
+      .nav-links .btn-primary::before {
+        content: "⤓";
+        font-size: 16px
       }
     }
 
@@ -416,16 +471,14 @@
       align-items: start
     }
 
-    @media(max-width:860px) {
-      .cs-layout {
-        grid-template-columns: 1fr
-      }
-
-      .cs-toc {
-        display: none
-      }
+    /* el contenido del grid nunca debe forzar ancho (evita scroll horizontal
+       cuando hay bloques de código largos) */
+    .cs-layout>main {
+      min-width: 0
     }
 
+    /* índice lateral (reglas base ANTES de los media queries para que el
+       display:none de móvil pueda sobrescribirlas correctamente) */
     .cs-toc {
       position: sticky;
       top: 84px;
@@ -452,6 +505,52 @@
       color: var(--accent2);
       border-left-color: var(--accent2);
       background: color-mix(in srgb, var(--accent2) 8%, transparent)
+    }
+
+    @media(max-width:860px) {
+      .cs-layout {
+        grid-template-columns: 1fr
+      }
+
+      .cs-toc {
+        display: none !important
+      }
+    }
+
+    /* móvil: menos padding, tipografía y tablas adaptadas */
+    @media(max-width:560px) {
+      .cs-sec {
+        padding: 20px 16px 16px;
+        border-radius: 14px
+      }
+
+      .cs-sec h2 {
+        font-size: 18px
+      }
+
+      .code pre {
+        padding: 13px;
+        font-size: 12px
+      }
+
+      /* las primeras columnas de las tablas ya pueden partir línea */
+      .tbl td:first-child {
+        white-space: normal
+      }
+
+      .tbl th,
+      .tbl td {
+        padding: 8px 8px
+      }
+
+      .tbl code {
+        white-space: normal;
+        word-break: break-word
+      }
+
+      .cs-layout {
+        padding: 12px 0 50px
+      }
     }
 
     /* tarjetas de sección */
@@ -708,6 +807,83 @@
       margin-top: 8px;
       opacity: .7
     }
+
+    /* ---------- impresión / guardar como PDF ---------- */
+    @media print {
+
+      .bg-fx,
+      nav,
+      .cs-toc,
+      .theme-btn,
+      .copy-btn,
+      footer .fsocial {
+        display: none !important
+      }
+
+      body {
+        background: #fff;
+        color: #000
+      }
+
+      .cs-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0
+      }
+
+      .cs-sec {
+        background: #fff;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 14px
+      }
+
+      .cs-sec h2,
+      .cs-sec h3 {
+        color: #000
+      }
+
+      .cs-sec .lead,
+      .tbl td,
+      .cs-sec p {
+        color: #222
+      }
+
+      .code {
+        background: #f4f4f4;
+        border: 1px solid #ccc
+      }
+
+      .code pre,
+      .code .k,
+      .code .s,
+      .code .c,
+      .code .b {
+        color: #000 !important
+      }
+
+      .note {
+        border: 1px solid #ccc !important;
+        background: #f7f7f7 !important
+      }
+
+      a {
+        color: #000;
+        text-decoration: underline
+      }
+
+      header.head {
+        padding: 10px 0
+      }
+
+      header.head h1 .grad {
+        -webkit-text-fill-color: #000;
+        color: #000;
+        background: none
+      }
+    }
   </style>
 </head>
 
@@ -716,6 +892,7 @@
   <div class="bg-fx" aria-hidden="true">
     <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
     <span class="grid"></span>
+    <div class="sparks" id="sparks"></div>
   </div>
 
   <nav>
@@ -779,11 +956,12 @@
 chmod +x crisol-*
 ./crisol-*
 
-<span class="c"># Windows: Ejecuta crisol-windows-amd64.exe</span></pre>
+<span class="c"># Windows: doble clic en crisol-windows-amd64.exe</span></pre>
           </div>
           <p style="font-size:13.5px;color:var(--muted);margin-top:12px">Se abre solo en el navegador. Entra como
             <b>admin</b>: la contraseña inicial aparece <b>una sola vez</b> en la consola al arrancar por primera vez.
-            Cámbiala desde el menú lateral.</p>
+            Cámbiala desde el menú lateral.
+          </p>
           <div class="note tip"><span class="ni">💡</span>
             <div><b>Tip:</b> ejecútalo desde una carpeta tuya (no desde Descargas ni una carpeta sincronizada en la
               nube), para que pueda crear su base de datos sin problemas.</div>
@@ -882,7 +1060,9 @@ chmod +x crisol-*
 }</pre>
           </div>
           <p style="font-size:13.5px;color:var(--muted)">Los demás acceden por
-            <code>http://&lt;IP-del-servidor&gt;:8723</code>. 
+            <code>http://&lt;IP-del-servidor&gt;:8723</code>. Averigua tu IP con <code>ipconfig</code> (Windows) o
+            <code>ip a</code> / <code>ifconfig</code> (Linux/macOS).
+          </p>
           <div class="note warn"><span class="ni">⚠️</span>
             <div>Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de confianza</b> y activa el cifrado de
               comunicaciones (siguiente sección). Cambia antes la contraseña de admin.</div>
@@ -1014,7 +1194,8 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
             <tr>
               <td>🔒</td>
               <td>Si activas el cifrado, guarda la passphrase en un gestor de contraseñas y protege el
-                <code>crisol.json</code>.</td>
+                <code>crisol.json</code>.
+              </td>
             </tr>
             <tr>
               <td>⏻</td>
@@ -1045,6 +1226,23 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
   </footer>
 
   <script>
+
+    (function () {
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var host = document.getElementById("sparks");
+      if (!host || reduce) return;
+      var N = window.innerWidth < 700 ? 10 : 18;
+      for (var i = 0; i < N; i++) {
+        var s = document.createElement("span");
+        s.className = "spark";
+        s.style.left = (Math.random() * 100) + "%";
+        s.style.top = (60 + Math.random() * 40) + "%";
+        s.style.animationDuration = (7 + Math.random() * 8) + "s";
+        s.style.animationDelay = (-Math.random() * 12) + "s";
+        if (i % 2) s.style.background = "var(--accent)", s.style.boxShadow = "0 0 8px 1px color-mix(in srgb,var(--accent) 70%,transparent)";
+        host.appendChild(s);
+      }
+    })();
 
     var root = document.documentElement, tb = document.getElementById("themeBtn");
     function curTheme() { return root.getAttribute("data-theme") || "dark"; }

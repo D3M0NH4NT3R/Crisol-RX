@@ -22,7 +22,7 @@ Workspaces por cliente, roles, ciclo de retest, pruebas de concepto e informes l
 
 ### 👉 Toda la información, capturas y guía de uso están en la web
 
-**[d3m0nh4nt3r.github.io/Crisol-RX](https://crisol-rx.com/)**
+**[crisol-rx.com](https://crisol-rx.com/)**
 
 Para configurar el archivo `crisol.json`, levantarlo en red con HTTPS o cifrar tus datos, consulta la **[Guía rápida](https://crisol-rx.com/cheatsheet.html)**.
 
@@ -36,7 +36,7 @@ Per-client workspaces, roles, retest cycle, proof-of-concept and ready-to-delive
 
 ### 👉 All the information, screenshots and usage guide are on the website
 
-**[d3m0nh4nt3r.github.io/Crisol-RX](https://crisol-rx.com/)**
+**[crisol-rx.com](https://crisol-rx.com/)**
 
 To configure the `crisol.json` file, run it on your network over HTTPS or encrypt your data, check the **[Quick guide](https://crisol-rx.com/cheatsheet.html)**.
 

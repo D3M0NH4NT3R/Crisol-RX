@@ -1227,7 +1227,8 @@
           <a href="index.html" data-i18n="nav.home">Inicio</a>
           <a href="index.html#features" data-i18n="nav.features">Características</a>
           <a href="index.html#contact" data-i18n="nav.report">Reportar bug</a>
-          <a href="index.html#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓ Descargar</span></a>
+          <a href="index.html#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓
+              Descargar</span></a>
           <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
           <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
         </div>
@@ -1246,8 +1247,9 @@
     <div class="head-spot" id="headSpot" aria-hidden="true"></div>
     <div class="wrap">
       <h1 data-i18n="head.title">Cheat Sheet de <span class="grad">configuración</span></h1>
-      <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
-        cifrado y comandos esenciales.</span></p>
+      <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo
+        </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
+          cifrado y comandos esenciales.</span></p>
     </div>
   </header>
 
@@ -1272,7 +1274,8 @@
         <!-- PRIMER ARRANQUE -->
         <section class="cs-sec reveal" id="inicio">
           <h2><span class="ico">🚀</span> <span data-i18n="sec.start.h">Primer arranque</span></h2>
-          <p class="lead" data-i18n="sec.start.lead">Descarga el archivo de tu sistema y ejecútalo. No hay instalación.</p>
+          <p class="lead" data-i18n="sec.start.lead">Descarga el archivo de tu sistema y ejecútalo. No hay instalación.
+          </p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre><span class="c" data-i18n="cmt.start1"># macOS / Linux: dar permiso de ejecución y arrancar</span>
 chmod +x crisol-*
@@ -1280,20 +1283,24 @@ chmod +x crisol-*
 
 <span class="c" data-i18n="cmt.start2"># Windows: doble clic en crisol-windows-amd64.exe</span></pre>
           </div>
-          <p style="font-size:13.5px;color:var(--muted);margin-top:12px" data-i18n="sec.start.p">Se abre solo en el navegador. Entra como
+          <p style="font-size:13.5px;color:var(--muted);margin-top:12px" data-i18n="sec.start.p">Se abre solo en el
+            navegador. Entra como
             <b>admin</b>: la contraseña inicial aparece <b>una sola vez</b> en la consola al arrancar por primera vez.
             Cámbiala desde el menú lateral.
           </p>
           <div class="note tip"><span class="ni">💡</span>
-            <div data-i18n="sec.start.tip"><b>Tip:</b> ejecútalo desde una carpeta tuya (no desde Descargas ni una carpeta sincronizada en la
+            <div data-i18n="sec.start.tip"><b>Tip:</b> ejecútalo desde una carpeta tuya (no desde Descargas ni una
+              carpeta sincronizada en la
               nube), para que pueda crear su base de datos sin problemas.</div>
           </div>
         </section>
 
         <!-- CONFIG -->
         <section class="cs-sec reveal" id="config">
-          <h2><span class="ico">⚙️</span> <span data-i18n="sec.config.h">El archivo</span> <code style="font-size:.7em">crisol.json</code></h2>
-          <p class="lead" data-i18n="sec.config.lead">Se crea solo junto al ejecutable en el primer arranque. Edítalo con cualquier editor de texto
+          <h2><span class="ico">⚙️</span> <span data-i18n="sec.config.h">El archivo</span> <code
+              style="font-size:.7em">crisol.json</code></h2>
+          <p class="lead" data-i18n="sec.config.lead">Se crea solo junto al ejecutable en el primer arranque. Edítalo
+            con cualquier editor de texto
             y reinicia la app para aplicar los cambios.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre>{
@@ -1317,7 +1324,8 @@ chmod +x crisol-*
             </tr>
             <tr>
               <td><code>listen</code></td>
-              <td data-i18n="config.listen">Dónde escucha. <code>127.0.0.1:8723</code> = solo tu equipo. <code>0.0.0.0:8723</code> = accesible
+              <td data-i18n="config.listen">Dónde escucha. <code>127.0.0.1:8723</code> = solo tu equipo.
+                <code>0.0.0.0:8723</code> = accesible
                 desde la red.</td>
             </tr>
             <tr>
@@ -1338,7 +1346,8 @@ chmod +x crisol-*
             </tr>
             <tr>
               <td><code>allowed_hosts</code></td>
-              <td data-i18n="config.allowed_hosts">Dominios extra permitidos si entras por nombre, p. ej. <code>["crisol.miempresa.local"]</code>.</td>
+              <td data-i18n="config.allowed_hosts">Dominios extra permitidos si entras por nombre, p. ej.
+                <code>["crisol.miempresa.local"]</code>.</td>
             </tr>
             <tr>
               <td><code>tls_enabled</code></td>
@@ -1362,7 +1371,8 @@ chmod +x crisol-*
         <!-- FLAGS -->
         <section class="cs-sec reveal" id="flags">
           <h2><span class="ico">⌨️</span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
-          <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad sobre el </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
+          <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad sobre el
+            </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre>./crisol                          <span class="c" data-i18n="cmt.flag1"># arranca según crisol.json</span>
 ./crisol -addr 127.0.0.1:9000     <span class="c" data-i18n="cmt.flag2"># otra dirección/puerto</span>
@@ -1382,11 +1392,13 @@ chmod +x crisol-*
 }</pre>
           </div>
           <p style="font-size:13.5px;color:var(--muted)"><span data-i18n="sec.net.pA">Los demás acceden por
-            </span><code>http://&lt;IP-del-servidor&gt;:8723</code><span data-i18n="sec.net.pB">. Averigua tu IP con </span><code>ipconfig</code><span data-i18n="sec.net.pC"> (Windows) o
+            </span><code>http://&lt;IP-del-servidor&gt;:8723</code><span data-i18n="sec.net.pB">. Averigua tu IP con
+            </span><code>ipconfig</code><span data-i18n="sec.net.pC"> (Windows) o
             </span><code>ip a</code> / <code>ifconfig</code><span data-i18n="sec.net.pD"> (Linux/macOS).
-          </span></p>
+            </span></p>
           <div class="note warn"><span class="ni">⚠️</span>
-            <div data-i18n="sec.net.warn">Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de confianza</b> y activa el cifrado de
+            <div data-i18n="sec.net.warn">Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de confianza</b> y
+              activa el cifrado de
               comunicaciones (siguiente sección). Cambia antes la contraseña de admin.</div>
           </div>
         </section>
@@ -1394,7 +1406,8 @@ chmod +x crisol-*
         <!-- HTTPS -->
         <section class="cs-sec reveal" id="https">
           <h2><span class="ico">🔐</span> HTTPS <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
-          <p class="lead" data-i18n="sec.https.lead">Cifra las comunicaciones. Con tu certificado propio o uno automático.</p>
+          <p class="lead" data-i18n="sec.https.lead">Cifra las comunicaciones. Con tu certificado propio o uno
+            automático.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre>{
   <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>,
@@ -1410,23 +1423,27 @@ chmod +x crisol-*
             </tr>
             <tr>
               <td data-i18n="https.auto.t">Certificado automático</td>
-              <td data-i18n="https.auto.d">Deja <code>cert_file</code> y <code>key_file</code> vacíos: se genera uno solo. El navegador avisará
+              <td data-i18n="https.auto.d">Deja <code>cert_file</code> y <code>key_file</code> vacíos: se genera uno
+                solo. El navegador avisará
                 la primera vez (normal en red interna).</td>
             </tr>
             <tr>
               <td data-i18n="https.own.t">Certificado propio</td>
-              <td data-i18n="https.own.d">Indica las rutas de tu certificado y su clave en <code>cert_file</code> y <code>key_file</code>.</td>
+              <td data-i18n="https.own.d">Indica las rutas de tu certificado y su clave en <code>cert_file</code> y
+                <code>key_file</code>.</td>
             </tr>
           </table>
           <div class="note tip"><span class="ni">💡</span>
-            <div data-i18n="https.tip">Bajo HTTPS, el acceso es por <code>https://&lt;IP&gt;:8723</code> y las cookies se marcan seguras
+            <div data-i18n="https.tip">Bajo HTTPS, el acceso es por <code>https://&lt;IP&gt;:8723</code> y las cookies
+              se marcan seguras
               automáticamente.</div>
           </div>
         </section>
 
         <!-- CIFRADO -->
         <section class="cs-sec reveal" id="cifrado">
-          <h2><span class="ico">🔒</span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
+          <h2><span class="ico">🔒</span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt"
+              data-i18n="pill.optional">opcional</span></h2>
           <p class="lead" data-i18n="sec.enc.lead">Con la app cerrada, tus datos quedan ilegibles para terceros.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre>{
@@ -1435,17 +1452,20 @@ chmod +x crisol-*
 }</pre>
           </div>
           <div class="note tip"><span class="ni">🔑</span>
-            <div data-i18n="enc.note1"><b>¿No ves el archivo cifrado?</b> Es normal: <b>se crea al cerrar la app con Ctrl-C</b>, no al
+            <div data-i18n="enc.note1"><b>¿No ves el archivo cifrado?</b> Es normal: <b>se crea al cerrar la app con
+                Ctrl-C</b>, no al
               arrancar. Mientras trabajas, los datos están descifrados; al cerrar ordenadamente se cifran y se borra la
               copia en claro.</div>
           </div>
           <div class="note danger"><span class="ni">🚨</span>
-            <div data-i18n="enc.note2">Cierra siempre con <b>Ctrl-C</b>. Si matas el proceso de golpe, el cifrado no se ejecuta. Y guarda bien
+            <div data-i18n="enc.note2">Cierra siempre con <b>Ctrl-C</b>. Si matas el proceso de golpe, el cifrado no se
+              ejecuta. Y guarda bien
               la passphrase: <b>si la pierdes, los datos no se recuperan</b>.</div>
           </div>
           <div class="note tip"><span class="ni">🛡️</span>
-            <div><span data-i18n="enc.note3"><b>Opción más segura:</b> en vez de poner la passphrase en el </span><code>crisol.json</code><span data-i18n="enc.note3b">, déjala vacía y
-              pásala por variable de entorno al arrancar — así no queda en disco:</span>
+            <div><span data-i18n="enc.note3"><b>Opción más segura:</b> en vez de poner la passphrase en el
+              </span><code>crisol.json</code><span data-i18n="enc.note3b">, déjala vacía y
+                pásala por variable de entorno al arrancar — así no queda en disco:</span>
               <div class="code" style="margin-top:8px"><button class="copy-btn" data-i18n="copy">Copiar</button>
                 <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol</pre>
               </div>
@@ -1468,8 +1488,9 @@ rm -f crisol.db crisol.db-wal crisol.db-shm</pre>
         <!-- PASSPHRASE -->
         <section class="cs-sec reveal" id="passphrase">
           <h2><span class="ico">🔁</span> <span data-i18n="sec.pass.h">Cambiar la passphrase</span></h2>
-          <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el </span><code>crisol.json</code><span data-i18n="sec.pass.leadB"> no basta si ya hay datos cifrados: el archivo
-            sigue cerrado con la frase anterior.</span></p>
+          <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el </span><code>crisol.json</code><span
+              data-i18n="sec.pass.leadB"> no basta si ya hay datos cifrados: el archivo
+              sigue cerrado con la frase anterior.</span></p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre><span class="c" data-i18n="cmt.pass0"># Con el servidor PARADO:</span>
 <span class="c" data-i18n="cmt.pass1"># 1) Descifra con la frase VIEJA</span>
@@ -1484,8 +1505,10 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
 <span class="c" data-i18n="cmt.pass4"># 4) Pon la frase NUEVA en crisol.json</span></pre>
           </div>
           <div class="note tip"><span class="ni">💡</span>
-            <div><span data-i18n="pass.tipA">Si <b>todavía no has generado</b> el archivo cifrado (no has cerrado con Ctrl-C con el cifrado activo),
-              basta con editar </span><code>db_passphrase</code><span data-i18n="pass.tipB"> en el </span><code>crisol.json</code><span data-i18n="pass.tipC">.</span></div>
+            <div><span data-i18n="pass.tipA">Si <b>todavía no has generado</b> el archivo cifrado (no has cerrado con
+                Ctrl-C con el cifrado activo),
+                basta con editar </span><code>db_passphrase</code><span data-i18n="pass.tipB"> en el
+              </span><code>crisol.json</code><span data-i18n="pass.tipC">.</span></div>
           </div>
         </section>
 
@@ -1494,10 +1517,12 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
           <h2><span class="ico">🧳</span> <span data-i18n="sec.move.h">Mover entre PCs</span></h2>
           <p class="lead" data-i18n="sec.move.lead">Tus datos viajan contigo. Dos formas:</p>
           <h3 data-i18n="move.all.t">Llevarte todo</h3>
-          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.all.d">Cierra la app y copia la carpeta del ejecutable junto a su
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.all.d">Cierra la app y copia la carpeta del
+            ejecutable junto a su
             archivo de datos. En la otra máquina, ejecuta el archivo de esa plataforma. Listo.</p>
           <h3 data-i18n="move.one.t">Mover un solo cliente</h3>
-          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.one.d">Desde la app: <b>Exportar</b> un workspace → te da un archivo
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.one.d">Desde la app: <b>Exportar</b> un
+            workspace → te da un archivo
             con todo (incluidas las capturas). En la otra instalación: <b>Importar workspace</b> y se recrea entero.</p>
         </section>
 
@@ -1515,22 +1540,26 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
             </tr>
             <tr>
               <td>🔒</td>
-              <td><span data-i18n="tips.t3a">Si activas el cifrado, guarda la passphrase en un gestor de contraseñas y protege el
+              <td><span data-i18n="tips.t3a">Si activas el cifrado, guarda la passphrase en un gestor de contraseñas y
+                  protege el
                 </span><code>crisol.json</code><span data-i18n="tips.t3b">.</span>
               </td>
             </tr>
             <tr>
               <td>⏻</td>
-              <td data-i18n="tips.t4">Cierra siempre con <b>Ctrl-C</b> para que el cifrado y la limpieza se completen.</td>
+              <td data-i18n="tips.t4">Cierra siempre con <b>Ctrl-C</b> para que el cifrado y la limpieza se completen.
+              </td>
             </tr>
             <tr>
               <td>🙈</td>
-              <td><span data-i18n="tips.t5a">No subas a ningún sitio público tus archivos de datos, el </span><code>crisol.json</code><span data-i18n="tips.t5b"> ni los
-                certificados.</span></td>
+              <td><span data-i18n="tips.t5a">No subas a ningún sitio público tus archivos de datos, el
+                </span><code>crisol.json</code><span data-i18n="tips.t5b"> ni los
+                  certificados.</span></td>
             </tr>
             <tr>
               <td>📦</td>
-              <td data-i18n="tips.t6">Los exports de workspace contienen datos reales de clientes: trátalos como información sensible.</td>
+              <td data-i18n="tips.t6">Los exports de workspace contienen datos reales de clientes: trátalos como
+                información sensible.</td>
             </tr>
           </table>
         </section>
@@ -1541,8 +1570,8 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
 
   <footer>
     <div class="wrap">
-      <span data-i18n="footer.madeBy">Crisol-RX · creado por </span><a href="https://github.com/D3M0NH4NT3R" target="_blank"
-        rel="noopener noreferrer">D3M0NH4NT3R</a>
+      <span data-i18n="footer.madeBy">Crisol-RX · creado por </span><a href="https://github.com/D3M0NH4NT3R"
+        target="_blank" rel="noopener noreferrer">D3M0NH4NT3R</a>
       <div class="note-f" data-i18n="footer.note">Herramienta para uso ético y autorizado de seguridad ofensiva.</div>
     </div>
   </footer>
@@ -1666,11 +1695,11 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         }
         card.addEventListener("pointermove", function (e) {
           var r = card.getBoundingClientRect();
-          var fx = (e.clientX - r.left) / r.width;   // 0..1
-          var fy = (e.clientY - r.top) / r.height;   // 0..1
+          var fx = (e.clientX - r.left) / r.width;
+          var fy = (e.clientY - r.top) / r.height;
           var MAX = 4.5;
-          ry = (fx - 0.5) * 2 * MAX;   // rotateY según X
-          rx = -(fy - 0.5) * 2 * MAX;  // rotateX según Y
+          ry = (fx - 0.5) * 2 * MAX;
+          rx = -(fy - 0.5) * 2 * MAX;
           if (!raf) raf = requestAnimationFrame(apply);
         });
         card.addEventListener("pointerenter", function () { card.classList.add("tilt"); });

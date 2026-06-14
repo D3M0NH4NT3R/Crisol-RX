@@ -1377,6 +1377,52 @@
       box-shadow: 0 0 0 1px var(--accent-dim)
     }
 
+    /* Selector de canal Estable / Beta */
+    .chan-toggle {
+      display: inline-flex;
+      gap: 4px;
+      padding: 4px;
+      margin: 22px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--panel)
+    }
+
+    .chan-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background .2s var(--ease), color .2s var(--ease)
+    }
+
+    .chan-btn:hover {
+      color: var(--text)
+    }
+
+    .chan-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff
+    }
+
+    .chan-warn {
+      max-width: 560px;
+      margin: 16px auto 0;
+      padding: 12px 16px;
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: left
+    }
+
     .dl .os .pill {
       font-size: 9.5px;
       text-transform: uppercase;
@@ -2613,6 +2659,18 @@
       <div class="dl reveal">
         <h2 data-i18n="dl.title">Descarga Crisol-RX</h2>
         <p class="sub" style="margin-bottom:0" data-i18n="dl.sub">Un solo archivo, sin instalación ni dependencias.</p>
+
+        <div class="chan-toggle" role="tablist" aria-label="Versión / Version">
+          <button class="chan-btn active" id="chanStable" role="tab" aria-selected="true"
+            data-i18n="dl.chanStable">Estable</button>
+          <button class="chan-btn" id="chanBeta" role="tab" aria-selected="false" data-i18n="dl.chanBeta">Versión de
+            prueba</button>
+        </div>
+        <div class="chan-warn" id="chanWarn" hidden data-i18n="dl.betaWarn">
+          ⚠️ Versión de prueba (Release Candidate). Puede contener fallos y no se recomienda para trabajo real. Pruébala
+          en un proyecto de test. La versión estable es la opción recomendada.
+        </div>
+
         <div class="big-dl">
           <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label"
               data-i18n="btn.download">⤓ Descargar</span></a>
@@ -2695,8 +2753,17 @@
 
   <script>
     var GH_USER = "D3M0NH4NT3R", GH_REPO = "Crisol-RX";
-    var RELEASES = "https://github.com/" + GH_USER + "/" + GH_REPO + "/releases/latest";
-    function dl(asset) { return "https://github.com/" + GH_USER + "/" + GH_REPO + "/releases/latest/download/" + asset; }
+    var BETA_TAG = "v1.1.0-rc1";
+    var GH = "https://github.com/" + GH_USER + "/" + GH_REPO;
+    var channel = "stable";
+    function releasesURL() {
+      return channel === "beta" ? GH + "/releases/tag/" + BETA_TAG : GH + "/releases/latest";
+    }
+    function dl(asset) {
+      return channel === "beta"
+        ? GH + "/releases/download/" + BETA_TAG + "/" + asset
+        : GH + "/releases/latest/download/" + asset;
+    }
 
     var OSES = {
       windows: { label: "Windows", ico: "🪟", arch: "x64", asset: "crisol-windows-amd64.exe" },
@@ -2759,13 +2826,33 @@
         note.innerHTML = s.detected(o);
         note2.innerHTML = "";
       } else {
-        heroBtn.href = RELEASES; mainBtn.href = RELEASES;
+        heroBtn.href = releasesURL(); mainBtn.href = releasesURL();
         setBtnLabel(heroBtn, s.seeHero);
         setBtnLabel(mainBtn, s.seeMain);
         note.innerHTML = s.noDetect;
         note2.innerHTML = "";
       }
     }
+
+    (function () {
+      var bStable = document.getElementById("chanStable");
+      var bBeta = document.getElementById("chanBeta");
+      var warn = document.getElementById("chanWarn");
+      if (!bStable || !bBeta) return;
+      function setChannel(ch) {
+        channel = ch;
+        var beta = ch === "beta";
+        bBeta.classList.toggle("active", beta);
+        bStable.classList.toggle("active", !beta);
+        bBeta.setAttribute("aria-selected", beta ? "true" : "false");
+        bStable.setAttribute("aria-selected", beta ? "false" : "true");
+        if (warn) warn.hidden = !beta;
+        applyDownload();
+        buildGrid();
+      }
+      bStable.addEventListener("click", function () { setChannel("stable"); });
+      bBeta.addEventListener("click", function () { setChannel("beta"); });
+    })();
 
     function buildGrid() {
       var s = dlStr();
@@ -3211,6 +3298,9 @@
         "why.c5": "Ligero y veloz <span>· arranca al instante</span>",
         "dl.title": "Descarga Crisol-RX",
         "dl.sub": "Un solo archivo, sin instalación ni dependencias.",
+        "dl.chanStable": "Estable",
+        "dl.chanBeta": "Versión de prueba",
+        "dl.betaWarn": "⚠️ Versión de prueba (Release Candidate). Puede contener fallos y no se recomienda para trabajo real. Pruébala antes en un proyecto de test. La versión estable es la opción recomendada.",
         "dl.step1": "<b>Descarga</b> el ejecutable de tu sistema.",
         "dl.step2a": "<b>Ejecútalo</b> (en macOS/Linux: ",
         "dl.step2b": " y luego ",
@@ -3319,6 +3409,9 @@
         "why.c5": "Light and fast <span>· starts instantly</span>",
         "dl.title": "Download Crisol-RX",
         "dl.sub": "A single file, no installation or dependencies.",
+        "dl.chanStable": "Stable",
+        "dl.chanBeta": "Test build",
+        "dl.betaWarn": "⚠️ Test build (Release Candidate). It may contain bugs and is not recommended for real work. Try it on a test project first. The stable version is the recommended option.",
         "dl.step1": "<b>Download</b> the executable for your system.",
         "dl.step2a": "<b>Run it</b> (on macOS/Linux: ",
         "dl.step2b": " then ",

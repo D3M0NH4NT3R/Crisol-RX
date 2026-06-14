@@ -1198,6 +1198,7 @@
 
     /* leve "dibujo" del trazo del icono al pasar por encima de la card */
     @media (prefers-reduced-motion:no-preference) {
+
       .card .ico svg path,
       .card .ico svg rect,
       .card .ico svg circle,
@@ -2242,7 +2243,8 @@
           <a href="#roles" data-i18n="nav.roles">Roles</a>
           <a href="cheatsheet.html" data-i18n="nav.quickguide">Guía rápida</a>
           <a href="#contact" data-i18n="nav.report">Reportar bug</a>
-          <a href="#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓ Descargar</span></a>
+          <a href="#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓
+              Descargar</span></a>
           <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
           <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
         </div>
@@ -2281,11 +2283,13 @@
           <path d="M24 4 L24 1" stroke="#15e6a0" stroke-width="2" stroke-linecap="round" />
         </svg></div>
       <h1 data-i18n="hero.title">Gestiona vulnerabilidades,<br><span class="grad">sin fricción.</span></h1>
-      <p class="tag" data-i18n="hero.tag"><b>Crisol-RX</b> es un gestor de vulnerabilidades <b>portable</b> para pentesters: un solo archivo,
+      <p class="tag" data-i18n="hero.tag"><b>Crisol-RX</b> es un gestor de vulnerabilidades <b>portable</b> para
+        pentesters: un solo archivo,
         cero instalación y tus datos viajan contigo. Workspaces por cliente, roles, ciclo de retest e informes listos
         para entregar.</p>
       <div class="cta">
-        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload"><span class="btn-label" data-i18n="btn.download">⤓
+        <a href="#download" class="btn btn-primary btn-lg" id="heroDownload"><span class="btn-label"
+            data-i18n="btn.download">⤓
             Descargar</span></a>
         <a href="cheatsheet.html" class="btn btn-ghost btn-lg" data-i18n="btn.quickguide">📋 Guía rápida</a>
       </div>
@@ -2307,8 +2311,10 @@
             <div class="ws"><span class="dot" style="background:var(--high)"></span>RetailX</div>
             <div class="ws"><span class="dot" style="background:var(--low)"></span>HealthNet</div>
             <div class="side-h" style="margin-top:14px" data-i18n="shot.status">Estado</div>
-            <div class="ws sm"><span class="dot" style="background:var(--crit)"></span><span data-i18n="shot.open">Abiertas</span></div>
-            <div class="ws sm"><span class="dot" style="background:var(--med)"></span><span data-i18n="shot.inRetest">En retest</span></div>
+            <div class="ws sm"><span class="dot" style="background:var(--crit)"></span><span
+                data-i18n="shot.open">Abiertas</span></div>
+            <div class="ws sm"><span class="dot" style="background:var(--med)"></span><span data-i18n="shot.inRetest">En
+                retest</span></div>
           </div>
           <div class="main">
             <div class="stats">
@@ -2318,7 +2324,8 @@
               <div class="st s"><b data-count="18">0</b><small data-i18n="shot.resolved">Resueltas</small></div>
             </div>
             <div class="charts">
-              <div class="donut"><span class="donut-c"><b id="donutPct">77</b><small data-i18n="shot.coverage">cobertura</small></span></div>
+              <div class="donut"><span class="donut-c"><b id="donutPct">77</b><small
+                    data-i18n="shot.coverage">cobertura</small></span></div>
               <div class="bars">
                 <div class="barwrap"><span class="barlbl" data-i18n="shot.sevCritical">Crítica</span>
                   <div class="barline"></div>
@@ -2332,14 +2339,16 @@
               </div>
             </div>
             <div class="vlist">
-              <div class="vrow"><span class="sev crit" data-i18n="shot.tagCrit">CRIT</span><span class="vname" data-i18n="shot.v1">SQLi en /api/login</span><span
-                  class="vid">ACM-014</span></div>
-              <div class="vrow"><span class="sev high" data-i18n="shot.tagHigh">ALTA</span><span class="vname" data-i18n="shot.v2">XSS reflejado en
+              <div class="vrow"><span class="sev crit" data-i18n="shot.tagCrit">CRIT</span><span class="vname"
+                  data-i18n="shot.v1">SQLi en /api/login</span><span class="vid">ACM-014</span></div>
+              <div class="vrow"><span class="sev high" data-i18n="shot.tagHigh">ALTA</span><span class="vname"
+                  data-i18n="shot.v2">XSS reflejado en
                   buscador</span><span class="vid">ACM-021</span></div>
-              <div class="vrow"><span class="sev med" data-i18n="shot.tagMed">MEDIA</span><span class="vname" data-i18n="shot.v3">Cabeceras de seguridad
+              <div class="vrow"><span class="sev med" data-i18n="shot.tagMed">MEDIA</span><span class="vname"
+                  data-i18n="shot.v3">Cabeceras de seguridad
                   ausentes</span><span class="vid">ACM-027</span></div>
-              <div class="vrow done"><span class="sev ok">OK</span><span class="vname" data-i18n="shot.v4">IDOR en exportación</span><span
-                  class="vid">ACM-009</span></div>
+              <div class="vrow done"><span class="sev ok">OK</span><span class="vname" data-i18n="shot.v4">IDOR en
+                  exportación</span><span class="vid">ACM-009</span></div>
             </div>
           </div>
         </div>
@@ -2350,71 +2359,146 @@
   <section id="features">
     <div class="wrap">
       <h2 class="reveal" data-i18n="feat.title">Todo lo que necesita un engagement</h2>
-      <p class="sub reveal" data-i18n="feat.sub">Desde el primer hallazgo hasta el informe final, en una herramienta que te llevas a
+      <p class="sub reveal" data-i18n="feat.sub">Desde el primer hallazgo hasta el informe final, en una herramienta que
+        te llevas a
         cualquier máquina.</p>
       <div class="feat">
         <div class="card reveal" style="--i:0">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v1H3z"/><path d="M3 10h18l-1.4 7.2A2 2 0 0 1 17.6 19H6.4a2 2 0 0 1-2-1.8z"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v1H3z" />
+              <path d="M3 10h18l-1.4 7.2A2 2 0 0 1 17.6 19H6.4a2 2 0 0 1-2-1.8z" />
+            </svg></div>
           <h3 data-i18n="feat.f1.t">Workspaces y proyectos</h3>
-          <p data-i18n="feat.f1.d">Separa cada cliente o engagement en su propio workspace, con proyectos y alcance independientes.</p>
+          <p data-i18n="feat.f1.d">Separa cada cliente o engagement en su propio workspace, con proyectos y alcance
+            independientes.</p>
         </div>
         <div class="card reveal" style="--i:1">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="6" width="8" height="11" rx="4"/><path d="M12 6V4"/><path d="M9 6.5 7.5 4.5M15 6.5 16.5 4.5"/><path d="M8 10H4M16 10h4M8 13H3.5M16 13H20.5M8 16l-2.5 2M16 16l2.5 2"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="8" y="6" width="8" height="11" rx="4" />
+              <path d="M12 6V4" />
+              <path d="M9 6.5 7.5 4.5M15 6.5 16.5 4.5" />
+              <path d="M8 10H4M16 10h4M8 13H3.5M16 13H20.5M8 16l-2.5 2M16 16l2.5 2" />
+            </svg></div>
           <h3 data-i18n="feat.f2.t">Vulnerabilidades completas</h3>
-          <p data-i18n="feat.f2.d">Severidad, CVSS, CWE, estado, activo, descripción, impacto, remediación y evidencia técnica.</p>
+          <p data-i18n="feat.f2.d">Severidad, CVSS, CWE, estado, activo, descripción, impacto, remediación y evidencia
+            técnica.</p>
         </div>
         <div class="card reveal" style="--i:2">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m4 17 5-5 4 4 3-3 4 4"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="9" cy="10" r="1.8" />
+              <path d="m4 17 5-5 4 4 3-3 4 4" />
+            </svg></div>
           <h3 data-i18n="feat.f3.t">Pruebas de concepto</h3>
-          <p data-i18n="feat.f3.d">Adjunta capturas con su descripción a cada hallazgo. Viajan contigo y se incrustan en el informe.</p>
+          <p data-i18n="feat.f3.d">Adjunta capturas con su descripción a cada hallazgo. Viajan contigo y se incrustan en
+            el informe.</p>
         </div>
         <div class="card reveal" style="--i:0">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4"/><path d="M4 20h16"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 20V4" />
+              <path d="M4 20h16" />
+              <rect x="7" y="12" width="3" height="5" />
+              <rect x="12" y="8" width="3" height="9" />
+              <rect x="17" y="5" width="3" height="12" />
+            </svg></div>
           <h3 data-i18n="feat.f4.t">Panel global</h3>
-          <p data-i18n="feat.f4.d">Métricas de severidad y por workspace, filtros en vivo y vista agrupada por activo afectado.</p>
+          <p data-i18n="feat.f4.d">Métricas de severidad y por workspace, filtros en vivo y vista agrupada por activo
+            afectado.</p>
         </div>
         <div class="card reveal" style="--i:1">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-8-5"/><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 8 5"/><polyline points="20 4 20 8 16 8"/><polyline points="4 20 4 16 8 16"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-8-5" />
+              <path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 8 5" />
+              <polyline points="20 4 20 8 16 8" />
+              <polyline points="4 20 4 16 8 16" />
+            </svg></div>
           <h3 data-i18n="feat.f5.t">Ciclo de retest</h3>
-          <p data-i18n="feat.f5.d">El cliente marca remediada → <i>pendiente de retest</i>. Solo quien la subió confirma la resolución.</p>
+          <p data-i18n="feat.f5.d">El cliente marca remediada → <i>pendiente de retest</i>. Solo quien la subió confirma
+            la resolución.</p>
         </div>
         <div class="card reveal" style="--i:2">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 8.5V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5z"/><path d="M13 3v5a1 1 0 0 0 1 1h5"/><path d="M8.5 17.5 10.5 19.5 14 15.5"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 8.5V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.5z" />
+              <path d="M13 3v5a1 1 0 0 0 1 1h5" />
+              <path d="M8.5 17.5 10.5 19.5 14 15.5" />
+            </svg></div>
           <h3 data-i18n="feat.f7.t">100% portable</h3>
-          <p data-i18n="feat.f7.d">Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e impórtalo donde quieras.</p>
+          <p data-i18n="feat.f7.d">Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e
+            impórtalo donde quieras.</p>
         </div>
         <div class="card wide reveal" style="--i:0">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.2 2.9 7.7 7 9 4.1-1.3 7-4.8 7-9V6z"/><path d="M9 9.5h6M9 12.5h6M10 15.5h4"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 5 6v5c0 4.2 2.9 7.7 7 9 4.1-1.3 7-4.8 7-9V6z" />
+              <path d="M9 9.5h6M9 12.5h6M10 15.5h4" />
+            </svg></div>
           <h3 data-i18n="feat.f12.t">Biblioteca de vulnerabilidades</h3>
-          <p data-i18n="feat.f12.d">Catálogo reutilizable de <b>77 hallazgos comunes</b> —web, API, infraestructura, Active Directory, Windows y Linux— que autorrellena tus vulnerabilidades con un clic.</p>
+          <p data-i18n="feat.f12.d">Catálogo reutilizable de <b>77 hallazgos comunes</b> —web, API, infraestructura,
+            Active Directory, Windows y Linux— que autorrellena tus vulnerabilidades con un clic.</p>
         </div>
         <div class="card wide reveal" style="--i:1">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M8 12h8M8 15h8M8 18h5"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+              <path d="M8 12h8M8 15h8M8 18h5" />
+            </svg></div>
           <h3 data-i18n="feat.f6.t">Informe profesional</h3>
-          <p data-i18n="feat.f6.d">Entregable completo con <b>portada, metodología, escala de severidad, tabla de hallazgos y conclusiones</b>; bilingüe, con la evidencia incrustada y listo para exportar a PDF.</p>
+          <p data-i18n="feat.f6.d">Entregable completo con <b>portada, metodología, escala de severidad, tabla de
+              hallazgos y conclusiones</b>; bilingüe, con la evidencia incrustada y listo para exportar a PDF.</p>
         </div>
         <div class="card wide reveal" style="--i:2">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.2 2.9 7.7 7 9 4.1-1.3 7-4.8 7-9V6z"/><path d="m9.5 12 1.8 1.8 3.5-3.6"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 5 6v5c0 4.2 2.9 7.7 7 9 4.1-1.3 7-4.8 7-9V6z" />
+              <path d="m9.5 12 1.8 1.8 3.5-3.6" />
+            </svg></div>
           <h3 data-i18n="feat.f8.t">Seguro por diseño</h3>
-          <p data-i18n="feat.f8.d">Control de acceso por rol verificado siempre en el servidor, protección frente a fuerza bruta y sesiones
+          <p data-i18n="feat.f8.d">Control de acceso por rol verificado siempre en el servidor, protección frente a
+            fuerza bruta y sesiones
             endurecidas. Privado por defecto.</p>
         </div>
         <div class="card wide reveal" style="--i:3">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4"/><path d="M12 16.4V18"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="10" width="16" height="11" rx="2" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              <circle cx="12" cy="15" r="1.4" />
+              <path d="M12 16.4V18" />
+            </svg></div>
           <h3 data-i18n="feat.f9.t">Tus datos cifrados</h3>
-          <p data-i18n="feat.f9.d">Opción de cifrar tu información en reposo: con la app cerrada, tus datos quedan ilegibles para terceros.
+          <p data-i18n="feat.f9.d">Opción de cifrar tu información en reposo: con la app cerrada, tus datos quedan
+            ilegibles para terceros.
           </p>
         </div>
         <div class="card wide reveal" style="--i:4">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18" />
+              <path d="M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z" />
+            </svg></div>
           <h3 data-i18n="feat.f10.t">Modo servidor con HTTPS</h3>
-          <p data-i18n="feat.f10.d">Úsalo solo para ti o levántalo para todo tu equipo en red local, con las comunicaciones cifradas de extremo
+          <p data-i18n="feat.f10.d">Úsalo solo para ti o levántalo para todo tu equipo en red local, con las
+            comunicaciones cifradas de extremo
             a extremo.</p>
         </div>
         <div class="card wide reveal" style="--i:5">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6 4 4L8 20l-4 1 1-4z"/><path d="M13 7l4 4"/><path d="M18 3l.7 1.6L20.3 5l-1.6.7L18 7.3l-.7-1.6L15.7 5l1.6-.7z"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m14 6 4 4L8 20l-4 1 1-4z" />
+              <path d="M13 7l4 4" />
+              <path d="M18 3l.7 1.6L20.3 5l-1.6.7L18 7.3l-.7-1.6L15.7 5l1.6-.7z" />
+            </svg></div>
           <h3 data-i18n="feat.f11.t">Diseño cuidado</h3>
-          <p data-i18n="feat.f11.d">Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu entidad en informes y
+          <p data-i18n="feat.f11.d">Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu
+            entidad en informes y
             pantalla.</p>
         </div>
       </div>
@@ -2424,25 +2508,43 @@
   <section id="flow">
     <div class="wrap">
       <h2 class="reveal" data-i18n="flow.title">Del hallazgo al informe, sin salir de la app</h2>
-      <p class="sub reveal" data-i18n="flow.sub">Un flujo pensado para el día a día del pentester: documenta, prueba, verifica y entrega.</p>
+      <p class="sub reveal" data-i18n="flow.sub">Un flujo pensado para el día a día del pentester: documenta, prueba,
+        verifica y entrega.</p>
       <div class="flow reveal" id="flowSteps">
         <div class="flow-step" style="--si:0">
-          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l1 1.5M16 3l-1 1.5"/><rect x="6" y="6" width="12" height="14" rx="6"/><path d="M3 11h3M18 11h3M3 16h3M18 16h3"/></svg></div>
+          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3l1 1.5M16 3l-1 1.5" />
+              <rect x="6" y="6" width="12" height="14" rx="6" />
+              <path d="M3 11h3M18 11h3M3 16h3M18 16h3" />
+            </svg></div>
           <h4 data-i18n="flow.s1.t">Documenta</h4>
           <p data-i18n="flow.s1.d">Crea la vuln con severidad, CVSS y remediación.</p>
         </div>
         <div class="flow-step" style="--si:1">
-          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 16l-5-5L5 19"/></svg></div>
+          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10" r="1.5" />
+              <path d="M21 16l-5-5L5 19" />
+            </svg></div>
           <h4 data-i18n="flow.s2.t">Adjunta PoC</h4>
           <p data-i18n="flow.s2.d">Capturas con descripción, guardadas en la BD.</p>
         </div>
         <div class="flow-step" style="--si:2">
-          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div>
+          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5" />
+            </svg></div>
           <h4 data-i18n="flow.s3.t">Retest</h4>
           <p data-i18n="flow.s3.d">El cliente marca remediada; tú confirmas.</p>
         </div>
         <div class="flow-step" style="--si:3">
-          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M14 2v5h5M8 13h8M8 17h6"/></svg></div>
+          <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 2h6l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+              <path d="M14 2v5h5M8 13h8M8 17h6" />
+            </svg></div>
           <h4 data-i18n="flow.s4.t">Informe</h4>
           <p data-i18n="flow.s4.d">HTML autocontenido, listo para entregar.</p>
         </div>
@@ -2455,10 +2557,13 @@
       <h2 class="reveal" data-i18n="metrics.title">Una herramienta, cero fricción</h2>
       <p class="sub reveal" data-i18n="metrics.sub">Pensada para ser ligera, portable y lista para producción.</p>
       <div class="metrics reveal">
-        <div class="metric"><b data-count="1" data-suffix=" ">1</b><small data-i18n="metrics.m1">solo archivo, sin instalación</small></div>
+        <div class="metric"><b data-count="1" data-suffix=" ">1</b><small data-i18n="metrics.m1">solo archivo, sin
+            instalación</small></div>
         <div class="metric"><b data-count="0">0</b><small data-i18n="metrics.m2">dependencias · 0 nube</small></div>
-        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m3">plataformas: Win · Linux · macOS</small></div>
-        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m4">roles con permisos por workspace</small></div>
+        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m3">plataformas: Win ·
+            Linux · macOS</small></div>
+        <div class="metric"><b data-count="3" data-suffix=" ">3</b><small data-i18n="metrics.m4">roles con permisos por
+            workspace</small></div>
       </div>
     </div>
   </section>
@@ -2466,18 +2571,22 @@
   <section id="roles">
     <div class="wrap">
       <h2 class="reveal" data-i18n="roles.title">Tres roles, permisos claros</h2>
-      <p class="sub reveal" data-i18n="roles.sub">Control de acceso por rol y por workspace, verificado siempre en el servidor.</p>
+      <p class="sub reveal" data-i18n="roles.sub">Control de acceso por rol y por workspace, verificado siempre en el
+        servidor.</p>
       <div class="roles">
         <div class="role reveal"><span class="tag2 admin" data-i18n="roles.admin.tag">Admin</span>
-          <p data-i18n="roles.admin.d"><b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede permisos. Ve toda la
+          <p data-i18n="roles.admin.d"><b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede
+            permisos. Ve toda la
             instalación.</p>
         </div>
         <div class="role reveal"><span class="tag2 pen" data-i18n="roles.pen.tag">Pentester</span>
-          <p data-i18n="roles.pen.d"><b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en los workspaces que se le
+          <p data-i18n="roles.pen.d"><b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en
+            los workspaces que se le
             comparten con permiso de edición.</p>
         </div>
         <div class="role reveal"><span class="tag2 cli" data-i18n="roles.cli.tag">Cliente</span>
-          <p data-i18n="roles.cli.d"><b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades como remediadas para su
+          <p data-i18n="roles.cli.d"><b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades
+            como remediadas para su
             verificación.</p>
         </div>
       </div>
@@ -2487,7 +2596,8 @@
   <section id="why">
     <div class="wrap">
       <h2 class="reveal" data-i18n="why.title">Por qué Crisol-RX</h2>
-      <p class="sub reveal" data-i18n="why.sub">Pensado para el trabajo real del pentester: rápido, privado y sin fricción.</p>
+      <p class="sub reveal" data-i18n="why.sub">Pensado para el trabajo real del pentester: rápido, privado y sin
+        fricción.</p>
       <div class="stack reveal">
         <div class="chip" data-i18n="why.c1">Cero instalación <span>· descarga y ejecuta</span></div>
         <div class="chip" data-i18n="why.c2">Funciona offline <span>· sin nube, sin terceros</span></div>
@@ -2504,7 +2614,8 @@
         <h2 data-i18n="dl.title">Descarga Crisol-RX</h2>
         <p class="sub" style="margin-bottom:0" data-i18n="dl.sub">Un solo archivo, sin instalación ni dependencias.</p>
         <div class="big-dl">
-          <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label" data-i18n="btn.download">⤓ Descargar</span></a>
+          <a href="#" class="btn btn-primary btn-lg" id="mainDownload"><span class="btn-label"
+              data-i18n="btn.download">⤓ Descargar</span></a>
         </div>
         <div class="os-note" id="osNote2"></div>
 
@@ -2515,17 +2626,20 @@
             <p data-i18n="dl.step1"><b>Descarga</b> el ejecutable de tu sistema.</p>
           </div>
           <div class="step"><span class="n">2</span>
-            <p><span data-i18n="dl.step2a"><b>Ejecútalo</b> (en macOS/Linux: </span><code>chmod +x crisol-*</code><span data-i18n="dl.step2b"> y luego </span><code>./crisol-*</code><span data-i18n="dl.step2c">). Se
-              abre solo en </span><code>http://127.0.0.1:8723</code><span data-i18n="dl.step2d">.</span></p>
+            <p><span data-i18n="dl.step2a"><b>Ejecútalo</b> (en macOS/Linux: </span><code>chmod +x crisol-*</code><span
+                data-i18n="dl.step2b"> y luego </span><code>./crisol-*</code><span data-i18n="dl.step2c">). Se
+                abre solo en </span><code>http://127.0.0.1:8723</code><span data-i18n="dl.step2d">.</span></p>
           </div>
           <div class="step"><span class="n">3</span>
-            <p data-i18n="dl.step3"><b>Entra</b> como <b>admin</b> — la contraseña inicial aparece en la consola la primera vez. Cámbiala
+            <p data-i18n="dl.step3"><b>Entra</b> como <b>admin</b> — la contraseña inicial aparece en la consola la
+              primera vez. Cámbiala
               desde tu perfil.</p>
           </div>
         </div>
         <p style="font-size:12.5px;color:var(--muted);margin-top:22px">
-          <span data-i18n="dl.other">¿No es tu sistema? </span><a href="https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest" target="_blank"
-            rel="noopener noreferrer" data-i18n="dl.otherLink">Elige otro binario en GitHub →</a>
+          <span data-i18n="dl.other">¿No es tu sistema? </span><a
+            href="https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest" target="_blank" rel="noopener noreferrer"
+            data-i18n="dl.otherLink">Elige otro binario en GitHub →</a>
         </p>
       </div>
     </div>
@@ -2534,7 +2648,8 @@
   <section id="contact">
     <div class="wrap">
       <h2 class="reveal" data-i18n="contact.title">¿Encontraste un bug?</h2>
-      <p class="sub reveal" data-i18n="contact.sub">Crisol-RX lo mantengo yo, <b>D3M0NH4NT3R</b>. Si das con un fallo o tienes una idea, dímelo
+      <p class="sub reveal" data-i18n="contact.sub">Crisol-RX lo mantengo yo, <b>D3M0NH4NT3R</b>. Si das con un fallo o
+        tienes una idea, dímelo
         y lo arreglo.</p>
       <div class="contact contact-solo">
         <a class="contact-card reveal" href="https://x.com/D3M0NH4NT3R" target="_blank" rel="noopener noreferrer">
@@ -2570,9 +2685,10 @@
           </svg>
         </a>
       </div>
-      <div style="margin-bottom:10px"><a href="cheatsheet.html" data-i18n="footer.cheatsheet">Guía rápida de configuración</a></div>
-      <span data-i18n="footer.madeBy">Crisol-RX · creado por </span><a href="https://github.com/D3M0NH4NT3R" target="_blank"
-        rel="noopener noreferrer">D3M0NH4NT3R</a>
+      <div style="margin-bottom:10px"><a href="cheatsheet.html" data-i18n="footer.cheatsheet">Guía rápida de
+          configuración</a></div>
+      <span data-i18n="footer.madeBy">Crisol-RX · creado por </span><a href="https://github.com/D3M0NH4NT3R"
+        target="_blank" rel="noopener noreferrer">D3M0NH4NT3R</a>
       <div class="note" data-i18n="footer.note">Herramienta para uso ético y autorizado de seguridad ofensiva.</div>
     </div>
   </footer>
@@ -2751,8 +2867,7 @@
     var flow = document.getElementById("flowSteps");
     if (flow) {
       var steps = flow.querySelectorAll(".flow-step");
-      // Red de seguridad: si por lo que sea el observer no dispara en 1.2s,
-      // mostramos los pasos igualmente (nunca deben quedar invisibles).
+
       var revealed = false;
       function runFlow() {
         if (revealed) return; revealed = true;
@@ -2799,7 +2914,7 @@
           shotScrollRX = Math.max(Math.min(off, 3), -3);
         }
       }, { passive: true });
-      // flotación suave continua + parallax de scroll, combinados en un solo rAF
+
       var shotStart = performance.now();
       (function shotLoop(t) {
         if (shotReady) {
@@ -2818,13 +2933,13 @@
       var h1 = document.querySelector(".hero h1");
       if (!h1) return;
       function splitTitle() {
-        if (reduce) return; // se deja el innerHTML tal cual
-        // envuelve cada palabra de texto en .word sin romper el <span class="grad"> ni <br>
+        if (reduce) return;
+
         var wi = 0;
         function wrap(node) {
           var kids = Array.prototype.slice.call(node.childNodes);
           kids.forEach(function (n) {
-            if (n.nodeType === 3) { // texto
+            if (n.nodeType === 3) {
               var parts = n.textContent.split(/(\s+)/);
               var frag = document.createDocumentFragment();
               parts.forEach(function (p) {
@@ -2838,7 +2953,7 @@
               node.replaceChild(frag, n);
             } else if (n.nodeType === 1 && n.tagName !== "BR") {
               if (n.classList && n.classList.contains("grad")) {
-                // anima la palabra destacada como un bloque (preserva el degradado aurora)
+
                 n.classList.add("word");
                 n.style.setProperty("--wi", wi++);
               } else {
@@ -2850,23 +2965,20 @@
         wrap(h1);
         h1.classList.add("kin");
       }
-      // exponer para re-aplicar tras cambio de idioma (applyLang re-renderiza innerHTML)
+
       window.__splitHeroTitle = function () {
         h1.classList.remove("kin");
-        // forzar reflow para reiniciar la animación
+
         void h1.offsetWidth;
         splitTitle();
       };
-      // El split lo dispara applyLang() (2º script) tras renderizar el innerHTML,
-      // tanto en la carga inicial como al cambiar de idioma.
-      // Fallback por si applyLang no estuviera disponible:
+
       if (typeof window.__lang === "undefined") {
         requestAnimationFrame(function () { if (!h1.classList.contains("kin")) splitTitle(); });
       }
     }
     )();
 
-    /* --- 1) Hero: spotlight + rejilla reactivos al ratón (rAF) --- */
     (function () {
       var hero = document.getElementById("top");
       var spot = document.getElementById("heroSpot");
@@ -2912,11 +3024,11 @@
         }
         card.addEventListener("pointermove", function (e) {
           var r = card.getBoundingClientRect();
-          var fx = (e.clientX - r.left) / r.width;   // 0..1
-          var fy = (e.clientY - r.top) / r.height;   // 0..1
+          var fx = (e.clientX - r.left) / r.width;
+          var fy = (e.clientY - r.top) / r.height;
           var MAX = 7;
-          ry = (fx - 0.5) * 2 * MAX;   // rotateY según X
-          rx = -(fy - 0.5) * 2 * MAX;  // rotateX según Y
+          ry = (fx - 0.5) * 2 * MAX;
+          rx = -(fy - 0.5) * 2 * MAX;
           sx = fx * 100; sy = fy * 100;
           if (!raf) raf = requestAnimationFrame(apply);
         });
@@ -2952,9 +3064,8 @@
       });
     })();
 
-    /* --- 3) Reveals: stagger por grupos --- */
     (function () {
-      // métricas, chips, roles, contact, feat ya tienen --i; añadimos --gi por grupos genéricos
+
       document.querySelectorAll(".metrics, .roles, .stack, .contact").forEach(function (group) {
         group.classList.add("reveal-group");
         var i = 0;
@@ -2994,7 +3105,7 @@
           raf = requestAnimationFrame(loop);
         }
       }, { passive: true });
-      // estado "hot" sobre elementos interactivos
+
       document.addEventListener("pointerover", function (e) {
         if (e.target.closest && e.target.closest("a,button,.card,.os,.chip,.metric,.role")) ring.classList.add("hot");
       });
@@ -3006,7 +3117,7 @@
   </script>
 
   <script>
-    /* ---------- internacionalización (ES por defecto, EN si el navegador no es ES) ---------- */
+
     var I18N = {
       es: {
         "nav.features": "Características",
@@ -3255,7 +3366,7 @@
       langBtns.forEach(function (b) { b.textContent = lang === "es" ? "ES" : "EN"; });
       if (typeof applyDownload === "function") applyDownload();
       if (typeof buildGrid === "function") buildGrid();
-      // re-aplica el título cinético tras re-renderizar el innerHTML del <h1>
+
       if (typeof window.__splitHeroTitle === "function") window.__splitHeroTitle();
     }
 

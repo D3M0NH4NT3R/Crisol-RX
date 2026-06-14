@@ -1012,6 +1012,160 @@
         background: none
       }
     }
+
+    /* ============================================================
+       PREMIUM ENHANCEMENTS — spotlight cabecera, tilt 3D en tarjetas,
+       botón magnético, índice animado, reveals refinados, cursor ring.
+       Todo neutralizado en prefers-reduced-motion (bloque al final).
+       ============================================================ */
+
+    /* ---- 1) Cabecera: spotlight reactivo al ratón ---- */
+    header.head {
+      isolation: isolate
+    }
+
+    .head-spot {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .5s var(--ease);
+      background:
+        radial-gradient(420px circle at var(--mx, 50%) var(--my, 40%),
+          color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%),
+        radial-gradient(640px circle at var(--mx, 50%) var(--my, 40%),
+          color-mix(in srgb, var(--accent2) 8%, transparent), transparent 65%);
+    }
+
+    .head-spot.lit {
+      opacity: 1
+    }
+
+    /* ---- 2) Tarjetas de sección: tilt 3D suave ---- */
+    .cs-layout>main {
+      perspective: 1300px
+    }
+
+    .cs-sec.tilt {
+      transition: transform .12s var(--ease), border-color .25s, box-shadow .25s;
+      transform: perspective(1100px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg)) translateZ(0)
+    }
+
+    /* ---- 4) Índice lateral: indicador animado más fino ---- */
+    @media (hover:hover) and (pointer:fine) {
+      .cs-toc a {
+        position: relative
+      }
+
+      .cs-toc a::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 4px;
+        height: 1.5px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .28s var(--ease)
+      }
+
+      .cs-toc a:hover::after,
+      .cs-toc a.active::after {
+        transform: scaleX(1)
+      }
+    }
+
+    /* ---- 4) Botón primario magnético ---- */
+    @media (hover:hover) and (pointer:fine) {
+      .btn-primary.mag {
+        transition: transform .35s var(--spring), filter .15s, box-shadow .25s
+      }
+    }
+
+    /* ---- 4) Botón Copiar: micro-feedback al click ---- */
+    .copy-btn:active {
+      transform: scale(.9)
+    }
+
+    /* ---- 3) Reveals refinados: fade + translate + leve scale ---- */
+    .reveal {
+      transform: translateY(26px) scale(.985);
+      transition: opacity .7s var(--ease), transform .7s var(--ease)
+    }
+
+    .reveal.in {
+      transform: none
+    }
+
+    /* stagger por orden de aparición */
+    .reveal {
+      transition-delay: calc(var(--ri, 0) * .06s)
+    }
+
+    /* ---- 4) Cursor ring personalizado (muy sutil) ---- */
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 26px;
+      height: 26px;
+      border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .3s var(--ease), width .2s var(--ease), height .2s var(--ease), border-color .2s;
+      will-change: transform;
+      mix-blend-mode: difference
+    }
+
+    .cursor-ring.on {
+      opacity: .7
+    }
+
+    .cursor-ring.hot {
+      width: 40px;
+      height: 40px;
+      border-color: color-mix(in srgb, var(--accent2) 70%, transparent)
+    }
+
+    @media (hover:none),
+    (pointer:coarse) {
+      .cursor-ring {
+        display: none
+      }
+    }
+
+    /* ============================================================
+       prefers-reduced-motion: neutraliza TODOS los efectos nuevos
+       ============================================================ */
+    @media (prefers-reduced-motion:reduce) {
+      .head-spot {
+        display: none
+      }
+
+      .cs-sec.tilt {
+        transform: none
+      }
+
+      .btn-primary.mag {
+        transform: none !important
+      }
+
+      .reveal {
+        transform: none;
+        transition: none;
+        transition-delay: 0s
+      }
+
+      .cursor-ring {
+        display: none
+      }
+    }
   </style>
 </head>
 
@@ -1062,6 +1216,7 @@
   </nav>
 
   <header class="head">
+    <div class="head-spot" id="headSpot" aria-hidden="true"></div>
     <div class="wrap">
       <h1 data-i18n="head.title">Cheat Sheet de <span class="grad">configuración</span></h1>
       <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
@@ -1427,6 +1582,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
       });
     });
 
+    document.querySelectorAll(".reveal").forEach(function (el, i) { el.style.setProperty("--ri", i % 4); });
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: .1 });
@@ -1443,6 +1599,108 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
       });
     }, { rootMargin: "-40% 0px -55% 0px" });
     secs.forEach(function (s) { spy.observe(s); });
+
+    /* ============================================================
+       PREMIUM ENHANCEMENTS — replican el estilo del index.html
+       ============================================================ */
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var fine = window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches;
+
+    /* --- 1) Cabecera: spotlight reactivo al ratón (rAF) --- */
+    (function () {
+      var head = document.querySelector("header.head");
+      var spot = document.getElementById("headSpot");
+      if (!head || !spot || reduce || !fine) return;
+      var px = 50, py = 40, raf = null;
+      function apply() {
+        raf = null;
+        spot.style.setProperty("--mx", px + "%");
+        spot.style.setProperty("--my", py + "%");
+      }
+      head.addEventListener("pointermove", function (e) {
+        var r = head.getBoundingClientRect();
+        px = ((e.clientX - r.left) / r.width) * 100;
+        py = ((e.clientY - r.top) / r.height) * 100;
+        if (!raf) raf = requestAnimationFrame(apply);
+      }, { passive: true });
+      head.addEventListener("pointerenter", function () { spot.classList.add("lit"); });
+      head.addEventListener("pointerleave", function () { spot.classList.remove("lit"); });
+    })();
+
+    /* --- 2) Tarjetas de sección: tilt 3D suave --- */
+    (function () {
+      if (reduce || !fine) return;
+      document.querySelectorAll(".cs-sec").forEach(function (card) {
+        var raf = null, rx = 0, ry = 0;
+        function apply() {
+          raf = null;
+          card.style.setProperty("--rx", rx.toFixed(2) + "deg");
+          card.style.setProperty("--ry", ry.toFixed(2) + "deg");
+        }
+        card.addEventListener("pointermove", function (e) {
+          var r = card.getBoundingClientRect();
+          var fx = (e.clientX - r.left) / r.width;   // 0..1
+          var fy = (e.clientY - r.top) / r.height;   // 0..1
+          var MAX = 4.5;
+          ry = (fx - 0.5) * 2 * MAX;   // rotateY según X
+          rx = -(fy - 0.5) * 2 * MAX;  // rotateX según Y
+          if (!raf) raf = requestAnimationFrame(apply);
+        });
+        card.addEventListener("pointerenter", function () { card.classList.add("tilt"); });
+        card.addEventListener("pointerleave", function () {
+          card.classList.remove("tilt");
+          rx = ry = 0; card.style.setProperty("--rx", "0deg"); card.style.setProperty("--ry", "0deg");
+        });
+      });
+    })();
+
+    /* --- 4) Botón Descargar magnético sutil --- */
+    (function () {
+      if (reduce || !fine) return;
+      var RADIUS = 80, STR = 0.3;
+      document.querySelectorAll(".btn-primary").forEach(function (btn) {
+        btn.classList.add("mag");
+        var raf = null, tx = 0, ty = 0;
+        function apply() { raf = null; btn.style.transform = "translate(" + tx.toFixed(1) + "px," + ty.toFixed(1) + "px)"; }
+        btn.addEventListener("pointermove", function (e) {
+          var r = btn.getBoundingClientRect();
+          var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          var dx = e.clientX - cx, dy = e.clientY - cy;
+          var dist = Math.hypot(dx, dy);
+          if (dist < RADIUS + Math.max(r.width, r.height) / 2) { tx = dx * STR; ty = dy * STR; }
+          else { tx = 0; ty = 0; }
+          if (!raf) raf = requestAnimationFrame(apply);
+        });
+        btn.addEventListener("pointerleave", function () { tx = 0; ty = 0; btn.style.transform = ""; });
+      });
+    })();
+
+    /* --- 4) Cursor ring personalizado (sutil) --- */
+    (function () {
+      if (reduce || !fine) return;
+      var ring = document.createElement("div");
+      ring.className = "cursor-ring";
+      document.body.appendChild(ring);
+      var rx = 0, ry = 0, cx = 0, cy = 0, started = false, raf = null;
+      function loop() {
+        rx += (cx - rx) * 0.22; ry += (cy - ry) * 0.22;
+        ring.style.transform = "translate(" + rx.toFixed(1) + "px," + ry.toFixed(1) + "px) translate(-50%,-50%)";
+        raf = requestAnimationFrame(loop);
+      }
+      window.addEventListener("pointermove", function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        cx = e.clientX; cy = e.clientY;
+        if (!started) { started = true; rx = cx; ry = cy; ring.classList.add("on"); raf = requestAnimationFrame(loop); }
+      }, { passive: true });
+      var HOT = "a,button,.cs-sec,.copy-btn,.cs-toc a";
+      document.addEventListener("pointerover", function (e) {
+        if (e.target.closest && e.target.closest(HOT)) ring.classList.add("hot");
+      });
+      document.addEventListener("pointerout", function (e) {
+        if (e.target.closest && e.target.closest(HOT)) ring.classList.remove("hot");
+      });
+      window.addEventListener("blur", function () { ring.classList.remove("on"); });
+    })();
   </script>
 
   <script>

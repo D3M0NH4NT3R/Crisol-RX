@@ -320,11 +320,38 @@
 
     .nav-links a:not(.btn) {
       color: var(--muted);
-      transition: color .15s
+      transition: color .15s;
+      position: relative
     }
 
     .nav-links a:not(.btn):hover {
       color: var(--text)
+    }
+
+    @media (hover:hover) and (pointer:fine) {
+      .nav-links a:not(.btn)::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 100%;
+        height: 2px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .28s var(--ease)
+      }
+
+      .nav-links a:not(.btn):hover::after {
+        transform: scaleX(1)
+      }
+    }
+
+    @media(max-width:720px) {
+      .nav-links a:not(.btn)::after {
+        display: none
+      }
     }
 
     /* botón hamburguesa (oculto en escritorio) */

@@ -19,8 +19,9 @@
   <meta name="twitter:image" content="https://crisol-rx.com/og-image.png">
   <meta name="theme-color" content="#12161f">
   <link rel="canonical" href="https://crisol-rx.com/cheatsheet.html">
-  <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239d5cff'/%3E%3Cstop offset='1' stop-color='%237e3fe0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2315131c'/%3E%3Cpath d='M32 8 L50 22 H14 Z' fill='url(%23a)'/%3E%3Cpath d='M14 22 H50 L32 56 Z' fill='url(%23a)' opacity='0.82'/%3E%3Cpath d='M23 22 L32 35 L41 22 L32 19 Z' fill='%2315e6a0'/%3E%3Ccircle cx='32' cy='24' r='2.8' fill='%2315e6a0'/%3E%3Cpath d='M32 8 L32 3' stroke='%2315e6a0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="https://crisol-rx.com/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="https://crisol-rx.com/favicon.svg">
+  <link rel="apple-touch-icon" href="https://crisol-rx.com/favicon.png">
   <script>
     (function () { try { var t = localStorage.getItem("vv_site_theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) { } })();
   </script>
@@ -1261,11 +1262,17 @@
         <a href="#inicio" data-i18n="toc.start">Primer arranque</a>
         <a href="#config" data-i18n="toc.config">El archivo crisol.json</a>
         <a href="#flags" data-i18n="toc.flags">Flags de arranque</a>
+        <a href="#import" data-i18n="toc.import">Importar escaneos</a>
+        <a href="#sla" data-i18n="toc.sla">SLA por proyecto</a>
+        <a href="#retest" data-i18n="toc.retest">Retest y justificación</a>
+        <a href="#word" data-i18n="toc.word">Exportar informes</a>
         <a href="#red" data-i18n="toc.network">Servidor en red</a>
         <a href="#https" data-i18n="toc.https">HTTPS</a>
         <a href="#cifrado" data-i18n="toc.encryption">Cifrado de datos</a>
         <a href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
+        <a href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
         <a href="#mover" data-i18n="toc.move">Mover entre PCs</a>
+        <a href="#roles" data-i18n="toc.roles">Roles</a>
         <a href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
       </aside>
 
@@ -1380,6 +1387,145 @@ chmod +x crisol-*
 ./crisol -config /ruta/otra.json  <span class="c" data-i18n="cmt.flag4"># otra configuración</span>
 ./crisol -no-open                 <span class="c" data-i18n="cmt.flag5"># no abrir el navegador</span></pre>
           </div>
+        </section>
+
+        <!-- IMPORTADOR DE ESCÁNERES -->
+        <section class="cs-sec reveal" id="import">
+          <h2><span class="ico">📥</span> <span data-i18n="sec.import.h">Importar escáneres</span></h2>
+          <p class="lead" data-i18n="sec.import.lead">Crea vulnerabilidades automáticamente importando los ficheros de
+            tus escáneres, sin depender de ellos. Con autodetección de formato.</p>
+          <h3 data-i18n="import.fmt.h">Formatos admitidos</h3>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="import.th.fmt">Formato</th>
+              <th data-i18n="import.th.file">Fichero</th>
+            </tr>
+            <tr>
+              <td data-i18n="import.nessus.t">Nessus</td>
+              <td data-i18n="import.nessus.d">Exportación <code>.nessus</code> (XML de Tenable).</td>
+            </tr>
+            <tr>
+              <td data-i18n="import.csv.t">CSV genérico</td>
+              <td data-i18n="import.csv.d">Cualquier <code>.csv</code> con columnas de hallazgos.</td>
+            </tr>
+            <tr>
+              <td data-i18n="import.nmap.t">Nmap</td>
+              <td data-i18n="import.nmap.d">Salida XML (<code>nmap -oX</code>).</td>
+            </tr>
+            <tr>
+              <td data-i18n="import.burp.t">Burp Suite</td>
+              <td data-i18n="import.burp.d">Informe exportado en XML.</td>
+            </tr>
+            <tr>
+              <td data-i18n="import.zap.t">OWASP ZAP</td>
+              <td data-i18n="import.zap.d">Informe exportado en XML.</td>
+            </tr>
+          </table>
+          <h3 data-i18n="import.steps.h">Pasos</h3>
+          <ol style="font-size:13.5px;color:var(--muted);margin:6px 0 4px;padding-left:20px">
+            <li data-i18n="import.step1">Abre el proyecto y pulsa <b>Importar escaneo</b>.</li>
+            <li data-i18n="import.step2">Selecciona el fichero: el formato se detecta solo.</li>
+            <li data-i18n="import.step3">Revisa la previsualización y confirma.</li>
+          </ol>
+          <div class="note tip"><span class="ni">💡</span>
+            <div data-i18n="import.tip"><b>Sin ruido:</b> al reimportar se <b>omiten los duplicados</b>, y los hallazgos
+              <b>informativos</b> quedan fuera salvo que los marques expresamente.</div>
+          </div>
+        </section>
+
+        <!-- SLA POR PROYECTO -->
+        <section class="cs-sec reveal" id="sla">
+          <h2><span class="ico">⏱️</span> <span data-i18n="sec.sla.h">SLA por proyecto</span></h2>
+          <p class="lead" data-i18n="sec.sla.lead">Cada proyecto define sus días de resolución por severidad. La app
+            calcula la fecha límite y avisa si una vulnerabilidad está <b>en plazo</b> o <b>vencida</b>.</p>
+          <h3 data-i18n="sla.cfg.h">Dónde se configura</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="sla.cfg.p">En el <b>modal del proyecto</b>: indica
+            los días de resolución para cada nivel de severidad. A partir de la fecha de detección, la app fija el
+            vencimiento de cada hallazgo.</p>
+          <h3 data-i18n="sla.ex.h">Valores típicos</h3>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="sla.th.sev">Severidad</th>
+              <th data-i18n="sla.th.days">Días de resolución</th>
+            </tr>
+            <tr>
+              <td data-i18n="sla.crit">Crítica</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td data-i18n="sla.high">Alta</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td data-i18n="sla.med">Media</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td data-i18n="sla.low">Baja</td>
+              <td>60</td>
+            </tr>
+          </table>
+          <div class="note tip"><span class="ni">📅</span>
+            <div data-i18n="sla.tip">La fecha límite viaja con el hallazgo y aparece también en el detalle exportado,
+              para que el cliente vea el plazo comprometido.</div>
+          </div>
+        </section>
+
+        <!-- RETEST Y JUSTIFICACIÓN -->
+        <section class="cs-sec reveal" id="retest">
+          <h2><span class="ico">🔁</span> <span data-i18n="sec.retest.h">Ciclo de retest y justificación</span></h2>
+          <p class="lead" data-i18n="sec.retest.lead">El flujo de verificación separa quién pide el cierre de quién lo
+            confirma, para que nadie cierre su propio hallazgo sin retest.</p>
+          <h3 data-i18n="retest.flow.h">El flujo, paso a paso</h3>
+          <ol style="font-size:13.5px;color:var(--muted);margin:6px 0 4px;padding-left:20px">
+            <li data-i18n="retest.step1">El <b>cliente</b> marca la vulnerabilidad como <b>remediada</b> (puede dejar un
+              comentario opcional).</li>
+            <li data-i18n="retest.step2">El hallazgo pasa a <b>pendiente de retest</b>.</li>
+            <li data-i18n="retest.step3">Solo <b>quien subió el hallazgo</b> confirma la resolución y la marca como
+              <b>resuelta</b>.</li>
+          </ol>
+          <div class="note warn"><span class="ni">⚖️</span>
+            <div data-i18n="retest.risk"><b>Aceptar riesgo:</b> permite asumir formalmente una vulnerabilidad que no se
+              va a corregir. La <b>justificación es obligatoria</b> y el estado tiene su <b>propio color</b> para
+              distinguirlo de un hallazgo resuelto.</div>
+          </div>
+        </section>
+
+        <!-- EXPORTAR INFORMES -->
+        <section class="cs-sec reveal" id="word">
+          <h2><span class="ico">📄</span> <span data-i18n="sec.word.h">Exportar informes</span></h2>
+          <p class="lead" data-i18n="sec.word.lead">Desde el proyecto puedes generar el informe en dos formatos, según
+            si quieres algo autocontenido o un bloque para pegar en tu plantilla corporativa.</p>
+          <h3 data-i18n="word.html.t">Informe completo (HTML)</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="word.html.d">Un único archivo HTML
+            <b>autocontenido</b> (estilos e imágenes incluidos): se abre en cualquier navegador y sirve como entregable
+            listo para enviar.</p>
+          <h3 data-i18n="word.docx.t">Detalle de vulnerabilidades (Word .docx)</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="word.docx.d">Un bloque limpio pensado para
+            <b>pegarlo dentro del informe corporativo</b> del pentester. Incluye:</p>
+          <table class="tbl">
+            <tr>
+              <td data-i18n="word.it1">Tabla resumen de hallazgos.</td>
+            </tr>
+            <tr>
+              <td data-i18n="word.it2">Ficha por vulnerabilidad con metadatos.</td>
+            </tr>
+            <tr>
+              <td data-i18n="word.it3">Descripción, impacto, remediación y evidencia.</td>
+            </tr>
+            <tr>
+              <td data-i18n="word.it4">Capturas de la PoC.</td>
+            </tr>
+            <tr>
+              <td data-i18n="word.it5">Comentarios / justificación y fecha de SLA.</td>
+            </tr>
+          </table>
+          <h3 data-i18n="word.steps.h">Pasos</h3>
+          <ol style="font-size:13.5px;color:var(--muted);margin:6px 0 4px;padding-left:20px">
+            <li data-i18n="word.step1">Abre el proyecto y pulsa <b>Exportar</b>.</li>
+            <li data-i18n="word.step2">Elige <b>Informe completo (HTML)</b> o <b>Detalle de vulnerabilidades (Word
+              .docx)</b>.</li>
+          </ol>
         </section>
 
         <!-- RED -->
@@ -1512,6 +1658,59 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
           </div>
         </section>
 
+        <!-- COPIAS DE SEGURIDAD -->
+        <section class="cs-sec reveal" id="backup">
+          <h2><span class="ico">💾</span> <span data-i18n="sec.backup.h">Copias de seguridad automáticas</span></h2>
+          <p class="lead" data-i18n="sec.backup.lead">La app hace copias automáticas, <b>cifradas con AES-256-GCM</b> y
+            con retención. Se configuran en <code>crisol.json</code>.</p>
+          <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+            <pre>{
+  <span class="k">"backup_enabled"</span>: <span class="b">true</span>,
+  <span class="k">"backup_dir"</span>: <span class="s">""</span>,
+  <span class="k">"backup_interval_hours"</span>: <span class="b">24</span>,
+  <span class="k">"backup_keep"</span>: <span class="b">7</span>,
+  <span class="k">"backup_passphrase"</span>: <span class="s">""</span>
+}</pre>
+          </div>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="backup.th.field">Campo</th>
+              <th data-i18n="backup.th.does">Qué hace</th>
+            </tr>
+            <tr>
+              <td><code>backup_enabled</code></td>
+              <td data-i18n="backup.enabled"><code>true</code>/<code>false</code>. Activa las copias automáticas.</td>
+            </tr>
+            <tr>
+              <td><code>backup_dir</code></td>
+              <td data-i18n="backup.dir">Carpeta de destino. Vacío = <code>&lt;carpeta de la BD&gt;/backups</code>.</td>
+            </tr>
+            <tr>
+              <td><code>backup_interval_hours</code></td>
+              <td data-i18n="backup.interval">Horas entre copias. Por defecto <code>24</code>, mínimo <code>1</code>.</td>
+            </tr>
+            <tr>
+              <td><code>backup_keep</code></td>
+              <td data-i18n="backup.keep">Cuántas copias conservar. Por defecto <code>7</code>.</td>
+            </tr>
+            <tr>
+              <td><code>backup_passphrase</code></td>
+              <td data-i18n="backup.pass">Si está vacío usa <code>db_passphrase</code> / <code>CRISOL_KEY</code>. Si no
+                hay ninguna, la copia se guarda <b>sin cifrar</b> y se avisa.</td>
+            </tr>
+          </table>
+          <h3 data-i18n="backup.restore.h">Restaurar una copia</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="backup.restore.p">Con la herramienta de descifrado
+            incluida, indicando la passphrase de la copia:</p>
+          <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+            <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -decrypt backups/crisol-AAAAMMDD-HHMMSS.db.enc -out restaurada.db</pre>
+          </div>
+          <div class="note tip"><span class="ni">📋</span>
+            <div data-i18n="backup.compliance">Cubre los requisitos de copias de seguridad de <b>ISO 27001 A.8.13</b>,
+              <b>ENS mp.info.6</b> y <b>RGPD art. 32</b>.</div>
+          </div>
+        </section>
+
         <!-- MOVER -->
         <section class="cs-sec reveal" id="mover">
           <h2><span class="ico">🧳</span> <span data-i18n="sec.move.h">Mover entre PCs</span></h2>
@@ -1524,6 +1723,32 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
           <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.one.d">Desde la app: <b>Exportar</b> un
             workspace → te da un archivo
             con todo (incluidas las capturas). En la otra instalación: <b>Importar workspace</b> y se recrea entero.</p>
+        </section>
+
+        <!-- ROLES -->
+        <section class="cs-sec reveal" id="roles">
+          <h2><span class="ico">👥</span> <span data-i18n="sec.roles.h">Roles</span></h2>
+          <p class="lead" data-i18n="sec.roles.lead">Tres tipos de usuario, cada uno con su alcance.</p>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="roles.th.role">Rol</th>
+              <th data-i18n="roles.th.can">Qué puede hacer</th>
+            </tr>
+            <tr>
+              <td data-i18n="roles.admin.t">Admin</td>
+              <td data-i18n="roles.admin.d">Gestiona usuarios, configuración y todos los proyectos. Acceso completo.</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.pentester.t">Pentester</td>
+              <td data-i18n="roles.pentester.d">Crea proyectos y hallazgos, importa escaneos, exporta informes y
+                <b>confirma la resolución</b> en el retest.</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.client.t">Cliente</td>
+              <td data-i18n="roles.client.d">Ve solo su workspace, marca hallazgos como <b>remediados</b> (con
+                comentario) y consulta los informes.</td>
+            </tr>
+          </table>
         </section>
 
         <!-- TIPS -->
@@ -1790,11 +2015,17 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.start": "Primer arranque",
         "toc.config": "El archivo crisol.json",
         "toc.flags": "Flags de arranque",
+        "toc.import": "Importar escaneos",
+        "toc.sla": "SLA por proyecto",
+        "toc.retest": "Retest y justificación",
+        "toc.word": "Exportar informes",
         "toc.network": "Servidor en red",
         "toc.https": "HTTPS",
         "toc.encryption": "Cifrado de datos",
         "toc.passphrase": "Cambiar passphrase",
+        "toc.backup": "Copias de seguridad",
         "toc.move": "Mover entre PCs",
+        "toc.roles": "Roles",
         "toc.tips": "Buenas prácticas",
         "sec.start.h": "Primer arranque",
         "sec.start.lead": "Descarga el archivo de tu sistema y ejecútalo. No hay instalación.",
@@ -1817,6 +2048,59 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "sec.flags.h": "Flags de arranque",
         "sec.flags.leadA": "Opciones de línea de comandos. Tienen prioridad sobre el ",
         "sec.flags.leadB": ".",
+        "sec.import.h": "Importar escáneres",
+        "sec.import.lead": "Crea vulnerabilidades automáticamente importando los ficheros de tus escáneres, sin depender de ellos. Con autodetección de formato.",
+        "import.fmt.h": "Formatos admitidos",
+        "import.th.fmt": "Formato",
+        "import.th.file": "Fichero",
+        "import.nessus.t": "Nessus",
+        "import.nessus.d": "Exportación <code>.nessus</code> (XML de Tenable).",
+        "import.csv.t": "CSV genérico",
+        "import.csv.d": "Cualquier <code>.csv</code> con columnas de hallazgos.",
+        "import.nmap.t": "Nmap",
+        "import.nmap.d": "Salida XML (<code>nmap -oX</code>).",
+        "import.burp.t": "Burp Suite",
+        "import.burp.d": "Informe exportado en XML.",
+        "import.zap.t": "OWASP ZAP",
+        "import.zap.d": "Informe exportado en XML.",
+        "import.steps.h": "Pasos",
+        "import.step1": "Abre el proyecto y pulsa <b>Importar escaneo</b>.",
+        "import.step2": "Selecciona el fichero: el formato se detecta solo.",
+        "import.step3": "Revisa la previsualización y confirma.",
+        "import.tip": "<b>Sin ruido:</b> al reimportar se <b>omiten los duplicados</b>, y los hallazgos <b>informativos</b> quedan fuera salvo que los marques expresamente.",
+        "sec.sla.h": "SLA por proyecto",
+        "sec.sla.lead": "Cada proyecto define sus días de resolución por severidad. La app calcula la fecha límite y avisa si una vulnerabilidad está <b>en plazo</b> o <b>vencida</b>.",
+        "sla.cfg.h": "Dónde se configura",
+        "sla.cfg.p": "En el <b>modal del proyecto</b>: indica los días de resolución para cada nivel de severidad. A partir de la fecha de detección, la app fija el vencimiento de cada hallazgo.",
+        "sla.ex.h": "Valores típicos",
+        "sla.th.sev": "Severidad",
+        "sla.th.days": "Días de resolución",
+        "sla.crit": "Crítica",
+        "sla.high": "Alta",
+        "sla.med": "Media",
+        "sla.low": "Baja",
+        "sla.tip": "La fecha límite viaja con el hallazgo y aparece también en el detalle exportado, para que el cliente vea el plazo comprometido.",
+        "sec.retest.h": "Ciclo de retest y justificación",
+        "sec.retest.lead": "El flujo de verificación separa quién pide el cierre de quién lo confirma, para que nadie cierre su propio hallazgo sin retest.",
+        "retest.flow.h": "El flujo, paso a paso",
+        "retest.step1": "El <b>cliente</b> marca la vulnerabilidad como <b>remediada</b> (puede dejar un comentario opcional).",
+        "retest.step2": "El hallazgo pasa a <b>pendiente de retest</b>.",
+        "retest.step3": "Solo <b>quien subió el hallazgo</b> confirma la resolución y la marca como <b>resuelta</b>.",
+        "retest.risk": "<b>Aceptar riesgo:</b> permite asumir formalmente una vulnerabilidad que no se va a corregir. La <b>justificación es obligatoria</b> y el estado tiene su <b>propio color</b> para distinguirlo de un hallazgo resuelto.",
+        "sec.word.h": "Exportar informes",
+        "sec.word.lead": "Desde el proyecto puedes generar el informe en dos formatos, según si quieres algo autocontenido o un bloque para pegar en tu plantilla corporativa.",
+        "word.html.t": "Informe completo (HTML)",
+        "word.html.d": "Un único archivo HTML <b>autocontenido</b> (estilos e imágenes incluidos): se abre en cualquier navegador y sirve como entregable listo para enviar.",
+        "word.docx.t": "Detalle de vulnerabilidades (Word .docx)",
+        "word.docx.d": "Un bloque limpio pensado para <b>pegarlo dentro del informe corporativo</b> del pentester. Incluye:",
+        "word.it1": "Tabla resumen de hallazgos.",
+        "word.it2": "Ficha por vulnerabilidad con metadatos.",
+        "word.it3": "Descripción, impacto, remediación y evidencia.",
+        "word.it4": "Capturas de la PoC.",
+        "word.it5": "Comentarios / justificación y fecha de SLA.",
+        "word.steps.h": "Pasos",
+        "word.step1": "Abre el proyecto y pulsa <b>Exportar</b>.",
+        "word.step2": "Elige <b>Informe completo (HTML)</b> o <b>Detalle de vulnerabilidades (Word .docx)</b>.",
         "sec.net.h": "Levantarlo como servidor en red",
         "sec.net.lead": "Para que otros equipos de tu red entren a la misma instancia.",
         "sec.net.pA": "Los demás acceden por ",
@@ -1845,12 +2129,34 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "pass.tipA": "Si <b>todavía no has generado</b> el archivo cifrado (no has cerrado con Ctrl-C con el cifrado activo), basta con editar ",
         "pass.tipB": " en el ",
         "pass.tipC": ".",
+        "sec.backup.h": "Copias de seguridad automáticas",
+        "sec.backup.lead": "La app hace copias automáticas, <b>cifradas con AES-256-GCM</b> y con retención. Se configuran en <code>crisol.json</code>.",
+        "backup.th.field": "Campo",
+        "backup.th.does": "Qué hace",
+        "backup.enabled": "<code>true</code>/<code>false</code>. Activa las copias automáticas.",
+        "backup.dir": "Carpeta de destino. Vacío = <code>&lt;carpeta de la BD&gt;/backups</code>.",
+        "backup.interval": "Horas entre copias. Por defecto <code>24</code>, mínimo <code>1</code>.",
+        "backup.keep": "Cuántas copias conservar. Por defecto <code>7</code>.",
+        "backup.pass": "Si está vacío usa <code>db_passphrase</code> / <code>CRISOL_KEY</code>. Si no hay ninguna, la copia se guarda <b>sin cifrar</b> y se avisa.",
+        "backup.restore.h": "Restaurar una copia",
+        "backup.restore.p": "Con la herramienta de descifrado incluida, indicando la passphrase de la copia:",
+        "backup.compliance": "Cubre los requisitos de copias de seguridad de <b>ISO 27001 A.8.13</b>, <b>ENS mp.info.6</b> y <b>RGPD art. 32</b>.",
         "sec.move.h": "Mover entre PCs",
         "sec.move.lead": "Tus datos viajan contigo. Dos formas:",
         "move.all.t": "Llevarte todo",
         "move.all.d": "Cierra la app y copia la carpeta del ejecutable junto a su archivo de datos. En la otra máquina, ejecuta el archivo de esa plataforma. Listo.",
         "move.one.t": "Mover un solo cliente",
         "move.one.d": "Desde la app: <b>Exportar</b> un workspace → te da un archivo con todo (incluidas las capturas). En la otra instalación: <b>Importar workspace</b> y se recrea entero.",
+        "sec.roles.h": "Roles",
+        "sec.roles.lead": "Tres tipos de usuario, cada uno con su alcance.",
+        "roles.th.role": "Rol",
+        "roles.th.can": "Qué puede hacer",
+        "roles.admin.t": "Admin",
+        "roles.admin.d": "Gestiona usuarios, configuración y todos los proyectos. Acceso completo.",
+        "roles.pentester.t": "Pentester",
+        "roles.pentester.d": "Crea proyectos y hallazgos, importa escaneos, exporta informes y <b>confirma la resolución</b> en el retest.",
+        "roles.client.t": "Cliente",
+        "roles.client.d": "Ve solo su workspace, marca hallazgos como <b>remediados</b> (con comentario) y consulta los informes.",
         "sec.tips.h": "Buenas prácticas",
         "tips.t1": "Cambia la contraseña inicial de <b>admin</b> cuanto antes.",
         "tips.t2": "Si lo expones a la red, usa <b>HTTPS</b> y solo en redes de confianza.",
@@ -1891,11 +2197,17 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.start": "First run",
         "toc.config": "The crisol.json file",
         "toc.flags": "Startup flags",
+        "toc.import": "Import scans",
+        "toc.sla": "Per-project SLA",
+        "toc.retest": "Retest & justification",
+        "toc.word": "Export reports",
         "toc.network": "Network server",
         "toc.https": "HTTPS",
         "toc.encryption": "Data encryption",
         "toc.passphrase": "Change passphrase",
+        "toc.backup": "Backups",
         "toc.move": "Move between PCs",
+        "toc.roles": "Roles",
         "toc.tips": "Best practices",
         "sec.start.h": "First run",
         "sec.start.lead": "Download the file for your system and run it. There is no installation.",
@@ -1918,6 +2230,59 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "sec.flags.h": "Startup flags",
         "sec.flags.leadA": "Command-line options. They take priority over ",
         "sec.flags.leadB": ".",
+        "sec.import.h": "Import scanners",
+        "sec.import.lead": "Create vulnerabilities automatically by importing your scanner files, without depending on them. With format auto-detection.",
+        "import.fmt.h": "Supported formats",
+        "import.th.fmt": "Format",
+        "import.th.file": "File",
+        "import.nessus.t": "Nessus",
+        "import.nessus.d": "<code>.nessus</code> export (Tenable XML).",
+        "import.csv.t": "Generic CSV",
+        "import.csv.d": "Any <code>.csv</code> with finding columns.",
+        "import.nmap.t": "Nmap",
+        "import.nmap.d": "XML output (<code>nmap -oX</code>).",
+        "import.burp.t": "Burp Suite",
+        "import.burp.d": "Report exported as XML.",
+        "import.zap.t": "OWASP ZAP",
+        "import.zap.d": "Report exported as XML.",
+        "import.steps.h": "Steps",
+        "import.step1": "Open the project and click <b>Import scan</b>.",
+        "import.step2": "Pick the file: the format is detected automatically.",
+        "import.step3": "Review the preview and confirm.",
+        "import.tip": "<b>No noise:</b> on re-import, <b>duplicates are skipped</b>, and <b>informational</b> findings are left out unless you explicitly include them.",
+        "sec.sla.h": "Per-project SLA",
+        "sec.sla.lead": "Each project defines its resolution days per severity. The app computes the due date and flags whether a vulnerability is <b>on time</b> or <b>overdue</b>.",
+        "sla.cfg.h": "Where it's configured",
+        "sla.cfg.p": "In the <b>project modal</b>: set the resolution days for each severity level. From the detection date, the app sets each finding's due date.",
+        "sla.ex.h": "Typical values",
+        "sla.th.sev": "Severity",
+        "sla.th.days": "Resolution days",
+        "sla.crit": "Critical",
+        "sla.high": "High",
+        "sla.med": "Medium",
+        "sla.low": "Low",
+        "sla.tip": "The due date travels with the finding and also appears in the exported detail, so the client sees the committed deadline.",
+        "sec.retest.h": "Retest and justification cycle",
+        "sec.retest.lead": "The verification flow separates who requests closure from who confirms it, so nobody closes their own finding without a retest.",
+        "retest.flow.h": "The flow, step by step",
+        "retest.step1": "The <b>client</b> marks the vulnerability as <b>remediated</b> (an optional comment can be left).",
+        "retest.step2": "The finding moves to <b>pending retest</b>.",
+        "retest.step3": "Only <b>whoever uploaded the finding</b> confirms the resolution and marks it as <b>resolved</b>.",
+        "retest.risk": "<b>Accept risk:</b> lets you formally assume a vulnerability that will not be fixed. The <b>justification is mandatory</b> and the status has its <b>own color</b> to tell it apart from a resolved finding.",
+        "sec.word.h": "Export reports",
+        "sec.word.lead": "From the project you can generate the report in two formats, depending on whether you want something self-contained or a block to paste into your corporate template.",
+        "word.html.t": "Full report (HTML)",
+        "word.html.d": "A single <b>self-contained</b> HTML file (styles and images included): it opens in any browser and works as a deliverable ready to send.",
+        "word.docx.t": "Vulnerability detail (Word .docx)",
+        "word.docx.d": "A clean block meant to be <b>pasted into the pentester's corporate report</b>. It includes:",
+        "word.it1": "Summary table of findings.",
+        "word.it2": "Per-vulnerability sheet with metadata.",
+        "word.it3": "Description, impact, remediation and evidence.",
+        "word.it4": "PoC screenshots.",
+        "word.it5": "Comments / justification and SLA date.",
+        "word.steps.h": "Steps",
+        "word.step1": "Open the project and click <b>Export</b>.",
+        "word.step2": "Choose <b>Full report (HTML)</b> or <b>Vulnerability detail (Word .docx)</b>.",
         "sec.net.h": "Running it as a network server",
         "sec.net.lead": "So that other machines on your network can reach the same instance.",
         "sec.net.pA": "Others connect via ",
@@ -1946,12 +2311,34 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "pass.tipA": "If you <b>haven't generated</b> the encrypted file yet (you haven't closed with Ctrl-C while encryption was on), it's enough to edit ",
         "pass.tipB": " in ",
         "pass.tipC": ".",
+        "sec.backup.h": "Automatic backups",
+        "sec.backup.lead": "The app makes automatic backups, <b>encrypted with AES-256-GCM</b> and with retention. They are configured in <code>crisol.json</code>.",
+        "backup.th.field": "Field",
+        "backup.th.does": "What it does",
+        "backup.enabled": "<code>true</code>/<code>false</code>. Enables automatic backups.",
+        "backup.dir": "Destination folder. Empty = <code>&lt;DB folder&gt;/backups</code>.",
+        "backup.interval": "Hours between backups. Default <code>24</code>, minimum <code>1</code>.",
+        "backup.keep": "How many backups to keep. Default <code>7</code>.",
+        "backup.pass": "If empty it uses <code>db_passphrase</code> / <code>CRISOL_KEY</code>. If there is none, the backup is stored <b>unencrypted</b> and you are warned.",
+        "backup.restore.h": "Restoring a backup",
+        "backup.restore.p": "With the included decryption tool, providing the backup's passphrase:",
+        "backup.compliance": "Covers the backup requirements of <b>ISO 27001 A.8.13</b>, <b>ENS mp.info.6</b> and <b>GDPR art. 32</b>.",
         "sec.move.h": "Move between PCs",
         "sec.move.lead": "Your data travels with you. Two ways:",
         "move.all.t": "Take everything",
         "move.all.d": "Close the app and copy the executable's folder along with its data file. On the other machine, run the file for that platform. Done.",
         "move.one.t": "Move a single client",
         "move.one.d": "From the app: <b>Export</b> a workspace → it gives you a file with everything (screenshots included). On the other installation: <b>Import workspace</b> and it is recreated in full.",
+        "sec.roles.h": "Roles",
+        "sec.roles.lead": "Three user types, each with its own scope.",
+        "roles.th.role": "Role",
+        "roles.th.can": "What it can do",
+        "roles.admin.t": "Admin",
+        "roles.admin.d": "Manages users, configuration and all projects. Full access.",
+        "roles.pentester.t": "Pentester",
+        "roles.pentester.d": "Creates projects and findings, imports scans, exports reports and <b>confirms the resolution</b> in the retest.",
+        "roles.client.t": "Client",
+        "roles.client.d": "Sees only its workspace, marks findings as <b>remediated</b> (with a comment) and reviews the reports.",
         "sec.tips.h": "Best practices",
         "tips.t1": "Change the initial <b>admin</b> password as soon as possible.",
         "tips.t2": "If you expose it to the network, use <b>HTTPS</b> and only on trusted networks.",

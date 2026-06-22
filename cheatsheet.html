@@ -77,6 +77,7 @@
     :root {
       --radius: 16px;
       --ease: cubic-bezier(.22, .61, .36, 1);
+      --ease-expo: cubic-bezier(.16, 1, .3, 1);
       --spring: cubic-bezier(.34, 1.4, .64, 1)
     }
 
@@ -738,11 +739,18 @@
       height: 34px;
       border-radius: 10px;
       background: color-mix(in srgb, var(--accent2) 14%, transparent);
+      color: var(--accent2);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 17px;
       flex-shrink: 0
+    }
+
+    .cs-sec h2 .ico svg {
+      width: 19px;
+      height: 19px;
+      display: block
     }
 
     .cs-sec .lead {
@@ -943,6 +951,376 @@
       }
     }
 
+    /* ============================================================
+       HUD / badges monoespaciados (mismo lenguaje que index.html)
+       ============================================================ */
+    .hud {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      background: color-mix(in srgb, var(--accent2) 9%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent2) 38%, transparent);
+      border-radius: 999px;
+      padding: 5px 13px;
+      white-space: nowrap
+    }
+
+    .hud .br {
+      color: color-mix(in srgb, var(--accent2) 70%, var(--muted));
+      font-weight: 700
+    }
+
+    .hud.purple {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      border-color: color-mix(in srgb, var(--accent) 40%, transparent)
+    }
+
+    .hud.purple .br {
+      color: color-mix(in srgb, var(--accent) 75%, var(--muted))
+    }
+
+    .dot-live {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent2) 70%, transparent);
+      animation: livePulse 1.6s var(--ease) infinite;
+      flex: none
+    }
+
+    .dot-live.purple {
+      background: var(--accent);
+      animation-name: livePulsePurple
+    }
+
+    @keyframes livePulse {
+      0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent2) 65%, transparent)
+      }
+
+      70% {
+        box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent2) 0%, transparent)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent2) 0%, transparent)
+      }
+    }
+
+    @keyframes livePulsePurple {
+      0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 65%, transparent)
+      }
+
+      70% {
+        box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent)
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .dot-live {
+        animation: none
+      }
+    }
+
+    /* badge HUD del hero */
+    .head-badge {
+      display: inline-flex;
+      justify-content: center;
+      margin: 0 auto 20px
+    }
+
+    /* línea que se dibuja al revelar (idéntica a index) */
+    .draw-line {
+      position: relative;
+      height: 1px;
+      background: var(--border);
+      max-width: 940px;
+      margin: 4px auto 26px
+    }
+
+    .draw-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: transform 1s var(--ease)
+    }
+
+    .draw-line.in::after {
+      transform: scaleX(1)
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .draw-line::after {
+        transition: none;
+        transform: scaleX(1)
+      }
+    }
+
+    /* ============================================================
+       CARPETAS PLEGABLES (acordeón) — paneles premium estilo index
+       ============================================================ */
+    .cs-folder {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+      scroll-margin-top: 84px
+    }
+
+    .cs-folder.open {
+      border-color: color-mix(in srgb, var(--accent2) 40%, var(--border))
+    }
+
+    /* cabecera clicable (button) */
+    .cs-fhead {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 20px 22px;
+      font: inherit;
+      position: relative;
+      transition: background .25s var(--ease)
+    }
+
+    .cs-fhead::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s var(--ease);
+      background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%),
+          color-mix(in srgb, var(--accent2) 12%, transparent), transparent 46%)
+    }
+
+    @media (hover:hover) and (pointer:fine) {
+      .cs-fhead:hover::before {
+        opacity: 1
+      }
+
+      .cs-fhead:hover {
+        background: color-mix(in srgb, var(--accent2) 4%, transparent)
+      }
+    }
+
+    .cs-fhead>* {
+      position: relative;
+      z-index: 1
+    }
+
+    .cs-fhead .fico {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--accent2);
+      background: color-mix(in srgb, var(--accent2) 14%, transparent);
+      transition: transform .35s var(--spring), background .3s
+    }
+
+    .cs-fhead .fico svg {
+      width: 25px;
+      height: 25px;
+      display: block
+    }
+
+    .cs-folder.open .cs-fhead .fico,
+    .cs-fhead:hover .fico {
+      background: color-mix(in srgb, var(--accent2) 22%, transparent);
+      transform: scale(1.06) rotate(-5deg)
+    }
+
+    .cs-fmeta {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px
+    }
+
+    .cs-ftop {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .cs-fnum {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: var(--accent2);
+      background: color-mix(in srgb, var(--accent2) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent2) 32%, transparent);
+      border-radius: 999px;
+      padding: 2px 9px;
+      white-space: nowrap
+    }
+
+    .cs-fhead h2 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      margin: 0;
+      color: var(--text)
+    }
+
+    .cs-fcount {
+      font-size: 12.5px;
+      color: var(--muted)
+    }
+
+    .cs-chevron {
+      flex: none;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: transform .4s var(--ease-expo), color .25s
+    }
+
+    .cs-chevron svg {
+      width: 18px;
+      height: 18px;
+      display: block
+    }
+
+    .cs-folder.open .cs-chevron {
+      transform: rotate(180deg);
+      color: var(--accent2)
+    }
+
+    /* cuerpo plegable — grid-template-rows 0fr→1fr para colapso sedoso */
+    .cs-fbody {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .5s var(--ease-expo)
+    }
+
+    .cs-folder.open .cs-fbody {
+      grid-template-rows: 1fr
+    }
+
+    .cs-fbody-inner {
+      overflow: hidden;
+      min-height: 0
+    }
+
+    .cs-fbody-pad {
+      padding: 4px 18px 18px
+    }
+
+    /* dentro de una carpeta, las tarjetas pierden sombra propia (la pone la carpeta) */
+    .cs-folder .cs-sec {
+      box-shadow: none
+    }
+
+    .cs-folder .cs-sec:last-child {
+      margin-bottom: 4px
+    }
+
+    @media(max-width:560px) {
+      .cs-fhead {
+        padding: 16px 16px
+      }
+
+      .cs-fhead .fico {
+        width: 40px;
+        height: 40px;
+        font-size: 19px
+      }
+
+      .cs-fhead h2 {
+        font-size: 17px
+      }
+
+      .cs-fbody-pad {
+        padding: 2px 11px 12px
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .cs-fbody {
+        transition: none
+      }
+
+      .cs-chevron {
+        transition: none
+      }
+
+      .cs-fhead .fico {
+        transition: none
+      }
+    }
+
+    /* índice lateral: grupos de carpeta */
+    .cs-toc .toc-group {
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 12px 4px;
+      display: flex;
+      align-items: center;
+      gap: 7px
+    }
+
+    .cs-toc .toc-group:first-child {
+      margin-top: 0
+    }
+
+    .cs-toc .toc-group .gi {
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      color: var(--accent2)
+    }
+
+    .cs-toc .toc-group .gi svg {
+      width: 15px;
+      height: 15px;
+      display: block
+    }
+
+    .cs-toc a.toc-sub {
+      padding-left: 22px;
+      font-size: 13px
+    }
+
     /* footer */
     footer {
       padding: 40px 0;
@@ -984,6 +1362,43 @@
       .cs-layout {
         grid-template-columns: 1fr;
         gap: 0;
+        padding: 0
+      }
+
+      /* en impresión todas las carpetas quedan abiertas y planas */
+      .cs-folder {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        overflow: visible
+      }
+
+      .cs-chevron,
+      .cs-fnum,
+      .cs-fcount,
+      .head-badge,
+      .draw-line {
+        display: none !important
+      }
+
+      .cs-fhead {
+        padding: 8px 0;
+        background: none
+      }
+
+      .cs-fhead h2 {
+        color: #000
+      }
+
+      .cs-fbody {
+        display: block !important
+      }
+
+      .cs-fbody-inner {
+        overflow: visible
+      }
+
+      .cs-fbody-pad {
         padding: 0
       }
 
@@ -1247,6 +1662,10 @@
   <header class="head">
     <div class="head-spot" id="headSpot" aria-hidden="true"></div>
     <div class="wrap">
+      <div class="head-badge">
+        <span class="hud"><span class="dot-live"></span><span class="br">[</span><span data-i18n="head.hud">GUÍA
+            RÁPIDA</span><span class="br">]</span></span>
+      </div>
       <h1 data-i18n="head.title">Cheat Sheet de <span class="grad">configuración</span></h1>
       <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo
         </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
@@ -1255,32 +1674,61 @@
   </header>
 
   <div class="wrap">
+    <div class="draw-line reveal" aria-hidden="true"></div>
     <div class="cs-layout">
 
-      <!-- índice lateral -->
+      <!-- índice lateral (agrupado por carpetas) -->
       <aside class="cs-toc" id="toc">
-        <a href="#inicio" data-i18n="toc.start">Primer arranque</a>
-        <a href="#config" data-i18n="toc.config">El archivo crisol.json</a>
-        <a href="#flags" data-i18n="toc.flags">Flags de arranque</a>
-        <a href="#import" data-i18n="toc.import">Importar escaneos</a>
-        <a href="#sla" data-i18n="toc.sla">SLA por proyecto</a>
-        <a href="#retest" data-i18n="toc.retest">Retest y justificación</a>
-        <a href="#word" data-i18n="toc.word">Exportar informes</a>
-        <a href="#red" data-i18n="toc.network">Servidor en red</a>
-        <a href="#https" data-i18n="toc.https">HTTPS</a>
-        <a href="#cifrado" data-i18n="toc.encryption">Cifrado de datos</a>
-        <a href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
-        <a href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
-        <a href="#mover" data-i18n="toc.move">Mover entre PCs</a>
-        <a href="#roles" data-i18n="toc.roles">Roles</a>
-        <a href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
+        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.7 1.4 4.4 4.3 4.4 7.6 0 2-.5 3.6-1.2 5.1H8.8c-.7-1.5-1.2-3.1-1.2-5.1C7.6 7.3 9.3 4.4 12 3Z"/><circle cx="12" cy="9.6" r="1.7"/><path d="M8.8 15.7l-2.2 1.5.9-3.4M15.2 15.7l2.2 1.5-.9-3.4"/><path d="M9.7 18.6c.6 1.1 1.5 1.9 2.3 2.4.8-.5 1.7-1.3 2.3-2.4"/></svg></span><span data-i18n="grp.start.t">Primeros pasos</span></div>
+        <a class="toc-sub" href="#inicio" data-i18n="toc.start">Primer arranque</a>
+        <a class="toc-sub" href="#config" data-i18n="toc.config">El archivo crisol.json</a>
+        <a class="toc-sub" href="#flags" data-i18n="toc.flags">Flags de arranque</a>
+        <a class="toc-sub" href="#mover" data-i18n="toc.move">Mover entre PCs</a>
+
+        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 4.5 13.2c-.3.4 0 1 .5 1H11l-1 7.3 8.5-10.7c.3-.4 0-1-.5-1H12l1-7.3Z"/></svg></span><span data-i18n="grp.features.t">Funcionalidades</span></div>
+        <a class="toc-sub" href="#import" data-i18n="toc.import">Importar escaneos</a>
+        <a class="toc-sub" href="#biblioteca" data-i18n="toc.biblioteca">Biblioteca import/export</a>
+        <a class="toc-sub" href="#sla" data-i18n="toc.sla">SLA por proyecto</a>
+        <a class="toc-sub" href="#retest" data-i18n="toc.retest">Retest y justificación</a>
+        <a class="toc-sub" href="#word" data-i18n="toc.word">Exportar informes</a>
+
+        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg></span><span data-i18n="grp.network.t">Servidor y red</span></div>
+        <a class="toc-sub" href="#red" data-i18n="toc.network">Servidor en red</a>
+        <a class="toc-sub" href="#https" data-i18n="toc.https">HTTPS</a>
+        <a class="toc-sub" href="#roles" data-i18n="toc.roles">Roles</a>
+
+        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z"/><path d="m8.7 12 2.3 2.3 4.3-4.6"/></svg></span><span data-i18n="grp.security.t">Seguridad y datos</span></div>
+        <a class="toc-sub" href="#cifrado" data-i18n="toc.encryption">Cifrado de datos</a>
+        <a class="toc-sub" href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
+        <a class="toc-sub" href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
+        <a class="toc-sub" href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
       </aside>
 
       <main>
 
+        <!-- ============ CARPETA 1 · PRIMEROS PASOS ============ -->
+        <section class="cs-folder reveal open" id="grp-start">
+          <button class="cs-fhead" aria-expanded="true" aria-controls="grp-start-body" id="grp-start-head">
+            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c2.7 1.4 4.4 4.3 4.4 7.6 0 2-.5 3.6-1.2 5.1H8.8c-.7-1.5-1.2-3.1-1.2-5.1C7.6 7.3 9.3 4.4 12 3Z"/><circle cx="12" cy="9.6" r="1.7"/><path d="M8.8 15.7l-2.2 1.5.9-3.4M15.2 15.7l2.2 1.5-.9-3.4"/><path d="M9.7 18.6c.6 1.1 1.5 1.9 2.3 2.4.8-.5 1.7-1.3 2.3-2.4"/></svg></span>
+            <span class="cs-fmeta">
+              <span class="cs-ftop">
+                <span class="cs-fnum">[ 01 ]</span>
+                <h2 data-i18n="grp.start.t">Primeros pasos</h2>
+              </span>
+              <span class="cs-fcount"><span data-i18n="grp.start.c">4 temas</span></span>
+            </span>
+            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg></span>
+          </button>
+          <div class="cs-fbody" id="grp-start-body" role="region" aria-labelledby="grp-start-head">
+            <div class="cs-fbody-inner">
+              <div class="cs-fbody-pad">
+
         <!-- PRIMER ARRANQUE -->
         <section class="cs-sec reveal" id="inicio">
-          <h2><span class="ico">🚀</span> <span data-i18n="sec.start.h">Primer arranque</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6.5V12"/><path d="M9.2 9.4a4 4 0 1 0 5.6 0"/></svg></span> <span data-i18n="sec.start.h">Primer arranque</span></h2>
           <p class="lead" data-i18n="sec.start.lead">Descarga el archivo de tu sistema y ejecútalo. No hay instalación.
           </p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
@@ -1304,7 +1752,7 @@ chmod +x crisol-*
 
         <!-- CONFIG -->
         <section class="cs-sec reveal" id="config">
-          <h2><span class="ico">⚙️</span> <span data-i18n="sec.config.h">El archivo</span> <code
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.3M12 19.2v2.3M21.5 12h-2.3M4.8 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3"/></svg></span> <span data-i18n="sec.config.h">El archivo</span> <code
               style="font-size:.7em">crisol.json</code></h2>
           <p class="lead" data-i18n="sec.config.lead">Se crea solo junto al ejecutable en el primer arranque. Edítalo
             con cualquier editor de texto
@@ -1377,7 +1825,7 @@ chmod +x crisol-*
 
         <!-- FLAGS -->
         <section class="cs-sec reveal" id="flags">
-          <h2><span class="ico">⌨️</span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.4"/><path d="m7 10 2.8 2.4L7 14.8"/><path d="M12.5 15h4.5"/></svg></span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
           <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad sobre el
             </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
@@ -1389,9 +1837,49 @@ chmod +x crisol-*
           </div>
         </section>
 
+        <!-- MOVER (movido a Primeros pasos) -->
+        <section class="cs-sec reveal" id="mover">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="8" height="6" rx="1.2"/><rect x="13.5" y="13" width="8" height="6" rx="1.2"/><path d="M6.5 11v2.6h7.5M17.5 13v-2.6H10"/><path d="m12.4 8.4 1.6-1.6-1.6-1.6M11.6 15.6 10 17.2l1.6 1.6"/></svg></span> <span data-i18n="sec.move.h">Mover entre PCs</span></h2>
+          <p class="lead" data-i18n="sec.move.lead">Tus datos viajan contigo. Dos formas:</p>
+          <h3 data-i18n="move.all.t">Llevarte todo</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.all.d">Cierra la app y copia la carpeta del
+            ejecutable junto a su
+            archivo de datos. En la otra máquina, ejecuta el archivo de esa plataforma. Listo.</p>
+          <h3 data-i18n="move.one.t">Mover un solo cliente</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.one.d">Desde la app: <b>Exportar</b> un
+            workspace → te da un archivo
+            con todo (incluidas las capturas). En la otra instalación: <b>Importar workspace</b> y se recrea entero.</p>
+        </section>
+
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /CARPETA 1 -->
+
+        <!-- ============ CARPETA 2 · FUNCIONALIDADES ============ -->
+        <section class="cs-folder reveal" id="grp-features">
+          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-features-body" id="grp-features-head">
+            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2.5 4.5 13.2c-.3.4 0 1 .5 1H11l-1 7.3 8.5-10.7c.3-.4 0-1-.5-1H12l1-7.3Z"/></svg></span>
+            <span class="cs-fmeta">
+              <span class="cs-ftop">
+                <span class="cs-fnum">[ 02 ]</span>
+                <h2 data-i18n="grp.features.t">Funcionalidades</h2>
+              </span>
+              <span class="cs-fcount"><span data-i18n="grp.features.c">5 temas</span></span>
+            </span>
+            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg></span>
+          </button>
+          <div class="cs-fbody" id="grp-features-body" role="region" aria-labelledby="grp-features-head">
+            <div class="cs-fbody-inner">
+              <div class="cs-fbody-pad">
+
         <!-- IMPORTADOR DE ESCÁNERES -->
         <section class="cs-sec reveal" id="import">
-          <h2><span class="ico">📥</span> <span data-i18n="sec.import.h">Importar escáneres</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v8.5"/><path d="m8.4 8.2 3.6 3.6 3.6-3.6"/><path d="M3.5 14.5 5 19a2 2 0 0 0 1.9 1.4h10.2A2 2 0 0 0 19 19l1.5-4.5h-4.3l-1.2 2H9l-1.2-2H3.5Z"/></svg></span> <span data-i18n="sec.import.h">Importar escáneres</span></h2>
           <p class="lead" data-i18n="sec.import.lead">Crea vulnerabilidades automáticamente importando los ficheros de
             tus escáneres, sin depender de ellos. Con autodetección de formato.</p>
           <h3 data-i18n="import.fmt.h">Formatos admitidos</h3>
@@ -1433,9 +1921,56 @@ chmod +x crisol-*
           </div>
         </section>
 
+        <!-- BIBLIOTECA (movida tras Importar) -->
+        <section class="cs-sec reveal" id="biblioteca">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.2h3.2a2 2 0 0 1 2 2v13a1.6 1.6 0 0 0-1.6-1.6H5a.8.8 0 0 1-.8-.8V5a.8.8 0 0 1 .8-.8Z"/><path d="M19 4.2h-3.2a2 2 0 0 0-2 2v13a1.6 1.6 0 0 1 1.6-1.6H19a.8.8 0 0 0 .8-.8V5a.8.8 0 0 0-.8-.8Z"/><path d="M6.4 7.6h2M6.4 10.4h2M15.6 7.6h2M15.6 10.4h2"/></svg></span> <span data-i18n="sec.lib.h">Importar / exportar la biblioteca de
+              vulnerabilidades</span></h2>
+          <p class="lead" data-i18n="sec.lib.lead">La biblioteca (tu catálogo de vulnerabilidades) se puede
+            <b>exportar</b> a un fichero JSON y volver a <b>importar</b>. Así no pierdes tus vulnerabilidades propias al
+            cambiar de versión, recrear la base de datos, o compartirlas entre equipos e instalaciones.</p>
+
+          <h3 data-i18n="lib.how.h">Cómo se hace (solo admin)</h3>
+          <ol style="font-size:13.5px;color:var(--muted);margin:6px 0 4px;padding-left:20px">
+            <li data-i18n="lib.step1">Abre la <b>Biblioteca</b> desde la app (es una acción de administrador).</li>
+            <li data-i18n="lib.step2">Pulsa <b>⤓ Exportar biblioteca</b>: descarga un JSON
+              (<code>crisol-biblioteca.json</code>) con todo el catálogo.</li>
+            <li data-i18n="lib.step3">Para restaurar o cargar otro catálogo, pulsa <b>⤒ Importar biblioteca</b> y sube un
+              JSON.</li>
+          </ol>
+
+          <div class="note tip"><span class="ni">🔁</span>
+            <div data-i18n="lib.merge">Al importar, las entradas que <b>coinciden</b> (mismo título + tipo de auditoría)
+              se <b>reemplazan</b> con las del fichero, y las nuevas se <b>añaden</b>. No se duplican.</div>
+          </div>
+
+          <h3 data-i18n="lib.format.h">Formato del fichero</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="lib.format.p">Es un JSON propio de Crisol-RX, con su
+            campo <code>format</code> y <code>version</code>. Puedes editarlo a mano si lo necesitas, siempre que
+            mantengas la estructura.</p>
+          <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+            <pre>{
+  <span class="k">"format"</span>: <span class="s">"crisol-library"</span>,
+  <span class="k">"version"</span>: <span class="b">1</span>,
+  <span class="k">"entries"</span>: [
+    {
+      <span class="k">"title"</span>: <span class="s">"Inyección SQL"</span>,
+      <span class="k">"audit_type"</span>: <span class="s">"web"</span>,
+      <span class="k">"severity"</span>: <span class="s">"high"</span>,
+      <span class="k">"description"</span>: <span class="s">"..."</span>,
+      <span class="k">"remediation"</span>: <span class="s">"..."</span>
+    }
+  ]
+}</pre>
+          </div>
+          <div class="note tip"><span class="ni">📚</span>
+            <div data-i18n="lib.tip">Exporta tu biblioteca antes de actualizar o de recrear la base de datos: tendrás una
+              copia de tus vulnerabilidades lista para volver a importar.</div>
+          </div>
+        </section>
+
         <!-- SLA POR PROYECTO -->
         <section class="cs-sec reveal" id="sla">
-          <h2><span class="ico">⏱️</span> <span data-i18n="sec.sla.h">SLA por proyecto</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.3V13l2.4 1.6"/><path d="M9.6 2.6h4.8M19 6l1.4-1.4"/></svg></span> <span data-i18n="sec.sla.h">SLA por proyecto</span></h2>
           <p class="lead" data-i18n="sec.sla.lead">Cada proyecto define sus días de resolución por severidad. La app
             calcula la fecha límite y avisa si una vulnerabilidad está <b>en plazo</b> o <b>vencida</b>.</p>
           <h3 data-i18n="sla.cfg.h">Dónde se configura</h3>
@@ -1473,7 +2008,7 @@ chmod +x crisol-*
 
         <!-- RETEST Y JUSTIFICACIÓN -->
         <section class="cs-sec reveal" id="retest">
-          <h2><span class="ico">🔁</span> <span data-i18n="sec.retest.h">Ciclo de retest y justificación</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-13.7 5.6"/><path d="M4 12A8 8 0 0 1 17.7 6.4"/><path d="M17.7 3v3.6h-3.6M6.3 21v-3.6h3.6"/></svg></span> <span data-i18n="sec.retest.h">Ciclo de retest y justificación</span></h2>
           <p class="lead" data-i18n="sec.retest.lead">El flujo de verificación separa quién pide el cierre de quién lo
             confirma, para que nadie cierre su propio hallazgo sin retest.</p>
           <h3 data-i18n="retest.flow.h">El flujo, paso a paso</h3>
@@ -1493,7 +2028,7 @@ chmod +x crisol-*
 
         <!-- EXPORTAR INFORMES -->
         <section class="cs-sec reveal" id="word">
-          <h2><span class="ico">📄</span> <span data-i18n="sec.word.h">Exportar informes</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 2.6h7.3L19 7.8v12.4a1.2 1.2 0 0 1-1.2 1.2H6.5a1.2 1.2 0 0 1-1.2-1.2V3.8a1.2 1.2 0 0 1 1.2-1.2Z"/><path d="M13.5 2.6v5h5"/><path d="m8.3 14.2 1.7 1.7 3.7-3.9"/></svg></span> <span data-i18n="sec.word.h">Exportar informes</span></h2>
           <p class="lead" data-i18n="sec.word.lead">Desde el proyecto puedes generar el informe en dos formatos, según
             si quieres algo autocontenido o un bloque para pegar en tu plantilla corporativa.</p>
           <h3 data-i18n="word.html.t">Informe completo (HTML)</h3>
@@ -1528,9 +2063,35 @@ chmod +x crisol-*
           </ol>
         </section>
 
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /CARPETA 2 -->
+
+        <!-- ============ CARPETA 3 · SERVIDOR Y RED ============ -->
+        <section class="cs-folder reveal" id="grp-network">
+          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-network-body" id="grp-network-head">
+            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg></span>
+            <span class="cs-fmeta">
+              <span class="cs-ftop">
+                <span class="cs-fnum">[ 03 ]</span>
+                <h2 data-i18n="grp.network.t">Servidor y red</h2>
+              </span>
+              <span class="cs-fcount"><span data-i18n="grp.network.c">3 temas</span></span>
+            </span>
+            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg></span>
+          </button>
+          <div class="cs-fbody" id="grp-network-body" role="region" aria-labelledby="grp-network-head">
+            <div class="cs-fbody-inner">
+              <div class="cs-fbody-pad">
+
         <!-- RED -->
         <section class="cs-sec reveal" id="red">
-          <h2><span class="ico">🌐</span> <span data-i18n="sec.net.h">Levantarlo como servidor en red</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2.3"/><circle cx="5" cy="18.5" r="2.3"/><circle cx="19" cy="18.5" r="2.3"/><path d="M12 6.8v4.4M11 12.6 6.2 16.6M13 12.6l4.8 4M6.8 18.5h10.4"/></svg></span> <span data-i18n="sec.net.h">Levantarlo como servidor en red</span></h2>
           <p class="lead" data-i18n="sec.net.lead">Para que otros equipos de tu red entren a la misma instancia.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
             <pre>{
@@ -1547,11 +2108,53 @@ chmod +x crisol-*
               activa el cifrado de
               comunicaciones (siguiente sección). Cambia antes la contraseña de admin.</div>
           </div>
+
+          <h3 data-i18n="net.acl.h">Control de acceso por IP (lista blanca)</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.acl.p">Limita quién puede entrar combinando
+            <code>allowed_hosts</code> (por nombre) y <code>allowed_ips</code> (por dirección de cliente). Solo los
+            equipos de la lista entran; el resto recibe <code>403</code>.</p>
+          <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+            <pre>{
+  <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>,
+  <span class="k">"allowed_hosts"</span>: [<span class="s">"crisol.miempresa.local"</span>],
+  <span class="k">"allowed_ips"</span>: [<span class="s">"192.168.1.50"</span>, <span class="s">"192.168.1.0/24"</span>]
+}</pre>
+          </div>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="net.acl.th.field">Campo</th>
+              <th data-i18n="net.acl.th.does">Qué hace</th>
+            </tr>
+            <tr>
+              <td><code>allowed_ips</code></td>
+              <td data-i18n="net.acl.ips">Lista blanca de IPs de cliente que pueden acceder. Acepta IPs sueltas y rangos
+                <b>CIDR</b> (p. ej. <code>192.168.1.0/24</code>). La IP loopback (<code>127.0.0.1</code>/<code>::1</code>)
+                <b>siempre</b> se permite: el propio equipo nunca se autobloquea. <b>Vacío = sin restricción por IP.</b>
+                Útil para exponer en LAN solo a equipos concretos.</td>
+            </tr>
+            <tr>
+              <td><code>allowed_hosts</code></td>
+              <td data-i18n="net.acl.hosts">Lista blanca por nombre de host. Se rechazan las peticiones cuyo
+                <code>Host</code> no esté listado. Vacío = sin restricción por nombre.</td>
+            </tr>
+          </table>
+
+          <h3 data-i18n="net.dns.h">Acceso por nombre DNS propio</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.dns.p">Para entrar por un nombre amable en vez de
+            por IP, pon tu nombre en <code>allowed_hosts</code> (p. ej. <code>crisol.miempresa.local</code>) y haz que ese
+            nombre <b>resuelva a la IP del servidor</b>: en el DNS interno de la empresa, o en el fichero
+            <code>hosts</code> de cada equipo cliente. Así el acceso pasa a ser
+            <code>http://crisol.miempresa.local:8723</code>.</p>
+          <div class="note tip"><span class="ni">💡</span>
+            <div data-i18n="net.dns.tip">Combina ambos: <code>allowed_hosts</code> fija el nombre y
+              <code>allowed_ips</code> restringe las direcciones de origen. El loopback queda siempre permitido para que
+              administres desde el propio servidor.</div>
+          </div>
         </section>
 
         <!-- HTTPS -->
         <section class="cs-sec reveal" id="https">
-          <h2><span class="ico">🔐</span> HTTPS <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M13.6 14.1a1.6 1.6 0 0 0-3 .5c0 1.6 2.8 1 2.8 2.6a1.6 1.6 0 0 1-3 .5"/></svg></span> HTTPS <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
           <p class="lead" data-i18n="sec.https.lead">Cifra las comunicaciones. Con tu certificado propio o uno
             automático.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
@@ -1586,9 +2189,61 @@ chmod +x crisol-*
           </div>
         </section>
 
+        <!-- ROLES (movido a Servidor y red) -->
+        <section class="cs-sec reveal" id="roles">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.8 19a5.2 5.2 0 0 1 10.4 0"/><path d="M16 5.3a3 3 0 0 1 0 5.4"/><path d="M17 13.4a5.2 5.2 0 0 1 3.2 4.8"/></svg></span> <span data-i18n="sec.roles.h">Roles</span></h2>
+          <p class="lead" data-i18n="sec.roles.lead">Tres tipos de usuario, cada uno con su alcance.</p>
+          <table class="tbl">
+            <tr>
+              <th data-i18n="roles.th.role">Rol</th>
+              <th data-i18n="roles.th.can">Qué puede hacer</th>
+            </tr>
+            <tr>
+              <td data-i18n="roles.admin.t">Admin</td>
+              <td data-i18n="roles.admin.d">Gestiona usuarios, configuración y todos los proyectos. Acceso completo.</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.pentester.t">Pentester</td>
+              <td data-i18n="roles.pentester.d">Crea proyectos y hallazgos, importa escaneos, exporta informes y
+                <b>confirma la resolución</b> en el retest.</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.client.t">Cliente</td>
+              <td data-i18n="roles.client.d">Ve solo su workspace, marca hallazgos como <b>remediados</b> (con
+                comentario) y consulta los informes.</td>
+            </tr>
+          </table>
+        </section>
+
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /CARPETA 3 -->
+
+        <!-- ============ CARPETA 4 · SEGURIDAD Y DATOS ============ -->
+        <section class="cs-folder reveal" id="grp-security">
+          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-security-body" id="grp-security-head">
+            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z"/><path d="m8.7 12 2.3 2.3 4.3-4.6"/></svg></span>
+            <span class="cs-fmeta">
+              <span class="cs-ftop">
+                <span class="cs-fnum">[ 04 ]</span>
+                <h2 data-i18n="grp.security.t">Seguridad y datos</h2>
+              </span>
+              <span class="cs-fcount"><span data-i18n="grp.security.c">4 temas</span></span>
+            </span>
+            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg></span>
+          </button>
+          <div class="cs-fbody" id="grp-security-body" role="region" aria-labelledby="grp-security-head">
+            <div class="cs-fbody-inner">
+              <div class="cs-fbody-pad">
+
         <!-- CIFRADO -->
         <section class="cs-sec reveal" id="cifrado">
-          <h2><span class="ico">🔒</span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt"
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 6c0-1.4 3.4-2.5 7.5-2.5S19.5 4.6 19.5 6v4c0 1.4-3.4 2.5-7.5 2.5"/><path d="M4.5 6v6c0 1.2 2.5 2.2 5.8 2.4"/><rect x="13" y="14" width="8" height="6.5" rx="1.5"/><path d="M15 14v-1.5a2 2 0 0 1 4 0V14"/></svg></span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt"
               data-i18n="pill.optional">opcional</span></h2>
           <p class="lead" data-i18n="sec.enc.lead">Con la app cerrada, tus datos quedan ilegibles para terceros.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
@@ -1633,7 +2288,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm</pre>
 
         <!-- PASSPHRASE -->
         <section class="cs-sec reveal" id="passphrase">
-          <h2><span class="ico">🔁</span> <span data-i18n="sec.pass.h">Cambiar la passphrase</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.5" cy="14" r="3.3"/><path d="m10.8 11.7 6.4-6.4M14.8 7.3l2 2M12.6 9.5l1.6 1.6"/><path d="M14.6 3.6A6 6 0 0 1 20 7M20 3.6V7h-3.4"/></svg></span> <span data-i18n="sec.pass.h">Cambiar la passphrase</span></h2>
           <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el </span><code>crisol.json</code><span
               data-i18n="sec.pass.leadB"> no basta si ya hay datos cifrados: el archivo
               sigue cerrado con la frase anterior.</span></p>
@@ -1660,7 +2315,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
 
         <!-- COPIAS DE SEGURIDAD -->
         <section class="cs-sec reveal" id="backup">
-          <h2><span class="ico">💾</span> <span data-i18n="sec.backup.h">Copias de seguridad automáticas</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 5.5c0-1.3 3.4-2.3 7.5-2.3s7.5 1 7.5 2.3-3.4 2.3-7.5 2.3"/><path d="M4.5 5.5v5.7M19.5 5.5v3"/><path d="M4.5 11.2c0 1.2 2.6 2.1 6 2.3"/><path d="M19.6 18a4.4 4.4 0 0 1-7.5 2.6M11.4 16.7A4.4 4.4 0 0 1 19 14.5"/><path d="M19 11.6v2.9h-2.9M11.6 21.4v-2.9h2.9"/></svg></span> <span data-i18n="sec.backup.h">Copias de seguridad automáticas</span></h2>
           <p class="lead" data-i18n="sec.backup.lead">La app hace copias automáticas, <b>cifradas con AES-256-GCM</b> y
             con retención. Se configuran en <code>crisol.json</code>.</p>
           <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
@@ -1711,49 +2366,9 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
           </div>
         </section>
 
-        <!-- MOVER -->
-        <section class="cs-sec reveal" id="mover">
-          <h2><span class="ico">🧳</span> <span data-i18n="sec.move.h">Mover entre PCs</span></h2>
-          <p class="lead" data-i18n="sec.move.lead">Tus datos viajan contigo. Dos formas:</p>
-          <h3 data-i18n="move.all.t">Llevarte todo</h3>
-          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.all.d">Cierra la app y copia la carpeta del
-            ejecutable junto a su
-            archivo de datos. En la otra máquina, ejecuta el archivo de esa plataforma. Listo.</p>
-          <h3 data-i18n="move.one.t">Mover un solo cliente</h3>
-          <p style="font-size:13.5px;color:var(--muted)" data-i18n="move.one.d">Desde la app: <b>Exportar</b> un
-            workspace → te da un archivo
-            con todo (incluidas las capturas). En la otra instalación: <b>Importar workspace</b> y se recrea entero.</p>
-        </section>
-
-        <!-- ROLES -->
-        <section class="cs-sec reveal" id="roles">
-          <h2><span class="ico">👥</span> <span data-i18n="sec.roles.h">Roles</span></h2>
-          <p class="lead" data-i18n="sec.roles.lead">Tres tipos de usuario, cada uno con su alcance.</p>
-          <table class="tbl">
-            <tr>
-              <th data-i18n="roles.th.role">Rol</th>
-              <th data-i18n="roles.th.can">Qué puede hacer</th>
-            </tr>
-            <tr>
-              <td data-i18n="roles.admin.t">Admin</td>
-              <td data-i18n="roles.admin.d">Gestiona usuarios, configuración y todos los proyectos. Acceso completo.</td>
-            </tr>
-            <tr>
-              <td data-i18n="roles.pentester.t">Pentester</td>
-              <td data-i18n="roles.pentester.d">Crea proyectos y hallazgos, importa escaneos, exporta informes y
-                <b>confirma la resolución</b> en el retest.</td>
-            </tr>
-            <tr>
-              <td data-i18n="roles.client.t">Cliente</td>
-              <td data-i18n="roles.client.d">Ve solo su workspace, marca hallazgos como <b>remediados</b> (con
-                comentario) y consulta los informes.</td>
-            </tr>
-          </table>
-        </section>
-
         <!-- TIPS -->
         <section class="cs-sec reveal" id="tips">
-          <h2><span class="ico">✅</span> <span data-i18n="sec.tips.h">Buenas prácticas</span></h2>
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.2 2.7 2.7L16 9.3"/></svg></span> <span data-i18n="sec.tips.h">Buenas prácticas</span></h2>
           <table class="tbl">
             <tr>
               <td>🔑</td>
@@ -1788,6 +2403,12 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
             </tr>
           </table>
         </section>
+
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /CARPETA 4 -->
 
       </main>
     </div>
@@ -1869,8 +2490,73 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
     }, { threshold: .1 });
     document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
 
-    var secs = document.querySelectorAll(".cs-sec");
+    /* ============================================================
+       ACORDEÓN — carpetas plegables (cuerpos colapsables)
+       ============================================================ */
+    var folders = Array.prototype.slice.call(document.querySelectorAll(".cs-folder"));
+
+    function setFolderOpen(folder, open) {
+      folder.classList.toggle("open", open);
+      var head = folder.querySelector(".cs-fhead");
+      if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    folders.forEach(function (folder) {
+      var head = folder.querySelector(".cs-fhead");
+      if (!head) return;
+      head.addEventListener("click", function () {
+        setFolderOpen(folder, !folder.classList.contains("open"));
+      });
+      /* spotlight reactivo en la cabecera (mismo lenguaje que el index) */
+      if (fineHeads()) {
+        var raf = null, px = 50, py = 50;
+        function apply() { raf = null; head.style.setProperty("--mx", px + "%"); head.style.setProperty("--my", py + "%"); }
+        head.addEventListener("pointermove", function (e) {
+          var r = head.getBoundingClientRect();
+          px = ((e.clientX - r.left) / r.width) * 100;
+          py = ((e.clientY - r.top) / r.height) * 100;
+          if (!raf) raf = requestAnimationFrame(apply);
+        }, { passive: true });
+      }
+    });
+    function fineHeads() { return window.matchMedia && matchMedia("(hover:hover) and (pointer:fine)").matches; }
+
+    /* abre la carpeta que contiene una sección dada (por id) */
+    function openFolderOf(id) {
+      var sec = document.getElementById(id);
+      if (!sec) return null;
+      var folder = sec.closest(".cs-folder");
+      if (folder && !folder.classList.contains("open")) setFolderOpen(folder, true);
+      return folder;
+    }
+
+    /* ============================================================
+       ÍNDICE LATERAL — al navegar, abre la carpeta y hace scroll
+       ============================================================ */
     var links = document.querySelectorAll(".cs-toc a");
+    links.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var href = a.getAttribute("href") || "";
+        if (href.charAt(0) !== "#") return;
+        var id = href.slice(1);
+        var sec = document.getElementById(id);
+        if (!sec) return;
+        e.preventDefault();
+        openFolderOf(id);
+        /* espera a que el cuerpo empiece a expandir antes de medir el destino */
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            sec.scrollIntoView({ behavior: "smooth", block: "start" });
+            try { history.replaceState(null, "", href); } catch (err) { }
+          }, 60);
+        });
+      });
+    });
+
+    /* ============================================================
+       SCROLLSPY — resalta la sección/carpeta activa en el índice
+       ============================================================ */
+    var secs = document.querySelectorAll(".cs-sec");
     var spy = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (e.isIntersecting) {
@@ -2009,9 +2695,18 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "cmt.pass3": "# 3) Borra la copia en claro",
         "cmt.pass4": "# 4) Pon la frase NUEVA en crisol.json",
         "pill.optional": "opcional",
+        "head.hud": "GUÍA RÁPIDA",
         "head.title": "Cheat Sheet de <span class=\"grad\">configuración</span>",
         "head.subA": "Todo lo que necesitas para configurar Crisol-RX: el archivo ",
         "head.subB": ", modo servidor, HTTPS, cifrado y comandos esenciales.",
+        "grp.start.t": "Primeros pasos",
+        "grp.start.c": "4 temas",
+        "grp.features.t": "Funcionalidades",
+        "grp.features.c": "5 temas",
+        "grp.network.t": "Servidor y red",
+        "grp.network.c": "3 temas",
+        "grp.security.t": "Seguridad y datos",
+        "grp.security.c": "4 temas",
         "toc.start": "Primer arranque",
         "toc.config": "El archivo crisol.json",
         "toc.flags": "Flags de arranque",
@@ -2019,6 +2714,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.sla": "SLA por proyecto",
         "toc.retest": "Retest y justificación",
         "toc.word": "Exportar informes",
+        "toc.biblioteca": "Biblioteca import/export",
         "toc.network": "Servidor en red",
         "toc.https": "HTTPS",
         "toc.encryption": "Cifrado de datos",
@@ -2108,6 +2804,25 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "sec.net.pC": " (Windows) o ",
         "sec.net.pD": " (Linux/macOS).",
         "sec.net.warn": "Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de confianza</b> y activa el cifrado de comunicaciones (siguiente sección). Cambia antes la contraseña de admin.",
+        "net.acl.h": "Control de acceso por IP (lista blanca)",
+        "net.acl.p": "Limita quién puede entrar combinando <code>allowed_hosts</code> (por nombre) y <code>allowed_ips</code> (por dirección de cliente). Solo los equipos de la lista entran; el resto recibe <code>403</code>.",
+        "net.acl.th.field": "Campo",
+        "net.acl.th.does": "Qué hace",
+        "net.acl.ips": "Lista blanca de IPs de cliente que pueden acceder. Acepta IPs sueltas y rangos <b>CIDR</b> (p. ej. <code>192.168.1.0/24</code>). La IP loopback (<code>127.0.0.1</code>/<code>::1</code>) <b>siempre</b> se permite: el propio equipo nunca se autobloquea. <b>Vacío = sin restricción por IP.</b> Útil para exponer en LAN solo a equipos concretos.",
+        "net.acl.hosts": "Lista blanca por nombre de host. Se rechazan las peticiones cuyo <code>Host</code> no esté listado. Vacío = sin restricción por nombre.",
+        "net.dns.h": "Acceso por nombre DNS propio",
+        "net.dns.p": "Para entrar por un nombre amable en vez de por IP, pon tu nombre en <code>allowed_hosts</code> (p. ej. <code>crisol.miempresa.local</code>) y haz que ese nombre <b>resuelva a la IP del servidor</b>: en el DNS interno de la empresa, o en el fichero <code>hosts</code> de cada equipo cliente. Así el acceso pasa a ser <code>http://crisol.miempresa.local:8723</code>.",
+        "net.dns.tip": "Combina ambos: <code>allowed_hosts</code> fija el nombre y <code>allowed_ips</code> restringe las direcciones de origen. El loopback queda siempre permitido para que administres desde el propio servidor.",
+        "sec.lib.h": "Importar / exportar la biblioteca de vulnerabilidades",
+        "sec.lib.lead": "La biblioteca (tu catálogo de vulnerabilidades) se puede <b>exportar</b> a un fichero JSON y volver a <b>importar</b>. Así no pierdes tus vulnerabilidades propias al cambiar de versión, recrear la base de datos, o compartirlas entre equipos e instalaciones.",
+        "lib.how.h": "Cómo se hace (solo admin)",
+        "lib.step1": "Abre la <b>Biblioteca</b> desde la app (es una acción de administrador).",
+        "lib.step2": "Pulsa <b>⤓ Exportar biblioteca</b>: descarga un JSON (<code>crisol-biblioteca.json</code>) con todo el catálogo.",
+        "lib.step3": "Para restaurar o cargar otro catálogo, pulsa <b>⤒ Importar biblioteca</b> y sube un JSON.",
+        "lib.merge": "Al importar, las entradas que <b>coinciden</b> (mismo título + tipo de auditoría) se <b>reemplazan</b> con las del fichero, y las nuevas se <b>añaden</b>. No se duplican.",
+        "lib.format.h": "Formato del fichero",
+        "lib.format.p": "Es un JSON propio de Crisol-RX, con su campo <code>format</code> y <code>version</code>. Puedes editarlo a mano si lo necesitas, siempre que mantengas la estructura.",
+        "lib.tip": "Exporta tu biblioteca antes de actualizar o de recrear la base de datos: tendrás una copia de tus vulnerabilidades lista para volver a importar.",
         "sec.https.lead": "Cifra las comunicaciones. Con tu certificado propio o uno automático.",
         "https.th.scenario": "Escenario",
         "https.th.set": "Qué poner",
@@ -2191,9 +2906,18 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "cmt.pass3": "# 3) Delete the cleartext copy",
         "cmt.pass4": "# 4) Set the NEW passphrase in crisol.json",
         "pill.optional": "optional",
+        "head.hud": "QUICK GUIDE",
         "head.title": "Configuration <span class=\"grad\">cheat sheet</span>",
         "head.subA": "Everything you need to configure Crisol-RX: the ",
         "head.subB": " file, server mode, HTTPS, encryption, and essential commands.",
+        "grp.start.t": "Getting started",
+        "grp.start.c": "4 topics",
+        "grp.features.t": "Features",
+        "grp.features.c": "5 topics",
+        "grp.network.t": "Server & network",
+        "grp.network.c": "3 topics",
+        "grp.security.t": "Security & data",
+        "grp.security.c": "4 topics",
         "toc.start": "First run",
         "toc.config": "The crisol.json file",
         "toc.flags": "Startup flags",
@@ -2201,6 +2925,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.sla": "Per-project SLA",
         "toc.retest": "Retest & justification",
         "toc.word": "Export reports",
+        "toc.biblioteca": "Library import/export",
         "toc.network": "Network server",
         "toc.https": "HTTPS",
         "toc.encryption": "Data encryption",
@@ -2290,6 +3015,25 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "sec.net.pC": " (Windows) or ",
         "sec.net.pD": " (Linux/macOS).",
         "sec.net.warn": "Without HTTPS, traffic travels in the clear. Use it only on a <b>trusted network</b> and enable communication encryption (next section). Change the admin password first.",
+        "net.acl.h": "IP access control (whitelist)",
+        "net.acl.p": "Limit who can connect by combining <code>allowed_hosts</code> (by name) and <code>allowed_ips</code> (by client address). Only listed machines get in; everyone else gets a <code>403</code>.",
+        "net.acl.th.field": "Field",
+        "net.acl.th.does": "What it does",
+        "net.acl.ips": "Whitelist of client IPs allowed to connect. Accepts single IPs and <b>CIDR</b> ranges (e.g. <code>192.168.1.0/24</code>). The loopback IP (<code>127.0.0.1</code>/<code>::1</code>) is <b>always</b> allowed: the host machine never locks itself out. <b>Empty = no IP restriction.</b> Handy to expose on the LAN to specific machines only.",
+        "net.acl.hosts": "Whitelist by host name. Requests whose <code>Host</code> is not listed are rejected. Empty = no name restriction.",
+        "net.dns.h": "Access by your own DNS name",
+        "net.dns.p": "To connect by a friendly name instead of by IP, put your name in <code>allowed_hosts</code> (e.g. <code>crisol.miempresa.local</code>) and make that name <b>resolve to the server IP</b>: in your company's internal DNS, or in each client's <code>hosts</code> file. Access then becomes <code>http://crisol.miempresa.local:8723</code>.",
+        "net.dns.tip": "Combine both: <code>allowed_hosts</code> pins the name and <code>allowed_ips</code> restricts source addresses. Loopback stays always allowed so you can administer from the server itself.",
+        "sec.lib.h": "Import / export the vulnerability library",
+        "sec.lib.lead": "The library (your vulnerability catalog) can be <b>exported</b> to a JSON file and <b>imported</b> back. That way you don't lose your own vulnerabilities when changing versions, recreating the database, or sharing them across teams and installations.",
+        "lib.how.h": "How to do it (admin only)",
+        "lib.step1": "Open the <b>Library</b> from the app (this is an administrator action).",
+        "lib.step2": "Click <b>⤓ Export library</b>: it downloads a JSON (<code>crisol-biblioteca.json</code>) with the whole catalog.",
+        "lib.step3": "To restore or load another catalog, click <b>⤒ Import library</b> and upload a JSON.",
+        "lib.merge": "On import, entries that <b>match</b> (same title + audit type) are <b>replaced</b> with the ones in the file, and new ones are <b>added</b>. Nothing is duplicated.",
+        "lib.format.h": "File format",
+        "lib.format.p": "It's a Crisol-RX native JSON, with its <code>format</code> and <code>version</code> fields. You can edit it by hand if you need to, as long as you keep the structure.",
+        "lib.tip": "Export your library before upgrading or recreating the database: you'll have a copy of your vulnerabilities ready to import back.",
         "sec.https.lead": "Encrypts communications. With your own certificate or an automatic one.",
         "https.th.scenario": "Scenario",
         "https.th.set": "What to set",

@@ -573,6 +573,44 @@
       border-color: var(--accent-dim)
     }
 
+    /* ===== Sistema GLASS (cheatsheet) ===== */
+    :root, [data-theme="dark"] {
+      --glass-hi: rgba(255,255,255,.16);
+      --glass-lo: rgba(0,0,0,.42);
+      --glass-edge: rgba(150,138,190,.30);
+      --glass-edge-hover: rgba(187,145,255,.55);
+      --glass-sheen: rgba(255,255,255,.18);
+      --glass-tintA: rgba(74,68,104,.30);
+      --glass-tintB: rgba(38,34,56,.18);
+    }
+    [data-theme="light"] {
+      --glass-hi: rgba(255,255,255,.85);
+      --glass-lo: rgba(80,70,120,.10);
+      --glass-edge: rgba(124,58,237,.16);
+      --glass-edge-hover: rgba(124,58,237,.4);
+      --glass-sheen: rgba(255,255,255,.5);
+      --glass-tintA: rgba(255,255,255,.5);
+      --glass-tintB: rgba(238,241,247,.35);
+    }
+    .btn-ghost {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--glass-tintA), var(--glass-tintB));
+      border-color: var(--glass-edge);
+      box-shadow: inset 0 1px 0 var(--glass-hi), inset 0 -1px 2px var(--glass-lo), 0 2px 8px rgba(0,0,0,.18);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .btn-ghost:hover { border-color: var(--glass-edge-hover) }
+    .cs-sec, .copy-btn {
+      box-shadow: inset 0 1px 0 var(--glass-hi);
+      border-color: var(--glass-edge);
+    }
+    .cs-sec:hover { border-color: var(--glass-edge-hover) }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .btn-ghost { background: var(--panel2) }
+    }
+
     /* header */
     header.head {
       padding: 60px 0 34px;
@@ -2063,6 +2101,48 @@ chmod +x crisol-*
           </ol>
         </section>
 
+        <section class="cs-sec reveal" id="roles">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.5 19c0-2.3 1-4 3.2-4"/></svg></span> <span data-i18n="sec.roles.h">Roles de usuario</span></h2>
+          <p class="lead" data-i18n="sec.roles.lead">Cada usuario tiene un rol que define qué puede hacer. El control se
+            verifica siempre en el servidor, no solo en la interfaz.</p>
+          <table class="tbl">
+            <tr>
+              <td><b>Admin</b> — <span data-i18n="roles.admin">crea workspaces, gestiona usuarios y permisos, lo ve
+                  todo.</span></td>
+            </tr>
+            <tr>
+              <td><b>Pentester</b> — <span data-i18n="roles.pen">sube y documenta vulnerabilidades, adjunta PoC, genera
+                  informes.</span></td>
+            </tr>
+            <tr>
+              <td><b>Consultor</b> — <span data-i18n="roles.con">edita vulnerabilidades existentes, acepta las mitigadas,
+                  comenta y genera informes, <b>pero no puede crear, importar, duplicar ni eliminar
+                    hallazgos</b>.</span></td>
+            </tr>
+            <tr>
+              <td><b>Cliente</b> — <span data-i18n="roles.cli">consulta los workspaces compartidos y marca
+                  vulnerabilidades como remediadas para retest.</span></td>
+            </tr>
+          </table>
+          <p style="font-size:13px;color:var(--muted);margin-top:10px" data-i18n="roles.note">El rol se cambia desde
+            <b>Perfil → Administración → Usuarios</b> (solo admin). Al cambiarlo, las sesiones de ese usuario se cierran
+            para que el nuevo rol aplique de inmediato.</p>
+        </section>
+
+        <section class="cs-sec reveal" id="perfil">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></span> <span data-i18n="sec.profile.h">Perfil y foto</span></h2>
+          <p class="lead" data-i18n="sec.profile.lead">Todo lo personal está en tu perfil (clic en tu nombre, abajo en la
+            barra lateral).</p>
+          <h3 data-i18n="profile.pic.t">Foto de perfil</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="profile.pic.d">Sube una imagen (PNG, JPG o WEBP) y se
+            recorta en círculo. Se guarda en la base de datos y aparece en la barra lateral y en la lista de usuarios.
+            Cada uno gestiona solo la suya.</p>
+          <h3 data-i18n="profile.dash.t">Panel global filtrable</h3>
+          <p style="font-size:13.5px;color:var(--muted)" data-i18n="profile.dash.d">En el panel de inicio, los filtros
+            (workspace, severidad, estado, búsqueda) recalculan en vivo las métricas y los gráficos, no solo la tabla.
+            Filtra por un workspace para ver al instante su reparto de riesgo.</p>
+        </section>
+
               </div>
             </div>
           </div>
@@ -2213,6 +2293,22 @@ chmod +x crisol-*
                 comentario) y consulta los informes.</td>
             </tr>
           </table>
+        </section>
+
+        <section class="cs-sec reveal" id="proxy">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="6" rx="1.6"/><rect x="3" y="13.5" width="18" height="6" rx="1.6"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span> <span data-i18n="sec.proxy.h">Detrás de un proxy (nginx / Caddy)</span></h2>
+          <p class="lead" data-i18n="sec.proxy.lead">Si sirves Crisol-RX detrás de un reverse proxy, activa
+            <code>trust_proxy</code> en <code>crisol.json</code> para que el registro de actividad y la página de error
+            muestren la IP real del visitante en vez de la del proxy.</p>
+          <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+            <pre>{
+  <span class="k">"secure_cookies"</span>: <span class="k">true</span>,
+  <span class="k">"trust_proxy"</span>: <span class="k">true</span>
+}</pre></div>
+          <p style="font-size:13px;color:var(--muted);margin-top:10px" data-i18n="proxy.note"><b>Importante:</b> esto solo
+            afecta a la IP que se <i>muestra</i>. La seguridad (lista blanca de IPs, límite de intentos de login) usa
+            siempre la IP real de la conexión, que no se puede falsear con cabeceras. Déjalo en <code>false</code> si
+            <b>no</b> usas proxy.</p>
         </section>
 
               </div>
@@ -2797,6 +2893,22 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "word.steps.h": "Pasos",
         "word.step1": "Abre el proyecto y pulsa <b>Exportar</b>.",
         "word.step2": "Elige <b>Informe completo (HTML)</b> o <b>Detalle de vulnerabilidades (Word .docx)</b>.",
+        "sec.roles.h": "Roles de usuario",
+        "sec.roles.lead": "Cada usuario tiene un rol que define qué puede hacer. El control se verifica siempre en el servidor, no solo en la interfaz.",
+        "roles.admin": "crea workspaces, gestiona usuarios y permisos, lo ve todo.",
+        "roles.pen": "sube y documenta vulnerabilidades, adjunta PoC, genera informes.",
+        "roles.con": "edita vulnerabilidades existentes, acepta las mitigadas, comenta y genera informes, <b>pero no puede crear, importar, duplicar ni eliminar hallazgos</b>.",
+        "roles.cli": "consulta los workspaces compartidos y marca vulnerabilidades como remediadas para retest.",
+        "roles.note": "El rol se cambia desde <b>Perfil → Administración → Usuarios</b> (solo admin). Al cambiarlo, las sesiones de ese usuario se cierran para que el nuevo rol aplique de inmediato.",
+        "sec.profile.h": "Perfil y foto",
+        "sec.profile.lead": "Todo lo personal está en tu perfil (clic en tu nombre, abajo en la barra lateral).",
+        "profile.pic.t": "Foto de perfil",
+        "profile.pic.d": "Sube una imagen (PNG, JPG o WEBP) y se recorta en círculo. Se guarda en la base de datos y aparece en la barra lateral y en la lista de usuarios. Cada uno gestiona solo la suya.",
+        "profile.dash.t": "Panel global filtrable",
+        "profile.dash.d": "En el panel de inicio, los filtros (workspace, severidad, estado, búsqueda) recalculan en vivo las métricas y los gráficos, no solo la tabla. Filtra por un workspace para ver al instante su reparto de riesgo.",
+        "sec.proxy.h": "Detrás de un proxy (nginx / Caddy)",
+        "sec.proxy.lead": "Si sirves Crisol-RX detrás de un reverse proxy, activa trust_proxy en crisol.json para que el registro de actividad y la página de error muestren la IP real del visitante en vez de la del proxy.",
+        "proxy.note": "<b>Importante:</b> esto solo afecta a la IP que se <i>muestra</i>. La seguridad (lista blanca de IPs, límite de intentos de login) usa siempre la IP real de la conexión, que no se puede falsear con cabeceras. Déjalo en <code>false</code> si <b>no</b> usas proxy.",
         "sec.net.h": "Levantarlo como servidor en red",
         "sec.net.lead": "Para que otros equipos de tu red entren a la misma instancia.",
         "sec.net.pA": "Los demás acceden por ",
@@ -3008,6 +3120,22 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "word.steps.h": "Steps",
         "word.step1": "Open the project and click <b>Export</b>.",
         "word.step2": "Choose <b>Full report (HTML)</b> or <b>Vulnerability detail (Word .docx)</b>.",
+        "sec.roles.h": "User roles",
+        "sec.roles.lead": "Every user has a role that defines what they can do. Access is always verified on the server, not just in the UI.",
+        "roles.admin": "creates workspaces, manages users and permissions, sees everything.",
+        "roles.pen": "uploads and documents vulnerabilities, attaches PoCs, generates reports.",
+        "roles.con": "edits existing vulnerabilities, accepts mitigated ones, comments and generates reports, <b>but can't create, import, duplicate or delete findings</b>.",
+        "roles.cli": "views shared workspaces and marks vulnerabilities as remediated for retest.",
+        "roles.note": "The role is changed from <b>Profile → Administration → Users</b> (admin only). On change, that user's sessions are closed so the new role applies immediately.",
+        "sec.profile.h": "Profile and photo",
+        "sec.profile.lead": "Everything personal lives in your profile (click your name, at the bottom of the sidebar).",
+        "profile.pic.t": "Profile picture",
+        "profile.pic.d": "Upload an image (PNG, JPG or WEBP) and it's cropped into a circle. It's stored in the database and shows in the sidebar and the user list. Everyone manages only their own.",
+        "profile.dash.t": "Filterable global dashboard",
+        "profile.dash.d": "On the home dashboard, the filters (workspace, severity, status, search) recalculate the metrics and charts live, not just the table. Filter by one workspace to instantly see its risk breakdown.",
+        "sec.proxy.h": "Behind a proxy (nginx / Caddy)",
+        "sec.proxy.lead": "If you serve Crisol-RX behind a reverse proxy, enable trust_proxy in crisol.json so the activity log and the error page show the visitor's real IP instead of the proxy's.",
+        "proxy.note": "<b>Important:</b> this only affects the IP that is <i>displayed</i>. Security (IP allowlist, login attempt limit) always uses the real connection IP, which can't be spoofed with headers. Leave it <code>false</code> if you do <b>not</b> use a proxy.",
         "sec.net.h": "Running it as a network server",
         "sec.net.lead": "So that other machines on your network can reach the same instance.",
         "sec.net.pA": "Others connect via ",

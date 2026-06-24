@@ -554,6 +554,69 @@
       border-radius: 13px
     }
 
+    /* ===== Sistema GLASS (web): relieve de vidrio sutil y legible ===== */
+    :root, [data-theme="dark"] {
+      --glass-hi: rgba(255,255,255,.16);
+      --glass-lo: rgba(0,0,0,.42);
+      --glass-edge: rgba(150,138,190,.30);
+      --glass-edge-hover: rgba(187,145,255,.55);
+      --glass-sheen: rgba(255,255,255,.18);
+      --glass-tintA: rgba(74,68,104,.30);
+      --glass-tintB: rgba(38,34,56,.18);
+    }
+    [data-theme="light"] {
+      --glass-hi: rgba(255,255,255,.85);
+      --glass-lo: rgba(80,70,120,.10);
+      --glass-edge: rgba(124,58,237,.16);
+      --glass-edge-hover: rgba(124,58,237,.4);
+      --glass-sheen: rgba(255,255,255,.5);
+      --glass-tintA: rgba(255,255,255,.5);
+      --glass-tintB: rgba(238,241,247,.35);
+    }
+    .btn-ghost {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--glass-tintA), var(--glass-tintB));
+      border-color: var(--glass-edge);
+      box-shadow: inset 0 1px 0 var(--glass-hi), inset 0 -1px 2px var(--glass-lo), 0 2px 8px rgba(0,0,0,.18);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .btn-ghost::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(90px 50px at var(--mx, 50%) 0, var(--glass-sheen), transparent 70%);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .btn-ghost:hover {
+      border-color: var(--glass-edge-hover);
+      box-shadow: inset 0 1px 0 var(--glass-hi), inset 0 -1px 2px var(--glass-lo), 0 6px 18px -4px color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+    .btn-ghost:hover::before { opacity: 1 }
+    .btn-primary {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 5px rgba(40,10,90,.5), 0 3px 12px rgba(120,60,224,.4);
+    }
+    /* Tarjetas y paneles de la web con relieve de vidrio (mismo lenguaje que la
+       app). Se aplica a TODAS las superficies con fondo propio del index. */
+    .card, .role, .metric, .pillar, .stat, .contact-card {
+      position: relative;
+      box-shadow: inset 0 1px 0 var(--glass-hi), var(--shadow-sm);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-color: var(--glass-edge);
+    }
+    .card:hover, .role:hover, .metric:hover, .pillar:hover, .stat:hover {
+      border-color: var(--glass-edge-hover);
+    }
+    /* Fallback sin backdrop-filter: fondo sólido para conservar contraste. */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .btn-ghost { background: var(--panel2) }
+    }
+
     header.hero {
       padding: 84px 0 64px;
       text-align: center;
@@ -1065,6 +1128,12 @@
       color: var(--low);
       background: color-mix(in srgb, var(--low) 12%, transparent);
       border: 1px solid color-mix(in srgb, var(--low) 45%, transparent)
+    }
+
+    .role .tag2.con {
+      color: #48a8f0;
+      background: rgba(72, 168, 240, .12);
+      border: 1px solid rgba(72, 168, 240, .4)
     }
 
     .role .tag2.cli {
@@ -3718,6 +3787,17 @@
                   impórtalo donde quieras.</p>
               </div>
             </li>
+            <li class="pillar-item">
+              <svg class="bullet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+              <div><b data-i18n="feat.f17.t">Duplica a cualquier proyecto</b>
+                <p data-i18n="feat.f17.d">Clona una vulnerabilidad —con sus PoC si quieres— al workspace y proyecto que
+                  elijas. Útil para hallazgos que se repiten.</p>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -3875,7 +3955,7 @@
 
   <section id="roles">
     <div class="wrap">
-      <h2 class="reveal" data-i18n="roles.title">Tres roles, permisos claros</h2>
+      <h2 class="reveal" data-i18n="roles.title">Cuatro roles, permisos claros</h2>
       <p class="sub reveal" data-i18n="roles.sub">Control de acceso por rol y por workspace, verificado siempre en el
         servidor.</p>
       <div class="roles">
@@ -3888,6 +3968,10 @@
           <p data-i18n="roles.pen.d"><b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en
             los workspaces que se le
             comparten con permiso de edición.</p>
+        </div>
+        <div class="role reveal"><span class="tag2 con" data-i18n="roles.con.tag">Consultor</span>
+          <p data-i18n="roles.con.d"><b>Revisa y da seguimiento.</b> Edita vulnerabilidades, acepta las mitigadas,
+            comenta y genera informes, pero no puede crear ni eliminar hallazgos.</p>
         </div>
         <div class="role reveal"><span class="tag2 cli" data-i18n="roles.cli.tag">Cliente</span>
           <p data-i18n="roles.cli.d"><b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades
@@ -4547,6 +4631,8 @@
         "feat.f12.d": "Catálogo reutilizable de <b>77 hallazgos comunes</b> —web, API, infraestructura, Active Directory, Windows y Linux— que autorrellena tus vulnerabilidades con un clic.",
         "feat.f7.t": "100% portable",
         "feat.f7.d": "Copia la carpeta a otra máquina y sigue funcionando. O exporta un workspace e impórtalo donde quieras.",
+        "feat.f17.t": "Duplica a cualquier proyecto",
+        "feat.f17.d": "Clona una vulnerabilidad —con sus PoC si quieres— al workspace y proyecto que elijas. Útil para hallazgos que se repiten.",
         "feat.f8.t": "Seguro por diseño",
         "feat.f8.d": "Control de acceso por rol verificado siempre en el servidor, protección frente a fuerza bruta y sesiones endurecidas. Privado por defecto.",
         "feat.f9.t": "Tus datos cifrados",
@@ -4554,7 +4640,7 @@
         "feat.f10.t": "Modo servidor con HTTPS",
         "feat.f10.d": "Úsalo solo para ti o levántalo para todo tu equipo en red local, con las comunicaciones cifradas de extremo a extremo.",
         "feat.f11.t": "Diseño cuidado",
-        "feat.f11.d": "Interfaz moderna con modo claro y oscuro, animaciones suaves y el branding de tu entidad en informes y pantalla.",
+        "feat.f11.d": "Acabado de cristal en toda la app, modo claro y oscuro, foto de perfil por usuario y el branding de tu entidad en informes y pantalla.",
         "feat.f14.t": "Copias de seguridad cifradas",
         "feat.f14.d": "Copias automáticas de tu base de datos, cifradas con AES-256-GCM y con rotación. Tus datos protegidos también ante un borrado o un fallo.",
         "trust.title": "Tu información, protegida",
@@ -4584,12 +4670,14 @@
         "metrics.m2": "dependencias · 0 nube",
         "metrics.m3": "plataformas: Win · Linux · macOS",
         "metrics.m4": "vulns en la biblioteca",
-        "roles.title": "Tres roles, permisos claros",
+        "roles.title": "Cuatro roles, permisos claros",
         "roles.sub": "Control de acceso por rol y por workspace, verificado siempre en el servidor.",
         "roles.admin.tag": "Admin",
         "roles.admin.d": "<b>Control total.</b> Único que crea workspaces, gestiona usuarios y concede permisos. Ve toda la instalación.",
         "roles.pen.tag": "Pentester",
         "roles.pen.d": "<b>Sube y documenta.</b> Crea vulnerabilidades, adjunta PoC y genera informes en los workspaces que se le comparten con permiso de edición.",
+        "roles.con.tag": "Consultor",
+        "roles.con.d": "<b>Revisa y da seguimiento.</b> Edita vulnerabilidades, acepta las mitigadas, comenta y genera informes, pero no puede crear ni eliminar hallazgos.",
         "roles.cli.tag": "Cliente",
         "roles.cli.d": "<b>Consulta y retest.</b> Ve los workspaces compartidos y marca vulnerabilidades como remediadas para su verificación.",
         "why.title": "Por qué Crisol-RX",
@@ -4711,6 +4799,8 @@
         "feat.f12.d": "A reusable catalog of <b>77 common findings</b> —web, API, infrastructure, Active Directory, Windows and Linux— that auto-fills your vulnerabilities with one click.",
         "feat.f7.t": "100% portable",
         "feat.f7.d": "Copy the folder to another machine and it keeps working. Or export a workspace and import it anywhere.",
+        "feat.f17.t": "Duplicate to any project",
+        "feat.f17.d": "Clone a vulnerability —with its PoCs if you want— to whichever workspace and project you choose. Handy for findings that repeat.",
         "feat.f8.t": "Secure by design",
         "feat.f8.d": "Role-based access control always verified on the server, brute-force protection, and hardened sessions. Private by default.",
         "feat.f9.t": "Your data encrypted",
@@ -4718,7 +4808,7 @@
         "feat.f10.t": "Server mode with HTTPS",
         "feat.f10.d": "Use it just for yourself or stand it up for your whole team on the local network, with end-to-end encrypted communications.",
         "feat.f11.t": "Polished design",
-        "feat.f11.d": "A modern interface with light and dark mode, smooth animations, and your organization's branding on screen and in reports.",
+        "feat.f11.d": "A glass finish across the whole app, light and dark mode, a per-user profile picture, and your organization's branding on screen and in reports.",
         "feat.f14.t": "Encrypted backups",
         "feat.f14.d": "Automatic backups of your database, encrypted with AES-256-GCM and rotated. Your data protected against loss or accidental deletion too.",
         "trust.title": "Your data, protected",
@@ -4748,12 +4838,14 @@
         "metrics.m2": "dependencies · 0 cloud",
         "metrics.m3": "platforms: Win · Linux · macOS",
         "metrics.m4": "vulns in the library",
-        "roles.title": "Three roles, clear permissions",
+        "roles.title": "Four roles, clear permissions",
         "roles.sub": "Role- and workspace-based access control, always verified on the server.",
         "roles.admin.tag": "Admin",
         "roles.admin.d": "<b>Full control.</b> The only one who creates workspaces, manages users, and grants permissions. Sees the whole installation.",
         "roles.pen.tag": "Pentester",
         "roles.pen.d": "<b>Uploads and documents.</b> Creates vulnerabilities, attaches PoCs, and generates reports in the workspaces shared with edit permission.",
+        "roles.con.tag": "Consultant",
+        "roles.con.d": "<b>Reviews and follows up.</b> Edits vulnerabilities, accepts mitigated ones, comments and generates reports, but can't create or delete findings.",
         "roles.cli.tag": "Client",
         "roles.cli.d": "<b>Reviews and retests.</b> Sees shared workspaces and marks vulnerabilities as remediated for verification.",
         "why.title": "Why Crisol-RX",
@@ -5247,6 +5339,16 @@
       })();
 
       if (typeof I18N !== "undefined") { try { window.I18N = I18N; } catch (e) { } }
+    })();
+
+    (function glassSheen() {
+      if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      document.addEventListener("pointermove", function (e) {
+        var c = e.target.closest && e.target.closest(".btn-ghost");
+        if (!c) return;
+        var r = c.getBoundingClientRect();
+        c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      }, { passive: true });
     })();
   </script>
 </body>

@@ -4009,7 +4009,7 @@
 
         <div class="steps">
           <div class="step"><span class="n">1</span>
-            <p data-i18n="dl.step1"><b>Descarga</b> el ejecutable de tu sistema.</p>
+            <p data-i18n="dl.step1"><b>Descarga</b> el <code>.zip</code> de tu sistema y <b>descomprímelo</b>.</p>
           </div>
           <div class="step"><span class="n">2</span>
             <p><span data-i18n="dl.step2a"><b>Ejecútalo</b> (en macOS/Linux: </span><code>chmod +x crisol-*</code><span
@@ -4023,7 +4023,7 @@
           </div>
         </div>
         <p style="font-size:12.5px;color:var(--muted);margin-top:22px">
-          <span data-i18n="dl.other">¿No es tu sistema? </span><a
+          <span data-i18n="dl.other">¿No es tu sistema? </span><a id="dlOtherLink"
             href="https://github.com/D3M0NH4NT3R/Crisol-RX/releases/latest" target="_blank" rel="noopener noreferrer"
             data-i18n="dl.otherLink">Elige otro binario en GitHub →</a>
         </p>
@@ -4082,22 +4082,33 @@
   <script>
     var GH_USER = "D3M0NH4NT3R", GH_REPO = "Crisol-RX";
     var BETA_TAG = "v1.1.0-rc1";
+    // Versión de los binarios publicados. Los assets de la Release se llaman
+    // crisol-<VERSION>-<plataforma>.zip — al subir una versión nueva, basta
+    // con cambiar este número aquí.
+    var VERSION = "1.3.0";
     var GH = "https://github.com/" + GH_USER + "/" + GH_REPO;
     var channel = "stable";
+    // Tag de la release estable. Como los assets llevan la versión en el
+    // nombre, descargamos desde el tag concreto (no desde "latest", que daría
+    // el nombre equivocado al publicar una versión nueva).
+    var STABLE_TAG = "v" + VERSION;
     function releasesURL() {
-      return channel === "beta" ? GH + "/releases/tag/" + BETA_TAG : GH + "/releases/latest";
+      return channel === "beta" ? GH + "/releases/tag/" + BETA_TAG : GH + "/releases/tag/" + STABLE_TAG;
     }
     function dl(asset) {
       return channel === "beta"
         ? GH + "/releases/download/" + BETA_TAG + "/" + asset
-        : GH + "/releases/latest/download/" + asset;
+        : GH + "/releases/download/" + STABLE_TAG + "/" + asset;
     }
 
+    // Los nombres coinciden con los .zip que genera build.sh:
+    //   crisol-<VERSION>-windows-amd64.zip, -linux-amd64.zip,
+    //   -macos-intel.zip, -macos-apple-silicon.zip
     var OSES = {
-      windows: { label: "Windows", ico: "🪟", arch: "x64", asset: "crisol-windows-amd64.exe" },
-      mac_arm: { label: "macOS", ico: "🍎", arch: "Apple Silicon", asset: "crisol-darwin-arm64" },
-      mac_intel: { label: "macOS", ico: "🍎", arch: "Intel", asset: "crisol-darwin-amd64" },
-      linux: { label: "Linux", ico: "🐧", arch: "x64", asset: "crisol-linux-amd64" }
+      windows: { label: "Windows", ico: "🪟", arch: "x64", asset: "crisol-" + VERSION + "-windows-amd64.zip" },
+      mac_arm: { label: "macOS", ico: "🍎", arch: "Apple Silicon", asset: "crisol-" + VERSION + "-macos-apple-silicon.zip" },
+      mac_intel: { label: "macOS", ico: "🍎", arch: "Intel", asset: "crisol-" + VERSION + "-macos-intel.zip" },
+      linux: { label: "Linux", ico: "🐧", arch: "x64", asset: "crisol-" + VERSION + "-linux-amd64.zip" }
     };
 
     function detectOS() {
@@ -4160,6 +4171,9 @@
         note.innerHTML = s.noDetect;
         note2.innerHTML = "";
       }
+      // El enlace "¿no es tu sistema?" apunta a la release concreta.
+      var other = document.getElementById("dlOtherLink");
+      if (other) other.href = releasesURL();
     }
 
     (function () {
@@ -4692,7 +4706,7 @@
         "dl.chanStable": "Estable",
         "dl.chanBeta": "Versión de prueba",
         "dl.betaWarn": "⚠️ Versión de prueba (Release Candidate). Puede contener fallos y no se recomienda para trabajo real. Pruébala antes en un proyecto de test. La versión estable es la opción recomendada.",
-        "dl.step1": "<b>Descarga</b> el ejecutable de tu sistema.",
+        "dl.step1": "<b>Descarga</b> el <code>.zip</code> de tu sistema y <b>descomprímelo</b>.",
         "dl.step2a": "<b>Ejecútalo</b> (en macOS/Linux: ",
         "dl.step2b": " y luego ",
         "dl.step2c": "). Se abre solo de manera predeterminada en ",
@@ -4860,7 +4874,7 @@
         "dl.chanStable": "Stable",
         "dl.chanBeta": "Test build",
         "dl.betaWarn": "⚠️ Test build (Release Candidate). It may contain bugs and is not recommended for real work. Try it on a test project first. The stable version is the recommended option.",
-        "dl.step1": "<b>Download</b> the executable for your system.",
+        "dl.step1": "<b>Download</b> the <code>.zip</code> for your system and <b>unzip it</b>.",
         "dl.step2a": "<b>Run it</b> (on macOS/Linux: ",
         "dl.step2b": " then ",
         "dl.step2c": "). It opens by itself at ",

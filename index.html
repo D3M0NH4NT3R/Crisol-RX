@@ -1637,7 +1637,7 @@
 
     .contact-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 52px
     }
@@ -1672,7 +1672,13 @@
       color: var(--muted)
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width: 480px) {
       .contact-grid {
         grid-template-columns: 1fr
       }
@@ -2216,6 +2222,9 @@
                 <path class="ac" d="M5 20c0-3.3 3.1-5.5 7-5.5s7 2.2 7 5.5" />
               </svg></div><b>@D3M0NH4NT3R</b><span data-i18n="ct.author">Autor del proyecto</span>
           </a>
+          <a class="ct rev rev-4" href="https://x.com/D3M0NH4NT3R" target="_blank" rel="noopener">
+            <div class="em"><svg viewBox="0 0 24 24"><path class="fillac" d="M17.7 3h3.2l-7 8 8.2 10.9h-6.4l-5-6.6-5.8 6.6H1.7l7.5-8.6L1.6 3h6.6l4.5 6 5-6Zm-1.1 17h1.8L7.5 4.8H5.6L16.6 20Z"/></svg></div><b>X (Twitter)</b><span>@D3M0NH4NT3R</span>
+          </a>
         </div>
       </div>
     </section>
@@ -2245,6 +2254,7 @@
           <a href="cheatsheet.html" data-i18n="nav.guide">Guía</a>
           <a href="#download" data-i18n="nav.download">Descargar</a>
           <a href="https://github.com/D3M0NH4NT3R/Crisol-RX" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://x.com/D3M0NH4NT3R" target="_blank" rel="noopener">X</a>
         </div>
       </div>
       <p class="foot-copy">© 2026 Crisol-RX · <span data-i18n="foot.made">Hecho para pentesters</span></p>

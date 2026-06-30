@@ -44,15 +44,15 @@
     }
     [data-theme="light"] {
       --bg: #fbfbfd;
-      --bg-soft: #f5f5f7;
+      --bg-soft: #eef0f4;
       --bg-card: #ffffff;
       --ink: #1d1d1f;
-      --ink-2: #424245;
-      --muted: #6e6e73;
-      --line: rgba(0, 0, 0, .1);
-      --accent: #7c3aed;
-      --accent-2: #06b981;
-      --accent-3: #0a84ff;
+      --ink-2: #3a3a3d;
+      --muted: #5b5b61;
+      --line: rgba(0, 0, 0, .14);
+      --accent: #6d28d9;
+      --accent-2: #058a63;
+      --accent-3: #0a6fd0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box }
@@ -73,6 +73,16 @@
     .grad {
       background: linear-gradient(95deg, var(--accent), var(--accent-3) 55%, var(--accent-2));
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    /* En tema claro el azul central aclara demasiado el degradado → más saturado */
+    [data-theme="light"] .grad {
+      background: linear-gradient(95deg, #7c3aed, #6d28d9 50%, #058a63);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    /* Detalle en OSCURO: tarjetas con un leve brillo de borde superior para dar profundidad */
+    [data-theme="dark"] .feat, [data-theme="dark"] .role, [data-theme="dark"] .dl-card, [data-theme="dark"] .ct {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 5%, var(--bg-card)), var(--bg-card) 60%);
+      box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 20px 50px -30px rgba(0,0,0,.7);
     }
 
     /* Botones tipo "píldora" Apple */
@@ -206,12 +216,22 @@
     section { position: relative }
     .pad { padding: 130px 0 } .pad-sm { padding: 90px 0 }
     .center { text-align: center }
-    .eyebrow { font-size: 19px; font-weight: 600; color: var(--accent-2); margin-bottom: 10px; letter-spacing: -.01em }
+    .eyebrow { font-size: 19px; font-weight: 600; color: var(--accent); margin-bottom: 10px; letter-spacing: -.01em }
     .display { font-size: clamp(34px, 6vw, 64px); font-weight: 600; letter-spacing: -.03em; line-height: 1.04 }
     .lead { max-width: 640px; margin: 18px auto 0; font-size: clamp(17px, 2.2vw, 22px); color: var(--ink-2); font-weight: 400; line-height: 1.5 }
 
-    /* Banda de contraste casi-negra (como las secciones oscuras de Apple) */
-    .band { background: #000; color: #fff } [data-theme="light"] .band { background: #000 }
+    /* Banda de contraste (secciones oscuras estilo Apple).
+       Forzamos tokens OSCUROS dentro de la banda, así contrasta y es legible en AMBOS temas. */
+    .band {
+      --bg-soft: #14182380; --bg-card: #141926; --ink: #f5f6fa; --ink-2: #c2c8d6; --muted: #9aa1b5; --line: rgba(255,255,255,.12);
+      background: #06070c; color: #f5f6fa; position: relative;
+    }
+    /* En tema claro, la banda negra sobre fondo blanco ya contrasta; en oscuro,
+       la separamos del fondo con finas líneas de resplandor arriba y abajo. */
+    .band::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; pointer-events: none;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 55%, transparent), transparent) }
+    .band + .band::after { display: none }
+    .band .eyebrow { color: var(--accent-2) }
     .band .lead { color: #b9bdc9 }
 
     /* Declaración grande de una sola frase */
@@ -289,36 +309,6 @@
     @media (max-width: 860px) { .flow { grid-template-columns: 1fr 1fr } }
     @media (max-width: 480px) { .flow { grid-template-columns: 1fr } }
 
-    /* ===================== DEMO LIGADA AL SCROLL (dashboard que se construye) ===================== */
-    .demo { height: 320vh; position: relative } /* alto extra = pista de scroll */
-    .demo-sticky { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; overflow: hidden }
-    .demo-glow { position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%) 32% 38%/720px 560px no-repeat,
-                  radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 20%, transparent), transparent 70%) 70% 60%/640px 520px no-repeat;
-      filter: blur(40px); opacity: .7 }
-    .demo-head { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; z-index: 2; padding: 0 20px }
-    .demo-head .eyebrow { margin-bottom: 8px } .demo-head h2 { font-size: clamp(28px, 5vw, 52px); letter-spacing: -.03em; line-height: 1.05 }
-    .demo-head .step-cap { margin-top: 12px; font-size: 15px; color: var(--muted); min-height: 22px; transition: opacity .4s }
-    .demo-screen { position: relative; z-index: 1; width: min(960px, 92vw); border-radius: 22px; overflow: hidden;
-      border: 1px solid var(--line); background: var(--bg-card); box-shadow: 0 60px 150px -40px rgba(0,0,0,.9);
-      transform: translateY(40px) scale(.96); will-change: transform }
-    .demo-screen .shot-main { padding: 22px 24px; min-height: 380px }
-    /* elementos que se montan: parten ocultos y los activa el JS por progreso */
-    .demo .kpi { opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease) }
-    .demo .kpi.show { opacity: 1; transform: none }
-    .demo .vr { opacity: 0; transform: translateX(-22px); transition: opacity .5s var(--ease), transform .5s var(--ease) }
-    .demo .vr.show { opacity: 1; transform: none }
-    /* mini-gráfica de barras que crece */
-    .demo-chart { display: flex; align-items: flex-end; gap: 10px; height: 96px; margin-top: 20px; padding: 0 2px }
-    .demo-chart .bar { flex: 1; border-radius: 7px 7px 0 0; height: 0; transition: height .7s var(--ease);
-      background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 55%, var(--accent-2))) }
-    .demo-chart .bar.b2 { background: linear-gradient(180deg, var(--accent-3), var(--accent)) }
-    .demo-chart .bar.b3 { background: linear-gradient(180deg, var(--accent-2), var(--accent-3)) }
-    .demo-progress { position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; gap: 8px }
-    .demo-progress i { width: 26px; height: 4px; border-radius: 3px; background: var(--line); transition: background .3s }
-    .demo-progress i.on { background: var(--accent) }
-    @media (max-width: 640px) { .demo { height: 300vh } .demo .kpis { grid-template-columns: repeat(2,1fr) } }
-
     /* ===================== DESCARGA ===================== */
     .dl-card { max-width: 760px; margin: 56px auto 0; background: var(--bg-card); border: 1px solid var(--line); border-radius: 26px; padding: 40px 36px; text-align: center }
     .dl-detect { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px; border-radius: 100px; background: var(--bg-soft); border: 1px solid var(--line); margin-bottom: 22px }
@@ -389,7 +379,7 @@
         <p class="sub rev rev-3" data-i18n="hero.sub">Crisol-RX funde hallazgos, retests y entregas en un único archivo portable. Sin servidores. Sin nube. Lo abres y empiezas.</p>
         <div class="hero-links rev rev-4">
           <a href="#download" class="btn btn-primary btn-lg" data-i18n="hero.cta">Descargar gratis</a>
-          <a href="#demo" class="btn-text arrow" data-i18n="hero.more">Ver en acción</a>
+          <a href="#product" class="btn-text arrow" data-i18n="hero.more">Ver en acción</a>
         </div>
       </div>
 
@@ -441,46 +431,6 @@
       </div>
     </section>
 
-    <!-- ===================== DEMO LIGADA AL SCROLL ===================== -->
-    <section class="demo" id="demo">
-      <div class="demo-sticky">
-        <div class="demo-glow" aria-hidden="true"></div>
-        <div class="demo-head">
-          <p class="eyebrow" data-i18n="demo.eyebrow">En acción</p>
-          <h2 data-i18n="demo.title">Mira cómo se monta tu panel.</h2>
-          <p class="step-cap" id="demoCap" data-i18n="demo.cap1">Desplázate para construir el dashboard…</p>
-        </div>
-
-        <div class="demo-screen" id="demoScreen">
-          <div class="shot-bar">
-            <div class="shot-dots"><i></i><i></i><i></i></div>
-            <span class="t">crisol-rx · dashboard</span>
-            <span class="live"><i></i> <span data-i18n="shot.live">En vivo</span></span>
-          </div>
-          <div class="shot-main">
-            <div class="kpis">
-              <div class="kpi c" data-stage="0"><b data-count-to="3">0</b><span data-i18n="sev.crit">Críticas</span></div>
-              <div class="kpi h" data-stage="0"><b data-count-to="6">0</b><span data-i18n="sev.high">Altas</span></div>
-              <div class="kpi" data-stage="0"><b data-count-to="24">0</b><span data-i18n="shot.total">Total</span></div>
-              <div class="kpi s" data-stage="0"><b data-count-to="71" data-suffix="%">0</b><span data-i18n="shot.fixed">Resueltas</span></div>
-            </div>
-            <div class="rows" style="margin-top:6px">
-              <div class="vr" data-stage="1"><span class="ref">VLN-014</span><span class="nm">SQL Injection en /api/login</span><span class="cv">9.8</span><span class="sev crit">CRIT</span></div>
-              <div class="vr" data-stage="1"><span class="ref">VLN-013</span><span class="nm">Stored XSS en panel de comentarios</span><span class="cv">8.1</span><span class="sev high">HIGH</span></div>
-              <div class="vr" data-stage="1"><span class="ref">VLN-011</span><span class="nm">IDOR en exportación de informes</span><span class="cv">7.4</span><span class="sev high">HIGH</span></div>
-            </div>
-            <div class="demo-chart" data-stage="2">
-              <div class="bar" data-h="60"></div><div class="bar b2" data-h="85"></div><div class="bar b3" data-h="45"></div>
-              <div class="bar" data-h="72"></div><div class="bar b2" data-h="95"></div><div class="bar b3" data-h="55"></div>
-              <div class="bar" data-h="68"></div><div class="bar b2" data-h="40"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="demo-progress" aria-hidden="true"><i id="dp0"></i><i id="dp1"></i><i id="dp2"></i></div>
-      </div>
-    </section>
-
     <!-- ===================== DECLARACIÓN ===================== -->
     <section class="pad">
       <div class="wrap">
@@ -511,7 +461,7 @@
         <div class="show">
           <div class="show-text rev">
             <h3 data-i18n="show1.t">El panel que lo dice todo de un vistazo.</h3>
-            <p data-i18n="show1.d">Criticidad, progreso y carga de trabajo en tiempo real. Filtra por workspace y ve exactamente dónde poner el foco.</p>
+            <p data-i18n="show1.d">Criticidad, progreso y carga de trabajo de un vistazo. Filtra por workspace y ve exactamente dónde poner el foco.</p>
             <ul class="pts">
               <li data-i18n="show1.p1">KPIs por severidad y porcentaje de resolución</li>
               <li data-i18n="show1.p2">Gráficos de tendencia y reparto por proyecto</li>
@@ -543,7 +493,7 @@
             <ul class="pts">
               <li data-i18n="show2.p1">Eventos multi-día con responsables asignados</li>
               <li data-i18n="show2.p2">Solicitudes de cambio pentester → admin</li>
-              <li data-i18n="show2.p3">Notificaciones y recordatorios</li>
+              <li data-i18n="show2.p3">Vista mensual con eventos de varios días</li>
             </ul>
           </div>
           <div class="show-frame zoom-in">
@@ -725,54 +675,6 @@
       heroFx();
     }
 
-    /* ---------- Demo ligada al scroll: el dashboard se construye ---------- */
-    var demo = document.getElementById("demo"), demoScreen = document.getElementById("demoScreen"), demoCap = document.getElementById("demoCap");
-    if (demo && demoScreen) {
-      var caps = { es: ["Desplázate para construir el dashboard…","Llegan las vulnerabilidades, ordenadas por criticidad.","Y la tendencia se dibuja sola. Listo para entregar."],
-                   en: ["Scroll to build the dashboard…","Vulnerabilities arrive, sorted by criticality.","And the trend draws itself. Ready to deliver."] };
-      var kpis = demoScreen.querySelectorAll('[data-stage="0"]'),
-          rowsD = demoScreen.querySelectorAll('[data-stage="1"]'),
-          chart = demoScreen.querySelector('[data-stage="2"]'),
-          bars = chart ? chart.querySelectorAll(".bar") : [],
-          dp = [document.getElementById("dp0"), document.getElementById("dp1"), document.getElementById("dp2")];
-      var kpiDone = false, lastStage = -1;
-      function countKpis() {
-        if (kpiDone) return; kpiDone = true;
-        kpis.forEach(function (k) {
-          var b = k.querySelector("b"), to = parseInt(b.getAttribute("data-count-to"), 10), suf = b.getAttribute("data-suffix") || "", t0 = null;
-          (function tick(ts) { if (!t0) t0 = ts; var p = Math.min((ts - t0) / 800, 1);
-            b.textContent = Math.round(p * to) + suf; if (p < 1) requestAnimationFrame(tick); })(performance.now());
-        });
-      }
-      var demoTicking = false;
-      function demoFx() {
-        demoTicking = false;
-        var r = demo.getBoundingClientRect(), vh = innerHeight;
-        var total = demo.offsetHeight - vh;
-        var p = Math.min(Math.max((-r.top) / total, 0), 1); // 0→1 a lo largo de la pista
-        // entrada del marco
-        var enter = Math.min(p / 0.12, 1);
-        demoScreen.style.transform = "translateY(" + (40 - enter * 40) + "px) scale(" + (0.96 + enter * 0.04) + ")";
-        // etapas
-        var stage = p < 0.30 ? 0 : p < 0.60 ? 1 : 2;
-        if (p > 0.12) { kpis.forEach(function (k) { k.classList.add("show"); }); countKpis(); }
-        if (stage >= 1) rowsD.forEach(function (v, i) { setTimeout(function(){ v.classList.add("show"); }, i * 90); });
-        else rowsD.forEach(function (v) { v.classList.remove("show"); });
-        if (stage >= 2 && bars.length) bars.forEach(function (bar) { bar.style.height = bar.getAttribute("data-h") + "%"; });
-        else bars.forEach(function (bar) { bar.style.height = "0"; });
-        if (stage !== lastStage) {
-          lastStage = stage;
-          if (demoCap) { demoCap.style.opacity = "0";
-            setTimeout(function(){ demoCap.textContent = (caps[lang] || caps.es)[stage]; demoCap.style.opacity = "1"; }, 180); }
-          dp.forEach(function (d, i) { if (d) d.classList.toggle("on", i <= stage); });
-        }
-      }
-      if (reduce) { kpis.forEach(function(k){k.classList.add("show");}); rowsD.forEach(function(v){v.classList.add("show");}); countKpis(); bars.forEach(function(b){b.style.height=b.getAttribute("data-h")+"%";}); if(dp[2])dp.forEach(function(d){d&&d.classList.add("on");}); }
-      else { addEventListener("scroll", function(){ if(!demoTicking){ requestAnimationFrame(demoFx); demoTicking = true; } }, { passive: true }); demoFx(); }
-      // exponer para refrescar caption al cambiar idioma
-      window.__demoRefreshCap = function(){ if(demoCap && lastStage>=0) demoCap.textContent = (caps[lang]||caps.es)[lastStage]; };
-    }
-
     /* ---------- Nav: estado scroll + burger ---------- */
     var nav = document.getElementById("nav"), links = document.getElementById("navLinks"), burger = document.getElementById("burger");
     addEventListener("scroll", function () { nav.classList.toggle("scrolled", scrollY > 8); }, { passive: true });
@@ -801,16 +703,15 @@
         "feat.f4.t":"Calendario y retest","feat.f4.d":"Planifica ventanas, retests y entregas. Eventos multi-día y solicitudes de cambio.",
         "feat.f5.t":"Informes listos","feat.f5.d":"Genera informes en PDF con resumen ejecutivo, hallazgos y remediaciones. Markdown incluido.",
         "feat.f6.t":"Cifrado y roles","feat.f6.d":"Datos cifrados en local, copias protegidas y permisos por rol. Tú controlas el acceso.",
-        "show1.t":"El panel que lo dice todo de un vistazo.","show1.d":"Criticidad, progreso y carga de trabajo en tiempo real. Filtra por workspace y ve exactamente dónde poner el foco.",
+        "show1.t":"El panel que lo dice todo de un vistazo.","show1.d":"Criticidad, progreso y carga de trabajo de un vistazo. Filtra por workspace y ve exactamente dónde poner el foco.",
         "show1.p1":"KPIs por severidad y porcentaje de resolución","show1.p2":"Gráficos de tendencia y reparto por proyecto","show1.p3":"Búsqueda global de vulnerabilidades",
         "show2.t":"Planifica el engagement entero.","show2.d":"Ventanas de prueba, retests y fechas de entrega en un calendario que el equipo entiende a la primera. Con solicitudes de cambio para no pisarse.",
-        "show2.p1":"Eventos multi-día con responsables asignados","show2.p2":"Solicitudes de cambio pentester → admin","show2.p3":"Notificaciones y recordatorios",
+        "show2.p1":"Eventos multi-día con responsables asignados","show2.p2":"Solicitudes de cambio pentester → admin","show2.p3":"Vista mensual con eventos de varios días",
         "roles.eyebrow":"Para todo el equipo","roles.title":"Cada rol, su sitio.","roles.lead":"Permisos claros para que cada persona vea y haga exactamente lo que le toca.",
         "roles.r1.t":"Administrador","roles.r1.d":"Control total: usuarios, workspaces, calendario y configuración.",
         "roles.r2.t":"Pentester","roles.r2.d":"Crea y gestiona hallazgos, solicita cambios y prepara informes.",
         "roles.r3.t":"Consultor","roles.r3.d":"Revisa y comenta sin modificar el alcance del trabajo.",
         "roles.r4.t":"Cliente","roles.r4.d":"Portal de solo lectura para seguir el avance y descargar informes.",
-        "demo.eyebrow":"En acción","demo.title":"Mira cómo se monta tu panel.","demo.cap1":"Desplázate para construir el dashboard…",
         "met.title":"Hecho para ir rápido.","met.m1":"archivo, sin instalación","met.m2":"dependencias externas","met.m3":"sistemas operativos","met.m4":"roles con permisos",
         "flow.eyebrow":"Cómo funciona","flow.title":"De cero a informe en cuatro pasos.",
         "flow.s1.t":"Descarga y abre","flow.s1.d":"Ejecuta el binario. Crisol-RX levanta su panel local al instante.",
@@ -836,16 +737,15 @@
         "feat.f4.t":"Calendar & retest","feat.f4.d":"Plan test windows, retests and deliveries. Multi-day events and change requests.",
         "feat.f5.t":"Reports ready","feat.f5.d":"Generate PDF reports with executive summary, findings and remediations. Markdown included.",
         "feat.f6.t":"Encryption & roles","feat.f6.d":"Locally encrypted data, protected backups and role-based permissions. You control access.",
-        "show1.t":"The dashboard that says it all at a glance.","show1.d":"Criticality, progress and workload in real time. Filter by workspace and see exactly where to focus.",
+        "show1.t":"The dashboard that says it all at a glance.","show1.d":"Criticality, progress and workload at a glance. Filter by workspace and see exactly where to focus.",
         "show1.p1":"KPIs by severity and resolution rate","show1.p2":"Trend charts and breakdown by project","show1.p3":"Global vulnerability search",
         "show2.t":"Plan the entire engagement.","show2.d":"Test windows, retests and delivery dates in a calendar the team gets instantly. With change requests so nobody steps on each other.",
-        "show2.p1":"Multi-day events with assigned owners","show2.p2":"Change requests pentester → admin","show2.p3":"Notifications and reminders",
+        "show2.p1":"Multi-day events with assigned owners","show2.p2":"Change requests pentester → admin","show2.p3":"Monthly view with multi-day events",
         "roles.eyebrow":"For the whole team","roles.title":"Every role, its place.","roles.lead":"Clear permissions so each person sees and does exactly what they should.",
         "roles.r1.t":"Administrator","roles.r1.d":"Full control: users, workspaces, calendar and settings.",
         "roles.r2.t":"Pentester","roles.r2.d":"Create and manage findings, request changes and prepare reports.",
         "roles.r3.t":"Consultant","roles.r3.d":"Review and comment without changing the scope of work.",
         "roles.r4.t":"Client","roles.r4.d":"Read-only portal to follow progress and download reports.",
-        "demo.eyebrow":"In action","demo.title":"Watch your dashboard build itself.","demo.cap1":"Scroll to build the dashboard…",
         "met.title":"Built to move fast.","met.m1":"file, no install","met.m2":"external dependencies","met.m3":"operating systems","met.m4":"roles with permissions",
         "flow.eyebrow":"How it works","flow.title":"From zero to report in four steps.",
         "flow.s1.t":"Download and open","flow.s1.d":"Run the binary. Crisol-RX spins up its local panel instantly.",
@@ -868,7 +768,6 @@
         var k = el.getAttribute("data-i18n"); if (dict[k] != null) el.innerHTML = dict[k];
       });
       renderOS(); // refresca etiquetas del bloque de descarga
-      if (window.__demoRefreshCap) window.__demoRefreshCap();
     }
     langBtn.addEventListener("click", function () { applyLang(lang === "es" ? "en" : "es"); });
 

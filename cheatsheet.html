@@ -22,6 +22,9 @@
   <link rel="icon" href="https://crisol-rx.com/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="https://crisol-rx.com/favicon.svg">
   <link rel="apple-touch-icon" href="https://crisol-rx.com/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script>
     (function () { try { var t = localStorage.getItem("vv_site_theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) { } })();
   </script>
@@ -1680,6 +1683,85 @@
         display: none
       }
     }
+
+    /* ============================================================
+       RE-SKIN ESTILO APPLE (override) — mismo look que la home v2
+       ============================================================ */
+    [data-theme="dark"] {
+      --bg: #0a0c12; --bg2: #0e1119; --panel: #141926; --panel2: #171c28;
+      --border: rgba(255,255,255,.09); --text: #f5f6fa; --muted: #8a91a6;
+      --nav-bg: rgba(10,12,18,.72); --code-bg: #0d1018;
+    }
+    [data-theme="light"] {
+      --bg: #fbfbfd; --bg2: #f5f5f7; --panel: #ffffff; --panel2: #f5f5f7;
+      --border: rgba(0,0,0,.1); --text: #1d1d1f; --muted: #6e6e73;
+      --nav-bg: rgba(251,251,253,.72); --code-bg: #f1edf8;
+    }
+    :root { --ease: cubic-bezier(.28,.11,.32,1) }
+
+    body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      letter-spacing: -.01em; line-height: 1.55 }
+
+    /* Atenuar los orbes cyber → resplandor sutil de marca, estilo Apple */
+    .bg-fx .orb { filter: blur(120px) !important; opacity: .22 !important; mix-blend-mode: normal !important; animation-duration: 40s !important }
+    [data-theme="light"] .bg-fx .orb { opacity: .14 !important }
+
+    /* Nav minimalista translúcido */
+    nav { height: 52px !important; backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid transparent }
+    nav.scrolled, nav.is-scrolled { border-bottom: 1px solid var(--border) }
+    nav .brand .name, nav .brand { font-weight: 600; letter-spacing: -.02em }
+    .nav-links a { font-size: 13px !important; font-weight: 400 !important; color: var(--muted) }
+    .nav-links a:hover { color: var(--text) }
+
+    /* Botones píldora Apple */
+    .btn { border-radius: 100px !important; font-weight: 500 !important; transition: transform .25s var(--ease), background .25s !important }
+    .btn-primary { background: var(--accent) !important; color: #fff !important }
+    .btn-primary::after { display: none !important }
+    .btn-primary:hover { transform: scale(1.03); background: color-mix(in srgb, var(--accent) 85%, #fff) !important }
+    .lang-btn, .theme-btn { border-radius: 100px !important; border: 1px solid var(--border) !important; background: transparent !important }
+
+    /* Cabecera: hero Apple con resplandor de marca y tipografía grande */
+    header.head { padding: 130px 0 70px !important; text-align: center; position: relative; overflow: clip }
+    header.head .wrap { position: relative; z-index: 1 }
+    header.head::before { content:""; position:absolute; top:-6%; left:50%; transform:translateX(-50%);
+      width:1000px; height:620px; pointer-events:none; z-index:0;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 40%, transparent), transparent 72%) 40% 34%/620px 500px no-repeat,
+                  radial-gradient(closest-side, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 72%) 64% 56%/560px 460px no-repeat;
+      filter: blur(40px); opacity:.8 }
+    header.head h1 { font-size: clamp(40px, 7vw, 76px) !important; font-weight: 600 !important; letter-spacing: -.04em !important; line-height: .98 !important }
+    header.head h1 .grad { background: linear-gradient(95deg, var(--accent), var(--accent2)) !important;
+      -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important }
+    header.head p { max-width: 600px; margin: 18px auto 0; font-size: clamp(16px, 2vw, 20px); color: var(--muted) }
+    .head-badge { display: inline-flex; margin-bottom: 18px }
+    .head-badge .hud { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent2); font-weight: 600 }
+    .head-badge .br { opacity: .5 }
+
+    /* Tarjetas de carpeta y secciones: limpias, redondeadas, Apple */
+    .cs-folder { background: var(--panel) !important; border: 1px solid var(--border) !important; border-radius: 22px !important;
+      box-shadow: none !important; overflow: hidden }
+    .cs-fhead { padding: 22px 26px !important }
+    .cs-fhead:hover { background: color-mix(in srgb, var(--accent) 6%, transparent) }
+    .cs-fhead h2 { font-weight: 600 !important; letter-spacing: -.02em !important }
+    .cs-fhead .fico { border-radius: 14px !important; background: color-mix(in srgb, var(--accent) 14%, transparent) !important }
+    .cs-fnum { color: var(--accent) !important; font-family: var(--mono, monospace) }
+    .cs-sec h3 { font-weight: 600 !important; letter-spacing: -.02em !important; font-size: clamp(20px, 2.6vw, 26px) !important }
+
+    /* TOC lateral más limpio */
+    .cs-toc a.toc-sub { border-radius: 9px !important; font-size: 13.5px }
+    .cs-toc a.active { background: color-mix(in srgb, var(--accent) 14%, transparent) !important; color: var(--text) !important }
+    .cs-toc .toc-group { letter-spacing: .04em; text-transform: uppercase; font-size: 11px; color: var(--muted) }
+
+    /* Bloques de código: bordes suaves */
+    .code { border-radius: 14px !important; border: 1px solid var(--border) !important }
+    .code pre { background: var(--code-bg) !important }
+    code { background: color-mix(in srgb, var(--accent) 12%, transparent); border-radius: 6px; padding: 1px 6px }
+
+    /* Reveal al scroll (curva Apple, ligeramente más largo) */
+    .reveal { transition: opacity 1s var(--ease), transform 1s var(--ease) !important }
+
+    /* Footer suave */
+    footer { background: var(--bg2); border-top: 1px solid var(--border) }
   </style>
 </head>
 
@@ -2673,6 +2755,10 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: .1 });
     document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+    /* nav: borde al hacer scroll (look Apple) */
+    (function () { var n = document.querySelector("nav"); if (!n) return;
+      addEventListener("scroll", function () { n.classList.toggle("scrolled", scrollY > 8); }, { passive: true }); })();
 
     /* ============================================================
        ACORDEÓN — carpetas plegables (cuerpos colapsables)

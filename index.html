@@ -331,7 +331,11 @@
     }
 
     .nav-buy:hover {
-      background: color-mix(in srgb, var(--accent) 85%, #fff)
+      /* el texto debe seguir siendo blanco: .nav-mini:hover lo ponía oscuro
+         (var(--ink)) y sobre el fondo morado se veía negro. */
+      color: #fff;
+      background: color-mix(in srgb, var(--accent) 82%, #000);
+      border-color: transparent
     }
 
     .nav-burger {
@@ -1129,6 +1133,1386 @@
       .pad {
         padding: 90px 0
       }
+    }
+
+    /* ===== demo animada "Ver en acción" ===== */
+    .demo {
+      max-width: 940px;
+      margin: 0 auto 64px
+    }
+
+    .demo-tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 18px
+    }
+
+    .demo-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 100px;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      color: var(--ink-2);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color .2s, border-color .2s, background .2s, transform .2s
+    }
+
+    .demo-tab svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7
+    }
+
+    .demo-tab:hover {
+      color: var(--ink);
+      border-color: var(--ink-2)
+    }
+
+    .demo-tab.active {
+      color: #fff;
+      background: var(--accent);
+      border-color: transparent
+    }
+
+    .demo-shot {
+      position: relative
+    }
+
+    .demo-stage {
+      position: relative;
+      min-height: 360px
+    }
+
+    @media (max-width:720px) {
+      .demo-stage {
+        min-height: 460px
+      }
+    }
+
+    .demo-panel {
+      position: absolute;
+      inset: 0;
+      padding: 22px 24px;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity .5s var(--ease), transform .5s var(--ease)
+    }
+
+    .demo-panel.on {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto
+    }
+
+    .demo-ph {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+      font-weight: 600;
+      margin-bottom: 14px
+    }
+
+    /* barras de severidad (panel 0) */
+    .demo-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px
+    }
+
+    .demo-brow {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .demo-brow span {
+      width: 68px;
+      font-size: 12px;
+      color: var(--ink-2);
+      text-align: right;
+      flex: none
+    }
+
+    .demo-brow .tk {
+      flex: 1;
+      height: 18px;
+      background: var(--bg-soft);
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .demo-brow .fl {
+      height: 100%;
+      width: 0;
+      border-radius: 6px;
+      transition: width .9s var(--ease)
+    }
+
+    .demo-panel.on .demo-brow .fl {
+      width: var(--w)
+    }
+
+    /* detalle de hallazgo (panel 1) */
+    .demo-detail {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 20px
+    }
+
+    @media (max-width:640px) {
+      .demo-detail {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .demo-detail h4 {
+      font-size: 19px;
+      letter-spacing: -.01em;
+      margin-bottom: 10px
+    }
+
+    .demo-chips {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .demo-chip {
+      font-size: 11.5px;
+      color: var(--ink-2);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 4px 10px
+    }
+
+    .demo-detail p {
+      font-size: 13.5px;
+      color: var(--ink-2);
+      line-height: 1.6
+    }
+
+    .demo-cvss {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      align-self: start
+    }
+
+    .demo-cvss .sc {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--crit)
+    }
+
+    .demo-cvss .lb {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+      margin-top: 2px
+    }
+
+    .demo-cvss .vec {
+      margin-top: 10px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 9.5px;
+      color: var(--ink-2);
+      word-break: break-all;
+      line-height: 1.5
+    }
+
+    /* timeline retest + sla (panel 2) */
+    .demo-tl {
+      display: flex;
+      flex-direction: column;
+      gap: 13px
+    }
+
+    .demo-tlr {
+      display: flex;
+      align-items: center;
+      gap: 13px
+    }
+
+    .demo-tlr .ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in srgb, var(--accent-2) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent-2) 40%, transparent)
+    }
+
+    .demo-tlr .ic svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: var(--accent-2);
+      stroke-width: 1.9
+    }
+
+    .demo-tlr b {
+      font-size: 14px
+    }
+
+    .demo-tlr small {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-2)
+    }
+
+    .demo-sla {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 15px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--med) 14%, var(--bg-soft));
+      border: 1px solid color-mix(in srgb, var(--med) 45%, transparent);
+      font-size: 13px;
+      color: var(--ink-2)
+    }
+
+    .demo-sla b {
+      color: var(--ink)
+    }
+
+    /* informe (panel 3) */
+    .demo-rep {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      gap: 18px;
+      align-items: start
+    }
+
+    @media (max-width:560px) {
+      .demo-rep {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .demo-cover {
+      border-radius: 13px;
+      padding: 34px 17px 16px;
+      min-height: 244px;
+      color: #fff;
+      background: linear-gradient(155deg, #2a1c46, #17121f 62%, #0f1c19);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 40px -22px rgba(157, 92, 255, .55)
+    }
+
+    .demo-cover::after {
+      content: "";
+      position: absolute;
+      right: -44px;
+      top: -44px;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157, 92, 255, .40), transparent 70%)
+    }
+
+    .demo-cover .cf {
+      position: absolute;
+      top: 14px;
+      left: 17px;
+      font-size: 8px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #c7a9ff
+    }
+
+    .demo-cover .ct {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.22;
+      position: relative;
+      z-index: 1
+    }
+
+    .demo-cover .cline {
+      width: 40px;
+      height: 3px;
+      border-radius: 2px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, #a974ff, #15e6a0)
+    }
+
+    .demo-cover .clines {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .demo-cover .clines i {
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .10)
+    }
+
+    .demo-cover .clines i:nth-child(2) {
+      width: 88%
+    }
+
+    .demo-cover .clines i:nth-child(3) {
+      width: 72%
+    }
+
+    .demo-exp {
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .demo-exp .r {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 13px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 12.5px;
+      color: var(--ink-2)
+    }
+
+    .demo-exp .r .fmt {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .03em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      flex: none;
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
+      color: var(--accent)
+    }
+
+    .demo-exp .r .adm {
+      margin-left: auto;
+      font-size: 10px;
+      color: var(--ink-2);
+      opacity: .8
+    }
+
+    .demo-dots {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 16px
+    }
+
+    .demo-dots i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--line);
+      transition: background .3s, transform .3s
+    }
+
+    .demo-dots i.on {
+      background: var(--accent);
+      transform: scale(1.35)
+    }
+
+    /* ===== demo v2: barra lateral persistente + paneles ricos ===== */
+    .demo-body {
+      display: flex;
+      min-height: 396px
+    }
+
+    .demo-side {
+      width: 194px;
+      flex: none;
+      border-right: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg-soft) 55%, transparent);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px
+    }
+
+    .demo-side .sh {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--ink-2);
+      font-weight: 600;
+      margin: 10px 6px 6px
+    }
+
+    .demo-side .sh:first-child {
+      margin-top: 0
+    }
+
+    .demo-side .wl {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 9px;
+      border-radius: 9px;
+      font-size: 13px;
+      color: var(--ink-2);
+      transition: background .2s, color .2s
+    }
+
+    .demo-side .wl small {
+      margin-left: auto;
+      font-size: 11px;
+      opacity: .7
+    }
+
+    .demo-side .wl .fav {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      flex: none
+    }
+
+    .demo-side .wl .d {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex: none;
+      margin: 0 7px
+    }
+
+    .demo-side .wl.on {
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--ink);
+      font-weight: 600
+    }
+
+    .demo-stage {
+      flex: 1;
+      min-width: 0
+    }
+
+    @media (max-width:720px) {
+      .demo-side {
+        display: none
+      }
+    }
+
+    /* dos columnas dentro de un panel */
+    .demo-2c {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      gap: 16px;
+      margin-top: 16px
+    }
+
+    @media (max-width:560px) {
+      .demo-2c {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .demo-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 15px
+    }
+
+    .demo-card .ct {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--ink-2);
+      font-weight: 600;
+      margin-bottom: 12px
+    }
+
+    /* donut de cobertura */
+    .demo-donut {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 148px
+    }
+
+    .demo-donut .ring {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent-2) 0 var(--p, 71%), color-mix(in srgb, var(--accent-2) 16%, transparent) 0);
+      -webkit-mask: radial-gradient(circle 39px at 50% 50%, transparent 98%, #000 100%);
+      mask: radial-gradient(circle 39px at 50% 50%, transparent 98%, #000 100%)
+    }
+
+    .demo-donut .rc {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      pointer-events: none
+    }
+
+    .demo-donut .rc b {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1
+    }
+
+    .demo-donut .rc small {
+      font-size: 9.5px;
+      color: var(--ink-2);
+      text-transform: uppercase;
+      letter-spacing: .06em
+    }
+
+    /* lista compacta de vulns dentro del panel */
+    .demo-vl {
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .demo-vrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 11px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-size: 12.5px
+    }
+
+    .demo-vrow .rf {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 11px;
+      color: var(--ink-2);
+      flex: none
+    }
+
+    .demo-vrow .vn {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    .demo-vrow .cvv {
+      font-family: ui-monospace, Menlo, monospace;
+      font-weight: 700;
+      font-size: 12px;
+      flex: none
+    }
+
+    .dsev {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: #fff;
+      padding: 3px 7px;
+      border-radius: 20px;
+      flex: none
+    }
+
+    .dsev.crit {
+      background: var(--crit)
+    }
+
+    .dsev.high {
+      background: var(--high)
+    }
+
+    .dsev.med {
+      background: var(--med);
+      color: #23180a
+    }
+
+    .dsev.ok {
+      background: var(--accent-2);
+      color: #04231a
+    }
+
+    .demo-vrow.done .vn {
+      color: var(--ink-2);
+      text-decoration: line-through
+    }
+
+    /* header de hallazgo */
+    .demo-fhead {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px
+    }
+
+    .demo-fhead .rf {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 12px;
+      color: var(--ink-2);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      padding: 3px 9px;
+      border-radius: 7px
+    }
+
+    .demo-fhead h4 {
+      font-size: 18px;
+      letter-spacing: -.01em;
+      flex: 1;
+      min-width: 160px
+    }
+
+    /* snippet de evidencia / PoC */
+    .demo-code {
+      background: #0e1118;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 14px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: #c9d3e6;
+      overflow: hidden
+    }
+
+    .demo-code .cm {
+      color: #6b7690
+    }
+
+    .demo-code .kw {
+      color: #ff8a9b
+    }
+
+    .demo-code .st {
+      color: #7ee0b6
+    }
+
+    .demo-fix {
+      margin-top: 14px;
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 11px;
+      background: color-mix(in srgb, var(--accent-2) 10%, var(--bg-soft));
+      border: 1px solid color-mix(in srgb, var(--accent-2) 34%, transparent);
+      font-size: 13px;
+      color: var(--ink-2)
+    }
+
+    .demo-fix b {
+      color: var(--ink)
+    }
+
+    .demo-fix .ic {
+      color: var(--accent-2);
+      flex: none;
+      font-size: 15px;
+      line-height: 1.3
+    }
+
+    /* timeline v2 con conector */
+    .demo-tl {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .demo-tlr {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+      padding-bottom: 16px
+    }
+
+    .demo-tlr:not(:last-child)::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 34px;
+      bottom: 0;
+      width: 2px;
+      background: color-mix(in srgb, var(--accent-2) 34%, transparent)
+    }
+
+    .demo-tlr .ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in srgb, var(--accent-2) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent-2) 42%, transparent);
+      z-index: 1
+    }
+
+    .demo-tlr .ic svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: var(--accent-2);
+      stroke-width: 2
+    }
+
+    .demo-tlr .tx {
+      padding-top: 6px
+    }
+
+    .demo-tlr b {
+      font-size: 14px
+    }
+
+    .demo-tlr small {
+      display: block;
+      font-size: 12px;
+      color: var(--ink-2);
+      margin-top: 1px
+    }
+
+    /* tarjeta SLA con anillo de días */
+    .demo-slac {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 4px;
+      padding: 16px;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--med) 12%, var(--bg-soft));
+      border: 1px solid color-mix(in srgb, var(--med) 40%, transparent)
+    }
+
+    .demo-slac .ring {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--med) 0 62%, color-mix(in srgb, var(--med) 22%, transparent) 0)
+    }
+
+    .demo-slac .ring i {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 15px;
+      font-style: normal;
+      text-align: center;
+      line-height: 1.05
+    }
+
+    .demo-slac .ring i small {
+      display: block;
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--ink-2);
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    .demo-slac .sx b {
+      font-size: 14px
+    }
+
+    .demo-slac .sx p {
+      font-size: 12.5px;
+      color: var(--ink-2);
+      margin: 3px 0 9px;
+      line-height: 1.5
+    }
+
+    .demo-nchips {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap
+    }
+
+    .demo-nchip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      color: var(--ink-2)
+    }
+
+    .demo-nchip b {
+      color: var(--accent)
+    }
+
+    /* informe v2 */
+    .demo-cover .cmark {
+      position: absolute;
+      top: 13px;
+      right: 14px;
+      width: 26px;
+      height: 26px;
+      opacity: .9
+    }
+
+    .demo-cover .cmeta {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      padding-top: 16px;
+      font-size: 9.5px;
+      color: #b9a9e0;
+      line-height: 1.7
+    }
+
+    .demo-brandchips {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 12px
+    }
+
+    .demo-brandchips .bc {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      color: var(--ink-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .demo-brandchips .sw {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      display: inline-block
+    }
+
+    /* ===== demo v3: dashboard tipo app + tabla real ===== */
+    .demo-k6 {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 14px
+    }
+
+    @media (max-width:560px) {
+      .demo-k6 {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    .demo-k {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 11px 10px
+    }
+
+    .demo-k b {
+      display: block;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1
+    }
+
+    .demo-k span {
+      display: block;
+      margin-top: 4px;
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--ink-2)
+    }
+
+    .demo-k.c b {
+      color: var(--crit)
+    }
+
+    .demo-k.h b {
+      color: var(--high)
+    }
+
+    .demo-k.s b {
+      color: var(--accent-2)
+    }
+
+    /* severidad: dona + leyenda */
+    .demo-sev2 {
+      display: flex;
+      align-items: center;
+      gap: 18px
+    }
+
+    .demo-sev2 .demo-donut {
+      flex: none;
+      width: 128px;
+      min-height: 128px
+    }
+
+    .demo-leg {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 9px
+    }
+
+    .demo-leg .lr {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--ink-2)
+    }
+
+    .demo-leg .lr .dt {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex: none
+    }
+
+    .demo-leg .lr b {
+      margin-left: auto;
+      color: var(--ink);
+      font-weight: 700
+    }
+
+    /* por workspace: barras apiladas */
+    .demo-wsb {
+      display: flex;
+      flex-direction: column;
+      gap: 13px
+    }
+
+    .demo-wsr .wl2 {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      color: var(--ink-2);
+      margin-bottom: 6px
+    }
+
+    .demo-wsr .wl2 b {
+      color: var(--ink)
+    }
+
+    .demo-wsr .stk {
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      background: var(--bg-card)
+    }
+
+    .demo-wsr .stk i {
+      height: 100%;
+      display: block
+    }
+
+    /* tabla de vulnerabilidades real */
+    .demo-tbl {
+      margin-top: 14px
+    }
+
+    .demo-thead,
+    .demo-trow {
+      display: grid;
+      grid-template-columns: 1fr 96px 50px 82px 88px;
+      gap: 10px;
+      align-items: center
+    }
+
+    .demo-thead {
+      padding: 0 13px 9px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--ink-2);
+      font-weight: 600
+    }
+
+    .demo-trow {
+      padding: 11px 13px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--line);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      font-size: 12.5px
+    }
+
+    .demo-trow:last-child {
+      margin-bottom: 0
+    }
+
+    .demo-trow.crit {
+      border-left-color: var(--crit)
+    }
+
+    .demo-trow.high {
+      border-left-color: var(--high)
+    }
+
+    .demo-trow.med {
+      border-left-color: var(--med)
+    }
+
+    .demo-trow.ok {
+      border-left-color: var(--accent-2)
+    }
+
+    .demo-trow .tw {
+      min-width: 0
+    }
+
+    .demo-trow .tw .rf2 {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 9.5px;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      padding: 2px 6px;
+      border-radius: 5px;
+      margin-right: 7px;
+      white-space: nowrap
+    }
+
+    .demo-trow .tw .tt2 {
+      color: var(--ink);
+      font-weight: 500
+    }
+
+    .demo-trow .tw small {
+      display: block;
+      margin-top: 3px;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 11px;
+      color: var(--ink-2)
+    }
+
+    .demo-trow .cvv2 {
+      font-family: ui-monospace, Menlo, monospace;
+      font-weight: 700;
+      font-size: 12.5px
+    }
+
+    .demo-trow .cwe2 {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 11.5px;
+      color: var(--ink-2)
+    }
+
+    .demo-st {
+      font-size: 11px;
+      color: var(--ink-2);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 3px 9px;
+      border-radius: 20px;
+      text-align: center;
+      justify-self: start
+    }
+
+    .demo-st.rt {
+      color: var(--med);
+      border-color: color-mix(in srgb, var(--med) 45%, transparent)
+    }
+
+    .demo-st.sv {
+      color: var(--accent-2);
+      border-color: color-mix(in srgb, var(--accent-2) 45%, transparent)
+    }
+
+    @media (max-width:600px) {
+
+      .demo-thead .hc,
+      .demo-trow .hc {
+        display: none
+      }
+
+      .demo-thead,
+      .demo-trow {
+        grid-template-columns: 1fr 84px 50px
+      }
+    }
+
+    /* ===== panel Informe (rediseño) ===== */
+    .rep-cover {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      color: #fff;
+      padding: 22px 26px;
+      min-height: 158px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(130deg, #271843 0%, #181227 46%, #0f1d1a 100%);
+      box-shadow: 0 22px 50px -28px rgba(157, 92, 255, .6)
+    }
+
+    .rep-cover::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157, 92, 255, .38), transparent 70%);
+      pointer-events: none
+    }
+
+    .rep-cover::before {
+      content: "";
+      position: absolute;
+      left: -50px;
+      bottom: -80px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(21, 230, 160, .14), transparent 72%);
+      pointer-events: none
+    }
+
+    .rep-cover .rc-mark {
+      position: absolute;
+      top: 18px;
+      left: 26px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 1
+    }
+
+    .rep-cover .rc-mark svg {
+      width: 22px;
+      height: 22px
+    }
+
+    .rep-cover .rc-mark span {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .01em
+    }
+
+    .rep-cover .rc-badge {
+      position: absolute;
+      top: 18px;
+      right: 26px;
+      font-size: 8.5px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: #c7a9ff;
+      border: 1px solid rgba(169, 116, 255, .5);
+      border-radius: 20px;
+      padding: 5px 12px;
+      z-index: 1
+    }
+
+    .rep-cover .rc-title {
+      position: relative;
+      z-index: 1;
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1
+    }
+
+    .rep-cover .rc-line {
+      position: relative;
+      z-index: 1;
+      width: 52px;
+      height: 3px;
+      border-radius: 2px;
+      margin: 12px 0 16px;
+      background: linear-gradient(90deg, #a974ff, #15e6a0)
+    }
+
+    .rep-cover .rc-meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap
+    }
+
+    .rep-cover .rc-meta>div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px
+    }
+
+    .rep-cover .rc-meta span {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #a99cc9
+    }
+
+    .rep-cover .rc-meta b {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f0ecff
+    }
+
+    .rep-exports {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 11px;
+      margin-top: 13px
+    }
+
+    @media (max-width:600px) {
+      .rep-exports {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    .rep-exp {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .2s var(--ease), border-color .2s, box-shadow .2s
+    }
+
+    .rep-exp:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+      box-shadow: 0 14px 30px -18px rgba(109, 40, 217, .5)
+    }
+
+    .rep-exp .fb {
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      padding: 4px 9px;
+      border-radius: 7px
+    }
+
+    .rep-exp .fb.pdf {
+      background: color-mix(in srgb, var(--crit) 16%, transparent);
+      color: var(--crit)
+    }
+
+    .rep-exp .fb.csv {
+      background: color-mix(in srgb, var(--accent-2) 16%, transparent);
+      color: var(--accent-2)
+    }
+
+    .rep-exp .fb.json {
+      background: color-mix(in srgb, var(--accent-3) 16%, transparent);
+      color: var(--accent-3)
+    }
+
+    .rep-exp .fb.sarif {
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
+      color: var(--accent)
+    }
+
+    .rep-exp .el {
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.45;
+      flex: 1
+    }
+
+    .rep-exp .lk {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      color: var(--ink-2);
+      text-transform: uppercase;
+      letter-spacing: .04em
+    }
+
+    .rep-exp .lk svg {
+      width: 11px;
+      height: 11px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2
+    }
+
+    .rep-brand {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap
+    }
+
+    .rep-brand .lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--ink-2);
+      font-weight: 600
+    }
+
+    .rep-brand .bchip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: var(--ink-2);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 5px 11px
+    }
+
+    .rep-brand .bchip .sw {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px
     }
 
     .show {
@@ -1939,6 +3323,33 @@
             <p data-i18n="feat.f6.d">Datos cifrados en local, copias protegidas y permisos por rol. Tú controlas el
               acceso.</p>
           </div>
+          <div class="feat rev">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <rect class="ln" x="4.5" y="10" width="15" height="10" rx="2.2" />
+                <path class="ln" d="M8 10V7.5a4 4 0 0 1 8 0V10" />
+                <circle class="fillac" cx="12" cy="15" r="1.4" />
+              </svg></div>
+            <h3 data-i18n="feat.f7.t">Doble factor (2FA)</h3>
+            <p data-i18n="feat.f7.d">TOTP opcional por usuario, compatible con cualquier app de autenticación, con códigos de recuperación.</p>
+          </div>
+          <div class="feat rev rev-2">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <path class="ln" d="M12 3v11" />
+                <path class="ac" d="m8 10 4 4 4-4" />
+                <path class="ln" d="M5 19h14" />
+              </svg></div>
+            <h3 data-i18n="feat.f8.t">Importa desde tu escáner</h3>
+            <p data-i18n="feat.f8.d">Nessus, Burp, OWASP ZAP, Nmap o CSV se convierten en hallazgos, deduplicados por activo.</p>
+          </div>
+          <div class="feat rev rev-3">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <path class="ln" d="M12 21V10" />
+                <path class="ac" d="m8 14 4-4 4 4" />
+                <path class="ln" d="M5 5h14" />
+              </svg></div>
+            <h3 data-i18n="feat.f9.t">Exporta e integra</h3>
+            <p data-i18n="feat.f9.d">Hallazgos en CSV, JSON o SARIF y avisos de SLA y retest en el centro de notificaciones.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1991,6 +3402,214 @@
 
     <section class="band pad" id="product">
       <div class="wrap">
+        <div class="center" style="margin-bottom:44px">
+          <p class="eyebrow rev" data-i18n="demo.eyebrow">En acción</p>
+          <h2 class="display rev rev-2" data-i18n="demo.title">Todo el flujo, en movimiento.</h2>
+          <p class="lead rev rev-3" data-i18n="demo.lead">Del panel al informe entregable. Pasa por las pestañas o déjalo correr.</p>
+        </div>
+
+        <div class="demo rev" id="demoBox">
+          <div class="demo-tabs" role="tablist">
+            <button class="demo-tab active" type="button" data-demo="0">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+              <span data-i18n="demo.t0">Panel</span>
+            </button>
+            <button class="demo-tab" type="button" data-demo="1">
+              <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V7l8-4Z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg>
+              <span data-i18n="demo.t1">Hallazgo</span>
+            </button>
+            <button class="demo-tab" type="button" data-demo="2">
+              <svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-.5 4"/><path d="M20 5v6h-6"/></svg>
+              <span data-i18n="demo.t2">Retest y SLA</span>
+            </button>
+            <button class="demo-tab" type="button" data-demo="3">
+              <svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7Z"/><path d="M14 3v5h5"/><path d="M9.5 13h6M9.5 16.5h4"/></svg>
+              <span data-i18n="demo.t3">Informe</span>
+            </button>
+          </div>
+
+          <div class="shot demo-shot">
+            <div class="shot-bar">
+              <div class="shot-dots"><i></i><i></i><i></i></div>
+              <span class="t">crisol-rx · localhost:8443</span>
+              <span class="live"><i></i> <span data-i18n="shot.live">En vivo</span></span>
+            </div>
+            <div class="demo-body">
+              <aside class="demo-side">
+                <div class="sh" data-i18n="shot.workspaces">Workspaces</div>
+                <div class="wl on"><span class="fav" style="background:linear-gradient(135deg,#9d5cff,#6f3ad6)">A</span> Acme Corp <small>24</small></div>
+                <div class="wl"><span class="fav" style="background:linear-gradient(135deg,#57b8ff,#2b6fd6)">B</span> Banca Nova <small>11</small></div>
+                <div class="wl"><span class="fav" style="background:linear-gradient(135deg,#15e6a0,#0a9e72)">F</span> Fintrek <small>7</small></div>
+                <div class="wl"><span class="fav" style="background:linear-gradient(135deg,#ff8a3d,#e85d1a)">O</span> Orbyx API <small>3</small></div>
+                <div class="sh" data-i18n="shot.views">Vistas</div>
+                <div class="wl"><span class="d" style="background:var(--accent-3)"></span> <span data-i18n="shot.calendar">Calendario</span></div>
+                <div class="wl"><span class="d" style="background:var(--med)"></span> <span data-i18n="shot.reports">Informes</span></div>
+                <div class="wl"><span class="d" style="background:var(--accent)"></span> <span data-i18n="demo.side.notif">Notificaciones</span> <small>2</small></div>
+              </aside>
+
+              <div class="demo-stage">
+
+                <!-- 0 · Panel -->
+                <div class="demo-panel on" data-panel="0">
+                  <div class="shot-top">
+                    <div class="tt" data-i18n="demo.p0.gt">Panel global<small data-i18n="demo.p0.gsub">Vista agregada de todos tus workspaces</small></div>
+                    <div class="prog">
+                      <div class="pl"><span data-i18n="shot.remed">Remediación</span><b>66%</b></div>
+                      <div class="bar"><i style="width:66%"></i></div>
+                    </div>
+                  </div>
+                  <div class="demo-k6">
+                    <div class="demo-k"><b>4</b><span data-i18n="shot.workspaces">Workspaces</span></div>
+                    <div class="demo-k"><b>32</b><span data-i18n="demo.p0.kact">Vulns activas</span></div>
+                    <div class="demo-k c"><b>4</b><span data-i18n="sev.crit">Críticas</span></div>
+                    <div class="demo-k h"><b>9</b><span data-i18n="sev.high">Altas</span></div>
+                    <div class="demo-k"><b>3</b><span data-i18n="demo.p0.kret">Pend. retest</span></div>
+                    <div class="demo-k s"><b>21</b><span data-i18n="shot.fixed">Resueltas</span></div>
+                  </div>
+                  <div class="demo-2c" style="grid-template-columns:1fr 1fr">
+                    <div class="demo-card">
+                      <div class="ct" data-i18n="demo.p0.bysev">Por severidad</div>
+                      <div class="demo-sev2">
+                        <div class="demo-donut">
+                          <div class="ring" style="background:conic-gradient(var(--crit) 0 12.5%,var(--high) 12.5% 40.6%,var(--med) 40.6% 78.1%,var(--accent-3) 78.1% 100%)"></div>
+                          <div class="rc"><b>32</b><small data-i18n="demo.p0.vulns">vulns</small></div>
+                        </div>
+                        <div class="demo-leg">
+                          <div class="lr"><span class="dt" style="background:var(--crit)"></span> <span data-i18n="sev.crit">Críticas</span> <b>4</b></div>
+                          <div class="lr"><span class="dt" style="background:var(--high)"></span> <span data-i18n="sev.high">Altas</span> <b>9</b></div>
+                          <div class="lr"><span class="dt" style="background:var(--med)"></span> <span data-i18n="demo.sevM">Medias</span> <b>12</b></div>
+                          <div class="lr"><span class="dt" style="background:var(--accent-3)"></span> <span data-i18n="demo.sevL">Bajas</span> <b>7</b></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="demo-card">
+                      <div class="ct" data-i18n="demo.p0.byws">Por workspace</div>
+                      <div class="demo-wsb">
+                        <div class="demo-wsr"><div class="wl2"><span>Acme Corp</span><b>18</b></div><div class="stk"><i style="width:16%;background:var(--crit)"></i><i style="width:33%;background:var(--high)"></i><i style="width:33%;background:var(--med)"></i><i style="width:18%;background:var(--accent-3)"></i></div></div>
+                        <div class="demo-wsr"><div class="wl2"><span>Banca Nova</span><b>9</b></div><div class="stk"><i style="width:11%;background:var(--crit)"></i><i style="width:22%;background:var(--high)"></i><i style="width:45%;background:var(--med)"></i><i style="width:22%;background:var(--accent-3)"></i></div></div>
+                        <div class="demo-wsr"><div class="wl2"><span>Fintrek</span><b>5</b></div><div class="stk"><i style="width:20%;background:var(--high)"></i><i style="width:40%;background:var(--med)"></i><i style="width:40%;background:var(--accent-3)"></i></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 1 · Hallazgos -->
+                <div class="demo-panel" data-panel="1">
+                  <div class="demo-ph"><span data-i18n="demo.p1.h2">Vulnerabilidades</span> · <span style="color:var(--ink);font-weight:600">Portal Web</span></div>
+                  <div class="demo-tbl">
+                    <div class="demo-thead">
+                      <span data-i18n="demo.tbl.vuln">Vulnerabilidad</span>
+                      <span data-i18n="demo.tbl.sev">Severidad</span>
+                      <span>CVSS</span>
+                      <span class="hc">CWE</span>
+                      <span class="hc" data-i18n="demo.tbl.state">Estado</span>
+                    </div>
+                    <div class="demo-trow crit">
+                      <div class="tw"><span class="rf2">VLN-041</span><span class="tt2" data-i18n="demo.r1.t">Inyección SQL en /portal/login</span><small>203.0.113.20:443</small></div>
+                      <span class="dsev crit">CRÍTICA</span>
+                      <span class="cvv2" style="color:var(--crit)">9.8</span>
+                      <span class="cwe2 hc">CWE-89</span>
+                      <span class="demo-st hc" data-i18n="demo.st.open">Abierta</span>
+                    </div>
+                    <div class="demo-trow high">
+                      <div class="tw"><span class="rf2">VLN-038</span><span class="tt2" data-i18n="demo.r2.t">XSS almacenado en comentarios</span><small>portal.demo.local</small></div>
+                      <span class="dsev high">ALTA</span>
+                      <span class="cvv2" style="color:var(--high)">7.4</span>
+                      <span class="cwe2 hc">CWE-79</span>
+                      <span class="demo-st hc" data-i18n="demo.st.open">Abierta</span>
+                    </div>
+                    <div class="demo-trow med">
+                      <div class="tw"><span class="rf2">VLN-033</span><span class="tt2" data-i18n="demo.r3.t">Cabeceras de seguridad ausentes</span><small>portal.demo.local:443</small></div>
+                      <span class="dsev med">MEDIA</span>
+                      <span class="cvv2" style="color:var(--med)">5.3</span>
+                      <span class="cwe2 hc">CWE-693</span>
+                      <span class="demo-st rt hc" data-i18n="demo.st.retest">En retest</span>
+                    </div>
+                    <div class="demo-trow ok">
+                      <div class="tw"><span class="rf2">VLN-025</span><span class="tt2" data-i18n="demo.r4.t">IDOR en descarga de facturas</span><small>api.demo.local</small></div>
+                      <span class="dsev ok">OK</span>
+                      <span class="cvv2" style="color:var(--accent-2)">✓</span>
+                      <span class="cwe2 hc">CWE-639</span>
+                      <span class="demo-st sv hc" data-i18n="demo.st.solved">Resuelta</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2 · Retest y SLA -->
+                <div class="demo-panel" data-panel="2">
+                  <div class="demo-ph" data-i18n="demo.p2.h">Ciclo de verificación</div>
+                  <div class="demo-tl">
+                    <div class="demo-tlr"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><span class="tx"><b data-i18n="demo.p2.s1t">Pentester documenta</b><small data-i18n="demo.p2.s1d">Sube la vuln con severidad, CVSS y PoC.</small></span></div>
+                    <div class="demo-tlr"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg></span><span class="tx"><b data-i18n="demo.p2.s2t">Cliente marca remediada</b><small data-i18n="demo.p2.s2d">Pasa a «pendiente de retest».</small></span></div>
+                    <div class="demo-tlr"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-.5 4"/><path d="M20 5v6h-6"/></svg></span><span class="tx"><b data-i18n="demo.p2.s3t">Pentester confirma</b><small data-i18n="demo.p2.s3d">Solo quien la subió cierra el hallazgo.</small></span></div>
+                  </div>
+                  <div class="demo-slac">
+                    <div class="ring"><i>5<small data-i18n="demo.p2.days">días</small></i></div>
+                    <div class="sx">
+                      <b data-i18n="demo.p2.slat">SLA · corrección de críticas</b>
+                      <p data-i18n="demo.p2.slad">El contador arranca al <b>entregar el informe</b>, no al subir la vuln.</p>
+                      <div class="demo-nchips">
+                        <span class="demo-nchip"><b>2</b> <span data-i18n="demo.p2.n1">SLA por vencer</span></span>
+                        <span class="demo-nchip"><b>1</b> <span data-i18n="demo.p2.n2">retest pendiente</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3 · Informe -->
+                <div class="demo-panel" data-panel="3">
+                  <div class="demo-ph" data-i18n="demo.p3.h">Informe y exportaciones</div>
+                  <div class="rep-cover">
+                    <div class="rc-mark">
+                      <svg viewBox="0 0 48 48" fill="none"><path d="M24 4 L38 16 H10 Z" fill="#a86bff"/><path d="M10 16 H38 L24 44 Z" fill="#a86bff" opacity="0.82"/><path d="M17 16 L24 26 L31 16 L24 14 Z" fill="#2fd6a6"/></svg>
+                      <span>Crisol-RX</span>
+                    </div>
+                    <span class="rc-badge">Confidencial</span>
+                    <div class="rc-title" data-i18n="demo.p3.cover">Informe de Test de Intrusión</div>
+                    <div class="rc-line"></div>
+                    <div class="rc-meta">
+                      <div><span data-i18n="demo.p3.mk1">Proyecto</span><b>Portal Web</b></div>
+                      <div><span data-i18n="demo.p3.mk2">Workspace</span><b>Acme Corp</b></div>
+                      <div><span data-i18n="demo.p3.mk3">Hallazgos</span><b data-i18n="demo.p3.mv3">24 · 3 críticas</b></div>
+                      <div><span data-i18n="demo.p3.mk4">Fecha</span><b>Q2 2026</b></div>
+                    </div>
+                  </div>
+                  <div class="rep-exports">
+                    <div class="rep-exp">
+                      <span class="fb pdf">PDF</span>
+                      <span class="el" data-i18n="demo.p3.e1">Informe HTML autocontenido, listo para imprimir a PDF.</span>
+                      <span class="lk"><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg> <span data-i18n="demo.p3.dl">Descargar</span></span>
+                    </div>
+                    <div class="rep-exp">
+                      <span class="fb csv">CSV</span>
+                      <span class="el" data-i18n="demo.p3.e2">Hallazgos para tu hoja de cálculo.</span>
+                      <span class="lk" data-i18n="demo.p3.adm">Solo admin</span>
+                    </div>
+                    <div class="rep-exp">
+                      <span class="fb json">JSON</span>
+                      <span class="el" data-i18n="demo.p3.e3">Datos completos, para automatizar.</span>
+                      <span class="lk" data-i18n="demo.p3.adm">Solo admin</span>
+                    </div>
+                    <div class="rep-exp">
+                      <span class="fb sarif">SARIF</span>
+                      <span class="el" data-i18n="demo.p3.e4">Integración con CI y herramientas.</span>
+                      <span class="lk" data-i18n="demo.p3.adm">Solo admin</span>
+                    </div>
+                  </div>
+                  <div class="rep-brand">
+                    <span class="lbl" data-i18n="demo.p3.brand">Personalización</span>
+                    <span class="bchip"><span class="sw" style="background:#6d28d9"></span> <span data-i18n="demo.p3.b1">Color de marca</span></span>
+                    <span class="bchip" data-i18n="demo.p3.b2">Logo en portada</span>
+                    <span class="bchip" data-i18n="demo.p3.b3">Plan de acción</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="demo-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+
         <div class="show flip">
           <div class="show-text rev">
             <h3 data-i18n="show2.t">Planifica el engagement entero.</h3>
@@ -2276,6 +3895,33 @@
         revs.forEach(function (el) { io.observe(el); });
       }
 
+      // Demo animada "Ver en acción": auto-cicla las pestañas al entrar en
+      // pantalla; el clic o el hover la controlan.
+      var demoBox = document.getElementById("demoBox");
+      if (demoBox) {
+        var dTabs = [].slice.call(demoBox.querySelectorAll(".demo-tab"));
+        var dPanels = [].slice.call(demoBox.querySelectorAll(".demo-panel"));
+        var dDots = [].slice.call(demoBox.querySelectorAll(".demo-dots i"));
+        var dCur = 0, dTimer = null;
+        function demoShow(n) {
+          dCur = (n + dPanels.length) % dPanels.length;
+          dTabs.forEach(function (t, i) { t.classList.toggle("active", i === dCur); });
+          dPanels.forEach(function (p, i) { p.classList.toggle("on", i === dCur); });
+          dDots.forEach(function (d, i) { d.classList.toggle("on", i === dCur); });
+        }
+        function demoStart() { if (dTimer || reduce) return; dTimer = setInterval(function () { demoShow(dCur + 1); }, 3400); }
+        function demoStop() { if (dTimer) { clearInterval(dTimer); dTimer = null; } }
+        dTabs.forEach(function (t, i) { t.addEventListener("click", function () { demoStop(); demoShow(i); }); });
+        demoBox.addEventListener("pointerenter", demoStop);
+        demoBox.addEventListener("pointerleave", demoStart);
+        if ("IntersectionObserver" in window) {
+          var dio = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { demoStart(); } else { demoStop(); } });
+          }, { threshold: 0.3 });
+          dio.observe(demoBox);
+        } else { demoStart(); }
+      }
+
       var counted = false;
       function runCounters() {
         if (counted) return; counted = true;
@@ -2340,10 +3986,32 @@
           "feat.f4.t": "Calendario y retest", "feat.f4.d": "Planifica ventanas, retests y entregas. Eventos multi-día y solicitudes de cambio.",
           "feat.f5.t": "Informes listos", "feat.f5.d": "Genera informes en PDF con resumen ejecutivo, hallazgos y remediaciones. Markdown incluido.",
           "feat.f6.t": "Cifrado y roles", "feat.f6.d": "Datos cifrados en local, copias protegidas y permisos por rol. Tú controlas el acceso.",
+          "feat.f7.t": "Doble factor (2FA)", "feat.f7.d": "TOTP opcional por usuario, compatible con cualquier app de autenticación, con códigos de recuperación.",
+          "feat.f8.t": "Importa desde tu escáner", "feat.f8.d": "Nessus, Burp, OWASP ZAP, Nmap o CSV se convierten en hallazgos, deduplicados por activo.",
+          "feat.f9.t": "Exporta e integra", "feat.f9.d": "Hallazgos en CSV, JSON o SARIF y avisos de SLA y retest en el centro de notificaciones.",
           "show1.t": "El panel que lo dice todo de un vistazo.", "show1.d": "Criticidad, progreso y carga de trabajo de un vistazo. Filtra por workspace y ve exactamente dónde poner el foco.",
           "show1.p1": "KPIs por severidad y porcentaje de resolución", "show1.p2": "Gráficos de tendencia y reparto por proyecto", "show1.p3": "Búsqueda global de vulnerabilidades",
           "show2.t": "Planifica el engagement entero.", "show2.d": "Ventanas de prueba, retests y fechas de entrega en un calendario que el equipo entiende a la primera. Con solicitudes de cambio para no pisarse.",
           "show2.p1": "Eventos multi-día con responsables asignados", "show2.p2": "Solicitudes de cambio pentester → admin", "show2.p3": "Vista mensual con eventos de varios días",
+          "demo.eyebrow": "En acción", "demo.title": "Todo el flujo, en movimiento.", "demo.lead": "Del panel al informe entregable. Pasa por las pestañas o déjalo correr.",
+          "demo.t0": "Panel", "demo.t1": "Hallazgos", "demo.t2": "Retest y SLA", "demo.t3": "Informe", "demo.sevM": "Medias",
+          "demo.p1.h": "Hallazgo · VLN-024", "demo.p1.title": "SQL Injection en /api/login", "demo.p1.state": "Abierta",
+          "demo.p1.desc": "El parámetro <b>user</b> se concatena en la consulta SQL y permite volcar la tabla de usuarios. Con descripción, impacto, remediación, evidencia y PoC adjunta en Markdown.",
+          "demo.p2.h": "Ciclo de verificación", "demo.p2.s1t": "Pentester documenta", "demo.p2.s1d": "Sube la vuln con severidad, CVSS y PoC.",
+          "demo.p2.s2t": "Cliente marca remediada", "demo.p2.s2d": "Pasa a «pendiente de retest».", "demo.p2.s3t": "Pentester confirma", "demo.p2.s3d": "Solo quien la subió cierra el hallazgo.",
+          "demo.p2.sla": "El contador de <b>SLA</b> arranca al entregar el informe. Los vencimientos y retests pendientes aparecen en el centro de notificaciones.",
+          "demo.p3.h": "Informe y exportaciones", "demo.p3.cover": "Informe de Test de Intrusión",
+          "demo.p3.e1": "Informe HTML autocontenido, listo para imprimir a PDF.", "demo.p3.e2": "Hallazgos para tu hoja de cálculo.", "demo.p3.e3": "Datos completos, para automatizar.", "demo.p3.e4": "Integración con CI y herramientas.",
+          "demo.p3.dl": "Descargar", "demo.p3.adm": "Solo admin", "demo.p3.brand": "Personalización",
+          "demo.p3.mk1": "Proyecto", "demo.p3.mk2": "Workspace", "demo.p3.mk3": "Hallazgos", "demo.p3.mv3": "24 · 3 críticas", "demo.p3.mk4": "Fecha",
+          "demo.side.notif": "Notificaciones", "demo.sevL": "Bajas", "demo.p0.bysev": "Por severidad", "demo.p0.v2": "XSS almacenado en comentarios", "demo.p0.v3": "IDOR en exportación de facturas",
+          "demo.p1.fixt": "Remediación:", "demo.p1.fixd": "consultas parametrizadas y validación de entrada. Plan de acción y evidencia adjunta viajan con el hallazgo.",
+          "demo.p2.days": "días", "demo.p2.slat": "SLA · corrección de críticas", "demo.p2.slad": "El contador arranca al <b>entregar el informe</b>, no al subir la vuln.", "demo.p2.n1": "SLA por vencer", "demo.p2.n2": "retest pendiente",
+          "demo.p3.m1": "Acme Corp · Web App", "demo.p3.m2": "24 hallazgos · 3 críticas", "demo.p3.b1": "Color de marca", "demo.p3.b2": "Logo en portada", "demo.p3.b3": "Plan de acción",
+          "demo.p0.gt": "Panel global", "demo.p0.gsub": "Vista agregada de todos tus workspaces", "demo.p0.kact": "Vulns activas", "demo.p0.kret": "Pend. retest", "demo.p0.vulns": "vulns", "demo.p0.byws": "Por workspace",
+          "demo.p1.h2": "Vulnerabilidades", "demo.tbl.vuln": "Vulnerabilidad", "demo.tbl.sev": "Severidad", "demo.tbl.state": "Estado",
+          "demo.r1.t": "Inyección SQL en /portal/login", "demo.r2.t": "XSS almacenado en comentarios", "demo.r3.t": "Cabeceras de seguridad ausentes", "demo.r4.t": "IDOR en descarga de facturas",
+          "demo.st.open": "Abierta", "demo.st.retest": "En retest", "demo.st.solved": "Resuelta",
           "roles.eyebrow": "Para todo el equipo", "roles.title": "Cada rol, su sitio.", "roles.lead": "Permisos claros para que cada persona vea y haga exactamente lo que le toca.",
           "roles.r1.t": "Administrador", "roles.r1.d": "Control total: usuarios, workspaces, calendario y configuración.",
           "roles.r2.t": "Pentester", "roles.r2.d": "Crea y gestiona hallazgos, solicita cambios y prepara informes.",
@@ -2376,10 +4044,32 @@
           "feat.f4.t": "Calendar & retest", "feat.f4.d": "Plan test windows, retests and deliveries. Multi-day events and change requests.",
           "feat.f5.t": "Reports ready", "feat.f5.d": "Generate PDF reports with executive summary, findings and remediations. Markdown included.",
           "feat.f6.t": "Encryption & roles", "feat.f6.d": "Locally encrypted data, protected backups and role-based permissions. You control access.",
+          "feat.f7.t": "Two-factor (2FA)", "feat.f7.d": "Optional per-user TOTP, compatible with any authenticator app, with recovery codes.",
+          "feat.f8.t": "Import from your scanner", "feat.f8.d": "Nessus, Burp, OWASP ZAP, Nmap or CSV become findings, deduplicated by asset.",
+          "feat.f9.t": "Export & integrate", "feat.f9.d": "Findings in CSV, JSON or SARIF, plus SLA and retest alerts in the notification center.",
           "show1.t": "The dashboard that says it all at a glance.", "show1.d": "Criticality, progress and workload at a glance. Filter by workspace and see exactly where to focus.",
           "show1.p1": "KPIs by severity and resolution rate", "show1.p2": "Trend charts and breakdown by project", "show1.p3": "Global vulnerability search",
           "show2.t": "Plan the entire engagement.", "show2.d": "Test windows, retests and delivery dates in a calendar the team gets instantly. With change requests so nobody steps on each other.",
           "show2.p1": "Multi-day events with assigned owners", "show2.p2": "Change requests pentester → admin", "show2.p3": "Monthly view with multi-day events",
+          "demo.eyebrow": "In action", "demo.title": "The whole flow, in motion.", "demo.lead": "From dashboard to delivery-ready report. Click through the tabs or let it run.",
+          "demo.t0": "Dashboard", "demo.t1": "Finding", "demo.t2": "Retest & SLA", "demo.t3": "Report", "demo.sevM": "Medium",
+          "demo.p1.h": "Finding · VLN-024", "demo.p1.title": "SQL Injection in /api/login", "demo.p1.state": "Open",
+          "demo.p1.desc": "The <b>user</b> parameter is concatenated into the SQL query and allows dumping the users table. With description, impact, remediation, evidence and an attached PoC in Markdown.",
+          "demo.p2.h": "Verification cycle", "demo.p2.s1t": "Pentester documents", "demo.p2.s1d": "Uploads the vuln with severity, CVSS and PoC.",
+          "demo.p2.s2t": "Client marks remediated", "demo.p2.s2d": "Moves to “pending retest”.", "demo.p2.s3t": "Pentester confirms", "demo.p2.s3d": "Only the reporter closes the finding.",
+          "demo.p2.sla": "The <b>SLA</b> countdown starts when the report is delivered. Due dates and pending retests appear in the notification center.",
+          "demo.p3.h": "Report and exports", "demo.p3.cover": "Penetration Test Report",
+          "demo.p3.e1": "Self-contained HTML report, ready to print to PDF.", "demo.p3.e2": "Findings for your spreadsheet.", "demo.p3.e3": "Full data, for automation.", "demo.p3.e4": "Integration with CI and tools.",
+          "demo.p3.dl": "Download", "demo.p3.adm": "Admin only", "demo.p3.brand": "Branding",
+          "demo.p3.mk1": "Project", "demo.p3.mk2": "Workspace", "demo.p3.mk3": "Findings", "demo.p3.mv3": "24 · 3 critical", "demo.p3.mk4": "Date",
+          "demo.side.notif": "Notifications", "demo.sevL": "Low", "demo.p0.bysev": "By severity", "demo.p0.v2": "Stored XSS in comments", "demo.p0.v3": "IDOR in invoice export",
+          "demo.p1.fixt": "Remediation:", "demo.p1.fixd": "parameterized queries and input validation. Action plan and attached evidence travel with the finding.",
+          "demo.p2.days": "days", "demo.p2.slat": "SLA · fix critical findings", "demo.p2.slad": "The countdown starts <b>when the report is delivered</b>, not when the vuln is uploaded.", "demo.p2.n1": "SLA due soon", "demo.p2.n2": "pending retest",
+          "demo.p3.m1": "Acme Corp · Web App", "demo.p3.m2": "24 findings · 3 critical", "demo.p3.b1": "Brand color", "demo.p3.b2": "Cover logo", "demo.p3.b3": "Action plan",
+          "demo.p0.gt": "Global dashboard", "demo.p0.gsub": "Aggregated view of all your workspaces", "demo.p0.kact": "Active vulns", "demo.p0.kret": "Pending retest", "demo.p0.vulns": "vulns", "demo.p0.byws": "By workspace",
+          "demo.p1.h2": "Vulnerabilities", "demo.tbl.vuln": "Vulnerability", "demo.tbl.sev": "Severity", "demo.tbl.state": "Status",
+          "demo.r1.t": "SQL Injection in /portal/login", "demo.r2.t": "Stored XSS in comments", "demo.r3.t": "Missing security headers", "demo.r4.t": "IDOR in invoice download",
+          "demo.st.open": "Open", "demo.st.retest": "In retest", "demo.st.solved": "Resolved",
           "roles.eyebrow": "For the whole team", "roles.title": "Every role, its place.", "roles.lead": "Clear permissions so each person sees and does exactly what they should.",
           "roles.r1.t": "Administrator", "roles.r1.d": "Full control: users, workspaces, calendar and settings.",
           "roles.r2.t": "Pentester", "roles.r2.d": "Create and manage findings, request changes and prepare reports.",

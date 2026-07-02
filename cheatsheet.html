@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -54,16 +54,16 @@
     }
 
     [data-theme="light"] {
-      --bg: #f4f6fb;
+      --bg: #f4f5f9;
       --bg2: #ffffff;
       --panel: #ffffff;
       --panel2: #eef1f7;
       --border: #dde4ef;
-      --text: #1b2435;
-      --muted: #5d6b84;
-      --accent: #7c3aed;
-      --accent2: #09b97f;
-      --accent-dim: #6a2cd4;
+      --text: #0c0d12;
+      --muted: #585b67;
+      --accent: #6d28d9;
+      --accent2: #047857;
+      --accent-dim: #5b21b6;
       --accent-contrast: #ffffff;
       --crit: #be0f2b;
       --high: #dc3838;
@@ -323,18 +323,18 @@
       font-size: 14px
     }
 
-    .nav-links a:not(.btn) {
+    .nav-links a:not(.btn):not(.nav-buy) {
       color: var(--muted);
       transition: color .15s;
       position: relative
     }
 
-    .nav-links a:not(.btn):hover {
+    .nav-links a:not(.btn):not(.nav-buy):hover {
       color: var(--text)
     }
 
     @media (hover:hover) and (pointer:fine) {
-      .nav-links a:not(.btn)::after {
+      .nav-links a:not(.btn):not(.nav-buy)::after {
         content: "";
         position: absolute;
         left: 0;
@@ -348,13 +348,13 @@
         transition: transform .28s var(--ease)
       }
 
-      .nav-links a:not(.btn):hover::after {
+      .nav-links a:not(.btn):not(.nav-buy):hover::after {
         transform: scaleX(1)
       }
     }
 
     @media(max-width:720px) {
-      .nav-links a:not(.btn)::after {
+      .nav-links a:not(.btn):not(.nav-buy)::after {
         display: none
       }
     }
@@ -430,7 +430,7 @@
         pointer-events: auto
       }
 
-      .nav-links a:not(.btn) {
+      .nav-links a:not(.btn):not(.nav-buy) {
         padding: 11px 6px;
         font-size: 15px;
         border-bottom: 1px solid var(--border)
@@ -505,6 +505,29 @@
     }
 
     /* buttons */
+    /* Botón "Obtener" del nav — idéntico al del index. */
+    .nav-buy {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-size: 12px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--accent);
+      border: 1px solid transparent;
+      padding: 7px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background .2s, transform .2s
+    }
+
+    .nav-buy:hover {
+      color: #fff;
+      background: color-mix(in srgb, var(--accent) 82%, #000);
+      transform: translateY(-1px)
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -1711,8 +1734,8 @@
       border-bottom: 1px solid transparent }
     nav.scrolled, nav.is-scrolled { border-bottom: 1px solid var(--border) }
     nav .brand .name, nav .brand { font-weight: 600; letter-spacing: -.02em }
-    .nav-links a { font-size: 13px !important; font-weight: 400 !important; color: var(--muted) }
-    .nav-links a:hover { color: var(--text) }
+    .nav-links a:not(.nav-buy) { font-size: 13px !important; font-weight: 400 !important; color: var(--muted) }
+    .nav-links a:not(.nav-buy):hover { color: var(--text) }
 
     /* Botones píldora Apple */
     .btn { border-radius: 100px !important; font-weight: 500 !important; transition: transform .25s var(--ease), background .25s !important }
@@ -1796,8 +1819,7 @@
           <a href="index.html" data-i18n="nav.home">Inicio</a>
           <a href="index.html#features" data-i18n="nav.features">Características</a>
           <a href="index.html#contact" data-i18n="nav.report">Reportar bug</a>
-          <a href="index.html#download" class="btn btn-primary"><span class="btn-label" data-i18n="btn.download">⤓
-              Descargar</span></a>
+          <a href="index.html#download" class="nav-buy" data-i18n="nav.buy">Obtener</a>
           <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
           <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
         </div>
@@ -1844,6 +1866,9 @@
         <a class="toc-sub" href="#sla" data-i18n="toc.sla">SLA por proyecto</a>
         <a class="toc-sub" href="#retest" data-i18n="toc.retest">Retest y justificación</a>
         <a class="toc-sub" href="#word" data-i18n="toc.word">Exportar informes</a>
+        <a class="toc-sub" href="#dosfa" data-i18n="toc.tfa">Doble factor (2FA)</a>
+        <a class="toc-sub" href="#exportar" data-i18n="toc.export">Exportar hallazgos</a>
+        <a class="toc-sub" href="#marca" data-i18n="toc.brand">Marca del informe</a>
 
         <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg></span><span data-i18n="grp.network.t">Servidor y red</span></div>
         <a class="toc-sub" href="#red" data-i18n="toc.network">Servidor en red</a>
@@ -2313,6 +2338,54 @@ chmod +x crisol-*
             más pesados sin perder funcionalidad.</p>
         </section>
 
+        <!-- 2FA / TOTP -->
+        <section class="cs-sec reveal" id="dosfa">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2.2"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/><circle cx="12" cy="15" r="1.3"/></svg></span> <span data-i18n="sec.tfa.h">Doble factor (2FA)</span> <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
+          <p class="lead" data-i18n="sec.tfa.lead">Segundo factor TOTP por usuario, compatible con cualquier app de autenticación.</p>
+          <table class="tbl">
+            <tr><th data-i18n="tfa.th.step">Paso</th><th data-i18n="tfa.th.what">Qué hacer</th></tr>
+            <tr><td data-i18n="tfa.s1.t">Activar</td><td data-i18n="tfa.s1.d">En <b>tu perfil → Seguridad → Activar 2FA</b>. Escanea el QR con tu app (Google Authenticator, Aegis, etc.) o introduce la clave manual.</td></tr>
+            <tr><td data-i18n="tfa.s2.t">Confirmar</td><td data-i18n="tfa.s2.d">Escribe el código de 6 dígitos para verificar. A partir de ahí se pide en cada inicio de sesión.</td></tr>
+            <tr><td data-i18n="tfa.s3.t">Recuperación</td><td data-i18n="tfa.s3.d">Al activarlo se generan códigos de <b>un solo uso</b>. Guárdalos: te dejan entrar si pierdes el teléfono.</td></tr>
+          </table>
+          <div class="note tip"><span class="ni">🛡️</span>
+            <div data-i18n="tfa.note1">El secreto TOTP se calcula en local (sin conexión) y se guarda en la base de datos, protegido por el cifrado en reposo si lo tienes activado. Los códigos de recuperación se guardan solo como hash (SHA-256).</div>
+          </div>
+          <div class="note"><span class="ni">🔧</span>
+            <div data-i18n="tfa.note2">Un <b>admin</b> puede restablecer el 2FA de un usuario que haya perdido el acceso desde <b>Usuarios</b>. Tolera un pequeño desfase de reloj (±1 intervalo).</div>
+          </div>
+        </section>
+
+        <!-- EXPORTAR HALLAZGOS -->
+        <section class="cs-sec reveal" id="exportar">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"/><path d="m8 8 4-4 4 4"/><path d="M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></span> <span data-i18n="sec.exp.h">Exportar hallazgos</span></h2>
+          <p class="lead" data-i18n="sec.exp.lead">Saca los hallazgos del proyecto para tu hoja de cálculo, tus scripts o tu CI.</p>
+          <table class="tbl">
+            <tr><th data-i18n="exp.th.fmt">Formato</th><th data-i18n="exp.th.use">Para qué</th></tr>
+            <tr><td><code>CSV</code></td><td data-i18n="exp.csv">Hoja de cálculo / informes rápidos.</td></tr>
+            <tr><td><code>JSON</code></td><td data-i18n="exp.json">Datos completos, para automatizar o migrar.</td></tr>
+            <tr><td><code>SARIF 2.1.0</code></td><td data-i18n="exp.sarif">Integración con pipelines de CI y herramientas de seguridad.</td></tr>
+          </table>
+          <div class="note warn"><span class="ni">🔐</span>
+            <div data-i18n="exp.note1">La exportación de hallazgos y de la actividad (audit log en CSV) está reservada a usuarios <b>admin</b>. También puedes aplicar <b>acciones en lote</b> (estado, severidad, etiquetas) sobre varias vulnerabilidades a la vez.</div>
+          </div>
+        </section>
+
+        <!-- MARCA DEL INFORME -->
+        <section class="cs-sec reveal" id="marca">
+          <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="7" cy="10" r="2.5"/><circle cx="8.5" cy="17" r="2.5"/><path d="M12 20a8 8 0 1 0-8-8"/></svg></span> <span data-i18n="sec.brand.h">Personalizar el informe</span></h2>
+          <p class="lead" data-i18n="sec.brand.lead">Da a tus informes la imagen de tu entidad: logo, color y nombre en la portada.</p>
+          <table class="tbl">
+            <tr><th data-i18n="brand.th.opt">Opción</th><th data-i18n="brand.th.d">Detalle</th></tr>
+            <tr><td data-i18n="brand.r1.t">Marca global</td><td data-i18n="brand.r1.d">El <b>admin</b> define nombre de la organización, color de acento y logo (PNG/JPG/WEBP/GIF, máx. 500 KB). Se aplica a todos los informes.</td></tr>
+            <tr><td data-i18n="brand.r2.t">Por informe</td><td data-i18n="brand.r2.d">Al generar un informe puedes ajustar el color de acento e incluir o no el logo. El color elegido se recuerda por proyecto.</td></tr>
+            <tr><td data-i18n="brand.r3.t">Plan de acción</td><td data-i18n="brand.r3.d">Cataloga un plan por vulnerabilidad (solo admin/pentester). Aparece en su propia sección del informe.</td></tr>
+          </table>
+          <div class="note tip"><span class="ni">🖨️</span>
+            <div data-i18n="brand.note1">El informe es un HTML autocontenido: ábrelo e imprime a PDF desde el navegador. El logo SVG se rechaza a propósito (solo imágenes ráster) por seguridad.</div>
+          </div>
+        </section>
+
               </div>
             </div>
           </div>
@@ -2440,7 +2513,7 @@ chmod +x crisol-*
         </section>
 
         <!-- ROLES (movido a Servidor y red) -->
-        <section class="cs-sec reveal" id="roles">
+        <section class="cs-sec reveal" id="roles-scope">
           <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.8 19a5.2 5.2 0 0 1 10.4 0"/><path d="M16 5.3a3 3 0 0 1 0 5.4"/><path d="M17 13.4a5.2 5.2 0 0 1 3.2 4.8"/></svg></span> <span data-i18n="sec.roles.h">Roles</span></h2>
           <p class="lead" data-i18n="sec.roles.lead">Tres tipos de usuario, cada uno con su alcance.</p>
           <table class="tbl">
@@ -2947,6 +3020,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "nav.home": "Inicio",
         "nav.features": "Características",
         "nav.report": "Reportar bug",
+        "nav.buy": "Obtener",
         "btn.download": "⤓ Descargar",
         "copy": "Copiar",
         "cmt.start0": "# Descomprime el .zip descargado, luego:",
@@ -2985,6 +3059,40 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.sla": "SLA por proyecto",
         "toc.retest": "Retest y justificación",
         "toc.word": "Exportar informes",
+        "toc.tfa": "Doble factor (2FA)",
+        "toc.export": "Exportar hallazgos",
+        "toc.brand": "Marca del informe",
+        "sec.tfa.h": "Doble factor (2FA)",
+        "sec.tfa.lead": "Segundo factor TOTP por usuario, compatible con cualquier app de autenticación.",
+        "tfa.th.step": "Paso",
+        "tfa.th.what": "Qué hacer",
+        "tfa.s1.t": "Activar",
+        "tfa.s1.d": "En <b>tu perfil → Seguridad → Activar 2FA</b>. Escanea el QR con tu app (Google Authenticator, Aegis, etc.) o introduce la clave manual.",
+        "tfa.s2.t": "Confirmar",
+        "tfa.s2.d": "Escribe el código de 6 dígitos para verificar. A partir de ahí se pide en cada inicio de sesión.",
+        "tfa.s3.t": "Recuperación",
+        "tfa.s3.d": "Al activarlo se generan códigos de <b>un solo uso</b>. Guárdalos: te dejan entrar si pierdes el teléfono.",
+        "tfa.note1": "El secreto TOTP se calcula en local (sin conexión) y se guarda en la base de datos, protegido por el cifrado en reposo si lo tienes activado. Los códigos de recuperación se guardan solo como hash (SHA-256).",
+        "tfa.note2": "Un <b>admin</b> puede restablecer el 2FA de un usuario que haya perdido el acceso desde <b>Usuarios</b>. Tolera un pequeño desfase de reloj (±1 intervalo).",
+        "sec.exp.h": "Exportar hallazgos",
+        "sec.exp.lead": "Saca los hallazgos del proyecto para tu hoja de cálculo, tus scripts o tu CI.",
+        "exp.th.fmt": "Formato",
+        "exp.th.use": "Para qué",
+        "exp.csv": "Hoja de cálculo / informes rápidos.",
+        "exp.json": "Datos completos, para automatizar o migrar.",
+        "exp.sarif": "Integración con pipelines de CI y herramientas de seguridad.",
+        "exp.note1": "La exportación de hallazgos y de la actividad (audit log en CSV) está reservada a usuarios <b>admin</b>. También puedes aplicar <b>acciones en lote</b> (estado, severidad, etiquetas) sobre varias vulnerabilidades a la vez.",
+        "sec.brand.h": "Personalizar el informe",
+        "sec.brand.lead": "Da a tus informes la imagen de tu entidad: logo, color y nombre en la portada.",
+        "brand.th.opt": "Opción",
+        "brand.th.d": "Detalle",
+        "brand.r1.t": "Marca global",
+        "brand.r1.d": "El <b>admin</b> define nombre de la organización, color de acento y logo (PNG/JPG/WEBP/GIF, máx. 500 KB). Se aplica a todos los informes.",
+        "brand.r2.t": "Por informe",
+        "brand.r2.d": "Al generar un informe puedes ajustar el color de acento e incluir o no el logo. El color elegido se recuerda por proyecto.",
+        "brand.r3.t": "Plan de acción",
+        "brand.r3.d": "Cataloga un plan por vulnerabilidad (solo admin/pentester). Aparece en su propia sección del informe.",
+        "brand.note1": "El informe es un HTML autocontenido: ábrelo e imprime a PDF desde el navegador. El logo SVG se rechaza a propósito (solo imágenes ráster) por seguridad.",
         "toc.biblioteca": "Biblioteca import/export",
         "toc.network": "Servidor en red",
         "toc.https": "HTTPS",
@@ -3192,6 +3300,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "nav.home": "Home",
         "nav.features": "Features",
         "nav.report": "Report a bug",
+        "nav.buy": "Get it",
         "btn.download": "⤓ Download",
         "copy": "Copy",
         "cmt.start0": "# Unzip the downloaded .zip, then:",
@@ -3230,6 +3339,40 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "toc.sla": "Per-project SLA",
         "toc.retest": "Retest & justification",
         "toc.word": "Export reports",
+        "toc.tfa": "Two-factor (2FA)",
+        "toc.export": "Export findings",
+        "toc.brand": "Report branding",
+        "sec.tfa.h": "Two-factor (2FA)",
+        "sec.tfa.lead": "Per-user TOTP second factor, compatible with any authenticator app.",
+        "tfa.th.step": "Step",
+        "tfa.th.what": "What to do",
+        "tfa.s1.t": "Enable",
+        "tfa.s1.d": "In <b>your profile → Security → Enable 2FA</b>. Scan the QR with your app (Google Authenticator, Aegis, etc.) or enter the manual key.",
+        "tfa.s2.t": "Confirm",
+        "tfa.s2.d": "Type the 6-digit code to verify. From then on it's requested at every login.",
+        "tfa.s3.t": "Recovery",
+        "tfa.s3.d": "Enabling it generates <b>single-use</b> codes. Keep them: they let you in if you lose your phone.",
+        "tfa.note1": "The TOTP secret is computed locally (offline) and stored in the database, protected by encryption at rest if you have it enabled. Recovery codes are stored only as a hash (SHA-256).",
+        "tfa.note2": "An <b>admin</b> can reset the 2FA of a user who lost access, from <b>Users</b>. It tolerates a small clock drift (±1 interval).",
+        "sec.exp.h": "Export findings",
+        "sec.exp.lead": "Pull the project's findings for your spreadsheet, your scripts, or your CI.",
+        "exp.th.fmt": "Format",
+        "exp.th.use": "What for",
+        "exp.csv": "Spreadsheet / quick reports.",
+        "exp.json": "Full data, for automation or migration.",
+        "exp.sarif": "Integration with CI pipelines and security tools.",
+        "exp.note1": "Exporting findings and activity (audit log as CSV) is restricted to <b>admin</b> users. You can also apply <b>bulk actions</b> (status, severity, tags) across several vulnerabilities at once.",
+        "sec.brand.h": "Customize the report",
+        "sec.brand.lead": "Give your reports your organization's look: logo, color, and name on the cover.",
+        "brand.th.opt": "Option",
+        "brand.th.d": "Detail",
+        "brand.r1.t": "Global branding",
+        "brand.r1.d": "The <b>admin</b> sets the organization name, accent color, and logo (PNG/JPG/WEBP/GIF, max 500 KB). Applies to all reports.",
+        "brand.r2.t": "Per report",
+        "brand.r2.d": "When generating a report you can adjust the accent color and include the logo or not. The chosen color is remembered per project.",
+        "brand.r3.t": "Action plan",
+        "brand.r3.d": "Catalog a plan per vulnerability (admin/pentester only). It appears in its own section of the report.",
+        "brand.note1": "The report is a self-contained HTML: open it and print to PDF from the browser. SVG logos are rejected on purpose (raster images only) for security.",
         "toc.biblioteca": "Library import/export",
         "toc.network": "Network server",
         "toc.https": "HTTPS",

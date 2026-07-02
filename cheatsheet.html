@@ -452,6 +452,14 @@
       }
     }
 
+    /* Grupo idioma/tema/Obtener: juntos y compactos, como en el index
+       (evita el gap grande de .nav-links entre estos controles). */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px
+    }
+
     /* Idioma y tema — idénticos al index (pastilla + icono SVG). */
     .lang-btn {
       font-size: 12px;
@@ -462,12 +470,18 @@
       border: 1px solid var(--border);
       background: transparent;
       cursor: pointer;
-      transition: color .2s, border-color .2s
+      transition: color .2s, border-color .2s, transform .2s var(--spring), box-shadow .2s
     }
 
     .lang-btn:hover {
       color: var(--text);
-      border-color: var(--muted)
+      border-color: var(--muted);
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .35)
+    }
+
+    .lang-btn:active {
+      transform: translateY(0) scale(.96)
     }
 
     .theme-btn {
@@ -479,11 +493,22 @@
       background: transparent;
       color: var(--muted);
       cursor: pointer;
-      transition: color .2s, border-color .2s
+      transition: color .2s, border-color .2s, transform .2s var(--spring), box-shadow .2s
     }
 
     .theme-btn:hover {
-      border-color: var(--muted)
+      border-color: var(--muted);
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .35)
+    }
+
+    .theme-btn:active {
+      transform: translateY(0) scale(.94)
+    }
+
+    .theme-btn:hover svg {
+      transform: rotate(-12deg);
+      transition: transform .3s var(--spring)
     }
 
     .theme-btn svg {
@@ -515,13 +540,18 @@
       padding: 7px 14px;
       border-radius: 100px;
       cursor: pointer;
-      transition: background .2s, transform .2s
+      transition: background .2s, transform .2s var(--spring), box-shadow .2s
     }
 
     .nav-buy:hover {
       color: #fff;
       background: color-mix(in srgb, var(--accent) 82%, #000);
-      transform: translateY(-1px)
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--accent) 70%, transparent)
+    }
+
+    .nav-buy:active {
+      transform: translateY(0) scale(.96)
     }
 
     .btn {
@@ -1815,9 +1845,11 @@
           <a href="index.html" data-i18n="nav.home">Inicio</a>
           <a href="index.html#features" data-i18n="nav.features">Características</a>
           <a href="index.html#contact" data-i18n="nav.report">Reportar bug</a>
-          <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
-          <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema"></button>
-          <a href="index.html#download" class="nav-buy" data-i18n="nav.buy">Obtener</a>
+          <span class="nav-cta">
+            <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
+            <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema"></button>
+            <a href="index.html#download" class="nav-buy" data-i18n="nav.buy">Obtener</a>
+          </span>
         </div>
         <button class="lang-btn" id="langBtnM" title="Idioma / Language" aria-label="Idioma / Language"
           style="display:none">ES</button>

@@ -452,56 +452,52 @@
       }
     }
 
-    .theme-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 17px;
-      transition: transform .2s var(--spring), border-color .15s, background .3s
-    }
-
-    .theme-btn:hover {
-      border-color: var(--accent-dim);
-      transform: rotate(-15deg) scale(1.08)
-    }
-
-    .theme-btn:active {
-      transform: scale(.92)
-    }
-
-    /* language toggle */
+    /* Idioma y tema — idénticos al index (pastilla + icono SVG). */
     .lang-btn {
-      height: 38px;
-      min-width: 42px;
-      padding: 0 10px;
-      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 11px;
+      border-radius: 100px;
       border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: transparent;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      transition: transform .2s var(--spring), border-color .15s, background .3s
+      transition: color .2s, border-color .2s
     }
 
     .lang-btn:hover {
-      border-color: var(--accent-dim);
-      transform: scale(1.06)
+      color: var(--text);
+      border-color: var(--muted)
     }
 
-    .lang-btn:active {
-      transform: scale(.92)
+    .theme-btn {
+      display: inline-grid;
+      place-items: center;
+      padding: 6px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color .2s, border-color .2s
+    }
+
+    .theme-btn:hover {
+      border-color: var(--muted)
+    }
+
+    .theme-btn svg {
+      width: 17px;
+      height: 17px;
+      display: block
+    }
+
+    .theme-btn .ln {
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round
     }
 
     /* buttons */
@@ -1819,14 +1815,14 @@
           <a href="index.html" data-i18n="nav.home">Inicio</a>
           <a href="index.html#features" data-i18n="nav.features">Características</a>
           <a href="index.html#contact" data-i18n="nav.report">Reportar bug</a>
-          <a href="index.html#download" class="nav-buy" data-i18n="nav.buy">Obtener</a>
           <button class="lang-btn" id="langBtn" title="Idioma / Language" aria-label="Idioma / Language">ES</button>
-          <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema">🌙</button>
+          <button class="theme-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema"></button>
+          <a href="index.html#download" class="nav-buy" data-i18n="nav.buy">Obtener</a>
         </div>
         <button class="lang-btn" id="langBtnM" title="Idioma / Language" aria-label="Idioma / Language"
           style="display:none">ES</button>
         <button class="theme-btn" id="themeBtnM" title="Cambiar tema" aria-label="Cambiar tema"
-          style="display:none">🌙</button>
+          style="display:none"></button>
         <button class="nav-burger" id="navBurger" aria-label="Abrir menú" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -2782,8 +2778,10 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
 
     var root = document.documentElement;
     var themeBtns = [document.getElementById("themeBtn"), document.getElementById("themeBtnM")].filter(Boolean);
+    var ICON_SUN = '<svg viewBox="0 0 24 24"><circle class="ln" cx="12" cy="12" r="4"/><path class="ln" d="M12 2.5v2.5M12 19v2.5M4.5 4.5 6.3 6.3M17.7 17.7l1.8 1.8M2.5 12H5M19 12h2.5M4.5 19.5 6.3 17.7M17.7 6.3l1.8-1.8"/></svg>';
+    var ICON_MOON = '<svg viewBox="0 0 24 24"><path class="ln" d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>';
     function curTheme() { return root.getAttribute("data-theme") || "dark"; }
-    function setIcon() { var ic = curTheme() === "dark" ? "🌙" : "☀️"; themeBtns.forEach(function (b) { b.textContent = ic; }); }
+    function setIcon() { var ic = curTheme() === "light" ? ICON_MOON : ICON_SUN; themeBtns.forEach(function (b) { b.innerHTML = ic; }); }
     themeBtns.forEach(function (b) {
       b.addEventListener("click", function () {
         var t = curTheme() === "dark" ? "light" : "dark";

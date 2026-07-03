@@ -477,9 +477,11 @@
 
     .lang-btn:hover {
       color: var(--text);
-      border-color: var(--muted);
+      /* aro oscuro y sólido como el index (mezcla con el fondo opaco, no con
+         el --border translúcido); se adapta a claro y oscuro. */
+      border-color: color-mix(in srgb, var(--text) 88%, var(--bg));
       transform: translateY(-1.5px);
-      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .35)
+      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .5)
     }
 
     .lang-btn:active {
@@ -499,9 +501,10 @@
     }
 
     .theme-btn:hover {
-      border-color: var(--muted);
+      color: var(--text);
+      border-color: color-mix(in srgb, var(--text) 88%, var(--bg));
       transform: translateY(-1.5px);
-      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .35)
+      box-shadow: 0 5px 14px -8px rgba(0, 0, 0, .5)
     }
 
     .theme-btn:active {

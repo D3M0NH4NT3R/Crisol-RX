@@ -2423,6 +2423,12 @@ chmod +x crisol-*
                       <b>informativos</b> quedan fuera salvo que los marques expresamente.
                     </div>
                   </div>
+                  <div class="note"><span class="ni">⚒️</span>
+                    <div data-i18n="import.fragua"><b>¿Automatizar el escaneo?</b> <a
+                        href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank" rel="noopener">Fragua</a> es un
+                      escáner web ligero (mismo autor) que analiza un activo y genera un fichero listo para importar aquí.
+                      Es un proyecto aparte y <b>en desarrollo</b>.</div>
+                  </div>
                 </section>
 
                 <!-- BIBLIOTECA (movida tras Importar) -->
@@ -3739,6 +3745,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "import.step2": "Selecciona el fichero: el formato se detecta solo.",
         "import.step3": "Revisa la previsualización y confirma.",
         "import.tip": "<b>Sin ruido:</b> al reimportar se <b>omiten los duplicados</b>, y los hallazgos <b>informativos</b> quedan fuera salvo que los marques expresamente.",
+        "import.fragua": "<b>¿Automatizar el escaneo?</b> <a href=\"https://github.com/D3M0NH4NT3R/Fragua\" target=\"_blank\" rel=\"noopener\">Fragua</a> es un escáner web ligero (mismo autor) que analiza un activo y genera un fichero listo para importar aquí. Es un proyecto aparte y <b>en desarrollo</b>.",
         "sec.sla.h": "SLA por proyecto",
         "sec.sla.lead": "Cada proyecto define sus días de resolución por severidad. La app calcula la fecha límite y avisa si una vulnerabilidad está <b>en plazo</b> o <b>vencida</b>.",
         "sla.cfg.h": "Dónde se configura",
@@ -4019,6 +4026,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "import.step2": "Pick the file: the format is detected automatically.",
         "import.step3": "Review the preview and confirm.",
         "import.tip": "<b>No noise:</b> on re-import, <b>duplicates are skipped</b>, and <b>informational</b> findings are left out unless you explicitly include them.",
+        "import.fragua": "<b>Automate scanning?</b> <a href=\"https://github.com/D3M0NH4NT3R/Fragua\" target=\"_blank\" rel=\"noopener\">Fragua</a> is a lightweight web scanner (same author) that scans an asset and produces a file ready to import here. It's a separate project and <b>a work in progress</b>.",
         "sec.sla.h": "Per-project SLA",
         "sec.sla.lead": "Each project defines its resolution days per severity. The app computes the due date and flags whether a vulnerability is <b>on time</b> or <b>overdue</b>.",
         "sla.cfg.h": "Where it's configured",
@@ -4215,12 +4223,4 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
     [document.getElementById("langBtn"), document.getElementById("langBtnM")].filter(Boolean).forEach(function (b) {
       b.addEventListener("click", function () {
         var next = (window.__lang === "es") ? "en" : "es";
-        try { localStorage.setItem("vv_site_lang", next); } catch (e) { }
-        applyLang(next);
-        pulseLang(b, "is-pop");
-      });
-    });
-  </script>
-</body>
-
-</html>
+       

@@ -300,6 +300,39 @@
       color: var(--ink)
     }
 
+    /* "Guía" destacado: chip con el acento de la app para que se note que es
+       un enlace especial (lleva al cheatsheet). */
+    .nav-links a.nav-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+      border-radius: 100px;
+      padding: 6px 13px;
+      font-weight: 500;
+      transition: color .2s, background .2s, border-color .2s, transform .2s cubic-bezier(.34, 1.4, .64, 1), box-shadow .2s
+    }
+
+    .nav-links a.nav-guide:hover {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 20%, transparent);
+      border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--accent) 60%, transparent)
+    }
+
+    .nav-links a.nav-guide:active {
+      transform: translateY(0) scale(.97)
+    }
+
+    .nav-guide .guide-ic {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto
+    }
+
     .nav-actions {
       display: flex;
       align-items: center;
@@ -432,6 +465,17 @@
         padding: 13px 8px;
         font-size: 16px;
         border-bottom: 1px solid var(--line)
+      }
+
+      /* En el menú móvil el chip se integra como fila, pero conserva el acento. */
+      .nav-links a.nav-guide {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid var(--line);
+        border-radius: 0;
+        justify-content: flex-start;
+        padding: 13px 8px;
+        color: var(--accent)
       }
 
       .nav-burger {
@@ -2939,14 +2983,15 @@
     }
 
     .dl-detect {
-      display: inline-flex;
+      display: flex;
+      width: fit-content;
       align-items: center;
       gap: 12px;
       padding: 10px 18px;
       border-radius: 100px;
       background: var(--bg-soft);
       border: 1px solid var(--line);
-      margin-bottom: 22px
+      margin: 0 auto 22px
     }
 
     .dl-detect .os-ico {
@@ -2981,12 +3026,13 @@
     }
 
     .channel {
-      display: inline-flex;
+      display: flex;
+      width: fit-content;
       padding: 4px;
       border-radius: 100px;
       background: var(--bg-soft);
       border: 1px solid var(--line);
-      margin-bottom: 28px;
+      margin: 0 auto 18px;
       gap: 4px
     }
 
@@ -3211,7 +3257,8 @@
     .foot-links {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap
+      flex-wrap: wrap;
+      align-items: center
     }
 
     .foot-links a {
@@ -3221,6 +3268,31 @@
 
     .foot-links a:hover {
       color: var(--ink)
+    }
+
+    /* "Guía" del footer: mismo chip de acento que el del nav, algo más compacto. */
+    .foot-links a.nav-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      border-radius: 100px;
+      padding: 3px 11px;
+      transition: color .2s, background .2s, border-color .2s
+    }
+
+    .foot-links a.nav-guide:hover {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 20%, transparent);
+      border-color: color-mix(in srgb, var(--accent) 50%, transparent)
+    }
+
+    .foot-links a.nav-guide .guide-ic {
+      width: 13px;
+      height: 13px;
+      flex: 0 0 auto
     }
 
     .foot-copy {
@@ -3256,7 +3328,14 @@
         <a href="#features" data-i18n="nav.features">Características</a>
         <a href="#product" data-i18n="nav.product">Producto</a>
         <a href="#roles" data-i18n="nav.roles">Roles</a>
-        <a href="cheatsheet.html" data-i18n="nav.guide">Guía</a>
+        <a href="cheatsheet.html" class="nav-guide">
+          <svg class="guide-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5.5A2 2 0 0 1 6 3.5h9a2 2 0 0 1 2 2V20a1.5 1.5 0 0 0-1.5-1.5H6A2 2 0 0 1 4 16.5V5.5Z" />
+            <path d="M8.5 3.5V18.5" />
+          </svg>
+          <span data-i18n="nav.guide">Guía</span>
+        </a>
         <a href="#download" data-i18n="nav.download">Descargar</a>
       </div>
       <div class="nav-actions">
@@ -4090,7 +4169,14 @@
         <div class="foot-links">
           <a href="#features" data-i18n="nav.features">Características</a>
           <a href="#product" data-i18n="nav.product">Producto</a>
-          <a href="cheatsheet.html" data-i18n="nav.guide">Guía</a>
+          <a href="cheatsheet.html" class="nav-guide">
+            <svg class="guide-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5.5A2 2 0 0 1 6 3.5h9a2 2 0 0 1 2 2V20a1.5 1.5 0 0 0-1.5-1.5H6A2 2 0 0 1 4 16.5V5.5Z" />
+              <path d="M8.5 3.5V18.5" />
+            </svg>
+            <span data-i18n="nav.guide">Guía</span>
+          </a>
           <a href="#download" data-i18n="nav.download">Descargar</a>
           <a href="https://github.com/D3M0NH4NT3R/Crisol-RX" target="_blank" rel="noopener">GitHub</a>
           <a href="https://x.com/D3M0NH4NT3R" target="_blank" rel="noopener">X</a>
@@ -4191,7 +4277,7 @@
       function pulse(elm, cls) {
         if (!elm) return;
         elm.classList.remove(cls);
-        void elm.offsetWidth; 
+        void elm.offsetWidth;
         elm.classList.add(cls);
         setTimeout(function () { elm.classList.remove(cls); }, 550);
       }
@@ -4402,7 +4488,7 @@
       applyLang("es");
       renderOS();
 
-   
+
       if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
         navigator.userAgentData.getHighEntropyValues(["architecture"]).then(function (d) {
           if (d && /arm/i.test(d.architecture || "")) {

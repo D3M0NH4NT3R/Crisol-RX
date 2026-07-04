@@ -4223,4 +4223,12 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
     [document.getElementById("langBtn"), document.getElementById("langBtnM")].filter(Boolean).forEach(function (b) {
       b.addEventListener("click", function () {
         var next = (window.__lang === "es") ? "en" : "es";
-       
+        try { localStorage.setItem("vv_site_lang", next); } catch (e) { }
+        applyLang(next);
+        pulseLang(b, "is-pop");
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -4071,7 +4071,7 @@
           <div>
             <a href="#" class="btn btn-primary btn-lg dl-main-btn" id="dlMain" data-i18n="dl.cta">Descargar</a>
           </div>
-          <p class="dl-ver" id="dlVer">crisol-rx · v1.3.0</p>
+          <p class="dl-ver" id="dlVer">crisol-rx · v1.4.0</p>
 
           <button class="all-os-toggle" id="allOsToggle" aria-expanded="false" aria-controls="allOsWrap">
             <span data-i18n="dl.all">Todas las plataformas</span>
@@ -4417,7 +4417,11 @@
       langBtn.addEventListener("click", function () { applyLang(lang === "es" ? "en" : "es"); pulse(langBtn, "is-pop"); });
 
       var GH = "https://github.com/D3M0NH4NT3R/Crisol-RX";
-      var STABLE = { tag: "1.3.0", ver: "1.3.0" }, BETA = { tag: "1.3.1", ver: "1.3.1" };
+      var GH_API = "https://api.github.com/repos/D3M0NH4NT3R/Crisol-RX/releases?per_page=15";
+      // Valores FALLBACK (por si la API de GitHub no responde). Se sobreescriben
+      // solos con la última release publicada: normalmente NO hace falta tocar esto
+      // en cada versión.
+      var STABLE = { tag: "1.4.0", ver: "1.4.0" }, BETA = { tag: "1.4.0", ver: "1.4.0" };
       var channel = "stable";
       function cur() { return channel === "beta" ? BETA : STABLE; }
       var SVG = {
@@ -4433,7 +4437,13 @@
         linux: { lbl: "Linux", icok: "linux", arch: "x64", suffix: "linux-amd64" },
         linux_arm: { lbl: "Linux", icok: "linux", arch: "ARM64", suffix: "linux-arm64" }
       };
-      function dlURL(key) { var c = cur(), o = OSES[key]; return GH + "/releases/download/" + c.tag + "/crisol-" + c.ver + "-" + o.suffix + ".zip"; }
+      function dlURL(key) {
+        var c = cur(), o = OSES[key];
+        // Si la API dio la URL real del asset, se usa (robusto ante cambios de
+        // nombre); si no, se construye a partir del tag/ver (fallback).
+        if (c.assets && c.assets[o.suffix]) return c.assets[o.suffix];
+        return GH + "/releases/download/" + c.tag + "/crisol-" + c.ver + "-" + o.suffix + ".zip";
+      }
 
       function detectOS() {
         var ua = navigator.userAgent || "", pf = navigator.platform || "";
@@ -4487,6 +4497,40 @@
       setTheme("light");
       applyLang("es");
       renderOS();
+
+      // --- Auto-actualización desde GitHub Releases ---
+      // Lee la última release publicada y rellena versión + enlaces de descarga
+      // solos, así NO hay que editar este index en cada release: basta con publicar
+      // la release en GitHub. Si la API falla (offline / límite), quedan los valores
+      // fallback de arriba. Empareja cada asset por el sufijo del sistema.
+      function buildChannel(rel) {
+        var assets = {};
+        (rel.assets || []).forEach(function (a) {
+          for (var key in OSES) {
+            if (a.name && a.name.indexOf(OSES[key].suffix + ".zip") !== -1) {
+              assets[OSES[key].suffix] = a.browser_download_url;
+            }
+          }
+        });
+        return { tag: rel.tag_name, ver: String(rel.tag_name || "").replace(/^v/, ""), assets: assets };
+      }
+      try {
+        fetch(GH_API, { headers: { "Accept": "application/vnd.github+json" } })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (list) {
+            if (!list || !list.length) return;
+            var stable = null, beta = null;
+            list.forEach(function (rel) {
+              if (rel.draft) return;
+              if (rel.prerelease) { if (!beta) beta = rel; }
+              else if (!stable) { stable = rel; }
+            });
+            if (stable) STABLE = buildChannel(stable);
+            if (beta) BETA = buildChannel(beta);
+            renderOS();
+          })
+          .catch(function () { });
+      } catch (e) { }
 
 
       if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {

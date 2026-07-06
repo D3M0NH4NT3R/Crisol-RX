@@ -753,6 +753,45 @@
       color: var(--low)
     }
 
+    /* ===== Mockup del nuevo diseño (bento + cajas de severidad + gauge) ===== */
+    .mk-brand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;margin:0 6px 15px;color:var(--ink)}
+    .mk-gem{width:16px;height:16px;border-radius:5px;flex-shrink:0;
+      background:conic-gradient(from 200deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent));
+      box-shadow:0 0 10px -1px color-mix(in srgb,var(--accent) 70%,transparent)}
+    .mk-main{padding:18px 20px}
+    .mk-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .mk-lead-num{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1;
+      background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .mk-lead-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-left:4px}
+    .mk-chip{font-size:11px;color:var(--muted);background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
+    .mk-sevrow{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:12px}
+    .mk-sev{position:relative;overflow:hidden;background:var(--bg-soft);border:1px solid var(--line);
+      border-radius:12px;padding:12px 12px 10px;transition:transform .2s,box-shadow .2s}
+    .mk-sev:hover{transform:translateY(-2px)}
+    .mk-sev-b{position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px}
+    .mk-sev em{display:block;font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600}
+    .mk-sev b{display:block;font-size:23px;font-weight:700;line-height:1;margin-top:7px;letter-spacing:-.02em}
+    .mk-sev.crit b{color:var(--crit)} .mk-sev.crit .mk-sev-b{background:var(--crit)} .mk-sev.crit:hover{box-shadow:0 8px 20px -10px var(--crit)}
+    .mk-sev.high b{color:var(--high)} .mk-sev.high .mk-sev-b{background:var(--high)} .mk-sev.high:hover{box-shadow:0 8px 20px -10px var(--high)}
+    .mk-sev.med b{color:var(--med)} .mk-sev.med .mk-sev-b{background:var(--med)}
+    .mk-sev.low b{color:var(--low)} .mk-sev.low .mk-sev-b{background:var(--low)}
+    .mk-sev.info b{color:var(--accent-3)} .mk-sev.info .mk-sev-b{background:var(--accent-3)}
+    .mk-bento{display:grid;grid-template-columns:0.85fr 1fr 1.05fr;gap:11px}
+    .mk-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:13px;padding:13px 14px}
+    .mk-ch{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:10px}
+    .mk-gwrap{position:relative;display:flex;justify-content:center;align-items:flex-end;height:56px}
+    .mk-g{width:118px;height:auto}
+    .mk-g path:last-child{filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent-2) 70%,transparent))}
+    .mk-gnum{position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:19px;font-weight:700;color:var(--ink)}
+    .mk-gcap{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:5px}
+    .mk-trend .mini-chart{height:66px;margin:0}
+    .mk-recent .mk-act{display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 0}
+    .mk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+    .mk-dot.crit{background:var(--crit);box-shadow:0 0 7px var(--crit)} .mk-dot.high{background:var(--high)}
+    .mk-an{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+    .mk-recent em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
+    @media(max-width:560px){.mk-bento{grid-template-columns:1fr}.mk-sevrow{grid-template-columns:repeat(3,1fr)}}
+
     .rows {
       display: flex;
       flex-direction: column;
@@ -3372,6 +3411,7 @@
             </div>
             <div class="shot-body">
               <aside class="shot-side">
+                <div class="mk-brand"><span class="mk-gem"></span> <b>Crisol-RX</b></div>
                 <div class="h" data-i18n="shot.workspaces">Workspaces</div>
                 <div class="ws on"><span class="fav" style="background:linear-gradient(135deg,#9d5cff,#6f3ad6)">A</span>
                   Acme Corp <small>24</small></div>
@@ -3381,40 +3421,50 @@
                   Fintrek <small>7</small></div>
                 <div class="ws"><span class="fav" style="background:linear-gradient(135deg,#ff8a3d,#e85d1a)">O</span>
                   Orbyx API <small>3</small></div>
-                <div class="h" style="margin-top:18px" data-i18n="shot.views">Vistas</div>
+                <div class="h" style="margin-top:16px" data-i18n="shot.views">Vistas</div>
                 <div class="ws"><span class="d" style="background:var(--accent-3)"></span> <span
                     data-i18n="shot.calendar">Calendario</span></div>
                 <div class="ws"><span class="d" style="background:var(--med)"></span> <span
-                    data-i18n="shot.reports">Informes</span></div>
+                    data-i18n="shot.library">Biblioteca</span></div>
+                <div class="ws"><span class="d" style="background:var(--accent)"></span> <span
+                    data-i18n="shot.notif">Notificaciones</span> <small>2</small></div>
               </aside>
-              <div class="shot-main">
-                <div class="shot-top">
-                  <div class="tt">Acme Corp · Web App<small data-i18n="shot.scope">Pentest externo · Q2 2026</small>
-                  </div>
-                  <div class="prog">
-                    <div class="pl"><span data-i18n="shot.remed">Remediación</span><b>71%</b></div>
-                    <div class="bar"><i></i></div>
-                  </div>
+              <div class="shot-main mk-main">
+                <div class="mk-head">
+                  <div><b class="mk-lead-num">17</b> <span class="mk-lead-lbl" data-i18n="shot.active">Vulns activas</span></div>
+                  <span class="mk-chip" data-i18n="shot.scope">Pentest externo · Q2 2026</span>
                 </div>
-                <div class="kpis">
-                  <div class="kpi c"><b>3</b><span data-i18n="sev.crit">Críticas</span></div>
-                  <div class="kpi h"><b>6</b><span data-i18n="sev.high">Altas</span></div>
-                  <div class="kpi"><b>24</b><span data-i18n="shot.total">Total</span></div>
-                  <div class="kpi s"><b>71%</b><span data-i18n="shot.fixed">Resueltas</span></div>
+                <div class="mk-sevrow">
+                  <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b></div>
+                  <div class="mk-sev high"><span class="mk-sev-b"></span><em data-i18n="sev.high">Altas</em><b>6</b></div>
+                  <div class="mk-sev med"><span class="mk-sev-b"></span><em data-i18n="sev.med">Medias</em><b>5</b></div>
+                  <div class="mk-sev low"><span class="mk-sev-b"></span><em data-i18n="sev.low">Bajas</em><b>2</b></div>
+                  <div class="mk-sev info"><span class="mk-sev-b"></span><em data-i18n="sev.info">Info</em><b>1</b></div>
                 </div>
-                <div class="rows">
-                  <div class="vr"><span class="ref">VLN-024</span><span class="nm">SQL Injection en
-                      /api/login</span><span class="cv">9.8</span><span class="sev crit">CRIT</span></div>
-                  <div class="vr"><span class="ref">VLN-021</span><span class="nm">Log4Shell ·
-                      CVE-2021-44228</span><span class="cv">10.0</span><span class="sev crit">CRIT</span></div>
-                  <div class="vr"><span class="ref">VLN-019</span><span class="nm">Stored XSS en comentarios</span><span
-                      class="tag retest" data-i18n="shot.retest">Retest</span><span class="cv">8.1</span><span
-                      class="sev high">HIGH</span></div>
-                  <div class="vr"><span class="ref">VLN-014</span><span class="nm">IDOR en exportación de
-                      informes</span><span class="cv">7.4</span><span class="sev high">HIGH</span></div>
-                  <div class="vr"><span class="ref">VLN-008</span><span class="nm">Cookie sin flag
-                      Secure/HttpOnly</span><span class="tag done" data-i18n="shot.solved">Resuelta</span><span
-                      class="cv">4.3</span><span class="sev med">MED</span></div>
+                <div class="mk-bento">
+                  <div class="mk-card mk-gauge">
+                    <div class="mk-ch" data-i18n="shot.health">Salud de seguridad</div>
+                    <div class="mk-gwrap">
+                      <svg class="mk-g" viewBox="0 0 120 66" aria-hidden="true">
+                        <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11" stroke-linecap="round" />
+                        <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
+                      </svg>
+                      <b class="mk-gnum">71%</b>
+                    </div>
+                    <span class="mk-gcap" data-i18n="shot.fixed">Resueltas</span>
+                  </div>
+                  <div class="mk-card mk-trend">
+                    <div class="mk-ch" data-i18n="shot.time">En el tiempo</div>
+                    <div class="mini-chart" aria-hidden="true"><span style="height:38%"></span><span
+                        style="height:60%"></span><span style="height:46%"></span><span style="height:74%"></span><span
+                        style="height:92%"></span><span style="height:66%"></span><span style="height:52%"></span></div>
+                  </div>
+                  <div class="mk-card mk-recent">
+                    <div class="mk-ch" data-i18n="shot.recent">Actividad reciente</div>
+                    <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi · /api/login</span><em>9.8</em></div>
+                    <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em></div>
+                    <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3432,12 +3482,13 @@
               <div class="ws"><span class="d"></span> Banca Nova</div>
               <div class="ws"><span class="d"></span> Fintrek</div>
             </aside>
-            <div class="shot-main">
-              <div class="kpis">
-                <div class="kpi c"><b>3</b></div>
-                <div class="kpi h"><b>6</b></div>
-                <div class="kpi"><b>24</b></div>
-                <div class="kpi s"><b>71%</b></div>
+            <div class="shot-main mk-main">
+              <div class="mk-sevrow">
+                <div class="mk-sev crit"><span class="mk-sev-b"></span><b>3</b></div>
+                <div class="mk-sev high"><span class="mk-sev-b"></span><b>6</b></div>
+                <div class="mk-sev med"><span class="mk-sev-b"></span><b>5</b></div>
+                <div class="mk-sev low"><span class="mk-sev-b"></span><b>2</b></div>
+                <div class="mk-sev info"><span class="mk-sev-b"></span><b>1</b></div>
               </div>
             </div>
           </div>
@@ -3571,26 +3622,37 @@
               <div class="shot-dots"><i></i><i></i><i></i></div><span class="t">Dashboard · Acme Corp</span><span
                 class="live"><i></i> <span data-i18n="shot.live">En vivo</span></span>
             </div>
-            <div class="shot-main" style="padding:20px">
-              <div class="kpis">
-                <div class="kpi c"><b>3</b><span data-i18n="sev.crit">Críticas</span></div>
-                <div class="kpi h"><b>6</b><span data-i18n="sev.high">Altas</span></div>
-                <div class="kpi"><b>24</b><span data-i18n="shot.total">Total</span></div>
-                <div class="kpi s"><b>71%</b><span data-i18n="shot.fixed">Resueltas</span></div>
+            <div class="shot-main mk-main">
+              <div class="mk-sevrow">
+                <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b></div>
+                <div class="mk-sev high"><span class="mk-sev-b"></span><em data-i18n="sev.high">Altas</em><b>6</b></div>
+                <div class="mk-sev med"><span class="mk-sev-b"></span><em data-i18n="sev.med">Medias</em><b>5</b></div>
+                <div class="mk-sev low"><span class="mk-sev-b"></span><em data-i18n="sev.low">Bajas</em><b>2</b></div>
+                <div class="mk-sev info"><span class="mk-sev-b"></span><em data-i18n="sev.info">Info</em><b>1</b></div>
               </div>
-              <div class="mini-split">
-                <div class="mini-chart" aria-hidden="true">
-                  <span style="height:36%"></span><span style="height:58%"></span><span style="height:44%"></span><span
-                    style="height:72%"></span><span style="height:90%"></span><span style="height:65%"></span><span
-                    style="height:50%"></span>
+              <div class="mk-bento">
+                <div class="mk-card mk-gauge">
+                  <div class="mk-ch" data-i18n="shot.health">Salud de seguridad</div>
+                  <div class="mk-gwrap">
+                    <svg class="mk-g" viewBox="0 0 120 66" aria-hidden="true">
+                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11" stroke-linecap="round" />
+                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
+                    </svg>
+                    <b class="mk-gnum">71%</b>
+                  </div>
+                  <span class="mk-gcap" data-i18n="shot.fixed">Resueltas</span>
                 </div>
-                <div class="rows">
-                  <div class="vr"><span class="ref">VLN-024</span><span class="nm">SQL Injection en
-                      /api/login</span><span class="cv">9.8</span><span class="sev crit">CRIT</span></div>
-                  <div class="vr"><span class="ref">VLN-021</span><span class="nm">Log4Shell ·
-                      CVE-2021-44228</span><span class="cv">10.0</span><span class="sev crit">CRIT</span></div>
-                  <div class="vr"><span class="ref">VLN-019</span><span class="nm">Stored XSS en comentarios</span><span
-                      class="cv">8.1</span><span class="sev high">HIGH</span></div>
+                <div class="mk-card mk-trend">
+                  <div class="mk-ch" data-i18n="shot.time">En el tiempo</div>
+                  <div class="mini-chart" aria-hidden="true"><span style="height:36%"></span><span
+                      style="height:58%"></span><span style="height:44%"></span><span style="height:72%"></span><span
+                      style="height:90%"></span><span style="height:65%"></span><span style="height:50%"></span></div>
+                </div>
+                <div class="mk-card mk-recent">
+                  <div class="mk-ch" data-i18n="shot.recent">Actividad reciente</div>
+                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi · /api/login</span><em>9.8</em></div>
+                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em></div>
+                  <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em></div>
                 </div>
               </div>
             </div>
@@ -4293,7 +4355,8 @@
           "shot.live": "En vivo", "shot.workspaces": "Workspaces", "shot.views": "Vistas", "shot.calendar": "Calendario", "shot.reports": "Informes", "shot.total": "Total", "shot.fixed": "Resueltas",
           "shot.scope": "Pentest externo · Q2 2026", "shot.remed": "Remediación", "shot.retest": "Retest", "shot.solved": "Resuelta",
           "cal.e1": "Pentest Acme · ventana", "cal.e2": "Retest Fintrek", "cal.e3": "Entrega informe Banca Nova",
-          "sev.crit": "Críticas", "sev.high": "Altas",
+          "sev.crit": "Críticas", "sev.high": "Altas", "sev.med": "Medias", "sev.low": "Bajas", "sev.info": "Info",
+          "shot.active": "Vulns activas", "shot.health": "Salud de seguridad", "shot.recent": "Actividad reciente", "shot.time": "En el tiempo", "shot.notif": "Notificaciones", "shot.library": "Biblioteca",
           "state.lead": "Todo tu pentest en un solo archivo.", "state.dim": "Sin servidores, sin nube, sin instalación. Lo abres y empiezas.",
           "feat.eyebrow": "Características", "feat.title": "Pensado para entregar.", "feat.lead": "Las herramientas que de verdad usas en un reporte, sin las que estorban.",
           "feat.f1.t": "Portable de verdad", "feat.f1.d": "Un único binario para Windows, macOS y Linux. Cero dependencias, cero instalación.",
@@ -4351,7 +4414,8 @@
           "shot.live": "Live", "shot.workspaces": "Workspaces", "shot.views": "Views", "shot.calendar": "Calendar", "shot.reports": "Reports", "shot.total": "Total", "shot.fixed": "Fixed",
           "shot.scope": "External pentest · Q2 2026", "shot.remed": "Remediation", "shot.retest": "Retest", "shot.solved": "Fixed",
           "cal.e1": "Acme pentest · window", "cal.e2": "Fintrek retest", "cal.e3": "Banca Nova report delivery",
-          "sev.crit": "Critical", "sev.high": "High",
+          "sev.crit": "Critical", "sev.high": "High", "sev.med": "Medium", "sev.low": "Low", "sev.info": "Info",
+          "shot.active": "Active vulns", "shot.health": "Security health", "shot.recent": "Recent activity", "shot.time": "Over time", "shot.notif": "Notifications", "shot.library": "Library",
           "state.lead": "Your whole pentest in a single file.", "state.dim": "No servers, no cloud, no install. Open it and start.",
           "feat.eyebrow": "Features", "feat.title": "Built to deliver.", "feat.lead": "The tools you actually use in a report, none of the ones that get in the way.",
           "feat.f1.t": "Truly portable", "feat.f1.d": "A single binary for Windows, macOS and Linux. Zero dependencies, zero install.",

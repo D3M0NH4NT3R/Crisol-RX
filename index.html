@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -46,16 +46,36 @@
     }
 
     [data-theme="light"] {
-      --bg: #f4f5f9;
-      --bg-soft: #e9ebf1;
+      /* Off-white suave y algo cálido (no blanco plano) para que combine con las
+         bandas oscuras y no quede "tosco". Bordes suaves; acentos a juego con la
+         app (morado + verde). */
+      --bg: #eef0f6;
+      --bg-soft: #e6e9f1;
       --bg-card: #ffffff;
-      --ink: #0c0d12;
-      --ink-2: #353742;
-      --muted: #585b67;
-      --line: rgba(15, 18, 40, .16);
-      --accent: #6d28d9;
-      --accent-2: #047857;
-      --accent-3: #1462c6;
+      --ink: #15171f;
+      --ink-2: #3c4150;
+      --muted: #5e6474;
+      --line: rgba(22, 27, 55, .10);
+      --accent: #7c3aed;
+      --accent-2: #0a9e72;
+      --accent-3: #2b7fff;
+    }
+
+    /* Tarjetas del tema claro: bordes suaves + sombra sutil (profundidad en vez
+       de líneas duras) para un aspecto más pulido. */
+    [data-theme="light"] .feat,
+    [data-theme="light"] .role,
+    [data-theme="light"] .dl-card,
+    [data-theme="light"] .ct,
+    [data-theme="light"] .card {
+      border-color: rgba(22, 27, 55, .08);
+      box-shadow: 0 1px 2px rgba(22, 27, 55, .04), 0 16px 34px -22px rgba(22, 27, 55, .22);
+    }
+
+    /* Transición SUAVE entre secciones claras y bandas oscuras (degradado en el
+       borde en vez de un corte seco). */
+    [data-theme="light"] .band {
+      box-shadow: 0 -40px 60px -40px rgba(6, 7, 12, .5);
     }
 
     * {
@@ -118,7 +138,7 @@
     }
 
     [data-theme="light"] .grad {
-      background: linear-gradient(95deg, #7c3aed, #6d28d9 50%, #058a63);
+      background: linear-gradient(95deg, #7c3aed, #6d28d9 50%, #0a9e72);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -754,43 +774,275 @@
     }
 
     /* ===== Mockup del nuevo diseño (bento + cajas de severidad + gauge) ===== */
-    .mk-brand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;margin:0 6px 15px;color:var(--ink)}
-    .mk-gem{width:16px;height:16px;border-radius:5px;flex-shrink:0;
-      background:conic-gradient(from 200deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent));
-      box-shadow:0 0 10px -1px color-mix(in srgb,var(--accent) 70%,transparent)}
-    .mk-main{padding:18px 20px}
-    .mk-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
-    .mk-lead-num{font-size:30px;font-weight:700;letter-spacing:-.03em;line-height:1;
-      background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .mk-lead-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-left:4px}
-    .mk-chip{font-size:11px;color:var(--muted);background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;padding:4px 11px}
-    .mk-sevrow{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:12px}
-    .mk-sev{position:relative;overflow:hidden;background:var(--bg-soft);border:1px solid var(--line);
-      border-radius:12px;padding:12px 12px 10px;transition:transform .2s,box-shadow .2s}
-    .mk-sev:hover{transform:translateY(-2px)}
-    .mk-sev-b{position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px}
-    .mk-sev em{display:block;font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);font-weight:600}
-    .mk-sev b{display:block;font-size:23px;font-weight:700;line-height:1;margin-top:7px;letter-spacing:-.02em}
-    .mk-sev.crit b{color:var(--crit)} .mk-sev.crit .mk-sev-b{background:var(--crit)} .mk-sev.crit:hover{box-shadow:0 8px 20px -10px var(--crit)}
-    .mk-sev.high b{color:var(--high)} .mk-sev.high .mk-sev-b{background:var(--high)} .mk-sev.high:hover{box-shadow:0 8px 20px -10px var(--high)}
-    .mk-sev.med b{color:var(--med)} .mk-sev.med .mk-sev-b{background:var(--med)}
-    .mk-sev.low b{color:var(--low)} .mk-sev.low .mk-sev-b{background:var(--low)}
-    .mk-sev.info b{color:var(--accent-3)} .mk-sev.info .mk-sev-b{background:var(--accent-3)}
-    .mk-bento{display:grid;grid-template-columns:0.85fr 1fr 1.05fr;gap:11px}
-    .mk-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:13px;padding:13px 14px}
-    .mk-ch{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;margin-bottom:10px}
-    .mk-gwrap{position:relative;display:flex;justify-content:center;align-items:flex-end;height:56px}
-    .mk-g{width:118px;height:auto}
-    .mk-g path:last-child{filter:drop-shadow(0 0 5px color-mix(in srgb,var(--accent-2) 70%,transparent))}
-    .mk-gnum{position:absolute;bottom:1px;left:0;right:0;text-align:center;font-size:19px;font-weight:700;color:var(--ink)}
-    .mk-gcap{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:5px}
-    .mk-trend .mini-chart{height:66px;margin:0}
-    .mk-recent .mk-act{display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 0}
-    .mk-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-    .mk-dot.crit{background:var(--crit);box-shadow:0 0 7px var(--crit)} .mk-dot.high{background:var(--high)}
-    .mk-an{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
-    .mk-recent em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
-    @media(max-width:560px){.mk-bento{grid-template-columns:1fr}.mk-sevrow{grid-template-columns:repeat(3,1fr)}}
+    .mk-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 6px 15px;
+      color: var(--ink)
+    }
+
+    .mk-gem {
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      flex-shrink: 0;
+      background: conic-gradient(from 200deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+      box-shadow: 0 0 10px -1px color-mix(in srgb, var(--accent) 70%, transparent)
+    }
+
+    .mk-main {
+      padding: 18px 20px
+    }
+
+    .mk-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px
+    }
+
+    .mk-lead-num {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .mk-lead-lbl {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-left: 4px
+    }
+
+    .mk-chip {
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 4px 11px
+    }
+
+    .mk-sevrow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 9px;
+      margin-bottom: 12px
+    }
+
+    .mk-sev {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 12px 10px;
+      transition: transform .2s, box-shadow .2s
+    }
+
+    .mk-sev:hover {
+      transform: translateY(-2px)
+    }
+
+    .mk-sev-b {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 3px
+    }
+
+    .mk-sev em {
+      display: block;
+      font-style: normal;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .mk-sev b {
+      display: block;
+      font-size: 23px;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 7px;
+      letter-spacing: -.02em
+    }
+
+    .mk-sev.crit b {
+      color: var(--crit)
+    }
+
+    .mk-sev.crit .mk-sev-b {
+      background: var(--crit)
+    }
+
+    .mk-sev.crit:hover {
+      box-shadow: 0 8px 20px -10px var(--crit)
+    }
+
+    .mk-sev.high b {
+      color: var(--high)
+    }
+
+    .mk-sev.high .mk-sev-b {
+      background: var(--high)
+    }
+
+    .mk-sev.high:hover {
+      box-shadow: 0 8px 20px -10px var(--high)
+    }
+
+    .mk-sev.med b {
+      color: var(--med)
+    }
+
+    .mk-sev.med .mk-sev-b {
+      background: var(--med)
+    }
+
+    .mk-sev.low b {
+      color: var(--low)
+    }
+
+    .mk-sev.low .mk-sev-b {
+      background: var(--low)
+    }
+
+    .mk-sev.info b {
+      color: var(--accent-3)
+    }
+
+    .mk-sev.info .mk-sev-b {
+      background: var(--accent-3)
+    }
+
+    .mk-bento {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr 1.05fr;
+      gap: 11px
+    }
+
+    .mk-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 13px 14px
+    }
+
+    .mk-ch {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 10px
+    }
+
+    .mk-gwrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 56px
+    }
+
+    .mk-g {
+      width: 118px;
+      height: auto
+    }
+
+    .mk-g path:last-child {
+      filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent-2) 70%, transparent))
+    }
+
+    .mk-gnum {
+      position: absolute;
+      bottom: 1px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink)
+    }
+
+    .mk-gcap {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 5px
+    }
+
+    .mk-trend .mini-chart {
+      height: 66px;
+      margin: 0
+    }
+
+    .mk-recent .mk-act {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      padding: 5px 0
+    }
+
+    .mk-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .mk-dot.crit {
+      background: var(--crit);
+      box-shadow: 0 0 7px var(--crit)
+    }
+
+    .mk-dot.high {
+      background: var(--high)
+    }
+
+    .mk-an {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink)
+    }
+
+    .mk-recent em {
+      font-style: normal;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    @media(max-width:560px) {
+      .mk-bento {
+        grid-template-columns: 1fr
+      }
+
+      .mk-sevrow {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
 
     .rows {
       display: flex;
@@ -3342,6 +3594,794 @@
       width: 100%
     }
   </style>
+
+  <!-- ============================================================
+       REDISEÑO HERO estilo "Crisol": navbar flotante + mar en
+       movimiento + luz estelar + haz vertical verde/morado.
+       Va después del CSS principal para SOBREESCRIBIR reglas.
+       ============================================================ -->
+  <style>
+    /* ---- Navbar FLOTANTE (pastilla centrada, cristal) ---- */
+    /* La navbar es cristal OSCURO en AMBOS temas (flota sobre el mar oscuro del
+       hero y también se ve bien sobre el contenido claro al bajar). */
+    .nav {
+      top: 18px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      width: min(1000px, calc(100% - 30px));
+      height: auto;
+      /* MUY translúcida arriba del todo (deja ver el mar/estrellas detrás). */
+      background: rgba(14, 17, 28, .30);
+      backdrop-filter: saturate(150%) blur(12px);
+      -webkit-backdrop-filter: saturate(150%) blur(12px);
+      border: 1px solid rgba(255, 255, 255, .09);
+      border-radius: 16px;
+      box-shadow: 0 14px 40px -22px rgba(0, 0, 0, .6);
+      padding: 8px 0;
+      transition: background .35s var(--ease), border-color .35s, box-shadow .35s, backdrop-filter .35s, transform .35s, top .35s, width .35s;
+    }
+
+    /* Al desplazar hacia abajo: se "solidifica" (más opaca + más blur + borde de
+       acento + se encoge un poco). Efecto de barra que se asienta. */
+    .nav.scrolled {
+      top: 12px;
+      width: min(920px, calc(100% - 30px));
+      background: rgba(12, 15, 26, .82);
+      backdrop-filter: saturate(180%) blur(22px);
+      -webkit-backdrop-filter: saturate(180%) blur(22px);
+      border-color: color-mix(in srgb, var(--accent) 30%, rgba(255, 255, 255, .1));
+      box-shadow: 0 22px 60px -22px rgba(0, 0, 0, .8), 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent) inset;
+    }
+
+    /* Texto e iconos de la barra SIEMPRE claros (va sobre cristal oscuro). */
+    .nav .brand {
+      color: #f5f6fa;
+    }
+
+    .nav .nav-links a {
+      color: #c6ccda;
+    }
+
+    .nav .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav .nav-mini {
+      color: #dfe4ee;
+      border-color: rgba(255, 255, 255, .16);
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .nav .nav-mini:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, .28);
+    }
+
+    .nav .nav-buy {
+      background: var(--accent);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .nav .nav-burger span {
+      background: #f5f6fa;
+    }
+
+    .nav-inner {
+      max-width: 100%;
+      padding: 0 16px;
+    }
+
+    /* ---- Hero como escenario nocturno (siempre oscuro) ---- */
+    .hero {
+      /* Paleta oscura local: el hero es una escena de noche también en tema claro. */
+      --bg-card: #141926;
+      --bg-soft: #0e1119;
+      --line: rgba(255, 255, 255, .10);
+      --ink: #f5f6fa;
+      --ink-2: #c6ccda;
+      --muted: #949bb0;
+      padding: 158px 0 0;
+      min-height: 94vh;
+      color: var(--ink);
+      background: radial-gradient(125% 100% at 50% -12%, #121627 0%, #0a0c16 46%, #06070e 100%);
+      isolation: isolate;
+    }
+
+    /* El glow viejo se sustituye por el fondo animado. */
+    .hero::before {
+      display: none !important;
+    }
+
+    /* La maqueta grande de la app y su reflejo TAPABAN el mar: se ocultan en el
+       hero para que se vean las olas y el impacto del haz (el preview del
+       producto sigue estando en la sección "Producto" más abajo). */
+    .hero .hero-stage,
+    .hero .hero-reflect {
+      display: none !important;
+    }
+
+    /* El hero pasa a ser la escena del mar: el texto arriba y el oleaje + impacto
+       llenando la parte baja. Un poco de aire abajo antes de la siguiente sección. */
+    .hero {
+      padding-bottom: 8vh;
+    }
+
+    .hero .wrap,
+    .hero-stage,
+    .hero-reflect {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Fondo animado (canvas mar+estrellas) + haz + resplandor + viñeta. */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Vídeo de mar real (si Media/sea.mp4 existe). Aparece con fundido cuando
+       carga; mientras, se ve el canvas. */
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity .9s ease;
+      z-index: 0;
+    }
+
+    .hero-video.ready {
+      opacity: 1;
+    }
+
+    /* Gradación de color: oscurece cielo/base y tiñe el agua hacia verde/morado
+       para que un vídeo azul/gris combine con la paleta de Crisol. */
+    .hero-grade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        /* oscurecido general para que el haz y la marca destaquen sobre el vídeo */
+        linear-gradient(180deg, rgba(5, 6, 12, .72) 0%, rgba(5, 6, 12, .30) 38%, rgba(4, 5, 11, .68) 100%),
+        /* viñeta radial: bordes oscuros, centro algo más limpio */
+        radial-gradient(115% 80% at 50% 42%, transparent 40%, rgba(4, 5, 11, .62) 100%),
+        /* tinte de la paleta: verde abajo (agua) y morado arriba (cielo) */
+        radial-gradient(70% 55% at 50% 66%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 68%),
+        radial-gradient(62% 50% at 50% 26%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 72%);
+    }
+
+    /* Resplandor ambiente detrás del haz (tenue). */
+    .hero-horizon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%);
+      width: min(720px, 88%);
+      height: 300px;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent 72%);
+      filter: blur(42px);
+      opacity: .5;
+    }
+
+    /* El HAZ vertical: rayo FINO y brillante que baja del cielo y acaba en el
+       agua (~64%). Núcleo casi blanco con tinte verde→morado. */
+    .hero-beam {
+      position: absolute;
+      left: 50%;
+      top: -2%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 66%;
+      border-radius: 3px;
+      background: linear-gradient(to bottom,
+          transparent 0%,
+          color-mix(in srgb, var(--accent) 60%, #fff) 14%,
+          #fff 34%,
+          color-mix(in srgb, var(--accent) 55%, #fff) 55%,
+          color-mix(in srgb, var(--accent-2) 60%, #fff) 82%,
+          #fff 100%);
+      box-shadow: 0 0 10px 1px #fff,
+        0 0 22px 3px color-mix(in srgb, var(--accent) 80%, transparent),
+        0 0 54px 10px color-mix(in srgb, var(--accent-2) 45%, transparent);
+      animation: beamPulse 3.8s ease-in-out infinite;
+      mix-blend-mode: screen;
+    }
+
+    .hero-beam::before {
+      /* halo ancho, difuso, en forma de cuña (más ancho abajo, hacia el agua) */
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 190px;
+      height: 100%;
+      clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%);
+      background: linear-gradient(to bottom,
+          transparent,
+          color-mix(in srgb, var(--accent) 30%, transparent) 34%,
+          color-mix(in srgb, var(--accent-2) 26%, transparent) 84%,
+          transparent);
+      filter: blur(24px);
+    }
+
+    /* PISCINA de luz sobre el agua: elipse ancha que ilumina las olas. */
+    .hero-pool {
+      position: absolute;
+      left: 50%;
+      top: 63%;
+      transform: translateX(-50%);
+      width: min(820px, 94%);
+      height: 250px;
+      background: radial-gradient(58% 50% at 50% 46%,
+          color-mix(in srgb, var(--accent-2) 55%, transparent) 0%,
+          color-mix(in srgb, var(--accent) 42%, transparent) 40%,
+          transparent 72%);
+      filter: blur(26px);
+      opacity: .9;
+      mix-blend-mode: screen;
+      animation: poolPulse 3.8s ease-in-out infinite;
+    }
+
+    /* NÚCLEO de impacto: destello brillante donde el haz toca el agua. */
+    .hero-impact {
+      position: absolute;
+      left: 50%;
+      top: 63.5%;
+      transform: translate(-50%, -50%);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 0%,
+          #fff 14%,
+          color-mix(in srgb, var(--accent-2) 80%, #fff) 30%,
+          color-mix(in srgb, var(--accent) 70%, transparent) 58%,
+          transparent 74%);
+      box-shadow: 0 0 26px 8px #fff,
+        0 0 50px 16px color-mix(in srgb, var(--accent) 70%, transparent),
+        0 0 90px 30px color-mix(in srgb, var(--accent-2) 50%, transparent);
+      mix-blend-mode: screen;
+      animation: impactPulse 3.8s ease-in-out infinite;
+    }
+
+    /* Reflejo/estela del haz bajando por el agua agitada. */
+    .hero-refl {
+      position: absolute;
+      left: 50%;
+      top: 64%;
+      transform: translateX(-50%);
+      width: 58px;
+      height: 24%;
+      background: linear-gradient(to bottom,
+          color-mix(in srgb, #fff 75%, transparent) 0%,
+          color-mix(in srgb, var(--accent-2) 45%, transparent) 28%,
+          color-mix(in srgb, var(--accent) 30%, transparent) 58%,
+          transparent 100%);
+      filter: blur(9px);
+      opacity: .55;
+      mix-blend-mode: screen;
+      -webkit-mask-image: linear-gradient(to bottom, #000, transparent 92%);
+      mask-image: linear-gradient(to bottom, #000, transparent 92%);
+      animation: reflShimmer 2.6s ease-in-out infinite;
+    }
+
+    @keyframes reflShimmer {
+
+      0%,
+      100% {
+        opacity: .42;
+        width: 50px;
+      }
+
+      50% {
+        opacity: .68;
+        width: 66px;
+      }
+    }
+
+    @keyframes beamPulse {
+
+      0%,
+      100% {
+        opacity: .9;
+        box-shadow: 0 0 14px 2px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 40px 6px color-mix(in srgb, var(--accent-2) 45%, transparent);
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 22px 3px color-mix(in srgb, var(--accent) 85%, transparent), 0 0 60px 10px color-mix(in srgb, var(--accent-2) 55%, transparent);
+      }
+    }
+
+    @keyframes poolPulse {
+
+      0%,
+      100% {
+        opacity: .78;
+        transform: translateX(-50%) scaleX(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) scaleX(1.08);
+      }
+    }
+
+    @keyframes impactPulse {
+
+      0%,
+      100% {
+        opacity: .85;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.28);
+      }
+    }
+
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(125% 85% at 50% 38%, transparent 52%, rgba(0, 0, 0, .55) 100%);
+    }
+
+    /* La gema del kicker en verde, a juego con "el crisol". */
+    .hero .kicker {
+      color: var(--accent-2);
+      text-shadow: 0 0 18px color-mix(in srgb, var(--accent-2) 45%, transparent);
+    }
+
+    /* ---- Viñetas de datos flotantes (glass) a los lados del hero ---- */
+    .hero-cards {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hcard {
+      position: absolute;
+      pointer-events: auto;
+      background: rgba(13, 17, 27, .46);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 16px;
+      padding: 14px 15px;
+      color: #eef1f7;
+      box-shadow: 0 26px 64px -26px rgba(0, 0, 0, .75), inset 0 1px 0 rgba(255, 255, 255, .06);
+    }
+
+    .hcard-l {
+      left: max(20px, calc(50% - 560px));
+      top: 250px;
+      width: 224px;
+      animation: floatA 7s ease-in-out infinite;
+    }
+
+    .hcard-r {
+      right: max(20px, calc(50% - 570px));
+      top: 196px;
+      width: 252px;
+      animation: floatB 8s ease-in-out infinite;
+    }
+
+    @keyframes floatA {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-9px);
+      }
+    }
+
+    @keyframes floatB {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(7px);
+      }
+    }
+
+    .hcard-h {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #c6ccda;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .hcard-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex: none;
+    }
+
+    .hcard-dot.g {
+      background: var(--accent-2);
+      box-shadow: 0 0 10px var(--accent-2);
+    }
+
+    .hcard-dot.p {
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .hcard-big {
+      margin-left: auto;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hcard-gauge {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hcard-gauge svg {
+      width: 130px;
+      height: auto;
+    }
+
+    .hcard-gnum {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .hcard-cap {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      color: #949bb0;
+      margin-top: 4px;
+    }
+
+    .hcard-sev {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      margin-bottom: 12px;
+    }
+
+    .hcard-sev .sv {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: #c6ccda;
+    }
+
+    .hcard-sev .sv i {
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      flex: none;
+    }
+
+    .hcard-sev .sv b {
+      margin-left: auto;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hcard-sev .crit i {
+      background: var(--crit);
+    }
+
+    .hcard-sev .high i {
+      background: var(--high);
+    }
+
+    .hcard-sev .med i {
+      background: var(--med);
+    }
+
+    .hcard-sev .low i {
+      background: var(--low);
+    }
+
+    .hcard-act {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .hcard-act .ha {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #c6ccda;
+    }
+
+    .hcard-act .ha i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex: none;
+    }
+
+    .hcard-act .ha i.crit {
+      background: var(--crit);
+    }
+
+    .hcard-act .ha i.high {
+      background: var(--high);
+    }
+
+    .hcard-act .ha span {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hcard-act .ha em {
+      font-style: normal;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    /* En pantallas donde no caben a los lados, se ocultan (no estorban al texto). */
+    @media (max-width: 1180px) {
+      .hero-cards {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .hero-beam,
+      .hero-pool,
+      .hero-impact,
+      .hero-refl {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        padding-top: 128px;
+        min-height: 88vh;
+      }
+
+      .hero-beam {
+        height: 52%;
+      }
+    }
+
+    /* ---- FIX tema claro: las maquetas de la app son SIEMPRE oscuras ----
+       Representan la UI real de Crisol (que es oscura). En tema claro su fondo
+       se ponía blanco y el contenido quedaba ilegible; aquí se fija la paleta
+       oscura de la app en ambos temas para que se lean bien. */
+    [data-theme="light"] .shot,
+    [data-theme="light"] .shot-bar,
+    [data-theme="light"] .shot-body,
+    [data-theme="light"] .shot-side,
+    [data-theme="light"] .shot-main,
+    [data-theme="light"] .mk-main,
+    [data-theme="light"] .demo,
+    [data-theme="light"] .mk-card {
+      --bg: #0a0c12;
+      --bg-soft: #0e1119;
+      --bg-card: #141926;
+      --line: rgba(255, 255, 255, .09);
+      --ink: #f5f6fa;
+      --ink-2: #c2c8d6;
+      --muted: #8a91a6;
+      color: #f5f6fa;
+    }
+  </style>
+
+  <!-- ============================================================
+       HERO PARTIDO: texto a la izquierda, vídeo a la derecha con
+       transición suave (degradado) y viñetas de datos sobre el vídeo.
+       Este bloque va el ÚLTIMO para sobreescribir el hero anterior.
+       ============================================================ -->
+  <style>
+    .hero {
+      --hero-bg: #0a0e12;
+      display: flex;
+      align-items: center;
+      min-height: 92vh;
+      padding: 92px 0 0;
+      overflow: hidden;
+      text-align: left;
+      position: relative;
+      isolation: isolate;
+      background: radial-gradient(135% 125% at 16% 26%, #13211b 0%, #0a0e12 52%, #06080c 100%);
+      /* Texto claro (el hero es oscuro en ambos temas). */
+      --ink: #f5f6fa;
+      --ink-2: #c9cfdd;
+      --muted: #98a0b4;
+      color: var(--ink);
+    }
+
+    .hero::before {
+      display: none !important;
+    }
+
+    /* --- Panel de VÍDEO (derecha), con borde diagonal suave --- */
+    .hero-media {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 56%;
+      z-index: 0;
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 3% 100%);
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 1;
+      /* leve realce/saturación para que combine con la paleta */
+      filter: saturate(108%) contrast(104%);
+    }
+
+    /* Fundido del borde izquierdo del vídeo hacia el fondo (transición NO brusca)
+       + oscurecido inferior para que se lean las viñetas + tinte de la paleta. */
+    .hero-media-fade {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(96deg, var(--hero-bg) 0%, color-mix(in srgb, var(--hero-bg) 82%, transparent) 18%, transparent 46%),
+        linear-gradient(0deg, rgba(6, 8, 13, .55) 0%, transparent 42%),
+        linear-gradient(118deg, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 52%),
+        radial-gradient(80% 60% at 70% 30%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
+    }
+
+    /* --- TEXTO (izquierda) --- */
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      width: min(560px, 50%);
+      margin-left: clamp(22px, 6vw, 96px);
+    }
+
+    .hero-text .kicker {
+      margin-bottom: 14px;
+      color: var(--accent-2);
+      text-shadow: 0 0 18px color-mix(in srgb, var(--accent-2) 40%, transparent);
+    }
+
+    .hero-text h1 {
+      font-size: clamp(42px, 5.6vw, 82px);
+      text-align: left;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text .sub {
+      text-align: left;
+      margin: 0 0 28px;
+      max-width: 470px;
+      color: var(--ink-2);
+    }
+
+    .hero-text .hero-links {
+      justify-content: flex-start;
+    }
+
+    /* --- Viñetas de datos sobre el vídeo (abajo-derecha) --- */
+    .hero-stats {
+      position: absolute;
+      right: 20px;
+      bottom: 22px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .hstat {
+      background: rgba(9, 13, 20, .5);
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 10px;
+      padding: 7px 13px;
+      color: #dfe4ee;
+      font-size: 12.5px;
+      box-shadow: 0 12px 30px -14px rgba(0, 0, 0, .6);
+    }
+
+    .hstat b {
+      color: #fff;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    /* --- Responsive: en estrecho, el vídeo pasa a fondo tenue y el texto se
+       centra encima (nunca brusco, siempre legible). --- */
+    @media (max-width: 900px) {
+      .hero {
+        padding-top: 120px;
+        min-height: 82vh;
+        text-align: center;
+      }
+
+      .hero-media {
+        width: 100%;
+        clip-path: none;
+        opacity: .35;
+      }
+
+      .hero-media-fade {
+        background:
+          linear-gradient(180deg, rgba(6, 8, 13, .55), rgba(6, 8, 13, .82)),
+          radial-gradient(80% 60% at 50% 30%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+      }
+
+      .hero-text {
+        width: auto;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+
+      .hero-text h1,
+      .hero-text .sub {
+        text-align: center;
+      }
+
+      .hero-text .sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-text .hero-links {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -3390,7 +4430,23 @@
   <main id="top">
 
     <section class="hero">
-      <div class="wrap">
+      <!-- Vídeo ajustado a la DERECHA con transición suave al fondo. -->
+      <div class="hero-media">
+        <video class="hero-video" id="heroVideo" autoplay loop muted playsinline preload="auto"
+          poster="./assets/video_poster.jpg">
+          <source src="./assets/video_index-web.mp4" type="video/mp4">
+          <source src="./assets/video_index.mp4" type="video/mp4">
+        </video>
+        <div class="hero-media-fade" aria-hidden="true"></div>
+        <!-- Viñetas de datos sobre el vídeo (abajo a la derecha). -->
+        <div class="hero-stats" aria-hidden="true">
+          <div class="hstat"><b>1</b><span data-i18n="hs.file">archivo — todo tu pentest, portable</span></div>
+          <div class="hstat"><b>0</b><span data-i18n="hs.cloud">servidores — sin nube, sin instalar</span></div>
+          <div class="hstat"><b>AES-256</b><span data-i18n="hs.enc">cifrado en reposo · 2FA</span></div>
+        </div>
+      </div>
+      <!-- Texto a la IZQUIERDA. -->
+      <div class="hero-text">
         <p class="kicker rev" data-i18n="hero.kicker">El crisol del pentester</p>
         <h1 class="rev rev-2" data-i18n="hero.title">Donde el caos<br>se vuelve <span class="grad">orden.</span></h1>
         <p class="sub rev rev-3" data-i18n="hero.sub">Crisol-RX funde hallazgos, retests y entregas en un único archivo
@@ -3398,100 +4454,6 @@
         <div class="hero-links rev rev-4">
           <a href="#download" class="btn btn-primary btn-lg" data-i18n="hero.cta">Descargar gratis</a>
           <a href="#product" class="btn-text arrow" data-i18n="hero.more">Ver en acción</a>
-        </div>
-      </div>
-
-      <div class="hero-stage">
-        <div class="hero-shot zoom-in" id="heroShot">
-          <div class="shot">
-            <div class="shot-bar">
-              <div class="shot-dots"><i></i><i></i><i></i></div>
-              <span class="t">crisol-rx · localhost:8443</span>
-              <span class="live"><i></i> <span data-i18n="shot.live">En vivo</span></span>
-            </div>
-            <div class="shot-body">
-              <aside class="shot-side">
-                <div class="mk-brand"><span class="mk-gem"></span> <b>Crisol-RX</b></div>
-                <div class="h" data-i18n="shot.workspaces">Workspaces</div>
-                <div class="ws on"><span class="fav" style="background:linear-gradient(135deg,#9d5cff,#6f3ad6)">A</span>
-                  Acme Corp <small>24</small></div>
-                <div class="ws"><span class="fav" style="background:linear-gradient(135deg,#57b8ff,#2b6fd6)">B</span>
-                  Banca Nova <small>11</small></div>
-                <div class="ws"><span class="fav" style="background:linear-gradient(135deg,#15e6a0,#0a9e72)">F</span>
-                  Fintrek <small>7</small></div>
-                <div class="ws"><span class="fav" style="background:linear-gradient(135deg,#ff8a3d,#e85d1a)">O</span>
-                  Orbyx API <small>3</small></div>
-                <div class="h" style="margin-top:16px" data-i18n="shot.views">Vistas</div>
-                <div class="ws"><span class="d" style="background:var(--accent-3)"></span> <span
-                    data-i18n="shot.calendar">Calendario</span></div>
-                <div class="ws"><span class="d" style="background:var(--med)"></span> <span
-                    data-i18n="shot.library">Biblioteca</span></div>
-                <div class="ws"><span class="d" style="background:var(--accent)"></span> <span
-                    data-i18n="shot.notif">Notificaciones</span> <small>2</small></div>
-              </aside>
-              <div class="shot-main mk-main">
-                <div class="mk-head">
-                  <div><b class="mk-lead-num">17</b> <span class="mk-lead-lbl" data-i18n="shot.active">Vulns activas</span></div>
-                  <span class="mk-chip" data-i18n="shot.scope">Pentest externo · Q2 2026</span>
-                </div>
-                <div class="mk-sevrow">
-                  <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b></div>
-                  <div class="mk-sev high"><span class="mk-sev-b"></span><em data-i18n="sev.high">Altas</em><b>6</b></div>
-                  <div class="mk-sev med"><span class="mk-sev-b"></span><em data-i18n="sev.med">Medias</em><b>5</b></div>
-                  <div class="mk-sev low"><span class="mk-sev-b"></span><em data-i18n="sev.low">Bajas</em><b>2</b></div>
-                  <div class="mk-sev info"><span class="mk-sev-b"></span><em data-i18n="sev.info">Info</em><b>1</b></div>
-                </div>
-                <div class="mk-bento">
-                  <div class="mk-card mk-gauge">
-                    <div class="mk-ch" data-i18n="shot.health">Salud de seguridad</div>
-                    <div class="mk-gwrap">
-                      <svg class="mk-g" viewBox="0 0 120 66" aria-hidden="true">
-                        <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11" stroke-linecap="round" />
-                        <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
-                      </svg>
-                      <b class="mk-gnum">71%</b>
-                    </div>
-                    <span class="mk-gcap" data-i18n="shot.fixed">Resueltas</span>
-                  </div>
-                  <div class="mk-card mk-trend">
-                    <div class="mk-ch" data-i18n="shot.time">En el tiempo</div>
-                    <div class="mini-chart" aria-hidden="true"><span style="height:38%"></span><span
-                        style="height:60%"></span><span style="height:46%"></span><span style="height:74%"></span><span
-                        style="height:92%"></span><span style="height:66%"></span><span style="height:52%"></span></div>
-                  </div>
-                  <div class="mk-card mk-recent">
-                    <div class="mk-ch" data-i18n="shot.recent">Actividad reciente</div>
-                    <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi · /api/login</span><em>9.8</em></div>
-                    <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em></div>
-                    <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-reflect" aria-hidden="true">
-        <div class="shot">
-          <div class="shot-bar">
-            <div class="shot-dots"><i></i><i></i><i></i></div>
-          </div>
-          <div class="shot-body">
-            <aside class="shot-side">
-              <div class="ws on"><span class="d"></span> Acme Corp</div>
-              <div class="ws"><span class="d"></span> Banca Nova</div>
-              <div class="ws"><span class="d"></span> Fintrek</div>
-            </aside>
-            <div class="shot-main mk-main">
-              <div class="mk-sevrow">
-                <div class="mk-sev crit"><span class="mk-sev-b"></span><b>3</b></div>
-                <div class="mk-sev high"><span class="mk-sev-b"></span><b>6</b></div>
-                <div class="mk-sev med"><span class="mk-sev-b"></span><b>5</b></div>
-                <div class="mk-sev low"><span class="mk-sev-b"></span><b>2</b></div>
-                <div class="mk-sev info"><span class="mk-sev-b"></span><b>1</b></div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -3624,7 +4586,8 @@
             </div>
             <div class="shot-main mk-main">
               <div class="mk-sevrow">
-                <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b></div>
+                <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b>
+                </div>
                 <div class="mk-sev high"><span class="mk-sev-b"></span><em data-i18n="sev.high">Altas</em><b>6</b></div>
                 <div class="mk-sev med"><span class="mk-sev-b"></span><em data-i18n="sev.med">Medias</em><b>5</b></div>
                 <div class="mk-sev low"><span class="mk-sev-b"></span><em data-i18n="sev.low">Bajas</em><b>2</b></div>
@@ -3635,8 +4598,10 @@
                   <div class="mk-ch" data-i18n="shot.health">Salud de seguridad</div>
                   <div class="mk-gwrap">
                     <svg class="mk-g" viewBox="0 0 120 66" aria-hidden="true">
-                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11" stroke-linecap="round" />
-                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
+                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11"
+                        stroke-linecap="round" />
+                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11"
+                        stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
                     </svg>
                     <b class="mk-gnum">71%</b>
                   </div>
@@ -3650,9 +4615,12 @@
                 </div>
                 <div class="mk-card mk-recent">
                   <div class="mk-ch" data-i18n="shot.recent">Actividad reciente</div>
-                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi · /api/login</span><em>9.8</em></div>
-                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em></div>
-                  <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em></div>
+                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi ·
+                      /api/login</span><em>9.8</em></div>
+                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em>
+                  </div>
+                  <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em>
+                  </div>
                 </div>
               </div>
             </div>
@@ -4334,7 +5302,7 @@
       var themeBtn = document.getElementById("themeBtn");
       var ICON_SUN = '<svg viewBox="0 0 24 24"><circle class="ln" cx="12" cy="12" r="4"/><path class="ln" d="M12 2.5v2.5M12 19v2.5M4.5 4.5 6.3 6.3M17.7 17.7l1.8 1.8M2.5 12H5M19 12h2.5M4.5 19.5 6.3 17.7M17.7 6.3l1.8-1.8"/></svg>';
       var ICON_MOON = '<svg viewBox="0 0 24 24"><path class="ln" d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z"/></svg>';
-      function setTheme(t) { document.documentElement.setAttribute("data-theme", t); themeBtn.innerHTML = t === "light" ? ICON_MOON : ICON_SUN; }
+      function setTheme(t) { document.documentElement.setAttribute("data-theme", t); themeBtn.innerHTML = t === "light" ? ICON_MOON : ICON_SUN; try { localStorage.setItem("crx_theme", t); } catch (e) { } }
 
       function pulse(elm, cls) {
         if (!elm) return;
@@ -4351,7 +5319,7 @@
       var I18N = {
         es: {
           "nav.features": "Características", "nav.product": "Producto", "nav.roles": "Roles", "nav.guide": "Guía", "nav.download": "Descargar", "nav.buy": "Obtener",
-          "hero.kicker": "El crisol del pentester", "hero.title": "Donde el caos<br>se vuelve <span class=\"grad\">orden.</span>", "hero.sub": "Crisol-RX funde hallazgos, retests y entregas en un único archivo portable. Sin servidores. Sin nube. Lo abres y empiezas.", "hero.cta": "Descargar gratis", "hero.more": "Ver en acción",
+          "hero.kicker": "El crisol del pentester", "hero.title": "Donde el caos<br>se vuelve <span class=\"grad\">orden.</span>", "hero.sub": "Crisol-RX funde hallazgos, retests y entregas en un único archivo portable. Sin servidores. Sin nube. Lo abres y empiezas.", "hero.cta": "Descargar gratis", "hero.more": "Ver en acción", "hs.file": "archivo — todo tu pentest, portable", "hs.cloud": "servidores — sin nube, sin instalar", "hs.enc": "cifrado en reposo · 2FA",
           "shot.live": "En vivo", "shot.workspaces": "Workspaces", "shot.views": "Vistas", "shot.calendar": "Calendario", "shot.reports": "Informes", "shot.total": "Total", "shot.fixed": "Resueltas",
           "shot.scope": "Pentest externo · Q2 2026", "shot.remed": "Remediación", "shot.retest": "Retest", "shot.solved": "Resuelta",
           "cal.e1": "Pentest Acme · ventana", "cal.e2": "Retest Fintrek", "cal.e3": "Entrega informe Banca Nova",
@@ -4410,7 +5378,7 @@
         },
         en: {
           "nav.features": "Features", "nav.product": "Product", "nav.roles": "Roles", "nav.guide": "Guide", "nav.download": "Download", "nav.buy": "Get it",
-          "hero.kicker": "The pentester's crucible", "hero.title": "Where chaos<br>becomes <span class=\"grad\">order.</span>", "hero.sub": "Crisol-RX melts findings, retests and deliveries into a single portable file. No servers. No cloud. Open it and start.", "hero.cta": "Download free", "hero.more": "See it in action",
+          "hero.kicker": "The pentester's crucible", "hero.title": "Where chaos<br>becomes <span class=\"grad\">order.</span>", "hero.sub": "Crisol-RX melts findings, retests and deliveries into a single portable file. No servers. No cloud. Open it and start.", "hero.cta": "Download free", "hero.more": "See it in action", "hs.file": "file — your whole pentest, portable", "hs.cloud": "servers — no cloud, no install", "hs.enc": "encryption at rest · 2FA",
           "shot.live": "Live", "shot.workspaces": "Workspaces", "shot.views": "Views", "shot.calendar": "Calendar", "shot.reports": "Reports", "shot.total": "Total", "shot.fixed": "Fixed",
           "shot.scope": "External pentest · Q2 2026", "shot.remed": "Remediation", "shot.retest": "Retest", "shot.solved": "Fixed",
           "cal.e1": "Acme pentest · window", "cal.e2": "Fintrek retest", "cal.e3": "Banca Nova report delivery",
@@ -4558,7 +5526,12 @@
       chS.addEventListener("click", function () { channel = "stable"; chS.classList.add("on"); chB.classList.remove("on"); renderOS(); });
       chB.addEventListener("click", function () { channel = "beta"; chB.classList.add("on"); chS.classList.remove("on"); renderOS(); });
 
-      setTheme("light");
+      // Oscuro por defecto (respeta la elección guardada si la hay).
+      (function () {
+        var saved = null;
+        try { saved = localStorage.getItem("crx_theme"); } catch (e) { }
+        setTheme(saved === "light" || saved === "dark" ? saved : "dark");
+      })();
       applyLang("es");
       renderOS();
 
@@ -4605,6 +5578,141 @@
           }
         }).catch(function () { });
       }
+    })();
+  </script>
+
+  <!-- Fondo animado del hero: mar en movimiento + luz estelar (canvas).
+       El haz vertical y los resplandores verde/morado son CSS. -->
+  <script>
+    (function () {
+      var c = document.getElementById('heroCanvas');
+      if (!c || !c.getContext) return;
+      var ctx = c.getContext('2d');
+      var W = 0, H = 0, DPR = 1, stars = [];
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var perfLite = document.documentElement.getAttribute('data-perf') === 'lite';
+
+      function resize() {
+        DPR = Math.min(window.devicePixelRatio || 1, 2);
+        W = c.clientWidth; H = c.clientHeight;
+        if (!W || !H) return;
+        c.width = Math.round(W * DPR); c.height = Math.round(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        // Estrellas solo en la mitad superior (cielo).
+        stars = [];
+        var n = Math.min(180, Math.round(W * H / 9000));
+        for (var i = 0; i < n; i++) {
+          stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H * 0.58,
+            r: Math.random() * 1.3 + 0.25,
+            tw: Math.random() * 6.28,
+            sp: 0.5 + Math.random() * 1.6
+          });
+        }
+      }
+
+      // Dibuja una capa de ola (relleno hasta el fondo) con dos senos superpuestos.
+      function wave(t, yBase, amp, len, phase, color) {
+        ctx.beginPath();
+        ctx.moveTo(0, H);
+        for (var x = 0; x <= W; x += 7) {
+          var y = yBase
+            + Math.sin(x / len + phase + t) * amp
+            + Math.sin(x / (len * 0.5) + phase * 1.7 + t * 1.35) * amp * 0.42;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(W, H); ctx.closePath();
+        ctx.fillStyle = color; ctx.fill();
+      }
+
+      var start = performance.now();
+      function draw(now) {
+        var t = (now - start) / 1000;
+        ctx.clearRect(0, 0, W, H);
+
+        // Estrellas parpadeantes (luz estelar).
+        for (var i = 0; i < stars.length; i++) {
+          var s = stars[i];
+          var a = 0.30 + 0.5 * (0.5 + 0.5 * Math.sin(s.tw + t * s.sp));
+          ctx.globalAlpha = a;
+          ctx.fillStyle = '#e3e9ff';
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        // Mar en movimiento: capas de fondo (más claras).
+        var horizon = H * 0.60;
+        wave(t * 0.45, horizon + 18, 9, 190, 0.0, 'rgba(22,28,48,0.55)');
+        wave(t * 0.62, horizon + 46, 15, 150, 1.3, 'rgba(15,19,34,0.72)');
+
+        // Luz del IMPACTO iluminando el agua (aditiva): el haz "choca" y el
+        // resplandor verde/morado se derrama sobre las olas, con leve latido.
+        var cx = W / 2, cy = horizon + 6;
+        var rad = Math.min(W * 0.44, 340);
+        var pulse = 0.82 + 0.18 * Math.sin(t * 1.6);
+        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+        g.addColorStop(0, 'rgba(150,255,214,' + (0.34 * pulse) + ')');
+        g.addColorStop(0.42, 'rgba(150,110,255,' + (0.17 * pulse) + ')');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.fillStyle = g;
+        ctx.fillRect(0, cy - 34, W, H - (cy - 34));
+        ctx.globalCompositeOperation = 'source-over';
+
+        // Olas del frente (siluetas oscuras) por encima de la luz.
+        wave(t * 0.82, horizon + 84, 21, 116, 2.5, 'rgba(9,11,20,0.9)');
+        wave(t * 1.05, horizon + 132, 26, 92, 3.7, 'rgba(5,6,12,1)');
+
+        if (!reduce) raf = requestAnimationFrame(draw);
+      }
+
+      var raf = 0;
+      function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
+      function go() { stop(); resize(); if (reduce || perfLite) { draw(performance.now()); } else { raf = requestAnimationFrame(draw); } }
+
+      window.addEventListener('resize', function () { resize(); }, { passive: true });
+      // Pausar la animación cuando el hero no está visible (ahorra batería/CPU).
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (ents) {
+          ents.forEach(function (e) {
+            if (e.isIntersecting) { if (!raf && !reduce && !perfLite) raf = requestAnimationFrame(draw); }
+            else { stop(); }
+          });
+        }, { threshold: 0 });
+        io.observe(c);
+      }
+      go();
+
+      // Si existe un vídeo de mar real (Media/sea.mp4), se usa como fondo y se
+      // apaga el canvas (ahorra CPU). Si no carga, el canvas sigue de fondo.
+      var vid = document.getElementById('heroVideo');
+      if (vid) {
+        var useVideo = function () {
+          if (vid.readyState < 2) return;      // aún sin datos
+          vid.classList.add('ready');
+          stop();
+          c.style.display = 'none';            // el vídeo sustituye al canvas
+        };
+        vid.addEventListener('loadeddata', useVideo);
+        vid.addEventListener('canplay', useVideo);
+        // Si el archivo no existe o falla, no hacemos nada: queda el canvas.
+        vid.addEventListener('error', function () { }, true);
+        var p = vid.play && vid.play();
+        if (p && p.catch) p.catch(function () { });
+      }
+    })();
+  </script>
+
+  <!-- Asegura la reproducción del vídeo del hero (autoplay muted). -->
+  <script>
+    (function () {
+      var v = document.getElementById('heroVideo');
+      if (!v) return;
+      var tryPlay = function () { var p = v.play && v.play(); if (p && p.catch) p.catch(function () { }); };
+      tryPlay();
+      v.addEventListener('canplay', tryPlay, { once: true });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) tryPlay(); });
     })();
   </script>
 </body>

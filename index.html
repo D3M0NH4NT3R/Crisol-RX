@@ -46,9 +46,7 @@
     }
 
     [data-theme="light"] {
-      /* Off-white suave y algo cálido (no blanco plano) para que combine con las
-         bandas oscuras y no quede "tosco". Bordes suaves; acentos a juego con la
-         app (morado + verde). */
+      
       --bg: #eef0f6;
       --bg-soft: #e6e9f1;
       --bg-card: #ffffff;
@@ -61,8 +59,6 @@
       --accent-3: #2b7fff;
     }
 
-    /* Tarjetas del tema claro: bordes suaves + sombra sutil (profundidad en vez
-       de líneas duras) para un aspecto más pulido. */
     [data-theme="light"] .feat,
     [data-theme="light"] .role,
     [data-theme="light"] .dl-card,
@@ -72,8 +68,6 @@
       box-shadow: 0 1px 2px rgba(22, 27, 55, .04), 0 16px 34px -22px rgba(22, 27, 55, .22);
     }
 
-    /* Transición SUAVE entre secciones claras y bandas oscuras (degradado en el
-       borde en vez de un corte seco). */
     [data-theme="light"] .band {
       box-shadow: 0 -40px 60px -40px rgba(6, 7, 12, .5);
     }
@@ -320,8 +314,6 @@
       color: var(--ink)
     }
 
-    /* "Guía" destacado: chip con el acento de la app para que se note que es
-       un enlace especial (lleva al cheatsheet). */
     .nav-links a.nav-guide {
       display: inline-flex;
       align-items: center;
@@ -382,7 +374,6 @@
       transform: translateY(0) scale(.96)
     }
 
-    /* Animación ligera al pulsar los botones de idioma/tema. */
     @keyframes navPop {
 
       0%,
@@ -417,8 +408,7 @@
     }
 
     .nav-buy:hover {
-      /* el texto debe seguir siendo blanco: .nav-mini:hover lo ponía oscuro
-         (var(--ink)) y sobre el fondo morado se veía negro. */
+      
       color: #fff;
       background: color-mix(in srgb, var(--accent) 82%, #000);
       border-color: transparent;
@@ -487,7 +477,6 @@
         border-bottom: 1px solid var(--line)
       }
 
-      /* En el menú móvil el chip se integra como fila, pero conserva el acento. */
       .nav-links a.nav-guide {
         background: transparent;
         border: none;
@@ -773,7 +762,6 @@
       color: var(--low)
     }
 
-    /* ===== Mockup del nuevo diseño (bento + cajas de severidad + gauge) ===== */
     .mk-brand {
       display: flex;
       align-items: center;
@@ -1509,7 +1497,6 @@
       }
     }
 
-    /* ===== demo animada "Ver en acción" ===== */
     .demo {
       max-width: 940px;
       margin: 0 auto 64px
@@ -1598,7 +1585,6 @@
       margin-bottom: 14px
     }
 
-    /* barras de severidad (panel 0) */
     .demo-bars {
       display: flex;
       flex-direction: column;
@@ -1639,7 +1625,6 @@
       width: var(--w)
     }
 
-    /* detalle de hallazgo (panel 1) */
     .demo-detail {
       display: grid;
       grid-template-columns: 1fr 200px;
@@ -1713,7 +1698,6 @@
       line-height: 1.5
     }
 
-    /* timeline retest + sla (panel 2) */
     .demo-tl {
       display: flex;
       flex-direction: column;
@@ -1773,7 +1757,6 @@
       color: var(--ink)
     }
 
-    /* informe (panel 3) */
     .demo-rep {
       display: grid;
       grid-template-columns: 168px 1fr;
@@ -1914,7 +1897,6 @@
       transform: scale(1.35)
     }
 
-    /* ===== demo v2: barra lateral persistente + paneles ricos ===== */
     .demo-body {
       display: flex;
       min-height: 396px
@@ -1999,7 +1981,6 @@
       }
     }
 
-    /* dos columnas dentro de un panel */
     .demo-2c {
       display: grid;
       grid-template-columns: 168px 1fr;
@@ -2029,7 +2010,6 @@
       margin-bottom: 12px
     }
 
-    /* donut de cobertura */
     .demo-donut {
       position: relative;
       display: grid;
@@ -2071,7 +2051,6 @@
       letter-spacing: .06em
     }
 
-    /* lista compacta de vulns dentro del panel */
     .demo-vl {
       display: flex;
       flex-direction: column;
@@ -2144,7 +2123,6 @@
       text-decoration: line-through
     }
 
-    /* header de hallazgo */
     .demo-fhead {
       display: flex;
       align-items: center;
@@ -2170,7 +2148,6 @@
       min-width: 160px
     }
 
-    /* snippet de evidencia / PoC */
     .demo-code {
       background: #0e1118;
       border: 1px solid var(--line);
@@ -2219,7 +2196,6 @@
       line-height: 1.3
     }
 
-    /* timeline v2 con conector */
     .demo-tl {
       position: relative;
       display: flex;
@@ -2281,7 +2257,6 @@
       margin-top: 1px
     }
 
-    /* tarjeta SLA con anillo de días */
     .demo-slac {
       display: grid;
       grid-template-columns: 96px 1fr;
@@ -2356,7 +2331,6 @@
       color: var(--accent)
     }
 
-    /* informe v2 */
     .demo-cover .cmark {
       position: absolute;
       top: 13px;
@@ -2402,7 +2376,6 @@
       display: inline-block
     }
 
-    /* ===== demo v3: dashboard tipo app + tabla real ===== */
     .demo-k6 {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -2452,7 +2425,6 @@
       color: var(--accent-2)
     }
 
-    /* severidad: dona + leyenda */
     .demo-sev2 {
       display: flex;
       align-items: center;
@@ -2493,7 +2465,6 @@
       font-weight: 700
     }
 
-    /* por workspace: barras apiladas */
     .demo-wsb {
       display: flex;
       flex-direction: column;
@@ -2525,7 +2496,6 @@
       display: block
     }
 
-    /* tabla de vulnerabilidades real */
     .demo-tbl {
       margin-top: 14px
     }
@@ -2651,7 +2621,6 @@
       }
     }
 
-    /* ===== panel Informe (rediseño) ===== */
     .rep-cover {
       position: relative;
       border-radius: 16px;
@@ -3345,7 +3314,6 @@
       color: #fff
     }
 
-    /* Botón que despliega el panel de todas las plataformas. */
     .all-os-toggle {
       display: inline-flex;
       align-items: center;
@@ -3377,7 +3345,6 @@
       transform: rotate(180deg)
     }
 
-    /* Contenedor slide: grid-rows 0fr→1fr para desplegar suave sin altura fija. */
     .all-os-wrap {
       display: grid;
       grid-template-rows: 0fr;
@@ -3561,7 +3528,6 @@
       color: var(--ink)
     }
 
-    /* "Guía" del footer: mismo chip de acento que el del nav, algo más compacto. */
     .foot-links a.nav-guide {
       display: inline-flex;
       align-items: center;
@@ -3595,15 +3561,8 @@
     }
   </style>
 
-  <!-- ============================================================
-       REDISEÑO HERO estilo "Crisol": navbar flotante + mar en
-       movimiento + luz estelar + haz vertical verde/morado.
-       Va después del CSS principal para SOBREESCRIBIR reglas.
-       ============================================================ -->
   <style>
-    /* ---- Navbar FLOTANTE (pastilla centrada, cristal) ---- */
-    /* La navbar es cristal OSCURO en AMBOS temas (flota sobre el mar oscuro del
-       hero y también se ve bien sobre el contenido claro al bajar). */
+
     .nav {
       top: 18px;
       left: 50%;
@@ -3611,7 +3570,7 @@
       transform: translateX(-50%);
       width: min(1000px, calc(100% - 30px));
       height: auto;
-      /* MUY translúcida arriba del todo (deja ver el mar/estrellas detrás). */
+      
       background: rgba(14, 17, 28, .30);
       backdrop-filter: saturate(150%) blur(12px);
       -webkit-backdrop-filter: saturate(150%) blur(12px);
@@ -3622,8 +3581,6 @@
       transition: background .35s var(--ease), border-color .35s, box-shadow .35s, backdrop-filter .35s, transform .35s, top .35s, width .35s;
     }
 
-    /* Al desplazar hacia abajo: se "solidifica" (más opaca + más blur + borde de
-       acento + se encoge un poco). Efecto de barra que se asienta. */
     .nav.scrolled {
       top: 12px;
       width: min(920px, calc(100% - 30px));
@@ -3634,7 +3591,6 @@
       box-shadow: 0 22px 60px -22px rgba(0, 0, 0, .8), 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent) inset;
     }
 
-    /* Texto e iconos de la barra SIEMPRE claros (va sobre cristal oscuro). */
     .nav .brand {
       color: #f5f6fa;
     }
@@ -3668,14 +3624,23 @@
       background: #f5f6fa;
     }
 
+    .nav .nav-icon .ln,
+    .nav .nav-icon .ac {
+      stroke: #dfe4ee;
+    }
+
+    .nav .nav-icon:hover .ln,
+    .nav .nav-icon:hover .ac {
+      stroke: #fff;
+    }
+
     .nav-inner {
       max-width: 100%;
       padding: 0 16px;
     }
 
-    /* ---- Hero como escenario nocturno (siempre oscuro) ---- */
     .hero {
-      /* Paleta oscura local: el hero es una escena de noche también en tema claro. */
+      
       --bg-card: #141926;
       --bg-soft: #0e1119;
       --line: rgba(255, 255, 255, .10);
@@ -3689,21 +3654,15 @@
       isolation: isolate;
     }
 
-    /* El glow viejo se sustituye por el fondo animado. */
     .hero::before {
       display: none !important;
     }
 
-    /* La maqueta grande de la app y su reflejo TAPABAN el mar: se ocultan en el
-       hero para que se vean las olas y el impacto del haz (el preview del
-       producto sigue estando en la sección "Producto" más abajo). */
     .hero .hero-stage,
     .hero .hero-reflect {
       display: none !important;
     }
 
-    /* El hero pasa a ser la escena del mar: el texto arriba y el oleaje + impacto
-       llenando la parte baja. Un poco de aire abajo antes de la siguiente sección. */
     .hero {
       padding-bottom: 8vh;
     }
@@ -3715,7 +3674,6 @@
       z-index: 2;
     }
 
-    /* Fondo animado (canvas mar+estrellas) + haz + resplandor + viñeta. */
     .hero-bg {
       position: absolute;
       inset: 0;
@@ -3732,8 +3690,6 @@
       display: block;
     }
 
-    /* Vídeo de mar real (si Media/sea.mp4 existe). Aparece con fundido cuando
-       carga; mientras, se ve el canvas. */
     .hero-video {
       position: absolute;
       inset: 0;
@@ -3750,23 +3706,20 @@
       opacity: 1;
     }
 
-    /* Gradación de color: oscurece cielo/base y tiñe el agua hacia verde/morado
-       para que un vídeo azul/gris combine con la paleta de Crisol. */
     .hero-grade {
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        /* oscurecido general para que el haz y la marca destaquen sobre el vídeo */
+        
         linear-gradient(180deg, rgba(5, 6, 12, .72) 0%, rgba(5, 6, 12, .30) 38%, rgba(4, 5, 11, .68) 100%),
-        /* viñeta radial: bordes oscuros, centro algo más limpio */
+        
         radial-gradient(115% 80% at 50% 42%, transparent 40%, rgba(4, 5, 11, .62) 100%),
-        /* tinte de la paleta: verde abajo (agua) y morado arriba (cielo) */
+        
         radial-gradient(70% 55% at 50% 66%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 68%),
         radial-gradient(62% 50% at 50% 26%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 72%);
     }
 
-    /* Resplandor ambiente detrás del haz (tenue). */
     .hero-horizon {
       position: absolute;
       left: 50%;
@@ -3779,8 +3732,6 @@
       opacity: .5;
     }
 
-    /* El HAZ vertical: rayo FINO y brillante que baja del cielo y acaba en el
-       agua (~64%). Núcleo casi blanco con tinte verde→morado. */
     .hero-beam {
       position: absolute;
       left: 50%;
@@ -3804,7 +3755,7 @@
     }
 
     .hero-beam::before {
-      /* halo ancho, difuso, en forma de cuña (más ancho abajo, hacia el agua) */
+      
       content: "";
       position: absolute;
       left: 50%;
@@ -3821,7 +3772,6 @@
       filter: blur(24px);
     }
 
-    /* PISCINA de luz sobre el agua: elipse ancha que ilumina las olas. */
     .hero-pool {
       position: absolute;
       left: 50%;
@@ -3839,7 +3789,6 @@
       animation: poolPulse 3.8s ease-in-out infinite;
     }
 
-    /* NÚCLEO de impacto: destello brillante donde el haz toca el agua. */
     .hero-impact {
       position: absolute;
       left: 50%;
@@ -3860,7 +3809,6 @@
       animation: impactPulse 3.8s ease-in-out infinite;
     }
 
-    /* Reflejo/estela del haz bajando por el agua agitada. */
     .hero-refl {
       position: absolute;
       left: 50%;
@@ -3943,13 +3891,11 @@
       background: radial-gradient(125% 85% at 50% 38%, transparent 52%, rgba(0, 0, 0, .55) 100%);
     }
 
-    /* La gema del kicker en verde, a juego con "el crisol". */
     .hero .kicker {
       color: var(--accent-2);
       text-shadow: 0 0 18px color-mix(in srgb, var(--accent-2) 45%, transparent);
     }
 
-    /* ---- Viñetas de datos flotantes (glass) a los lados del hero ---- */
     .hero-cards {
       position: absolute;
       inset: 0;
@@ -4159,7 +4105,6 @@
       font-size: 11px;
     }
 
-    /* En pantallas donde no caben a los lados, se ocultan (no estorban al texto). */
     @media (max-width: 1180px) {
       .hero-cards {
         display: none;
@@ -4187,10 +4132,6 @@
       }
     }
 
-    /* ---- FIX tema claro: las maquetas de la app son SIEMPRE oscuras ----
-       Representan la UI real de Crisol (que es oscura). En tema claro su fondo
-       se ponía blanco y el contenido quedaba ilegible; aquí se fija la paleta
-       oscura de la app en ambos temas para que se lean bien. */
     [data-theme="light"] .shot,
     [data-theme="light"] .shot-bar,
     [data-theme="light"] .shot-body,
@@ -4210,11 +4151,6 @@
     }
   </style>
 
-  <!-- ============================================================
-       HERO PARTIDO: texto a la izquierda, vídeo a la derecha con
-       transición suave (degradado) y viñetas de datos sobre el vídeo.
-       Este bloque va el ÚLTIMO para sobreescribir el hero anterior.
-       ============================================================ -->
   <style>
     .hero {
       --hero-bg: #0a0e12;
@@ -4227,7 +4163,7 @@
       position: relative;
       isolation: isolate;
       background: radial-gradient(135% 125% at 16% 26%, #13211b 0%, #0a0e12 52%, #06080c 100%);
-      /* Texto claro (el hero es oscuro en ambos temas). */
+      
       --ink: #f5f6fa;
       --ink-2: #c9cfdd;
       --muted: #98a0b4;
@@ -4238,7 +4174,6 @@
       display: none !important;
     }
 
-    /* --- Panel de VÍDEO (derecha), con borde diagonal suave --- */
     .hero-media {
       position: absolute;
       top: 0;
@@ -4257,12 +4192,10 @@
       object-fit: cover;
       display: block;
       opacity: 1;
-      /* leve realce/saturación para que combine con la paleta */
+      
       filter: saturate(108%) contrast(104%);
     }
 
-    /* Fundido del borde izquierdo del vídeo hacia el fondo (transición NO brusca)
-       + oscurecido inferior para que se lean las viñetas + tinte de la paleta. */
     .hero-media-fade {
       position: absolute;
       inset: 0;
@@ -4274,7 +4207,6 @@
         radial-gradient(80% 60% at 70% 30%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
     }
 
-    /* --- TEXTO (izquierda) --- */
     .hero-text {
       position: relative;
       z-index: 2;
@@ -4306,7 +4238,6 @@
       justify-content: flex-start;
     }
 
-    /* --- Viñetas de datos sobre el vídeo (abajo-derecha) --- */
     .hero-stats {
       position: absolute;
       right: 20px;
@@ -4336,8 +4267,6 @@
       margin-right: 8px;
     }
 
-    /* --- Responsive: en estrecho, el vídeo pasa a fondo tenue y el texto se
-       centra encima (nunca brusco, siempre legible). --- */
     @media (max-width: 900px) {
       .hero {
         padding-top: 120px;
@@ -4430,22 +4359,21 @@
   <main id="top">
 
     <section class="hero">
-      <!-- Vídeo ajustado a la DERECHA con transición suave al fondo. -->
+      
       <div class="hero-media">
         <video class="hero-video" id="heroVideo" autoplay loop muted playsinline preload="auto"
           poster="./assets/video_poster.jpg">
           <source src="./assets/video_index-web.mp4" type="video/mp4">
-          <source src="./assets/video_index.mp4" type="video/mp4">
         </video>
         <div class="hero-media-fade" aria-hidden="true"></div>
-        <!-- Viñetas de datos sobre el vídeo (abajo a la derecha). -->
+        
         <div class="hero-stats" aria-hidden="true">
           <div class="hstat"><b>1</b><span data-i18n="hs.file">archivo — todo tu pentest, portable</span></div>
           <div class="hstat"><b>0</b><span data-i18n="hs.cloud">servidores — sin nube, sin instalar</span></div>
           <div class="hstat"><b>AES-256</b><span data-i18n="hs.enc">cifrado en reposo · 2FA</span></div>
         </div>
       </div>
-      <!-- Texto a la IZQUIERDA. -->
+      
       <div class="hero-text">
         <p class="kicker rev" data-i18n="hero.kicker">El crisol del pentester</p>
         <h1 class="rev rev-2" data-i18n="hero.title">Donde el caos<br>se vuelve <span class="grad">orden.</span></h1>
@@ -4701,7 +4629,6 @@
 
               <div class="demo-stage">
 
-                <!-- 0 · Panel -->
                 <div class="demo-panel on" data-panel="0">
                   <div class="shot-top">
                     <div class="tt" data-i18n="demo.p0.gt">Panel global<small data-i18n="demo.p0.gsub">Vista agregada de
@@ -4769,7 +4696,6 @@
                   </div>
                 </div>
 
-                <!-- 1 · Hallazgos -->
                 <div class="demo-panel" data-panel="1">
                   <div class="demo-ph"><span data-i18n="demo.p1.h2">Vulnerabilidades</span> · <span
                       style="color:var(--ink);font-weight:600">Portal Web</span></div>
@@ -4816,7 +4742,6 @@
                   </div>
                 </div>
 
-                <!-- 2 · Retest y SLA -->
                 <div class="demo-panel" data-panel="2">
                   <div class="demo-ph" data-i18n="demo.p2.h">Ciclo de verificación</div>
                   <div class="demo-tl">
@@ -4848,7 +4773,6 @@
                   </div>
                 </div>
 
-                <!-- 3 · Informe -->
                 <div class="demo-panel" data-panel="3">
                   <div class="demo-ph" data-i18n="demo.p3.h">Informe y exportaciones</div>
                   <div class="rep-cover">
@@ -5231,7 +5155,6 @@
         revs.forEach(function (el) { io.observe(el); });
       }
 
-
       var demoBox = document.getElementById("demoBox");
       if (demoBox) {
         var dTabs = [].slice.call(demoBox.querySelectorAll(".demo-tab"));
@@ -5450,9 +5373,8 @@
 
       var GH = "https://github.com/D3M0NH4NT3R/Crisol-RX";
       var GH_API = "https://api.github.com/repos/D3M0NH4NT3R/Crisol-RX/releases?per_page=15";
-      // Valores FALLBACK (por si la API de GitHub no responde). Se sobreescriben
-      // solos con la última release publicada: normalmente NO hace falta tocar esto
-      // en cada versión.
+
+      
       var STABLE = { tag: "1.4.0", ver: "1.4.0" }, BETA = { tag: "1.4.0", ver: "1.4.0" };
       var channel = "stable";
       function cur() { return channel === "beta" ? BETA : STABLE; }
@@ -5471,8 +5393,7 @@
       };
       function dlURL(key) {
         var c = cur(), o = OSES[key];
-        // Si la API dio la URL real del asset, se usa (robusto ante cambios de
-        // nombre); si no, se construye a partir del tag/ver (fallback).
+
         if (c.assets && c.assets[o.suffix]) return c.assets[o.suffix];
         return GH + "/releases/download/" + c.tag + "/crisol-" + c.ver + "-" + o.suffix + ".zip";
       }
@@ -5526,7 +5447,6 @@
       chS.addEventListener("click", function () { channel = "stable"; chS.classList.add("on"); chB.classList.remove("on"); renderOS(); });
       chB.addEventListener("click", function () { channel = "beta"; chB.classList.add("on"); chS.classList.remove("on"); renderOS(); });
 
-      // Oscuro por defecto (respeta la elección guardada si la hay).
       (function () {
         var saved = null;
         try { saved = localStorage.getItem("crx_theme"); } catch (e) { }
@@ -5535,11 +5455,9 @@
       applyLang("es");
       renderOS();
 
-      // --- Auto-actualización desde GitHub Releases ---
-      // Lee la última release publicada y rellena versión + enlaces de descarga
-      // solos, así NO hay que editar este index en cada release: basta con publicar
-      // la release en GitHub. Si la API falla (offline / límite), quedan los valores
-      // fallback de arriba. Empareja cada asset por el sufijo del sistema.
+      
+
+      
       function buildChannel(rel) {
         var assets = {};
         (rel.assets || []).forEach(function (a) {
@@ -5569,7 +5487,6 @@
           .catch(function () { });
       } catch (e) { }
 
-
       if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
         navigator.userAgentData.getHighEntropyValues(["architecture"]).then(function (d) {
           if (d && /arm/i.test(d.architecture || "")) {
@@ -5581,8 +5498,6 @@
     })();
   </script>
 
-  <!-- Fondo animado del hero: mar en movimiento + luz estelar (canvas).
-       El haz vertical y los resplandores verde/morado son CSS. -->
   <script>
     (function () {
       var c = document.getElementById('heroCanvas');
@@ -5598,7 +5513,7 @@
         if (!W || !H) return;
         c.width = Math.round(W * DPR); c.height = Math.round(H * DPR);
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-        // Estrellas solo en la mitad superior (cielo).
+        
         stars = [];
         var n = Math.min(180, Math.round(W * H / 9000));
         for (var i = 0; i < n; i++) {
@@ -5612,7 +5527,6 @@
         }
       }
 
-      // Dibuja una capa de ola (relleno hasta el fondo) con dos senos superpuestos.
       function wave(t, yBase, amp, len, phase, color) {
         ctx.beginPath();
         ctx.moveTo(0, H);
@@ -5631,7 +5545,6 @@
         var t = (now - start) / 1000;
         ctx.clearRect(0, 0, W, H);
 
-        // Estrellas parpadeantes (luz estelar).
         for (var i = 0; i < stars.length; i++) {
           var s = stars[i];
           var a = 0.30 + 0.5 * (0.5 + 0.5 * Math.sin(s.tw + t * s.sp));
@@ -5641,13 +5554,11 @@
         }
         ctx.globalAlpha = 1;
 
-        // Mar en movimiento: capas de fondo (más claras).
         var horizon = H * 0.60;
         wave(t * 0.45, horizon + 18, 9, 190, 0.0, 'rgba(22,28,48,0.55)');
         wave(t * 0.62, horizon + 46, 15, 150, 1.3, 'rgba(15,19,34,0.72)');
 
-        // Luz del IMPACTO iluminando el agua (aditiva): el haz "choca" y el
-        // resplandor verde/morado se derrama sobre las olas, con leve latido.
+        
         var cx = W / 2, cy = horizon + 6;
         var rad = Math.min(W * 0.44, 340);
         var pulse = 0.82 + 0.18 * Math.sin(t * 1.6);
@@ -5660,7 +5571,6 @@
         ctx.fillRect(0, cy - 34, W, H - (cy - 34));
         ctx.globalCompositeOperation = 'source-over';
 
-        // Olas del frente (siluetas oscuras) por encima de la luz.
         wave(t * 0.82, horizon + 84, 21, 116, 2.5, 'rgba(9,11,20,0.9)');
         wave(t * 1.05, horizon + 132, 26, 92, 3.7, 'rgba(5,6,12,1)');
 
@@ -5672,7 +5582,7 @@
       function go() { stop(); resize(); if (reduce || perfLite) { draw(performance.now()); } else { raf = requestAnimationFrame(draw); } }
 
       window.addEventListener('resize', function () { resize(); }, { passive: true });
-      // Pausar la animación cuando el hero no está visible (ahorra batería/CPU).
+      
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (ents) {
           ents.forEach(function (e) {
@@ -5684,19 +5594,18 @@
       }
       go();
 
-      // Si existe un vídeo de mar real (Media/sea.mp4), se usa como fondo y se
-      // apaga el canvas (ahorra CPU). Si no carga, el canvas sigue de fondo.
+      
       var vid = document.getElementById('heroVideo');
       if (vid) {
         var useVideo = function () {
-          if (vid.readyState < 2) return;      // aún sin datos
+          if (vid.readyState < 2) return;      
           vid.classList.add('ready');
           stop();
-          c.style.display = 'none';            // el vídeo sustituye al canvas
+          c.style.display = 'none';            
         };
         vid.addEventListener('loadeddata', useVideo);
         vid.addEventListener('canplay', useVideo);
-        // Si el archivo no existe o falla, no hacemos nada: queda el canvas.
+        
         vid.addEventListener('error', function () { }, true);
         var p = vid.play && vid.play();
         if (p && p.catch) p.catch(function () { });
@@ -5704,7 +5613,6 @@
     })();
   </script>
 
-  <!-- Asegura la reproducción del vídeo del hero (autoplay muted). -->
   <script>
     (function () {
       var v = document.getElementById('heroVideo');

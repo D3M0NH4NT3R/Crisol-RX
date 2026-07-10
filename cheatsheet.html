@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -263,23 +263,64 @@
     }
 
     /* nav */
+    /* Barra FLOTANTE (misma que la landing): pastilla centrada de cristal
+       oscuro en ambos temas, con efecto al hacer scroll. */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--border);
-      transition: background .4s var(--ease)
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1000px, calc(100% - 30px));
+      z-index: 60;
+      /* SIEMPRE oscura y sólida (no se mimetiza con el fondo en ningún tema). */
+      background: rgba(18, 21, 33, .9);
+      backdrop-filter: saturate(170%) blur(16px);
+      -webkit-backdrop-filter: saturate(170%) blur(16px);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      box-shadow: 0 18px 46px -22px rgba(0, 0, 0, .7);
+      transition: border-color .35s, box-shadow .35s, top .35s, width .35s;
+    }
+
+    nav.scrolled {
+      top: 12px;
+      width: min(920px, calc(100% - 30px));
+      border-color: color-mix(in srgb, var(--accent) 30%, rgba(255, 255, 255, .1));
+      box-shadow: 0 22px 60px -22px rgba(0, 0, 0, .82), 0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent) inset;
     }
 
     nav .wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
-      position: relative
+      height: 52px;
+      padding: 0 16px;
+      position: relative;
+      max-width: 100%;
     }
+
+    /* Texto/iconos de la barra SIEMPRE claros en AMBOS temas (va sobre oscuro). */
+    nav .brand,
+    nav .brand .name { color: #f5f6fa; }
+    nav .nav-links a:not(.btn):not(.nav-buy) { color: #c6ccda; }
+    nav .nav-links a:not(.btn):not(.nav-buy):hover { color: #fff; }
+    nav .lang-btn,
+    nav .theme-btn {
+      color: #dfe4ee !important;
+      border-color: rgba(255, 255, 255, .18) !important;
+      background: rgba(255, 255, 255, .05) !important;
+    }
+    nav .lang-btn:hover,
+    nav .theme-btn:hover {
+      color: #fff !important;
+      border-color: rgba(255, 255, 255, .34) !important;
+      background: rgba(255, 255, 255, .1) !important;
+    }
+    /* El icono de tema (luna/sol) hereda el color claro. */
+    nav .theme-btn svg,
+    nav .theme-btn .ln { stroke: currentColor; color: #dfe4ee; }
+    nav .nav-burger { border-color: rgba(255, 255, 255, .18) !important; background: rgba(255, 255, 255, .05) !important; }
+    nav .nav-burger span { background: #f5f6fa; }
 
     .brand {
       display: flex;
@@ -711,7 +752,7 @@
 
     /* header */
     header.head {
-      padding: 60px 0 34px;
+      padding: 116px 0 34px;
       text-align: center
     }
 
@@ -1828,18 +1869,8 @@
       opacity: .14 !important
     }
 
-    /* Nav minimalista translúcido */
-    nav {
-      height: 52px !important;
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid transparent
-    }
-
-    nav.scrolled,
-    nav.is-scrolled {
-      border-bottom: 1px solid var(--border)
-    }
+    /* (La barra flotante ya define su propio borde y sombra; aquí no se añade
+       border-bottom para no duplicar líneas dentro de la pastilla.) */
 
     nav .brand .name,
     nav .brand {
@@ -2152,6 +2183,7 @@
         <a class="toc-sub" href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
         <a class="toc-sub" href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
         <a class="toc-sub" href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
+        <a class="toc-sub" href="#despliegue" data-i18n="toc.deploy">Despliegue seguro</a>
       </aside>
 
       <main>
@@ -3118,7 +3150,7 @@ chmod +x crisol-*
                 <span class="cs-fnum">[ 04 ]</span>
                 <h2 data-i18n="grp.security.t">Seguridad y datos</h2>
               </span>
-              <span class="cs-fcount"><span data-i18n="grp.security.c">4 temas</span></span>
+              <span class="cs-fcount"><span data-i18n="grp.security.c">5 temas</span></span>
             </span>
             <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -3332,6 +3364,90 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
                   </table>
                 </section>
 
+                <!-- DESPLIEGUE SEGURO POR SISTEMA -->
+                <section class="cs-sec reveal" id="despliegue">
+                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="7" rx="1.5" />
+                        <rect x="3" y="13" width="18" height="7" rx="1.5" />
+                        <path d="M7 7.5h.01M7 16.5h.01" />
+                      </svg></span> <span data-i18n="sec.deploy.h">Despliegue seguro (Linux y macOS)</span></h2>
+                  <p class="lead"><span data-i18n="sec.deploy.lead">Para un servidor: usuario dedicado, permisos mínimos,
+                      servicio del sistema y cortafuegos. Guía completa en </span><code>docs/DESPLIEGUE-SEGURO.md</code>.</p>
+
+                  <h3 data-i18n="deploy.perms.h">1. Usuario dedicado y permisos mínimos</h3>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre><span class="c"># Usuario de servicio sin login (Linux)</span>
+sudo useradd --system --home /opt/crisol --shell /usr/sbin/nologin crisol
+sudo chown -R crisol:crisol /opt/crisol
+
+<span class="c"># Solo el servicio lee la config, la clave TLS y la base</span>
+sudo chmod 600 /opt/crisol/crisol.json crisol-key.pem crisol.db*
+sudo chmod 700 /opt/crisol/backups</pre>
+                  </div>
+                  <div class="note tip"><span class="ni">🔑</span>
+                    <div data-i18n="deploy.note.key">No pongas la passphrase en el <code>crisol.json</code>: pásala por la
+                      variable <code>CRISOL_KEY</code> desde el propio servicio, así no queda en disco.</div>
+                  </div>
+
+                  <h3 data-i18n="deploy.systemd.h">2. Servicio en Linux (systemd endurecido)</h3>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre><span class="c"># /etc/systemd/system/crisol.service</span>
+[Service]
+User=crisol
+WorkingDirectory=/opt/crisol
+ExecStart=/opt/crisol/crisol
+EnvironmentFile=/etc/crisol/crisol.env   <span class="c"># CRISOL_KEY=...</span>
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+RestrictAddressFamilies=AF_INET AF_INET6
+SystemCallFilter=@system-service
+ReadWritePaths=/opt/crisol
+UMask=0077
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target</pre>
+                  </div>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre>sudo systemctl daemon-reload
+sudo systemctl enable --now crisol
+sudo journalctl -u crisol -f   <span class="c"># contraseña admin del 1er arranque</span></pre>
+                  </div>
+
+                  <h3 data-i18n="deploy.launchd.h">3. Servicio en macOS (launchd)</h3>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre><span class="c"># /Library/LaunchDaemons/com.crisol.rx.plist (extracto)</span>
+&lt;key&gt;ProgramArguments&lt;/key&gt;
+&lt;array&gt;&lt;string&gt;/usr/local/crisol/crisol&lt;/string&gt;&lt;string&gt;-no-open&lt;/string&gt;&lt;/array&gt;
+&lt;key&gt;UserName&lt;/key&gt;&lt;string&gt;_crisol&lt;/string&gt;
+&lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;
+&lt;key&gt;EnvironmentVariables&lt;/key&gt;
+&lt;dict&gt;&lt;key&gt;CRISOL_KEY&lt;/key&gt;&lt;string&gt;tu-passphrase&lt;/string&gt;&lt;/dict&gt;</pre>
+                  </div>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre>sudo chown root:wheel /Library/LaunchDaemons/com.crisol.rx.plist
+sudo chmod 600 /Library/LaunchDaemons/com.crisol.rx.plist   <span class="c"># oculta la clave</span>
+sudo launchctl load -w /Library/LaunchDaemons/com.crisol.rx.plist</pre>
+                  </div>
+
+                  <h3 data-i18n="deploy.fw.h">4. Cortafuegos y acceso</h3>
+                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                    <pre><span class="c"># Linux (ufw): abre el puerto solo a tu subred de confianza</span>
+sudo ufw allow from 192.168.1.0/24 to any port 8723 proto tcp
+
+<span class="c"># macOS: firewall de aplicaciones</span>
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/local/crisol/crisol</pre>
+                  </div>
+                  <div class="note danger"><span class="ni">🛡️</span>
+                    <div data-i18n="deploy.note.check">Refuerza con <code>allowed_ips</code> en el <code>crisol.json</code>,
+                      activa <b>TLS</b> (abre por <code>https://</code>), <code>encrypt_db</code> y copias replicadas fuera
+                      del host. Activa <b>2FA</b> en todas las cuentas.</div>
+                  </div>
+                </section>
+
               </div>
             </div>
           </div>
@@ -3392,7 +3508,8 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         pulse(b, "is-spin");
       });
     });
-    try { if (!localStorage.getItem("vv_site_theme") && window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) { root.setAttribute("data-theme", "light"); } } catch (e) { }
+    /* Oscuro por defecto: se respeta la elección guardada (localStorage), pero no
+       se cambia a claro por la preferencia del sistema. */
     setIcon();
 
     var burger = document.getElementById("navBurger");
@@ -3653,7 +3770,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "grp.network.t": "Servidor y red",
         "grp.network.c": "3 temas",
         "grp.security.t": "Seguridad y datos",
-        "grp.security.c": "4 temas",
+        "grp.security.c": "5 temas",
         "toc.start": "Primer arranque",
         "toc.config": "El archivo crisol.json",
         "toc.flags": "Flags de arranque",
@@ -3896,6 +4013,15 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "tips.t5a": "No subas a ningún sitio público tus archivos de datos, el ",
         "tips.t5b": " ni los certificados.",
         "tips.t6": "Los exports de workspace contienen datos reales de clientes: trátalos como información sensible.",
+        "toc.deploy": "Despliegue seguro",
+        "sec.deploy.h": "Despliegue seguro (Linux y macOS)",
+        "sec.deploy.lead": "Para un servidor: usuario dedicado, permisos mínimos, servicio del sistema y cortafuegos. Guía completa en ",
+        "deploy.perms.h": "1. Usuario dedicado y permisos mínimos",
+        "deploy.note.key": "No pongas la passphrase en el <code>crisol.json</code>: pásala por la variable <code>CRISOL_KEY</code> desde el propio servicio, así no queda en disco.",
+        "deploy.systemd.h": "2. Servicio en Linux (systemd endurecido)",
+        "deploy.launchd.h": "3. Servicio en macOS (launchd)",
+        "deploy.fw.h": "4. Cortafuegos y acceso",
+        "deploy.note.check": "Refuerza con <code>allowed_ips</code> en el <code>crisol.json</code>, activa <b>TLS</b> (abre por <code>https://</code>), <code>encrypt_db</code> y copias replicadas fuera del host. Activa <b>2FA</b> en todas las cuentas.",
         "footer.madeBy": "Crisol-RX · creado por ",
         "footer.note": "Herramienta para uso ético y autorizado de seguridad ofensiva."
       },
@@ -3934,7 +4060,7 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "grp.network.t": "Server & network",
         "grp.network.c": "3 topics",
         "grp.security.t": "Security & data",
-        "grp.security.c": "4 topics",
+        "grp.security.c": "5 topics",
         "toc.start": "First run",
         "toc.config": "The crisol.json file",
         "toc.flags": "Startup flags",
@@ -4177,6 +4303,15 @@ rm -f crisol.db crisol.db-wal crisol.db-shm
         "tips.t5a": "Don't upload your data files, ",
         "tips.t5b": ", or the certificates to any public location.",
         "tips.t6": "Workspace exports contain real client data: treat them as sensitive information.",
+        "toc.deploy": "Secure deployment",
+        "sec.deploy.h": "Secure deployment (Linux & macOS)",
+        "sec.deploy.lead": "For a server: dedicated user, minimal permissions, system service and firewall. Full guide in ",
+        "deploy.perms.h": "1. Dedicated user & minimal permissions",
+        "deploy.note.key": "Don't put the passphrase in <code>crisol.json</code>: pass it via the <code>CRISOL_KEY</code> variable from the service itself, so it never touches disk.",
+        "deploy.systemd.h": "2. Linux service (hardened systemd)",
+        "deploy.launchd.h": "3. macOS service (launchd)",
+        "deploy.fw.h": "4. Firewall & access",
+        "deploy.note.check": "Reinforce with <code>allowed_ips</code> in <code>crisol.json</code>, enable <b>TLS</b> (open via <code>https://</code>), <code>encrypt_db</code> and off-host backups. Enable <b>2FA</b> on all accounts.",
         "footer.madeBy": "Crisol-RX · created by ",
         "footer.note": "Tool for ethical and authorized offensive security use."
       }

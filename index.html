@@ -1551,29 +1551,23 @@
 
     .demo-stage {
       position: relative;
-      min-height: 360px
+      min-height: 560px
     }
 
     @media (max-width:720px) {
       .demo-stage {
-        min-height: 460px
+        min-height: 480px
       }
     }
 
     .demo-panel {
-      position: absolute;
-      inset: 0;
+      display: none;
       padding: 22px 24px;
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity .5s var(--ease), transform .5s var(--ease)
     }
 
     .demo-panel.on {
-      opacity: 1;
-      transform: none;
-      pointer-events: auto
+      display: block;
+      animation: pdUp .45s var(--ease, cubic-bezier(.22, .61, .36, 1)) both;
     }
 
     .demo-ph {
@@ -4152,26 +4146,42 @@
   </style>
 
   <style>
+    /* ===================== PORTADA (split) ===================== */
     .hero {
       --hero-bg: #0a0e12;
       display: flex;
       align-items: center;
-      min-height: 92vh;
+      min-height: 100vh;
+      min-height: 100svh;
       padding: 92px 0 0;
       overflow: hidden;
       text-align: left;
       position: relative;
       isolation: isolate;
       background: radial-gradient(135% 125% at 16% 26%, #13211b 0%, #0a0e12 52%, #06080c 100%);
-      
       --ink: #f5f6fa;
       --ink-2: #c9cfdd;
       --muted: #98a0b4;
       color: var(--ink);
     }
 
-    .hero::before {
-      display: none !important;
+    .hero::before { display: none !important; }
+
+    /* Efecto suave de marca detrás del texto (lado izquierdo), sutil. */
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      left: -6%;
+      top: 34%;
+      width: 44%;
+      height: 62%;
+      background:
+        radial-gradient(closest-side, color-mix(in srgb, var(--accent) 24%, transparent), transparent 72%),
+        radial-gradient(closest-side at 30% 90%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 70%);
+      filter: blur(58px);
+      opacity: .55;
     }
 
     .hero-media {
@@ -4179,9 +4189,8 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: 56%;
+      width: 54%;
       z-index: 0;
-      clip-path: polygon(15% 0, 100% 0, 100% 100%, 3% 100%);
     }
 
     .hero-video {
@@ -4192,26 +4201,30 @@
       object-fit: cover;
       display: block;
       opacity: 1;
-      
       filter: saturate(108%) contrast(104%);
     }
 
+    /* Fundido del borde izquierdo del video con el fondo (sin efectos encima). */
     .hero-media-fade {
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(96deg, var(--hero-bg) 0%, color-mix(in srgb, var(--hero-bg) 82%, transparent) 18%, transparent 46%),
-        linear-gradient(0deg, rgba(6, 8, 13, .55) 0%, transparent 42%),
-        linear-gradient(118deg, color-mix(in srgb, var(--accent-2) 14%, transparent), transparent 52%),
-        radial-gradient(80% 60% at 70% 30%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
+        linear-gradient(100deg, var(--hero-bg) 0%, color-mix(in srgb, var(--hero-bg) 90%, transparent) 20%, color-mix(in srgb, var(--hero-bg) 55%, transparent) 34%, transparent 52%),
+        linear-gradient(0deg, rgba(6, 8, 13, .5) 0%, transparent 40%),
+        radial-gradient(85% 60% at 72% 30%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 72%);
     }
 
+    /* El texto vive SOLO en el 44% izquierdo (border-box incluye el padding), así
+       su borde derecho queda a 44% y NUNCA toca el vídeo (que empieza en el 46%). */
     .hero-text {
       position: relative;
       z-index: 2;
-      width: min(560px, 50%);
-      margin-left: clamp(22px, 6vw, 96px);
+      box-sizing: border-box;
+      width: 44%;
+      max-width: 600px;
+      padding-left: clamp(22px, 5.5vw, 84px);
+      padding-right: 26px;
     }
 
     .hero-text .kicker {
@@ -4251,8 +4264,8 @@
 
     .hstat {
       background: rgba(9, 13, 20, .5);
-      backdrop-filter: blur(10px) saturate(150%);
       -webkit-backdrop-filter: blur(10px) saturate(150%);
+      backdrop-filter: blur(10px) saturate(150%);
       border: 1px solid rgba(255, 255, 255, .14);
       border-radius: 10px;
       padding: 7px 13px;
@@ -4268,26 +4281,29 @@
     }
 
     @media (max-width: 900px) {
+      /* En móvil se APILA: texto arriba, vídeo debajo (nunca encima del texto). */
       .hero {
-        padding-top: 120px;
-        min-height: 82vh;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding-top: 104px;
+        min-height: 100svh;
         text-align: center;
       }
 
-      .hero-media {
-        width: 100%;
-        clip-path: none;
-        opacity: .35;
-      }
-
-      .hero-media-fade {
-        background:
-          linear-gradient(180deg, rgba(6, 8, 13, .55), rgba(6, 8, 13, .82)),
-          radial-gradient(80% 60% at 50% 30%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+      .hero::after {
+        left: 50%;
+        top: 8%;
+        width: 80%;
+        height: 40%;
+        transform: translateX(-50%);
+        opacity: .5;
       }
 
       .hero-text {
-        width: auto;
+        order: 1;
+        width: 100%;
+        max-width: 560px;
         margin: 0 auto;
         padding: 0 22px;
       }
@@ -4306,9 +4322,167 @@
         justify-content: center;
       }
 
-      .hero-stats {
-        display: none;
+      .hero-media {
+        order: 2;
+        position: relative;
+        width: min(560px, calc(100% - 44px));
+        margin: 34px auto 0;
+        height: 40vh;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, .1);
       }
+
+      .hero-media-fade {
+        background:
+          linear-gradient(180deg, transparent 46%, rgba(6, 8, 13, .5) 100%),
+          radial-gradient(80% 60% at 50% 20%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 72%);
+      }
+
+      .hero-stats {
+        right: 12px;
+        bottom: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-media { height: 34vh; }
+      .hero-stats { display: none; }
+    }
+
+  </style>
+
+  <style>
+    /* ===== Réplica del Panel global real (panel 0 del demo) ===== */
+    .pd { font-size: 11px; color: var(--ink); display: flex; flex-direction: column; gap: 9px; line-height: 1.3; }
+    .pd-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+    .pd-h-t { font-size: 16px; font-weight: 800; letter-spacing: -.3px; }
+    .pd-h-t small { display: block; font-size: 10.5px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+    .pd-inicio { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 600; color: var(--ink-2); background: var(--bg-soft, #0e1119); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; white-space: nowrap; }
+    .pd-tools { display: grid; grid-template-columns: 1fr auto auto auto; gap: 7px; }
+    .pd-search, .pd-sel { background: var(--bg-soft, #0e1119); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; color: var(--muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pd-sel { color: var(--ink-2); }
+    .pd-sevs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .pd-sev { position: relative; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px 9px; overflow: hidden; }
+    .pd-sev::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2.5px; background: var(--c); }
+    .pd-s-h { display: flex; align-items: center; gap: 6px; font-size: 9px; font-weight: 700; letter-spacing: .4px; color: var(--ink-2); }
+    .pd-s-h i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px -1px var(--c); }
+    .pd-sev b { display: block; font-size: 25px; font-weight: 800; margin: 5px 0 2px; color: var(--ink); }
+    .pd-sev em { font-size: 9px; color: var(--muted); font-style: normal; }
+    .pd-sev.crit { --c: var(--crit); } .pd-sev.high { --c: var(--high); } .pd-sev.med { --c: var(--med); }
+    .pd-sev.low { --c: var(--low); } .pd-sev.info { --c: var(--accent-3); }
+    .pd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .pd-stat { background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 13px; }
+    .pd-stat b { display: block; font-size: 21px; font-weight: 800; }
+    .pd-stat span { font-size: 8.5px; font-weight: 700; letter-spacing: .5px; color: var(--muted); }
+    .pd-row2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 9px; }
+    .pd-row3 { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 9px; }
+    .pd-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 13px; }
+    .pd-ct { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .4px; color: var(--ink-2); margin-bottom: 10px; text-transform: uppercase; }
+    .pd-leg { display: inline-flex; gap: 9px; font-size: 8.5px; font-weight: 600; color: var(--muted); text-transform: none; letter-spacing: 0; }
+    .pd-leg em { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
+    .pd-leg .d1 { background: var(--accent); } .pd-leg .d2 { background: var(--accent-2); }
+    .pd-line { width: 100%; height: 92px; display: block; }
+    .pd-line .ln-area { opacity: 0; animation: pdFade .8s ease .5s forwards; }
+    .pd-line .ln-path { stroke-dasharray: 340; stroke-dashoffset: 340; }
+    .demo.seen .pd-line .ln-path { animation: pdDraw 1.3s ease .3s forwards; }
+    .pd-donut-wrap { display: flex; align-items: center; gap: 14px; }
+    .pd-donut { width: 92px; height: 92px; border-radius: 50%; flex-shrink: 0; position: relative;
+      background: conic-gradient(var(--crit) 0 9.4%, var(--high) 9.4% 28.1%, var(--med) 28.1% 56.3%, var(--low) 56.3% 81.3%, var(--accent-3) 81.3% 100%);
+      transform: scale(.6); opacity: 0; }
+    .demo.seen .pd-donut { animation: pdPop .7s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) .35s forwards; }
+    .pd-donut::after { content: ""; position: absolute; inset: 13px; border-radius: 50%; background: var(--bg-card); }
+    .pd-dc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; }
+    .pd-dc b { font-size: 21px; font-weight: 800; line-height: 1; }
+    .pd-dc small { font-size: 7.5px; letter-spacing: 1px; color: var(--muted); margin-top: 2px; }
+    .pd-dleg { display: flex; flex-direction: column; gap: 6px; font-size: 10px; flex: 1; }
+    .pd-dleg > div { display: flex; align-items: center; gap: 7px; }
+    .pd-dleg .dt { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .pd-dleg b { margin-left: auto; font-weight: 700; }
+    .dt.crit { background: var(--crit); } .dt.high { background: var(--high); } .dt.med { background: var(--med); }
+    .dt.low { background: var(--low); } .dt.info { background: var(--accent-3); }
+    .pd-gauge { text-align: center; }
+    .pd-gwrap { position: relative; width: 128px; margin: 4px auto 0; }
+    .pd-gsvg { width: 128px; display: block; }
+    .pd-gsvg .g-val { stroke-dasharray: 157; stroke-dashoffset: 157; }
+    .demo.seen .pd-gsvg .g-val { animation: pdGauge 1.2s ease .4s forwards; }
+    .pd-gnum { font-size: 21px; font-weight: 800; display: block; margin-top: -34px; }
+    .pd-gcap { font-size: 9px; color: var(--muted); } .pd-gsub { font-size: 9px; color: var(--muted); display: block; margin-top: 9px; }
+    .pd-act { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 10.5px; }
+    .pd-act:last-child { border-bottom: none; }
+    .pd-act i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .pd-act i.crit { background: var(--crit); } .pd-act i.high { background: var(--high); } .pd-act i.med { background: var(--med); } .pd-act i.info { background: var(--accent-3); }
+    .pd-act em { margin-left: auto; font-style: normal; color: var(--muted); font-size: 9px; white-space: nowrap; }
+    .pd-act span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-wsr { display: flex; justify-content: space-between; font-size: 10.5px; margin-bottom: 5px; }
+    .pd-wsbar { height: 7px; border-radius: 5px; background: var(--bg-soft, #0e1119); overflow: hidden; margin-bottom: 11px; }
+    .pd-wsbar i { display: block; height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); width: 0; }
+    .demo.seen .pd-wsbar i { animation: pdBar 1.1s ease .5s forwards; }
+    .pd-detail { font-size: 13px; font-weight: 800; margin-top: 2px; }
+    .pd-tbl { background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .pd-thead, .pd-trow { display: grid; grid-template-columns: 2.5fr 1.1fr 1.2fr .95fr .5fr .85fr; gap: 8px; align-items: center; padding: 9px 12px; }
+    .pd-thead { font-size: 8px; font-weight: 700; letter-spacing: .5px; color: var(--muted); background: var(--bg-soft, #0e1119); border-bottom: 1px solid var(--line); }
+    .pd-trow { font-size: 9.5px; border-bottom: 1px solid var(--line); }
+    .pd-trow:last-child { border-bottom: none; }
+    .pd-trow .vn { font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-trow .mut { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pd-chip { display: inline-block; font-size: 8px; font-weight: 800; letter-spacing: .4px; padding: 2px 7px; border-radius: 20px; justify-self: start; }
+    .pd-chip.crit { color: var(--crit); background: color-mix(in srgb, var(--crit) 16%, transparent); }
+    .pd-chip.high { color: var(--high); background: color-mix(in srgb, var(--high) 16%, transparent); }
+    .pd-chip.med { color: var(--med); background: color-mix(in srgb, var(--med) 16%, transparent); }
+    .pd-chip.low { color: var(--low); background: color-mix(in srgb, var(--low) 16%, transparent); }
+    .pd-chip.info { color: var(--accent-3); background: color-mix(in srgb, var(--accent-3) 16%, transparent); }
+    .pd-st { font-size: 8.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 20px; padding: 2px 8px; justify-self: start; white-space: nowrap; }
+    /* ---- Interactividad del demo (panel 0) ---- */
+    .demo .pd-sev { cursor: pointer; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+    .demo .pd-sev:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); }
+    .demo .pd-sev.active { border-color: var(--c); box-shadow: 0 0 0 1px var(--c), 0 12px 26px -14px var(--c); }
+    .demo .pd-sev.active::after { content: ""; position: absolute; right: 9px; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px 1px var(--c); }
+    .demo .pd-trow { transition: opacity .3s ease, background .15s ease; }
+    .demo .pd-trow:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+    .demo .pd-trow.dim { opacity: .14; }
+    .demo .pd-act { transition: transform .4s var(--ease, cubic-bezier(.22,.61,.36,1)), opacity .4s ease; }
+    .demo .pd-act.pd-act-new { opacity: 0; transform: translateY(-10px); }
+    .demo .pd-recent .pd-ct .pd-livedot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); display: inline-block; margin-left: 6px; box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent); animation: pdLive 1.8s ease-in-out infinite; }
+    @keyframes pdLive { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 55%, transparent); } 70% { box-shadow: 0 0 0 6px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+    /* Entrada escalonada de tarjetas al ver el demo */
+    .demo.seen .pd-sev, .demo.seen .pd-stat, .demo.seen .pd-row2 > *, .demo.seen .pd-row3 > *, .demo.seen .pd-tbl { animation: pdUp .5s var(--ease, cubic-bezier(.22,.61,.36,1)) both; }
+    .demo.seen .pd-sev:nth-child(2) { animation-delay: .04s; } .demo.seen .pd-sev:nth-child(3) { animation-delay: .08s; }
+    .demo.seen .pd-sev:nth-child(4) { animation-delay: .12s; } .demo.seen .pd-sev:nth-child(5) { animation-delay: .16s; }
+    .demo.seen .pd-stat:nth-child(2) { animation-delay: .05s; } .demo.seen .pd-stat:nth-child(3) { animation-delay: .1s; } .demo.seen .pd-stat:nth-child(4) { animation-delay: .15s; }
+    .demo.seen .pd-row3 > *:nth-child(2) { animation-delay: .08s; } .demo.seen .pd-row3 > *:nth-child(3) { animation-delay: .16s; }
+    .demo.seen .pd-tbl { animation-delay: .1s; }
+    @keyframes pdUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @keyframes pdDraw { to { stroke-dashoffset: 0; } }
+    @keyframes pdGauge { to { stroke-dashoffset: 53; } }
+    @keyframes pdBar { to { width: var(--w, 78%); } }
+    @keyframes pdPop { to { transform: scale(1); opacity: 1; } }
+    @keyframes pdFade { to { opacity: 1; } }
+    /* Mini-dashboard de la sección "de un vistazo": estado FINAL (sin depender del
+       observador del demo), y compacto. */
+    .pd-mini .pd-donut { transform: none; opacity: 1; }
+    .pd-mini .pd-line .ln-path { stroke-dashoffset: 0; }
+    .pd-mini .pd-line .ln-area { opacity: 1; animation: none; }
+    .pd-mini .pd-sev b { font-size: 22px; }
+    .pd-mini .pd-row2 { grid-template-columns: 1.3fr 1fr; }
+    /* Con movimiento reducido: sin animación, pero mostrando el estado FINAL
+       (si no, la línea/medidor/donut quedarían ocultos por su estado inicial). */
+    @media (prefers-reduced-motion: reduce) {
+      .pd-line .ln-path { stroke-dashoffset: 0; }
+      .pd-line .ln-area { opacity: 1; animation: none; }
+      .pd-gsvg .g-val { stroke-dashoffset: 53; }
+      .pd-wsbar i { width: var(--w, 78%); }
+      .pd-donut { transform: none; opacity: 1; }
+      .demo .pd-sev, .demo .pd-stat, .demo .pd-row2 > *, .demo .pd-row3 > *, .demo .pd-tbl { opacity: 1; transform: none; animation: none; }
+    }
+    @media (max-width: 720px) {
+      .pd-tools { grid-template-columns: 1fr 1fr; }
+      .pd-tools .pd-sel:last-child { display: none; }
+      .pd-sevs { grid-template-columns: repeat(3, 1fr); }
+      .pd-stats { grid-template-columns: repeat(2, 1fr); }
+      .pd-row2, .pd-row3 { grid-template-columns: 1fr; }
+      .pd-thead, .pd-trow { grid-template-columns: 2.2fr 1fr .9fr .5fr; }
+      .pd-thead .hc2, .pd-trow .hc2 { display: none; }
     }
   </style>
 </head>
@@ -4359,21 +4533,19 @@
   <main id="top">
 
     <section class="hero">
-      
       <div class="hero-media">
         <video class="hero-video" id="heroVideo" autoplay loop muted playsinline preload="auto"
           poster="./assets/video_poster.jpg">
           <source src="./assets/video_index-web.mp4" type="video/mp4">
         </video>
         <div class="hero-media-fade" aria-hidden="true"></div>
-        
         <div class="hero-stats" aria-hidden="true">
           <div class="hstat"><b>1</b><span data-i18n="hs.file">archivo — todo tu pentest, portable</span></div>
           <div class="hstat"><b>0</b><span data-i18n="hs.cloud">servidores — sin nube, sin instalar</span></div>
           <div class="hstat"><b>AES-256</b><span data-i18n="hs.enc">cifrado en reposo · 2FA</span></div>
         </div>
       </div>
-      
+
       <div class="hero-text">
         <p class="kicker rev" data-i18n="hero.kicker">El crisol del pentester</p>
         <h1 class="rev rev-2" data-i18n="hero.title">Donde el caos<br>se vuelve <span class="grad">orden.</span></h1>
@@ -4513,41 +4685,48 @@
                 class="live"><i></i> <span data-i18n="shot.live">En vivo</span></span>
             </div>
             <div class="shot-main mk-main">
-              <div class="mk-sevrow">
-                <div class="mk-sev crit"><span class="mk-sev-b"></span><em data-i18n="sev.crit">Críticas</em><b>3</b>
+              <div class="pd pd-mini">
+                <div class="pd-sevs">
+                  <div class="pd-sev crit"><span class="pd-s-h"><i></i><span data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                  <div class="pd-sev high"><span class="pd-s-h"><i></i><span data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                  <div class="pd-sev med"><span class="pd-s-h"><i></i><span data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                  <div class="pd-sev low"><span class="pd-s-h"><i></i><span data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                  <div class="pd-sev info"><span class="pd-s-h"><i></i><span data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
                 </div>
-                <div class="mk-sev high"><span class="mk-sev-b"></span><em data-i18n="sev.high">Altas</em><b>6</b></div>
-                <div class="mk-sev med"><span class="mk-sev-b"></span><em data-i18n="sev.med">Medias</em><b>5</b></div>
-                <div class="mk-sev low"><span class="mk-sev-b"></span><em data-i18n="sev.low">Bajas</em><b>2</b></div>
-                <div class="mk-sev info"><span class="mk-sev-b"></span><em data-i18n="sev.info">Info</em><b>1</b></div>
-              </div>
-              <div class="mk-bento">
-                <div class="mk-card mk-gauge">
-                  <div class="mk-ch" data-i18n="shot.health">Salud de seguridad</div>
-                  <div class="mk-gwrap">
-                    <svg class="mk-g" viewBox="0 0 120 66" aria-hidden="true">
-                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11"
-                        stroke-linecap="round" />
-                      <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)" stroke-width="11"
-                        stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="46" />
+                <div class="pd-row2">
+                  <div class="pd-card pd-trend">
+                    <div class="pd-ct"><span data-i18n="demo.p0.time">Vulnerabilidades en el tiempo</span>
+                      <span class="pd-leg"><em class="d1"></em><span data-i18n="demo.p0.disc">Descubiertas</span>
+                        <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span></div>
+                    <svg class="pd-line" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="pdA2" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="var(--accent)" stop-opacity=".34" />
+                          <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path class="ln-area" d="M0,78 L53,70 L106,60 L160,46 L213,36 L266,22 L320,12 L320,92 L0,92 Z"
+                        fill="url(#pdA2)" />
+                      <path class="ln-path" d="M0,78 L53,70 L106,60 L160,46 L213,36 L266,22 L320,12" fill="none"
+                        stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path class="ln-path" d="M0,86 L53,84 L106,80 L160,72 L213,64 L266,56 L320,48" fill="none"
+                        stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <b class="mk-gnum">71%</b>
                   </div>
-                  <span class="mk-gcap" data-i18n="shot.fixed">Resueltas</span>
-                </div>
-                <div class="mk-card mk-trend">
-                  <div class="mk-ch" data-i18n="shot.time">En el tiempo</div>
-                  <div class="mini-chart" aria-hidden="true"><span style="height:36%"></span><span
-                      style="height:58%"></span><span style="height:44%"></span><span style="height:72%"></span><span
-                      style="height:90%"></span><span style="height:65%"></span><span style="height:50%"></span></div>
-                </div>
-                <div class="mk-card mk-recent">
-                  <div class="mk-ch" data-i18n="shot.recent">Actividad reciente</div>
-                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">SQLi ·
-                      /api/login</span><em>9.8</em></div>
-                  <div class="mk-act"><span class="mk-dot crit"></span><span class="mk-an">Log4Shell</span><em>10.0</em>
-                  </div>
-                  <div class="mk-act"><span class="mk-dot high"></span><span class="mk-an">Stored XSS</span><em>8.1</em>
+                  <div class="pd-card pd-bysev">
+                    <div class="pd-ct" data-i18n="demo.p0.bysev">Por severidad</div>
+                    <div class="pd-donut-wrap">
+                      <div class="pd-donut">
+                        <div class="pd-dc"><b>32</b><small data-i18n="demo.p0.vulns">VULNS</small></div>
+                      </div>
+                      <div class="pd-dleg">
+                        <div><span class="dt crit"></span><span data-i18n="sev.crit">Críticas</span><b>3</b></div>
+                        <div><span class="dt high"></span><span data-i18n="sev.high">Altas</span><b>6</b></div>
+                        <div><span class="dt med"></span><span data-i18n="demo.sevM">Medias</span><b>9</b></div>
+                        <div><span class="dt low"></span><span data-i18n="demo.sevL">Bajas</span><b>8</b></div>
+                        <div><span class="dt info"></span><span data-i18n="sev.info">Info</span><b>6</b></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4630,68 +4809,155 @@
               <div class="demo-stage">
 
                 <div class="demo-panel on" data-panel="0">
-                  <div class="shot-top">
-                    <div class="tt" data-i18n="demo.p0.gt">Panel global<small data-i18n="demo.p0.gsub">Vista agregada de
-                        todos tus workspaces</small></div>
-                    <div class="prog">
-                      <div class="pl"><span data-i18n="shot.remed">Remediación</span><b>66%</b></div>
-                      <div class="bar"><i style="width:66%"></i></div>
+                  <div class="pd">
+                    <div class="pd-head">
+                      <div class="pd-h-t" data-i18n="demo.p0.gt">Panel global<small data-i18n="demo.p0.gsub">Vista
+                          agregada de todos tus workspaces</small></div>
+                      <span class="pd-inicio">◆ <span data-i18n="demo.side.home">Inicio</span></span>
                     </div>
-                  </div>
-                  <div class="demo-k6">
-                    <div class="demo-k"><b>4</b><span data-i18n="shot.workspaces">Workspaces</span></div>
-                    <div class="demo-k"><b>32</b><span data-i18n="demo.p0.kact">Vulns activas</span></div>
-                    <div class="demo-k c"><b>4</b><span data-i18n="sev.crit">Críticas</span></div>
-                    <div class="demo-k h"><b>9</b><span data-i18n="sev.high">Altas</span></div>
-                    <div class="demo-k"><b>3</b><span data-i18n="demo.p0.kret">Pend. retest</span></div>
-                    <div class="demo-k s"><b>21</b><span data-i18n="shot.fixed">Resueltas</span></div>
-                  </div>
-                  <div class="demo-2c" style="grid-template-columns:1fr 1fr">
-                    <div class="demo-card">
-                      <div class="ct" data-i18n="demo.p0.bysev">Por severidad</div>
-                      <div class="demo-sev2">
-                        <div class="demo-donut">
-                          <div class="ring"
-                            style="background:conic-gradient(var(--crit) 0 12.5%,var(--high) 12.5% 40.6%,var(--med) 40.6% 78.1%,var(--accent-3) 78.1% 100%)">
+                    <div class="pd-tools">
+                      <span class="pd-search">⌕ <span data-i18n="demo.p0.search">Buscar en todo: título, activo, CWE,
+                          ID…</span></span>
+                      <span class="pd-sel" data-i18n="demo.p0.fsev">Todas las severidades ⌄</span>
+                      <span class="pd-sel" data-i18n="demo.p0.fsta">Todos los estados ⌄</span>
+                      <span class="pd-sel" data-i18n="demo.p0.fws">Todos los workspaces ⌄</span>
+                    </div>
+                    <div class="pd-sevs">
+                      <div class="pd-sev crit"><span class="pd-s-h"><i></i><span data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev high"><span class="pd-s-h"><i></i><span data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev med"><span class="pd-s-h"><i></i><span data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev low"><span class="pd-s-h"><i></i><span data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev info"><span class="pd-s-h"><i></i><span data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                    </div>
+                    <div class="pd-stats">
+                      <div class="pd-stat"><b>3</b><span data-i18n="demo.p0.kret">Pend. retest</span></div>
+                      <div class="pd-stat"><b>21</b><span data-i18n="shot.fixed">Resueltas</span></div>
+                      <div class="pd-stat"><b>14</b><span data-i18n="demo.p0.assets">Activos afectados</span></div>
+                      <div class="pd-stat"><b>4</b><span data-i18n="shot.workspaces">Workspaces</span></div>
+                    </div>
+                    <div class="pd-row2">
+                      <div class="pd-card pd-trend">
+                        <div class="pd-ct"><span data-i18n="demo.p0.time">Vulnerabilidades en el tiempo</span>
+                          <span class="pd-leg"><em class="d1"></em><span data-i18n="demo.p0.disc">Descubiertas</span>
+                            <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span></div>
+                        <svg class="pd-line" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
+                          <defs>
+                            <linearGradient id="pdA" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0" stop-color="var(--accent)" stop-opacity=".34" />
+                              <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
+                            </linearGradient>
+                          </defs>
+                          <path class="ln-area" d="M0,78 L53,70 L106,60 L160,46 L213,36 L266,22 L320,12 L320,92 L0,92 Z"
+                            fill="url(#pdA)" />
+                          <path class="ln-path" d="M0,78 L53,70 L106,60 L160,46 L213,36 L266,22 L320,12" fill="none"
+                            stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                          <path class="ln-path" d="M0,86 L53,84 L106,80 L160,72 L213,64 L266,56 L320,48" fill="none"
+                            stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </div>
+                      <div class="pd-card pd-bysev">
+                        <div class="pd-ct" data-i18n="demo.p0.bysev">Por severidad</div>
+                        <div class="pd-donut-wrap">
+                          <div class="pd-donut">
+                            <div class="pd-dc"><b>32</b><small data-i18n="demo.p0.vulns">VULNS</small></div>
                           </div>
-                          <div class="rc"><b>32</b><small data-i18n="demo.p0.vulns">vulns</small></div>
-                        </div>
-                        <div class="demo-leg">
-                          <div class="lr"><span class="dt" style="background:var(--crit)"></span> <span
-                              data-i18n="sev.crit">Críticas</span> <b>4</b></div>
-                          <div class="lr"><span class="dt" style="background:var(--high)"></span> <span
-                              data-i18n="sev.high">Altas</span> <b>9</b></div>
-                          <div class="lr"><span class="dt" style="background:var(--med)"></span> <span
-                              data-i18n="demo.sevM">Medias</span> <b>12</b></div>
-                          <div class="lr"><span class="dt" style="background:var(--accent-3)"></span> <span
-                              data-i18n="demo.sevL">Bajas</span> <b>7</b></div>
+                          <div class="pd-dleg">
+                            <div><span class="dt crit"></span><span data-i18n="sev.crit">Críticas</span><b>3</b></div>
+                            <div><span class="dt high"></span><span data-i18n="sev.high">Altas</span><b>6</b></div>
+                            <div><span class="dt med"></span><span data-i18n="demo.sevM">Medias</span><b>9</b></div>
+                            <div><span class="dt low"></span><span data-i18n="demo.sevL">Bajas</span><b>8</b></div>
+                            <div><span class="dt info"></span><span data-i18n="sev.info">Info</span><b>6</b></div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="demo-card">
-                      <div class="ct" data-i18n="demo.p0.byws">Por workspace</div>
-                      <div class="demo-wsb">
-                        <div class="demo-wsr">
-                          <div class="wl2"><span>Acme Corp</span><b>18</b></div>
-                          <div class="stk"><i style="width:16%;background:var(--crit)"></i><i
-                              style="width:33%;background:var(--high)"></i><i
-                              style="width:33%;background:var(--med)"></i><i
-                              style="width:18%;background:var(--accent-3)"></i></div>
+                    <div class="pd-row3">
+                      <div class="pd-card pd-gauge">
+                        <div class="pd-ct" data-i18n="shot.health">Salud de seguridad</div>
+                        <div class="pd-gwrap">
+                          <svg class="pd-gsvg" viewBox="0 0 120 66" aria-hidden="true">
+                            <path d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--line)" stroke-width="11"
+                              stroke-linecap="round" />
+                            <path class="g-val" d="M10 60 A50 50 0 0 1 110 60" fill="none" stroke="var(--accent-2)"
+                              stroke-width="11" stroke-linecap="round" />
+                          </svg>
+                          <b class="pd-gnum">66%</b>
                         </div>
-                        <div class="demo-wsr">
-                          <div class="wl2"><span>Banca Nova</span><b>9</b></div>
-                          <div class="stk"><i style="width:11%;background:var(--crit)"></i><i
-                              style="width:22%;background:var(--high)"></i><i
-                              style="width:45%;background:var(--med)"></i><i
-                              style="width:22%;background:var(--accent-3)"></i></div>
-                        </div>
-                        <div class="demo-wsr">
-                          <div class="wl2"><span>Fintrek</span><b>5</b></div>
-                          <div class="stk"><i style="width:20%;background:var(--high)"></i><i
-                              style="width:40%;background:var(--med)"></i><i
-                              style="width:40%;background:var(--accent-3)"></i></div>
-                        </div>
+                        <span class="pd-gcap" data-i18n="shot.fixed">Resueltas</span>
+                        <span class="pd-gsub">35 / 53</span>
                       </div>
+                      <div class="pd-card pd-recent">
+                        <div class="pd-ct"><span data-i18n="shot.recent">Actividad reciente</span><span
+                            class="pd-livedot"></span></div>
+                        <div class="pd-act"><i class="crit"></i><span data-i18n="demo.r1.t">Inyección SQL en
+                            /portal/login</span><em>9.8</em></div>
+                        <div class="pd-act"><i class="high"></i><span data-i18n="demo.r2.t">XSS almacenado en
+                            comentarios</span><em>7.4</em></div>
+                        <div class="pd-act"><i class="med"></i><span data-i18n="demo.r3.t">Cabeceras de seguridad
+                            ausentes</span><em>5.3</em></div>
+                      </div>
+                      <div class="pd-card pd-byws">
+                        <div class="pd-ct" data-i18n="demo.p0.byws">Por workspace</div>
+                        <div class="pd-wsr"><span>Acme Corp</span><b>18</b></div>
+                        <div class="pd-wsbar" style="--w:78%"><i></i></div>
+                        <div class="pd-wsr"><span>Banca Nova</span><b>9</b></div>
+                        <div class="pd-wsbar" style="--w:42%"><i></i></div>
+                        <div class="pd-wsr"><span>Fintrek</span><b>5</b></div>
+                        <div class="pd-wsbar" style="--w:24%"><i></i></div>
+                      </div>
+                    </div>
+                    <div class="pd-detail" data-i18n="demo.p0.detail">Detalle por activo</div>
+                    <div class="pd-tbl">
+                      <div class="pd-thead">
+                        <span data-i18n="demo.tbl.vuln">Vulnerabilidad</span>
+                        <span data-i18n="shot.workspaces">Workspace</span>
+                        <span class="hc2" data-i18n="demo.p0.proj">Proyecto</span>
+                        <span data-i18n="demo.tbl.sev">Severidad</span>
+                        <span>CVSS</span>
+                        <span class="hc2" data-i18n="demo.tbl.state">Estado</span>
+                      </div>
+                      <div class="pd-trow">
+                        <span class="vn" data-i18n="demo.r1.t">Inyección SQL en /portal/login</span>
+                        <span class="mut">Acme Corp</span>
+                        <span class="mut hc2" data-i18n="demo.p0.pweb">Portal Web</span>
+                        <span class="pd-chip crit" data-i18n="sev.crit">Crítica</span>
+                        <span style="color:var(--crit);font-weight:700">9.8</span>
+                        <span class="pd-st hc2" data-i18n="demo.st.open">Abierta</span>
+                      </div>
+                      <div class="pd-trow">
+                        <span class="vn" data-i18n="demo.r2.t">XSS almacenado en comentarios</span>
+                        <span class="mut">Acme Corp</span>
+                        <span class="mut hc2" data-i18n="demo.p0.pweb">Portal Web</span>
+                        <span class="pd-chip high" data-i18n="sev.high">Alta</span>
+                        <span style="color:var(--high);font-weight:700">7.4</span>
+                        <span class="pd-st hc2" data-i18n="demo.st.open">Abierta</span>
+                      </div>
+                      <div class="pd-trow">
+                        <span class="vn" data-i18n="demo.r3.t">Cabeceras de seguridad ausentes</span>
+                        <span class="mut">Acme Corp</span>
+                        <span class="mut hc2" data-i18n="demo.p0.pweb">Portal Web</span>
+                        <span class="pd-chip med" data-i18n="demo.sevM">Media</span>
+                        <span style="color:var(--med);font-weight:700">5.3</span>
+                        <span class="pd-st hc2" data-i18n="demo.st.retest">En retest</span>
+                      </div>
+                      <div class="pd-trow">
+                        <span class="vn" data-i18n="demo.p0.rcookie">Cookie sin flags Secure/HttpOnly</span>
+                        <span class="mut">Banca Nova</span>
+                        <span class="mut hc2" data-i18n="demo.p0.pcore">API Core</span>
+                        <span class="pd-chip low" data-i18n="demo.sevL">Baja</span>
+                        <span style="color:var(--low);font-weight:700">4.0</span>
+                        <span class="pd-st hc2" data-i18n="demo.st.open">Abierta</span>
+                      </div>
+                      <div class="pd-trow">
+                        <span class="vn" data-i18n="demo.p0.rperm">Falta cabecera Permissions-Policy</span>
+                        <span class="mut">Fintrek</span>
+                        <span class="mut hc2" data-i18n="demo.p0.pweb">Portal Web</span>
+                        <span class="pd-chip info" data-i18n="sev.info">Info</span>
+                        <span style="color:var(--muted)">—</span>
+                        <span class="pd-st hc2" data-i18n="demo.st.open">Abierta</span>
+                      </div>
+                      <div class="pd-empty-row" style="display:none;padding:14px 12px;font-size:9.5px;color:var(--muted)"
+                        data-i18n="demo.p0.nofilter">Sin resultados para este filtro.</div>
                     </div>
                   </div>
                 </div>
@@ -5178,6 +5444,81 @@
           }, { threshold: 0.3 });
           dio.observe(demoBox);
         } else { demoStart(); }
+
+        // Dispara las animaciones de dibujo del dashboard (líneas, donut, medidor,
+        // barras y entrada de tarjetas) cuando el demo entra en pantalla.
+        if ("IntersectionObserver" in window) {
+          var pio = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { demoBox.classList.add("seen"); pio.disconnect(); } });
+          }, { threshold: 0.25 });
+          pio.observe(demoBox);
+        } else { demoBox.classList.add("seen"); }
+
+        // ---- Dashboard interactivo del panel 0 ----
+        var pd0 = demoBox.querySelector('.demo-panel[data-panel="0"] .pd');
+        if (pd0) {
+          var SEVS = ["crit", "high", "med", "low", "info"];
+          var clsOf = function (el) { for (var i = 0; i < SEVS.length; i++) { if (el.classList.contains(SEVS[i])) return SEVS[i]; } return ""; };
+          var sevCards = [].slice.call(pd0.querySelectorAll(".pd-sev"));
+          var rows = [].slice.call(pd0.querySelectorAll(".pd-tbl .pd-trow"));
+          var emptyRow = pd0.querySelector(".pd-empty-row");
+          var curF = null;
+          function applyFilter(sev) {
+            curF = sev;
+            sevCards.forEach(function (c) { c.classList.toggle("active", clsOf(c) === sev); });
+            var any = false;
+            rows.forEach(function (r) {
+              var chip = r.querySelector(".pd-chip");
+              var match = !sev || (chip && chip.classList.contains(sev));
+              r.classList.toggle("dim", !match);
+              if (match) any = true;
+            });
+            if (emptyRow) emptyRow.style.display = (sev && !any) ? "" : "none";
+          }
+          sevCards.forEach(function (c) {
+            c.addEventListener("click", function () { applyFilter(curF === clsOf(c) ? null : clsOf(c)); });
+          });
+
+          // Feed de actividad "en vivo": inyecta hallazgos mientras el panel está a la vista.
+          var recent = pd0.querySelector(".pd-recent");
+          if (recent && !reduce) {
+            var FEED = [
+              ["crit", "Deserialización insegura", "9.1"], ["high", "SSRF en /api/fetch", "8.6"],
+              ["med", "TLS 1.0 habilitado", "6.1"], ["crit", "RCE en carga de archivos", "9.4"],
+              ["low", "Cookie sin flag Secure", "4.0"], ["high", "IDOR en /facturas", "8.2"],
+              ["info", "Falta Permissions-Policy", "—"], ["med", "CORS permisivo", "5.8"]
+            ];
+            var fidx = 0, feedTimer = null;
+            function pushFeed() {
+              var it = FEED[fidx % FEED.length]; fidx++;
+              var row = document.createElement("div");
+              row.className = "pd-act pd-act-new";
+              var i = document.createElement("i"); i.className = it[0];
+              var s = document.createElement("span"); s.textContent = it[1];
+              var e = document.createElement("em"); e.textContent = it[2];
+              row.appendChild(i); row.appendChild(s); row.appendChild(e);
+              var title = recent.querySelector(".pd-ct");
+              recent.insertBefore(row, title.nextSibling);
+              var acts = recent.querySelectorAll(".pd-act");
+              if (acts.length > 3) acts[acts.length - 1].remove();
+              requestAnimationFrame(function () { row.classList.remove("pd-act-new"); });
+            }
+            function feedStart() {
+              if (feedTimer) return;
+              feedTimer = setInterval(function () {
+                var panel = pd0.closest(".demo-panel");
+                if (panel && panel.classList.contains("on")) pushFeed();
+              }, 2600);
+            }
+            function feedStop() { if (feedTimer) { clearInterval(feedTimer); feedTimer = null; } }
+            if ("IntersectionObserver" in window) {
+              var fio = new IntersectionObserver(function (es) {
+                es.forEach(function (e) { if (e.isIntersecting) feedStart(); else feedStop(); });
+              }, { threshold: 0.25 });
+              fio.observe(demoBox);
+            } else { feedStart(); }
+          }
+        }
       }
 
       var counted = false;
@@ -5242,7 +5583,7 @@
       var I18N = {
         es: {
           "nav.features": "Características", "nav.product": "Producto", "nav.roles": "Roles", "nav.guide": "Guía", "nav.download": "Descargar", "nav.buy": "Obtener",
-          "hero.kicker": "El crisol del pentester", "hero.title": "Donde el caos<br>se vuelve <span class=\"grad\">orden.</span>", "hero.sub": "Crisol-RX funde hallazgos, retests y entregas en un único archivo portable. Sin servidores. Sin nube. Lo abres y empiezas.", "hero.cta": "Descargar gratis", "hero.more": "Ver en acción", "hs.file": "archivo — todo tu pentest, portable", "hs.cloud": "servidores — sin nube, sin instalar", "hs.enc": "cifrado en reposo · 2FA",
+          "hero.kicker": "El crisol del pentester", "hero.title": "Donde el caos<br>se vuelve <span class=\"grad\">orden.</span>", "hero.sub": "Crisol-RX funde hallazgos, retests y entregas en un único archivo portable. Sin servidores. Sin nube. Lo abres y empiezas.", "hero.cta": "Descargar gratis", "hero.more": "Ver en acción", "hs.file": "archivo — todo tu pentest, portable", "hs.cloud": "servidores — sin nube, sin instalar", "hs.enc": "cifrado en reposo · 2FA", "hero.t1": "archivo portable", "hero.t2": "servidores · sin nube", "hero.t3": "cifrado · 2FA", "hero.pill1": "hallazgos", "hero.pill2": "workspaces",
           "shot.live": "En vivo", "shot.workspaces": "Workspaces", "shot.views": "Vistas", "shot.calendar": "Calendario", "shot.reports": "Informes", "shot.total": "Total", "shot.fixed": "Resueltas",
           "shot.scope": "Pentest externo · Q2 2026", "shot.remed": "Remediación", "shot.retest": "Retest", "shot.solved": "Resuelta",
           "cal.e1": "Pentest Acme · ventana", "cal.e2": "Retest Fintrek", "cal.e3": "Entrega informe Banca Nova",
@@ -5279,6 +5620,7 @@
           "demo.p2.days": "días", "demo.p2.slat": "SLA · corrección de críticas", "demo.p2.slad": "El contador arranca al <b>entregar el informe</b>, no al subir la vuln.", "demo.p2.n1": "SLA por vencer", "demo.p2.n2": "retest pendiente",
           "demo.p3.m1": "Acme Corp · Web App", "demo.p3.m2": "24 hallazgos · 3 críticas", "demo.p3.b1": "Color de marca", "demo.p3.b2": "Logo en portada", "demo.p3.b3": "Plan de acción",
           "demo.p0.gt": "Panel global", "demo.p0.gsub": "Vista agregada de todos tus workspaces", "demo.p0.kact": "Vulns activas", "demo.p0.kret": "Pend. retest", "demo.p0.vulns": "vulns", "demo.p0.byws": "Por workspace",
+          "demo.side.home": "Inicio", "demo.p0.search": "Buscar en todo: título, activo, CWE, ID…", "demo.p0.fsev": "Todas las severidades ⌄", "demo.p0.fsta": "Todos los estados ⌄", "demo.p0.fws": "Todos los workspaces ⌄", "demo.p0.oftotal": "del total", "demo.p0.assets": "Activos afectados", "demo.p0.time": "Vulnerabilidades en el tiempo", "demo.p0.disc": "Descubiertas", "demo.p0.detail": "Detalle por activo", "demo.p0.proj": "Proyecto", "demo.p0.pweb": "Portal Web", "demo.p0.rcookie": "Cookie sin flags Secure/HttpOnly", "demo.p0.pcore": "API Core", "demo.p0.rperm": "Falta cabecera Permissions-Policy", "demo.p0.nofilter": "Sin resultados para este filtro.",
           "demo.p1.h2": "Vulnerabilidades", "demo.tbl.vuln": "Vulnerabilidad", "demo.tbl.sev": "Severidad", "demo.tbl.state": "Estado",
           "demo.r1.t": "Inyección SQL en /portal/login", "demo.r2.t": "XSS almacenado en comentarios", "demo.r3.t": "Cabeceras de seguridad ausentes", "demo.r4.t": "IDOR en descarga de facturas",
           "demo.st.open": "Abierta", "demo.st.retest": "En retest", "demo.st.solved": "Resuelta",
@@ -5301,7 +5643,7 @@
         },
         en: {
           "nav.features": "Features", "nav.product": "Product", "nav.roles": "Roles", "nav.guide": "Guide", "nav.download": "Download", "nav.buy": "Get it",
-          "hero.kicker": "The pentester's crucible", "hero.title": "Where chaos<br>becomes <span class=\"grad\">order.</span>", "hero.sub": "Crisol-RX melts findings, retests and deliveries into a single portable file. No servers. No cloud. Open it and start.", "hero.cta": "Download free", "hero.more": "See it in action", "hs.file": "file — your whole pentest, portable", "hs.cloud": "servers — no cloud, no install", "hs.enc": "encryption at rest · 2FA",
+          "hero.kicker": "The pentester's crucible", "hero.title": "Where chaos<br>becomes <span class=\"grad\">order.</span>", "hero.sub": "Crisol-RX melts findings, retests and deliveries into a single portable file. No servers. No cloud. Open it and start.", "hero.cta": "Download free", "hero.more": "See it in action", "hs.file": "file — your whole pentest, portable", "hs.cloud": "servers — no cloud, no install", "hs.enc": "encryption at rest · 2FA", "hero.t1": "portable file", "hero.t2": "servers · no cloud", "hero.t3": "encryption · 2FA", "hero.pill1": "findings", "hero.pill2": "workspaces",
           "shot.live": "Live", "shot.workspaces": "Workspaces", "shot.views": "Views", "shot.calendar": "Calendar", "shot.reports": "Reports", "shot.total": "Total", "shot.fixed": "Fixed",
           "shot.scope": "External pentest · Q2 2026", "shot.remed": "Remediation", "shot.retest": "Retest", "shot.solved": "Fixed",
           "cal.e1": "Acme pentest · window", "cal.e2": "Fintrek retest", "cal.e3": "Banca Nova report delivery",
@@ -5338,6 +5680,7 @@
           "demo.p2.days": "days", "demo.p2.slat": "SLA · fix critical findings", "demo.p2.slad": "The countdown starts <b>when the report is delivered</b>, not when the vuln is uploaded.", "demo.p2.n1": "SLA due soon", "demo.p2.n2": "pending retest",
           "demo.p3.m1": "Acme Corp · Web App", "demo.p3.m2": "24 findings · 3 critical", "demo.p3.b1": "Brand color", "demo.p3.b2": "Cover logo", "demo.p3.b3": "Action plan",
           "demo.p0.gt": "Global dashboard", "demo.p0.gsub": "Aggregated view of all your workspaces", "demo.p0.kact": "Active vulns", "demo.p0.kret": "Pending retest", "demo.p0.vulns": "vulns", "demo.p0.byws": "By workspace",
+          "demo.side.home": "Home", "demo.p0.search": "Search everything: title, asset, CWE, ID…", "demo.p0.fsev": "All severities ⌄", "demo.p0.fsta": "All statuses ⌄", "demo.p0.fws": "All workspaces ⌄", "demo.p0.oftotal": "of total", "demo.p0.assets": "Affected assets", "demo.p0.time": "Vulnerabilities over time", "demo.p0.disc": "Discovered", "demo.p0.detail": "Detail by asset", "demo.p0.proj": "Project", "demo.p0.pweb": "Web Portal", "demo.p0.rcookie": "Cookie missing Secure/HttpOnly flags", "demo.p0.pcore": "API Core", "demo.p0.rperm": "Missing Permissions-Policy header", "demo.p0.nofilter": "No results for this filter.",
           "demo.p1.h2": "Vulnerabilities", "demo.tbl.vuln": "Vulnerability", "demo.tbl.sev": "Severity", "demo.tbl.state": "Status",
           "demo.r1.t": "SQL Injection in /portal/login", "demo.r2.t": "Stored XSS in comments", "demo.r3.t": "Missing security headers", "demo.r4.t": "IDOR in invoice download",
           "demo.st.open": "Open", "demo.st.retest": "In retest", "demo.st.solved": "Resolved",

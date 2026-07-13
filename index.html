@@ -46,7 +46,7 @@
     }
 
     [data-theme="light"] {
-      
+
       --bg: #eef0f6;
       --bg-soft: #e6e9f1;
       --bg-card: #ffffff;
@@ -408,7 +408,7 @@
     }
 
     .nav-buy:hover {
-      
+
       color: #fff;
       background: color-mix(in srgb, var(--accent) 82%, #000);
       border-color: transparent;
@@ -3556,7 +3556,6 @@
   </style>
 
   <style>
-
     .nav {
       top: 18px;
       left: 50%;
@@ -3564,7 +3563,7 @@
       transform: translateX(-50%);
       width: min(1000px, calc(100% - 30px));
       height: auto;
-      
+
       background: rgba(14, 17, 28, .30);
       backdrop-filter: saturate(150%) blur(12px);
       -webkit-backdrop-filter: saturate(150%) blur(12px);
@@ -3634,7 +3633,7 @@
     }
 
     .hero {
-      
+
       --bg-card: #141926;
       --bg-soft: #0e1119;
       --line: rgba(255, 255, 255, .10);
@@ -3705,11 +3704,11 @@
       inset: 0;
       pointer-events: none;
       background:
-        
+
         linear-gradient(180deg, rgba(5, 6, 12, .72) 0%, rgba(5, 6, 12, .30) 38%, rgba(4, 5, 11, .68) 100%),
-        
+
         radial-gradient(115% 80% at 50% 42%, transparent 40%, rgba(4, 5, 11, .62) 100%),
-        
+
         radial-gradient(70% 55% at 50% 66%, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 68%),
         radial-gradient(62% 50% at 50% 26%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 72%);
     }
@@ -3749,7 +3748,7 @@
     }
 
     .hero-beam::before {
-      
+
       content: "";
       position: absolute;
       left: 50%;
@@ -4165,7 +4164,9 @@
       color: var(--ink);
     }
 
-    .hero::before { display: none !important; }
+    .hero::before {
+      display: none !important;
+    }
 
     /* Efecto suave de marca detrás del texto (lado izquierdo), sutil. */
     .hero::after {
@@ -4281,6 +4282,7 @@
     }
 
     @media (max-width: 900px) {
+
       /* En móvil se APILA: texto arriba, vídeo debajo (nunca encima del texto). */
       .hero {
         flex-direction: column;
@@ -4346,143 +4348,842 @@
     }
 
     @media (max-width: 560px) {
-      .hero-media { height: 34vh; }
-      .hero-stats { display: none; }
-    }
+      .hero-media {
+        height: 34vh;
+      }
 
+      .hero-stats {
+        display: none;
+      }
+    }
   </style>
 
   <style>
     /* ===== Réplica del Panel global real (panel 0 del demo) ===== */
-    .pd { font-size: 11px; color: var(--ink); display: flex; flex-direction: column; gap: 9px; line-height: 1.3; }
-    .pd-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-    .pd-h-t { font-size: 16px; font-weight: 800; letter-spacing: -.3px; }
-    .pd-h-t small { display: block; font-size: 10.5px; font-weight: 500; color: var(--muted); margin-top: 2px; }
-    .pd-inicio { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 600; color: var(--ink-2); background: var(--bg-soft, #0e1119); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; white-space: nowrap; }
-    .pd-tools { display: grid; grid-template-columns: 1fr auto auto auto; gap: 7px; }
-    .pd-search, .pd-sel { background: var(--bg-soft, #0e1119); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; color: var(--muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .pd-sel { color: var(--ink-2); }
-    .pd-sevs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-    .pd-sev { position: relative; background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px 9px; overflow: hidden; }
-    .pd-sev::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2.5px; background: var(--c); }
-    .pd-s-h { display: flex; align-items: center; gap: 6px; font-size: 9px; font-weight: 700; letter-spacing: .4px; color: var(--ink-2); }
-    .pd-s-h i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px -1px var(--c); }
-    .pd-sev b { display: block; font-size: 25px; font-weight: 800; margin: 5px 0 2px; color: var(--ink); }
-    .pd-sev em { font-size: 9px; color: var(--muted); font-style: normal; }
-    .pd-sev.crit { --c: var(--crit); } .pd-sev.high { --c: var(--high); } .pd-sev.med { --c: var(--med); }
-    .pd-sev.low { --c: var(--low); } .pd-sev.info { --c: var(--accent-3); }
-    .pd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    .pd-stat { background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 13px; }
-    .pd-stat b { display: block; font-size: 21px; font-weight: 800; }
-    .pd-stat span { font-size: 8.5px; font-weight: 700; letter-spacing: .5px; color: var(--muted); }
-    .pd-row2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 9px; }
-    .pd-row3 { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 9px; }
-    .pd-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 13px; }
-    .pd-ct { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 9.5px; font-weight: 800; letter-spacing: .4px; color: var(--ink-2); margin-bottom: 10px; text-transform: uppercase; }
-    .pd-leg { display: inline-flex; gap: 9px; font-size: 8.5px; font-weight: 600; color: var(--muted); text-transform: none; letter-spacing: 0; }
-    .pd-leg em { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 3px; vertical-align: middle; }
-    .pd-leg .d1 { background: var(--accent); } .pd-leg .d2 { background: var(--accent-2); }
-    .pd-line { width: 100%; height: 92px; display: block; }
-    .pd-line .ln-area { opacity: 0; animation: pdFade .8s ease .5s forwards; }
-    .pd-line .ln-path { stroke-dasharray: 340; stroke-dashoffset: 340; }
-    .demo.seen .pd-line .ln-path { animation: pdDraw 1.3s ease .3s forwards; }
-    .pd-donut-wrap { display: flex; align-items: center; gap: 14px; }
-    .pd-donut { width: 92px; height: 92px; border-radius: 50%; flex-shrink: 0; position: relative;
+    .pd {
+      font-size: 11px;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      line-height: 1.3;
+    }
+
+    .pd-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .pd-h-t {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    .pd-h-t small {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .pd-inicio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--ink-2);
+      background: var(--bg-soft, #0e1119);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+
+    .pd-tools {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 7px;
+    }
+
+    .pd-search,
+    .pd-sel {
+      background: var(--bg-soft, #0e1119);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 11px;
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pd-sel {
+      color: var(--ink-2);
+    }
+
+    .pd-sevs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .pd-sev {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 11px 12px 9px;
+      overflow: hidden;
+    }
+
+    .pd-sev::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2.5px;
+      background: var(--c);
+    }
+
+    .pd-s-h {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      color: var(--ink-2);
+    }
+
+    .pd-s-h i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c);
+      box-shadow: 0 0 8px -1px var(--c);
+    }
+
+    .pd-sev b {
+      display: block;
+      font-size: 25px;
+      font-weight: 800;
+      margin: 5px 0 2px;
+      color: var(--ink);
+    }
+
+    .pd-sev em {
+      font-size: 9px;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    .pd-sev.crit {
+      --c: var(--crit);
+    }
+
+    .pd-sev.high {
+      --c: var(--high);
+    }
+
+    .pd-sev.med {
+      --c: var(--med);
+    }
+
+    .pd-sev.low {
+      --c: var(--low);
+    }
+
+    .pd-sev.info {
+      --c: var(--accent-3);
+    }
+
+    .pd-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .pd-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 13px;
+    }
+
+    .pd-stat b {
+      display: block;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .pd-stat span {
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--muted);
+    }
+
+    .pd-row2 {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 9px;
+    }
+
+    .pd-row3 {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 9px;
+    }
+
+    .pd-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 13px;
+    }
+
+    .pd-ct {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      color: var(--ink-2);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .pd-leg {
+      display: inline-flex;
+      gap: 9px;
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .pd-leg em {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+
+    .pd-leg .d1 {
+      background: var(--accent);
+    }
+
+    .pd-leg .d2 {
+      background: var(--accent-2);
+    }
+
+    .pd-line {
+      width: 100%;
+      height: 92px;
+      display: block;
+    }
+
+    .pd-line .ln-area {
+      opacity: 0;
+      animation: pdFade .8s ease .5s forwards;
+    }
+
+    .pd-line .ln-path {
+      stroke-dasharray: 340;
+      stroke-dashoffset: 340;
+    }
+
+    .demo.seen .pd-line .ln-path {
+      animation: pdDraw 1.3s ease .3s forwards;
+    }
+
+    .pd-donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .pd-donut {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
       background: conic-gradient(var(--crit) 0 9.4%, var(--high) 9.4% 28.1%, var(--med) 28.1% 56.3%, var(--low) 56.3% 81.3%, var(--accent-3) 81.3% 100%);
-      transform: scale(.6); opacity: 0; }
-    .demo.seen .pd-donut { animation: pdPop .7s var(--ease-spring, cubic-bezier(.34,1.56,.64,1)) .35s forwards; }
-    .pd-donut::after { content: ""; position: absolute; inset: 13px; border-radius: 50%; background: var(--bg-card); }
-    .pd-dc { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; }
-    .pd-dc b { font-size: 21px; font-weight: 800; line-height: 1; }
-    .pd-dc small { font-size: 7.5px; letter-spacing: 1px; color: var(--muted); margin-top: 2px; }
-    .pd-dleg { display: flex; flex-direction: column; gap: 6px; font-size: 10px; flex: 1; }
-    .pd-dleg > div { display: flex; align-items: center; gap: 7px; }
-    .pd-dleg .dt { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .pd-dleg b { margin-left: auto; font-weight: 700; }
-    .dt.crit { background: var(--crit); } .dt.high { background: var(--high); } .dt.med { background: var(--med); }
-    .dt.low { background: var(--low); } .dt.info { background: var(--accent-3); }
-    .pd-gauge { text-align: center; }
-    .pd-gwrap { position: relative; width: 128px; margin: 4px auto 0; }
-    .pd-gsvg { width: 128px; display: block; }
-    .pd-gsvg .g-val { stroke-dasharray: 157; stroke-dashoffset: 157; }
-    .demo.seen .pd-gsvg .g-val { animation: pdGauge 1.2s ease .4s forwards; }
-    .pd-gnum { font-size: 21px; font-weight: 800; display: block; margin-top: -34px; }
-    .pd-gcap { font-size: 9px; color: var(--muted); } .pd-gsub { font-size: 9px; color: var(--muted); display: block; margin-top: 9px; }
-    .pd-act { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 10.5px; }
-    .pd-act:last-child { border-bottom: none; }
-    .pd-act i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .pd-act i.crit { background: var(--crit); } .pd-act i.high { background: var(--high); } .pd-act i.med { background: var(--med); } .pd-act i.info { background: var(--accent-3); }
-    .pd-act em { margin-left: auto; font-style: normal; color: var(--muted); font-size: 9px; white-space: nowrap; }
-    .pd-act span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .pd-wsr { display: flex; justify-content: space-between; font-size: 10.5px; margin-bottom: 5px; }
-    .pd-wsbar { height: 7px; border-radius: 5px; background: var(--bg-soft, #0e1119); overflow: hidden; margin-bottom: 11px; }
-    .pd-wsbar i { display: block; height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-2), var(--accent)); width: 0; }
-    .demo.seen .pd-wsbar i { animation: pdBar 1.1s ease .5s forwards; }
-    .pd-detail { font-size: 13px; font-weight: 800; margin-top: 2px; }
-    .pd-tbl { background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-    .pd-thead, .pd-trow { display: grid; grid-template-columns: 2.5fr 1.1fr 1.2fr .95fr .5fr .85fr; gap: 8px; align-items: center; padding: 9px 12px; }
-    .pd-thead { font-size: 8px; font-weight: 700; letter-spacing: .5px; color: var(--muted); background: var(--bg-soft, #0e1119); border-bottom: 1px solid var(--line); }
-    .pd-trow { font-size: 9.5px; border-bottom: 1px solid var(--line); }
-    .pd-trow:last-child { border-bottom: none; }
-    .pd-trow .vn { font-weight: 600; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .pd-trow .mut { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .pd-chip { display: inline-block; font-size: 8px; font-weight: 800; letter-spacing: .4px; padding: 2px 7px; border-radius: 20px; justify-self: start; }
-    .pd-chip.crit { color: var(--crit); background: color-mix(in srgb, var(--crit) 16%, transparent); }
-    .pd-chip.high { color: var(--high); background: color-mix(in srgb, var(--high) 16%, transparent); }
-    .pd-chip.med { color: var(--med); background: color-mix(in srgb, var(--med) 16%, transparent); }
-    .pd-chip.low { color: var(--low); background: color-mix(in srgb, var(--low) 16%, transparent); }
-    .pd-chip.info { color: var(--accent-3); background: color-mix(in srgb, var(--accent-3) 16%, transparent); }
-    .pd-st { font-size: 8.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 20px; padding: 2px 8px; justify-self: start; white-space: nowrap; }
+      transform: scale(.6);
+      opacity: 0;
+    }
+
+    .demo.seen .pd-donut {
+      animation: pdPop .7s var(--ease-spring, cubic-bezier(.34, 1.56, .64, 1)) .35s forwards;
+    }
+
+    .pd-donut::after {
+      content: "";
+      position: absolute;
+      inset: 13px;
+      border-radius: 50%;
+      background: var(--bg-card);
+    }
+
+    .pd-dc {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .pd-dc b {
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .pd-dc small {
+      font-size: 7.5px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .pd-dleg {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 10px;
+      flex: 1;
+    }
+
+    .pd-dleg>div {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .pd-dleg .dt {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pd-dleg b {
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .dt.crit {
+      background: var(--crit);
+    }
+
+    .dt.high {
+      background: var(--high);
+    }
+
+    .dt.med {
+      background: var(--med);
+    }
+
+    .dt.low {
+      background: var(--low);
+    }
+
+    .dt.info {
+      background: var(--accent-3);
+    }
+
+    .pd-gauge {
+      text-align: center;
+    }
+
+    .pd-gwrap {
+      position: relative;
+      width: 128px;
+      margin: 4px auto 0;
+    }
+
+    .pd-gsvg {
+      width: 128px;
+      display: block;
+    }
+
+    .pd-gsvg .g-val {
+      stroke-dasharray: 157;
+      stroke-dashoffset: 157;
+    }
+
+    .demo.seen .pd-gsvg .g-val {
+      animation: pdGauge 1.2s ease .4s forwards;
+    }
+
+    .pd-gnum {
+      font-size: 21px;
+      font-weight: 800;
+      display: block;
+      margin-top: -34px;
+    }
+
+    .pd-gcap {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .pd-gsub {
+      font-size: 9px;
+      color: var(--muted);
+      display: block;
+      margin-top: 9px;
+    }
+
+    .pd-act {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 10.5px;
+    }
+
+    .pd-act:last-child {
+      border-bottom: none;
+    }
+
+    .pd-act i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pd-act i.crit {
+      background: var(--crit);
+    }
+
+    .pd-act i.high {
+      background: var(--high);
+    }
+
+    .pd-act i.med {
+      background: var(--med);
+    }
+
+    .pd-act i.info {
+      background: var(--accent-3);
+    }
+
+    .pd-act em {
+      margin-left: auto;
+      font-style: normal;
+      color: var(--muted);
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .pd-act span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pd-wsr {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      margin-bottom: 5px;
+    }
+
+    .pd-wsbar {
+      height: 7px;
+      border-radius: 5px;
+      background: var(--bg-soft, #0e1119);
+      overflow: hidden;
+      margin-bottom: 11px;
+    }
+
+    .pd-wsbar i {
+      display: block;
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      width: 0;
+    }
+
+    .demo.seen .pd-wsbar i {
+      animation: pdBar 1.1s ease .5s forwards;
+    }
+
+    .pd-detail {
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .pd-tbl {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .pd-thead,
+    .pd-trow {
+      display: grid;
+      grid-template-columns: 2.5fr 1.1fr 1.2fr .95fr .5fr .85fr;
+      gap: 8px;
+      align-items: center;
+      padding: 9px 12px;
+    }
+
+    .pd-thead {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: var(--muted);
+      background: var(--bg-soft, #0e1119);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pd-trow {
+      font-size: 9.5px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pd-trow:last-child {
+      border-bottom: none;
+    }
+
+    .pd-trow .vn {
+      font-weight: 600;
+      color: var(--ink);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pd-trow .mut {
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pd-chip {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      padding: 2px 7px;
+      border-radius: 20px;
+      justify-self: start;
+    }
+
+    .pd-chip.crit {
+      color: var(--crit);
+      background: color-mix(in srgb, var(--crit) 16%, transparent);
+    }
+
+    .pd-chip.high {
+      color: var(--high);
+      background: color-mix(in srgb, var(--high) 16%, transparent);
+    }
+
+    .pd-chip.med {
+      color: var(--med);
+      background: color-mix(in srgb, var(--med) 16%, transparent);
+    }
+
+    .pd-chip.low {
+      color: var(--low);
+      background: color-mix(in srgb, var(--low) 16%, transparent);
+    }
+
+    .pd-chip.info {
+      color: var(--accent-3);
+      background: color-mix(in srgb, var(--accent-3) 16%, transparent);
+    }
+
+    .pd-st {
+      font-size: 8.5px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 2px 8px;
+      justify-self: start;
+      white-space: nowrap;
+    }
+
     /* ---- Interactividad del demo (panel 0) ---- */
-    .demo .pd-sev { cursor: pointer; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
-    .demo .pd-sev:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--c) 55%, var(--line)); }
-    .demo .pd-sev.active { border-color: var(--c); box-shadow: 0 0 0 1px var(--c), 0 12px 26px -14px var(--c); }
-    .demo .pd-sev.active::after { content: ""; position: absolute; right: 9px; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px 1px var(--c); }
-    .demo .pd-trow { transition: opacity .3s ease, background .15s ease; }
-    .demo .pd-trow:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
-    .demo .pd-trow.dim { opacity: .14; }
-    .demo .pd-act { transition: transform .4s var(--ease, cubic-bezier(.22,.61,.36,1)), opacity .4s ease; }
-    .demo .pd-act.pd-act-new { opacity: 0; transform: translateY(-10px); }
-    .demo .pd-recent .pd-ct .pd-livedot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); display: inline-block; margin-left: 6px; box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent); animation: pdLive 1.8s ease-in-out infinite; }
-    @keyframes pdLive { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 55%, transparent); } 70% { box-shadow: 0 0 0 6px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+    .demo .pd-sev {
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .demo .pd-sev:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--c) 55%, var(--line));
+    }
+
+    .demo .pd-sev.active {
+      border-color: var(--c);
+      box-shadow: 0 0 0 1px var(--c), 0 12px 26px -14px var(--c);
+    }
+
+    .demo .pd-sev.active::after {
+      content: "";
+      position: absolute;
+      right: 9px;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c);
+      box-shadow: 0 0 8px 1px var(--c);
+    }
+
+    .demo .pd-trow {
+      transition: opacity .3s ease, background .15s ease;
+    }
+
+    .demo .pd-trow:hover {
+      background: color-mix(in srgb, var(--ink) 6%, transparent);
+    }
+
+    .demo .pd-trow.dim {
+      opacity: .14;
+    }
+
+    .demo .pd-act {
+      transition: transform .4s var(--ease, cubic-bezier(.22, .61, .36, 1)), opacity .4s ease;
+    }
+
+    .demo .pd-act.pd-act-new {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .demo .pd-recent .pd-ct .pd-livedot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      display: inline-block;
+      margin-left: 6px;
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent);
+      animation: pdLive 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pdLive {
+      0% {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 55%, transparent);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px transparent;
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 transparent;
+      }
+    }
+
     /* Entrada escalonada de tarjetas al ver el demo */
-    .demo.seen .pd-sev, .demo.seen .pd-stat, .demo.seen .pd-row2 > *, .demo.seen .pd-row3 > *, .demo.seen .pd-tbl { animation: pdUp .5s var(--ease, cubic-bezier(.22,.61,.36,1)) both; }
-    .demo.seen .pd-sev:nth-child(2) { animation-delay: .04s; } .demo.seen .pd-sev:nth-child(3) { animation-delay: .08s; }
-    .demo.seen .pd-sev:nth-child(4) { animation-delay: .12s; } .demo.seen .pd-sev:nth-child(5) { animation-delay: .16s; }
-    .demo.seen .pd-stat:nth-child(2) { animation-delay: .05s; } .demo.seen .pd-stat:nth-child(3) { animation-delay: .1s; } .demo.seen .pd-stat:nth-child(4) { animation-delay: .15s; }
-    .demo.seen .pd-row3 > *:nth-child(2) { animation-delay: .08s; } .demo.seen .pd-row3 > *:nth-child(3) { animation-delay: .16s; }
-    .demo.seen .pd-tbl { animation-delay: .1s; }
-    @keyframes pdUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-    @keyframes pdDraw { to { stroke-dashoffset: 0; } }
-    @keyframes pdGauge { to { stroke-dashoffset: 53; } }
-    @keyframes pdBar { to { width: var(--w, 78%); } }
-    @keyframes pdPop { to { transform: scale(1); opacity: 1; } }
-    @keyframes pdFade { to { opacity: 1; } }
+    .demo.seen .pd-sev,
+    .demo.seen .pd-stat,
+    .demo.seen .pd-row2>*,
+    .demo.seen .pd-row3>*,
+    .demo.seen .pd-tbl {
+      animation: pdUp .5s var(--ease, cubic-bezier(.22, .61, .36, 1)) both;
+    }
+
+    .demo.seen .pd-sev:nth-child(2) {
+      animation-delay: .04s;
+    }
+
+    .demo.seen .pd-sev:nth-child(3) {
+      animation-delay: .08s;
+    }
+
+    .demo.seen .pd-sev:nth-child(4) {
+      animation-delay: .12s;
+    }
+
+    .demo.seen .pd-sev:nth-child(5) {
+      animation-delay: .16s;
+    }
+
+    .demo.seen .pd-stat:nth-child(2) {
+      animation-delay: .05s;
+    }
+
+    .demo.seen .pd-stat:nth-child(3) {
+      animation-delay: .1s;
+    }
+
+    .demo.seen .pd-stat:nth-child(4) {
+      animation-delay: .15s;
+    }
+
+    .demo.seen .pd-row3>*:nth-child(2) {
+      animation-delay: .08s;
+    }
+
+    .demo.seen .pd-row3>*:nth-child(3) {
+      animation-delay: .16s;
+    }
+
+    .demo.seen .pd-tbl {
+      animation-delay: .1s;
+    }
+
+    @keyframes pdUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes pdDraw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes pdGauge {
+      to {
+        stroke-dashoffset: 53;
+      }
+    }
+
+    @keyframes pdBar {
+      to {
+        width: var(--w, 78%);
+      }
+    }
+
+    @keyframes pdPop {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes pdFade {
+      to {
+        opacity: 1;
+      }
+    }
+
     /* Mini-dashboard de la sección "de un vistazo": estado FINAL (sin depender del
        observador del demo), y compacto. */
-    .pd-mini .pd-donut { transform: none; opacity: 1; }
-    .pd-mini .pd-line .ln-path { stroke-dashoffset: 0; }
-    .pd-mini .pd-line .ln-area { opacity: 1; animation: none; }
-    .pd-mini .pd-sev b { font-size: 22px; }
-    .pd-mini .pd-row2 { grid-template-columns: 1.3fr 1fr; }
+    .pd-mini .pd-donut {
+      transform: none;
+      opacity: 1;
+    }
+
+    .pd-mini .pd-line .ln-path {
+      stroke-dashoffset: 0;
+    }
+
+    .pd-mini .pd-line .ln-area {
+      opacity: 1;
+      animation: none;
+    }
+
+    .pd-mini .pd-sev b {
+      font-size: 22px;
+    }
+
+    .pd-mini .pd-row2 {
+      grid-template-columns: 1.3fr 1fr;
+    }
+
     /* Con movimiento reducido: sin animación, pero mostrando el estado FINAL
        (si no, la línea/medidor/donut quedarían ocultos por su estado inicial). */
     @media (prefers-reduced-motion: reduce) {
-      .pd-line .ln-path { stroke-dashoffset: 0; }
-      .pd-line .ln-area { opacity: 1; animation: none; }
-      .pd-gsvg .g-val { stroke-dashoffset: 53; }
-      .pd-wsbar i { width: var(--w, 78%); }
-      .pd-donut { transform: none; opacity: 1; }
-      .demo .pd-sev, .demo .pd-stat, .demo .pd-row2 > *, .demo .pd-row3 > *, .demo .pd-tbl { opacity: 1; transform: none; animation: none; }
+      .pd-line .ln-path {
+        stroke-dashoffset: 0;
+      }
+
+      .pd-line .ln-area {
+        opacity: 1;
+        animation: none;
+      }
+
+      .pd-gsvg .g-val {
+        stroke-dashoffset: 53;
+      }
+
+      .pd-wsbar i {
+        width: var(--w, 78%);
+      }
+
+      .pd-donut {
+        transform: none;
+        opacity: 1;
+      }
+
+      .demo .pd-sev,
+      .demo .pd-stat,
+      .demo .pd-row2>*,
+      .demo .pd-row3>*,
+      .demo .pd-tbl {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
     }
+
     @media (max-width: 720px) {
-      .pd-tools { grid-template-columns: 1fr 1fr; }
-      .pd-tools .pd-sel:last-child { display: none; }
-      .pd-sevs { grid-template-columns: repeat(3, 1fr); }
-      .pd-stats { grid-template-columns: repeat(2, 1fr); }
-      .pd-row2, .pd-row3 { grid-template-columns: 1fr; }
-      .pd-thead, .pd-trow { grid-template-columns: 2.2fr 1fr .9fr .5fr; }
-      .pd-thead .hc2, .pd-trow .hc2 { display: none; }
+      .pd-tools {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pd-tools .pd-sel:last-child {
+        display: none;
+      }
+
+      .pd-sevs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .pd-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pd-row2,
+      .pd-row3 {
+        grid-template-columns: 1fr;
+      }
+
+      .pd-thead,
+      .pd-trow {
+        grid-template-columns: 2.2fr 1fr .9fr .5fr;
+      }
+
+      .pd-thead .hc2,
+      .pd-trow .hc2 {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -4662,6 +5363,26 @@
             <p data-i18n="feat.f9.d">Hallazgos en CSV, JSON o SARIF y avisos de SLA y retest en el centro de
               notificaciones.</p>
           </div>
+          <div class="feat rev">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <rect class="ln" x="3.5" y="4.5" width="17" height="13" rx="2.2" />
+                <path class="ln" d="M3.5 20.5h17" />
+                <rect class="ac" x="6.5" y="7.5" width="5" height="4" rx="1" />
+                <rect class="ac" x="13.5" y="10.5" width="4.5" height="4" rx="1" />
+              </svg></div>
+            <h3 data-i18n="feat.f10.t">Lienzos (pizarra)</h3>
+            <p data-i18n="feat.f10.d">Roadmap, diagramas de red y tablero de objetivos «pwned» en un lienzo infinito.
+              Exporta a PNG, PDF o JSON.</p>
+          </div>
+          <div class="feat rev rev-2">
+            <div class="ic"><svg viewBox="0 0 24 24">
+                <path class="ln" d="M12 3 5 5.6v5c0 4.3 3 7.7 7 8.9 4-1.2 7-4.6 7-8.9v-5L12 3Z" />
+                <path class="ac" d="m9 11.5 2 2 4-4" />
+              </svg></div>
+            <h3 data-i18n="feat.f11.t">Estándares y cumplimiento</h3>
+            <p data-i18n="feat.f11.d">Mapea a OWASP, MITRE ATT&amp;CK, PCI, ISO 27001 y NIST. Matriz de riesgo y anexo
+              de cumplimiento en el informe.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -4687,17 +5408,28 @@
             <div class="shot-main mk-main">
               <div class="pd pd-mini">
                 <div class="pd-sevs">
-                  <div class="pd-sev crit"><span class="pd-s-h"><i></i><span data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                  <div class="pd-sev high"><span class="pd-s-h"><i></i><span data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                  <div class="pd-sev med"><span class="pd-s-h"><i></i><span data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                  <div class="pd-sev low"><span class="pd-s-h"><i></i><span data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                  <div class="pd-sev info"><span class="pd-s-h"><i></i><span data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                  <div class="pd-sev crit"><span class="pd-s-h"><i></i><span
+                        data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span data-i18n="demo.p0.oftotal">del
+                        total</span></em></div>
+                  <div class="pd-sev high"><span class="pd-s-h"><i></i><span
+                        data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del
+                        total</span></em></div>
+                  <div class="pd-sev med"><span class="pd-s-h"><i></i><span
+                        data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span data-i18n="demo.p0.oftotal">del
+                        total</span></em></div>
+                  <div class="pd-sev low"><span class="pd-s-h"><i></i><span
+                        data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span data-i18n="demo.p0.oftotal">del
+                        total</span></em></div>
+                  <div class="pd-sev info"><span class="pd-s-h"><i></i><span
+                        data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del
+                        total</span></em></div>
                 </div>
                 <div class="pd-row2">
                   <div class="pd-card pd-trend">
                     <div class="pd-ct"><span data-i18n="demo.p0.time">Vulnerabilidades en el tiempo</span>
                       <span class="pd-leg"><em class="d1"></em><span data-i18n="demo.p0.disc">Descubiertas</span>
-                        <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span></div>
+                        <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span>
+                    </div>
                     <svg class="pd-line" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
                       <defs>
                         <linearGradient id="pdA2" x1="0" y1="0" x2="0" y2="1">
@@ -4732,6 +5464,612 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* ===== Showcase animado de LIENZOS: kill-chain de AD/Infra montándose ===== */
+      .cvx-stage {
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(120% 90% at 50% -8%, rgba(157, 92, 255, .12), transparent 62%), linear-gradient(180deg, #141019, #0e0b14);
+        border-radius: 0 0 16px 16px
+      }
+
+      .cvx-svg {
+        display: block;
+        width: 100%;
+        height: auto
+      }
+
+      .cvx-t {
+        font: 700 16px Inter, system-ui, -apple-system, sans-serif;
+        fill: #eef1fa
+      }
+
+      .cvx-sub {
+        font: 500 12.5px ui-monospace, SFMono-Regular, Menlo, monospace;
+        fill: #8891a8
+      }
+
+      .cvx-s0 {
+        font: 700 13px Inter, system-ui, sans-serif;
+        fill: #8a90a6
+      }
+
+      .cvx-pwn {
+        font: 800 14px Inter, system-ui, sans-serif;
+        fill: #ff4d63
+      }
+
+      .cvx-elbl {
+        font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace;
+        fill: #c7ccdb;
+        paint-order: stroke;
+        stroke: #0e0b14;
+        stroke-width: 3.5;
+        stroke-linejoin: round;
+        opacity: 0
+      }
+
+      .cvx-node,
+      .cvx-pwn,
+      .cvx-ring {
+        transform-box: fill-box;
+        transform-origin: center
+      }
+
+      .cvx-node {
+        opacity: 0
+      }
+
+      .cvx-edge {
+        fill: none;
+        stroke: #6b6f86;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-dasharray: 360;
+        stroke-dashoffset: 360;
+        opacity: 0
+      }
+
+      .cvx-grid {
+        opacity: 0
+      }
+
+      .cvx-objrect {
+        fill: rgba(138, 144, 166, .10);
+        stroke: #8a90a6
+      }
+
+      .cvx-objbar {
+        fill: #8a90a6
+      }
+
+      .cvx-s0 {
+        opacity: 1
+      }
+
+      .cvx-pwn {
+        opacity: 0
+      }
+
+      .cvx-ring {
+        opacity: 0;
+        fill: none;
+        stroke: #e8142f;
+        stroke-width: 2
+      }
+
+      .cvx-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin: 24px auto 0;
+        max-width: 820px
+      }
+
+      .cvx-chips span {
+        font-size: 13px;
+        color: var(--muted, #9aa1b2);
+        background: rgba(157, 92, 255, .08);
+        border: 1px solid rgba(157, 92, 255, .22);
+        border-radius: 99px;
+        padding: 7px 15px
+      }
+
+      /* Reproduce en bucle sólo cuando la sección está a la vista */
+      .cvx-run .cvx-grid {
+        animation: cvxGrid 11s linear infinite
+      }
+
+      .cvx-run .cvxN1 {
+        animation: cvxN1 11s ease-in-out infinite
+      }
+
+      .cvx-run .cvxN2 {
+        animation: cvxN2 11s ease-in-out infinite
+      }
+
+      .cvx-run .cvxN3 {
+        animation: cvxN3 11s ease-in-out infinite
+      }
+
+      .cvx-run .cvxN4 {
+        animation: cvxN4 11s ease-in-out infinite
+      }
+
+      .cvx-run .cvxN5 {
+        animation: cvxN5 11s ease-in-out infinite
+      }
+
+      .cvx-run .cvxE1 {
+        animation: cvxE1 11s linear infinite
+      }
+
+      .cvx-run .cvxE2 {
+        animation: cvxE2 11s linear infinite
+      }
+
+      .cvx-run .cvxE3 {
+        animation: cvxE3 11s linear infinite
+      }
+
+      .cvx-run .cvxE4 {
+        animation: cvxE4 11s linear infinite
+      }
+
+      .cvx-run .cvx-objrect {
+        animation: cvxObjR 11s ease infinite
+      }
+
+      .cvx-run .cvx-objbar {
+        animation: cvxObjB 11s ease infinite
+      }
+
+      .cvx-run .cvx-s0 {
+        animation: cvxS0 11s ease infinite
+      }
+
+      .cvx-run .cvx-pwn {
+        animation: cvxPwn 11s ease infinite
+      }
+
+      .cvx-run .cvx-ring {
+        animation: cvxRing 11s ease infinite
+      }
+
+      @keyframes cvxGrid {
+
+        0%,
+        3% {
+          opacity: 0
+        }
+
+        7%,
+        90% {
+          opacity: 1
+        }
+
+        98%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxN1 {
+
+        0%,
+        6% {
+          opacity: 0;
+          transform: translateY(12px) scale(.72)
+        }
+
+        11%,
+        88% {
+          opacity: 1;
+          transform: none
+        }
+
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(.9)
+        }
+      }
+
+      @keyframes cvxN2 {
+
+        0%,
+        12% {
+          opacity: 0;
+          transform: translateY(12px) scale(.72)
+        }
+
+        17%,
+        88% {
+          opacity: 1;
+          transform: none
+        }
+
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(.9)
+        }
+      }
+
+      @keyframes cvxN3 {
+
+        0%,
+        24% {
+          opacity: 0;
+          transform: translateY(12px) scale(.72)
+        }
+
+        29%,
+        88% {
+          opacity: 1;
+          transform: none
+        }
+
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(.9)
+        }
+      }
+
+      @keyframes cvxN4 {
+
+        0%,
+        34% {
+          opacity: 0;
+          transform: translateY(12px) scale(.72)
+        }
+
+        39%,
+        88% {
+          opacity: 1;
+          transform: none
+        }
+
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(.9)
+        }
+      }
+
+      @keyframes cvxN5 {
+
+        0%,
+        44% {
+          opacity: 0;
+          transform: translateY(12px) scale(.72)
+        }
+
+        49%,
+        88% {
+          opacity: 1;
+          transform: none
+        }
+
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(.9)
+        }
+      }
+
+      @keyframes cvxE1 {
+
+        0%,
+        18% {
+          stroke-dashoffset: 360;
+          opacity: 0
+        }
+
+        19% {
+          opacity: 1
+        }
+
+        27%,
+        88% {
+          stroke-dashoffset: 0;
+          opacity: 1
+        }
+
+        95%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxE2 {
+
+        0%,
+        30% {
+          stroke-dashoffset: 360;
+          opacity: 0
+        }
+
+        31% {
+          opacity: 1
+        }
+
+        39%,
+        88% {
+          stroke-dashoffset: 0;
+          opacity: 1
+        }
+
+        95%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxE3 {
+
+        0%,
+        40% {
+          stroke-dashoffset: 360;
+          opacity: 0
+        }
+
+        41% {
+          opacity: 1
+        }
+
+        49%,
+        88% {
+          stroke-dashoffset: 0;
+          opacity: 1
+        }
+
+        95%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxE4 {
+
+        0%,
+        50% {
+          stroke-dashoffset: 360;
+          opacity: 0
+        }
+
+        51% {
+          opacity: 1
+        }
+
+        59%,
+        88% {
+          stroke-dashoffset: 0;
+          opacity: 1
+        }
+
+        95%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxObjR {
+
+        0%,
+        63% {
+          stroke: #8a90a6;
+          fill: rgba(138, 144, 166, .10)
+        }
+
+        70%,
+        100% {
+          stroke: #e8142f;
+          fill: rgba(232, 20, 47, .13)
+        }
+      }
+
+      @keyframes cvxObjB {
+
+        0%,
+        63% {
+          fill: #8a90a6
+        }
+
+        70%,
+        100% {
+          fill: #e8142f
+        }
+      }
+
+      @keyframes cvxS0 {
+
+        0%,
+        63% {
+          opacity: 1
+        }
+
+        68%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxPwn {
+
+        0%,
+        63% {
+          opacity: 0;
+          transform: scale(.85)
+        }
+
+        69% {
+          opacity: 1;
+          transform: scale(1.14)
+        }
+
+        75%,
+        100% {
+          opacity: 1;
+          transform: scale(1)
+        }
+      }
+
+      @keyframes cvxRing {
+
+        0%,
+        63% {
+          opacity: 0;
+          transform: scale(.4)
+        }
+
+        69% {
+          opacity: .6
+        }
+
+        84%,
+        100% {
+          opacity: 0;
+          transform: scale(1.7)
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cvx-node {
+          opacity: 1 !important;
+          transform: none !important;
+          animation: none !important
+        }
+
+        .cvx-edge {
+          opacity: 1 !important;
+          stroke-dashoffset: 0 !important;
+          animation: none !important
+        }
+
+        .cvx-elbl {
+          opacity: 1 !important;
+          animation: none !important
+        }
+
+        .cvx-grid {
+          opacity: 1 !important;
+          animation: none !important
+        }
+
+        .cvx-s0 {
+          opacity: 0 !important
+        }
+
+        .cvx-pwn {
+          opacity: 1 !important;
+          transform: none !important
+        }
+
+        .cvx-objrect {
+          stroke: #e8142f !important;
+          fill: rgba(232, 20, 47, .13) !important
+        }
+
+        .cvx-objbar {
+          fill: #e8142f !important
+        }
+
+        .cvx-run * {
+          animation: none !important
+        }
+      }
+    </style>
+    <section class="band pad" id="canvas">
+      <div class="wrap">
+        <div class="rev" style="max-width:740px;margin:0 auto 28px;text-align:center">
+          <p class="eyebrow" data-i18n="cvx.eyebrow">Nuevo · Lienzos</p>
+          <h2 class="display" data-i18n="cvx.t">Del foothold al Domain Admin, en una pizarra.</h2>
+          <p class="lead" data-i18n="cvx.d">Monta el kill-chain, los diagramas de red y el tablero de objetivos «pwned»
+            en un lienzo infinito dentro del workspace. Míralo montarse solo.</p>
+        </div>
+        <div class="show-frame zoom-in cvx-frame" style="max-width:1060px;margin:0 auto">
+          <div class="shot-bar">
+            <div class="shot-dots"><i></i><i></i><i></i></div><span class="t" data-i18n="cvx.bar">Lienzo · AD / Infra —
+              acme.local</span><span class="live"><i></i> <span data-i18n="cvx.building">Montando…</span></span>
+          </div>
+          <div class="cvx-stage">
+            <svg class="cvx-svg" viewBox="0 0 940 520" role="img"
+              aria-label="Animación de un lienzo de pentest de Active Directory montándose">
+              <defs>
+                <pattern id="cvxDots" width="24" height="24" patternUnits="userSpaceOnUse">
+                  <circle cx="2" cy="2" r="1.4" fill="#9d5cff" fill-opacity="0.16" />
+                </pattern>
+                <marker id="cvxArr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7"
+                  orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" fill="#6b6f86" />
+                </marker>
+              </defs>
+              <rect class="cvx-grid" x="0" y="0" width="940" height="520" fill="url(#cvxDots)" />
+              <!-- Flechas del kill-chain (se dibujan solas) + técnica -->
+              <path class="cvx-edge cvxE1" d="M250 122 C 320 122, 320 110, 380 110" marker-end="url(#cvxArr)" />
+              <path class="cvx-edge cvxE2" d="M485 150 C 485 260, 490 270, 490 360" marker-end="url(#cvxArr)" />
+              <path class="cvx-edge cvxE3" d="M590 110 C 664 110, 674 190, 682 214" marker-end="url(#cvxArr)" />
+              <path class="cvx-edge cvxE4" d="M796 266 C 796 340, 762 360, 756 380" marker-end="url(#cvxArr)" />
+              <text class="cvx-elbl cvxE1" x="300" y="98" text-anchor="middle">NetNTLMv2</text>
+              <text class="cvx-elbl cvxE2" x="500" y="262">ntlmrelayx (SMB)</text>
+              <text class="cvx-elbl cvxE3" x="612" y="150">BloodHound · LDAP</text>
+              <text class="cvx-elbl cvxE4" x="812" y="330">Kerberoast → DCSync</text>
+              <!-- N1: Responder (violeta) -->
+              <g class="cvx-node cvxN1">
+                <rect x="40" y="80" width="210" height="84" rx="13" fill="rgba(157,92,255,.14)" stroke="#9d5cff"
+                  stroke-width="1.7" />
+                <text class="cvx-t" x="58" y="122">Responder</text>
+                <text class="cvx-sub" x="58" y="146">LLMNR / NBT-NS</text>
+              </g>
+              <!-- N2: Estación de trabajo comprometida (azul) -->
+              <g class="cvx-node cvxN2">
+                <rect x="380" y="70" width="210" height="80" rx="13" fill="rgba(72,168,240,.13)" stroke="#48a8f0"
+                  stroke-width="1.7" />
+                <text class="cvx-t" x="398" y="108">WKSTN-07</text>
+                <text class="cvx-sub" x="398" y="132">Win10 · ACME\jdoe</text>
+              </g>
+              <!-- N3: File server con relay (ámbar) -->
+              <g class="cvx-node cvxN3">
+                <rect x="380" y="360" width="220" height="84" rx="13" fill="rgba(239,139,26,.13)" stroke="#ef8b1a"
+                  stroke-width="1.7" />
+                <text class="cvx-t" x="398" y="400">SRV-FILE01</text>
+                <text class="cvx-sub" x="398" y="424">SMB signing: OFF</text>
+              </g>
+              <!-- N4: Controlador de dominio (esmeralda, glifo de servidor) -->
+              <g class="cvx-node cvxN4">
+                <rect x="680" y="170" width="228" height="96" rx="13" fill="rgba(21,230,160,.12)" stroke="#15e6a0"
+                  stroke-width="1.7" />
+                <rect x="864" y="188" width="26" height="10" rx="2.5" fill="none" stroke="#15e6a0" stroke-width="1.6" />
+                <rect x="864" y="202" width="26" height="10" rx="2.5" fill="none" stroke="#15e6a0" stroke-width="1.6" />
+                <text class="cvx-t" x="700" y="210">DC01</text>
+                <text class="cvx-sub" x="700" y="234">acme.local · LDAP/GC</text>
+              </g>
+              <!-- N5: Objetivo Domain Admin (gris → PWNED) -->
+              <g class="cvx-node cvxN5">
+                <circle class="cvx-ring" cx="754" cy="430" r="64" />
+                <rect class="cvx-objrect" x="620" y="378" width="270" height="104" rx="16" stroke-width="1.8" />
+                <rect class="cvx-objbar" x="620" y="378" width="7" height="104" rx="3.5" />
+                <circle cx="654" cy="410" r="8.5" fill="none" stroke="#c9cee0" stroke-width="1.7" />
+                <circle cx="654" cy="410" r="2.6" fill="#c9cee0" />
+                <text class="cvx-t" x="676" y="416">Domain Admin</text>
+                <text class="cvx-sub" x="646" y="440">acme\Administrator</text>
+                <text class="cvx-s0" x="646" y="468" data-i18n="cvx.s0">● En curso</text>
+                <text class="cvx-pwn" x="646" y="469" data-i18n="cvx.pwn">● PWNED</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="cvx-chips rev">
+          <span data-i18n="cvx.p1">Notas, cajas, flechas e iconos tecnológicos y de hacking</span>
+          <span data-i18n="cvx.p2">Objetivos con estado: por evaluar → en curso → pwned</span>
+          <span data-i18n="cvx.p3">Exporta a PNG, PDF o JSON reimportable</span>
         </div>
       </div>
     </section>
@@ -4823,11 +6161,21 @@
                       <span class="pd-sel" data-i18n="demo.p0.fws">Todos los workspaces ⌄</span>
                     </div>
                     <div class="pd-sevs">
-                      <div class="pd-sev crit"><span class="pd-s-h"><i></i><span data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                      <div class="pd-sev high"><span class="pd-s-h"><i></i><span data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                      <div class="pd-sev med"><span class="pd-s-h"><i></i><span data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                      <div class="pd-sev low"><span class="pd-s-h"><i></i><span data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
-                      <div class="pd-sev info"><span class="pd-s-h"><i></i><span data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev crit"><span class="pd-s-h"><i></i><span
+                            data-i18n="sev.crit">Críticas</span></span><b>3</b><em>9% <span
+                            data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev high"><span class="pd-s-h"><i></i><span
+                            data-i18n="sev.high">Altas</span></span><b>6</b><em>19% <span
+                            data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev med"><span class="pd-s-h"><i></i><span
+                            data-i18n="demo.sevM">Medias</span></span><b>9</b><em>28% <span
+                            data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev low"><span class="pd-s-h"><i></i><span
+                            data-i18n="demo.sevL">Bajas</span></span><b>8</b><em>25% <span
+                            data-i18n="demo.p0.oftotal">del total</span></em></div>
+                      <div class="pd-sev info"><span class="pd-s-h"><i></i><span
+                            data-i18n="sev.info">Info</span></span><b>6</b><em>19% <span data-i18n="demo.p0.oftotal">del
+                            total</span></em></div>
                     </div>
                     <div class="pd-stats">
                       <div class="pd-stat"><b>3</b><span data-i18n="demo.p0.kret">Pend. retest</span></div>
@@ -4839,7 +6187,8 @@
                       <div class="pd-card pd-trend">
                         <div class="pd-ct"><span data-i18n="demo.p0.time">Vulnerabilidades en el tiempo</span>
                           <span class="pd-leg"><em class="d1"></em><span data-i18n="demo.p0.disc">Descubiertas</span>
-                            <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span></div>
+                            <em class="d2"></em><span data-i18n="shot.fixed">Resueltas</span></span>
+                        </div>
                         <svg class="pd-line" viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
                           <defs>
                             <linearGradient id="pdA" x1="0" y1="0" x2="0" y2="1">
@@ -4852,7 +6201,8 @@
                           <path class="ln-path" d="M0,78 L53,70 L106,60 L160,46 L213,36 L266,22 L320,12" fill="none"
                             stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
                           <path class="ln-path" d="M0,86 L53,84 L106,80 L160,72 L213,64 L266,56 L320,48" fill="none"
-                            stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
                         </svg>
                       </div>
                       <div class="pd-card pd-bysev">
@@ -4956,7 +6306,8 @@
                         <span style="color:var(--muted)">—</span>
                         <span class="pd-st hc2" data-i18n="demo.st.open">Abierta</span>
                       </div>
-                      <div class="pd-empty-row" style="display:none;padding:14px 12px;font-size:9.5px;color:var(--muted)"
+                      <div class="pd-empty-row"
+                        style="display:none;padding:14px 12px;font-size:9.5px;color:var(--muted)"
                         data-i18n="demo.p0.nofilter">Sin resultados para este filtro.</div>
                     </div>
                   </div>
@@ -5421,6 +6772,17 @@
         revs.forEach(function (el) { io.observe(el); });
       }
 
+
+      var cvxFrame = document.querySelector(".cvx-frame");
+      if (cvxFrame) {
+        if ("IntersectionObserver" in window) {
+          var cvxIO = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { cvxFrame.classList.toggle("cvx-run", e.isIntersecting); });
+          }, { threshold: 0.35 });
+          cvxIO.observe(cvxFrame);
+        } else { cvxFrame.classList.add("cvx-run"); }
+      }
+
       var demoBox = document.getElementById("demoBox");
       if (demoBox) {
         var dTabs = [].slice.call(demoBox.querySelectorAll(".demo-tab"));
@@ -5445,8 +6807,7 @@
           dio.observe(demoBox);
         } else { demoStart(); }
 
-        // Dispara las animaciones de dibujo del dashboard (líneas, donut, medidor,
-        // barras y entrada de tarjetas) cuando el demo entra en pantalla.
+
         if ("IntersectionObserver" in window) {
           var pio = new IntersectionObserver(function (es) {
             es.forEach(function (e) { if (e.isIntersecting) { demoBox.classList.add("seen"); pio.disconnect(); } });
@@ -5454,7 +6815,7 @@
           pio.observe(demoBox);
         } else { demoBox.classList.add("seen"); }
 
-        // ---- Dashboard interactivo del panel 0 ----
+
         var pd0 = demoBox.querySelector('.demo-panel[data-panel="0"] .pd');
         if (pd0) {
           var SEVS = ["crit", "high", "med", "low", "info"];
@@ -5479,7 +6840,7 @@
             c.addEventListener("click", function () { applyFilter(curF === clsOf(c) ? null : clsOf(c)); });
           });
 
-          // Feed de actividad "en vivo": inyecta hallazgos mientras el panel está a la vista.
+
           var recent = pd0.querySelector(".pd-recent");
           if (recent && !reduce) {
             var FEED = [
@@ -5595,11 +6956,16 @@
           "feat.f2.t": "Workspaces y subcarpetas", "feat.f2.d": "Organiza clientes, proyectos y hallazgos en un árbol anidado con arrastrar y soltar.",
           "feat.f3.t": "CVSS interactivo", "feat.f3.d": "Calculadora CVSS integrada que puntúa y clasifica cada vulnerabilidad al vuelo.",
           "feat.f4.t": "Calendario y retest", "feat.f4.d": "Planifica ventanas, retests y entregas. Eventos multi-día y solicitudes de cambio.",
-          "feat.f5.t": "Informes listos", "feat.f5.d": "Genera informes en PDF con resumen ejecutivo, hallazgos y remediaciones. Markdown incluido.",
+          "feat.f5.t": "Informes de nivel", "feat.f5.d": "HTML autocontenido y PDF de alta calidad (vectorial). Firmado con SHA-256 + Ed25519 y carta de atestación.",
           "feat.f6.t": "Cifrado y roles", "feat.f6.d": "Datos cifrados en local, copias protegidas y permisos por rol. Tú controlas el acceso.",
           "feat.f7.t": "Doble factor (2FA)", "feat.f7.d": "TOTP opcional por usuario, compatible con cualquier app de autenticación, con códigos de recuperación.",
-          "feat.f8.t": "Importa desde tu escáner", "feat.f8.d": "Nessus, Burp, OWASP ZAP, Nmap o CSV se convierten en hallazgos, deduplicados por activo.",
+          "feat.f8.t": "Importa desde tu escáner", "feat.f8.d": "Nessus, Nuclei, Burp, OWASP ZAP, Nmap, OpenVAS, Qualys, Trivy, Semgrep, Acunetix o CSV, deduplicados por activo.",
           "feat.f9.t": "Exporta e integra", "feat.f9.d": "Hallazgos en CSV, JSON o SARIF y avisos de SLA y retest en el centro de notificaciones.",
+          "feat.f10.t": "Lienzos (pizarra)", "feat.f10.d": "Roadmap, diagramas de red y tablero de objetivos «pwned» en un lienzo infinito. Exporta a PNG, PDF o JSON.",
+          "feat.f11.t": "Estándares y cumplimiento", "feat.f11.d": "Mapea a OWASP, MITRE ATT&CK, PCI, ISO 27001 y NIST. Matriz de riesgo y anexo de cumplimiento en el informe.",
+          "cvx.eyebrow": "Nuevo · Lienzos", "cvx.t": "Del foothold al Domain Admin, en una pizarra.", "cvx.d": "Monta el kill-chain, los diagramas de red y el tablero de objetivos «pwned» en un lienzo infinito dentro del workspace. Míralo montarse solo.",
+          "cvx.p1": "Notas, cajas, flechas e iconos tecnológicos y de hacking", "cvx.p2": "Objetivos con estado: por evaluar → en curso → pwned", "cvx.p3": "Exporta a PNG, PDF o JSON reimportable",
+          "cvx.bar": "Lienzo · AD / Infra — acme.local", "cvx.building": "Montando…", "cvx.s0": "● En curso", "cvx.pwn": "● PWNED",
           "show1.t": "El panel que lo dice todo de un vistazo.", "show1.d": "Criticidad, progreso y carga de trabajo de un vistazo. Filtra por workspace y ve exactamente dónde poner el foco.",
           "show1.p1": "KPIs por severidad y porcentaje de resolución", "show1.p2": "Gráficos de tendencia y reparto por proyecto", "show1.p3": "Búsqueda global de vulnerabilidades",
           "show2.t": "Planifica el engagement entero.", "show2.d": "Ventanas de prueba, retests y fechas de entrega en un calendario que el equipo entiende a la primera. Con solicitudes de cambio para no pisarse.",
@@ -5655,11 +7021,16 @@
           "feat.f2.t": "Workspaces & subfolders", "feat.f2.d": "Organize clients, projects and findings in a nested tree with drag-and-drop.",
           "feat.f3.t": "Interactive CVSS", "feat.f3.d": "Built-in CVSS calculator that scores and ranks every vulnerability on the fly.",
           "feat.f4.t": "Calendar & retest", "feat.f4.d": "Plan test windows, retests and deliveries. Multi-day events and change requests.",
-          "feat.f5.t": "Reports ready", "feat.f5.d": "Generate PDF reports with executive summary, findings and remediations. Markdown included.",
+          "feat.f5.t": "Reports that ship", "feat.f5.d": "Self-contained HTML and high-quality (vector) PDF. Signed with SHA-256 + Ed25519 and an attestation letter.",
           "feat.f6.t": "Encryption & roles", "feat.f6.d": "Locally encrypted data, protected backups and role-based permissions. You control access.",
           "feat.f7.t": "Two-factor (2FA)", "feat.f7.d": "Optional per-user TOTP, compatible with any authenticator app, with recovery codes.",
-          "feat.f8.t": "Import from your scanner", "feat.f8.d": "Nessus, Burp, OWASP ZAP, Nmap or CSV become findings, deduplicated by asset.",
+          "feat.f8.t": "Import from your scanner", "feat.f8.d": "Nessus, Nuclei, Burp, OWASP ZAP, Nmap, OpenVAS, Qualys, Trivy, Semgrep, Acunetix or CSV, deduplicated by asset.",
           "feat.f9.t": "Export & integrate", "feat.f9.d": "Findings in CSV, JSON or SARIF, plus SLA and retest alerts in the notification center.",
+          "feat.f10.t": "Canvases (whiteboard)", "feat.f10.d": "Roadmap, network diagrams and a 'pwned' objectives board on an infinite canvas. Export to PNG, PDF or JSON.",
+          "feat.f11.t": "Standards & compliance", "feat.f11.d": "Map to OWASP, MITRE ATT&CK, PCI, ISO 27001 and NIST. Risk matrix and compliance annex in the report.",
+          "cvx.eyebrow": "New · Canvases", "cvx.t": "From foothold to Domain Admin, on one canvas.", "cvx.d": "Lay out the kill-chain, network diagrams and the 'pwned' objectives board on an infinite canvas inside the workspace. Watch it build itself.",
+          "cvx.p1": "Notes, boxes, arrows and tech/hacking icons", "cvx.p2": "Objectives with status: to assess → in progress → pwned", "cvx.p3": "Export to PNG, PDF or re-importable JSON",
+          "cvx.bar": "Canvas · AD / Infra — acme.local", "cvx.building": "Building…", "cvx.s0": "● In progress", "cvx.pwn": "● PWNED",
           "show1.t": "The dashboard that says it all at a glance.", "show1.d": "Criticality, progress and workload at a glance. Filter by workspace and see exactly where to focus.",
           "show1.p1": "KPIs by severity and resolution rate", "show1.p2": "Trend charts and breakdown by project", "show1.p3": "Global vulnerability search",
           "show2.t": "Plan the entire engagement.", "show2.d": "Test windows, retests and delivery dates in a calendar the team gets instantly. With change requests so nobody steps on each other.",
@@ -5717,7 +7088,7 @@
       var GH = "https://github.com/D3M0NH4NT3R/Crisol-RX";
       var GH_API = "https://api.github.com/repos/D3M0NH4NT3R/Crisol-RX/releases?per_page=15";
 
-      
+
       var STABLE = { tag: "1.4.0", ver: "1.4.0" }, BETA = { tag: "1.4.0", ver: "1.4.0" };
       var channel = "stable";
       function cur() { return channel === "beta" ? BETA : STABLE; }
@@ -5798,9 +7169,9 @@
       applyLang("es");
       renderOS();
 
-      
 
-      
+
+
       function buildChannel(rel) {
         var assets = {};
         (rel.assets || []).forEach(function (a) {
@@ -5856,7 +7227,7 @@
         if (!W || !H) return;
         c.width = Math.round(W * DPR); c.height = Math.round(H * DPR);
         ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-        
+
         stars = [];
         var n = Math.min(180, Math.round(W * H / 9000));
         for (var i = 0; i < n; i++) {
@@ -5901,7 +7272,7 @@
         wave(t * 0.45, horizon + 18, 9, 190, 0.0, 'rgba(22,28,48,0.55)');
         wave(t * 0.62, horizon + 46, 15, 150, 1.3, 'rgba(15,19,34,0.72)');
 
-        
+
         var cx = W / 2, cy = horizon + 6;
         var rad = Math.min(W * 0.44, 340);
         var pulse = 0.82 + 0.18 * Math.sin(t * 1.6);
@@ -5925,7 +7296,7 @@
       function go() { stop(); resize(); if (reduce || perfLite) { draw(performance.now()); } else { raf = requestAnimationFrame(draw); } }
 
       window.addEventListener('resize', function () { resize(); }, { passive: true });
-      
+
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (ents) {
           ents.forEach(function (e) {
@@ -5937,18 +7308,18 @@
       }
       go();
 
-      
+
       var vid = document.getElementById('heroVideo');
       if (vid) {
         var useVideo = function () {
-          if (vid.readyState < 2) return;      
+          if (vid.readyState < 2) return;
           vid.classList.add('ready');
           stop();
-          c.style.display = 'none';            
+          c.style.display = 'none';
         };
         vid.addEventListener('loadeddata', useVideo);
         vid.addEventListener('canplay', useVideo);
-        
+
         vid.addEventListener('error', function () { }, true);
         var p = vid.play && vid.play();
         if (p && p.catch) p.catch(function () { });

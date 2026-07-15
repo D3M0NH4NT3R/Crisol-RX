@@ -5722,23 +5722,23 @@
       }
 
       .cvx-run .cvxN1 {
-        animation: cvxN1 11s ease-in-out infinite
+        animation: cvxN1 11s cubic-bezier(.34, 1.38, .5, 1) infinite
       }
 
       .cvx-run .cvxN2 {
-        animation: cvxN2 11s ease-in-out infinite
+        animation: cvxN2 11s cubic-bezier(.34, 1.38, .5, 1) infinite
       }
 
       .cvx-run .cvxN3 {
-        animation: cvxN3 11s ease-in-out infinite
+        animation: cvxN3 11s cubic-bezier(.34, 1.38, .5, 1) infinite
       }
 
       .cvx-run .cvxN4 {
-        animation: cvxN4 11s ease-in-out infinite
+        animation: cvxN4 11s cubic-bezier(.34, 1.38, .5, 1) infinite
       }
 
       .cvx-run .cvxN5 {
-        animation: cvxN5 11s ease-in-out infinite
+        animation: cvxN5 11s cubic-bezier(.34, 1.38, .5, 1) infinite
       }
 
       .cvx-run .cvxE1 {
@@ -6076,10 +6076,182 @@
         }
       }
 
+      /* Pulsos de "datos" que recorren cada flecha una vez dibujada: dan
+         movimiento continuo y fluido (no solo el montaje inicial). */
+      .cvx-spark {
+        fill: none;
+        stroke-width: 3.6;
+        stroke-linecap: round;
+        stroke-dasharray: 3 240;
+        stroke-dashoffset: 243;
+        opacity: 0
+      }
+
+      .cvx-spark.s1 {
+        stroke: #c9a3ff
+      }
+
+      .cvx-spark.s2 {
+        stroke: #ffc078
+      }
+
+      .cvx-spark.s3 {
+        stroke: #8fd0ff
+      }
+
+      .cvx-spark.s4 {
+        stroke: #6ff0c2
+      }
+
+      .cvx-run .cvx-spark.s1 {
+        animation: cvxSparkMove 2.1s linear infinite, cvxGate1 11s ease infinite
+      }
+
+      .cvx-run .cvx-spark.s2 {
+        animation: cvxSparkMove 2.4s linear infinite, cvxGate2 11s ease infinite
+      }
+
+      .cvx-run .cvx-spark.s3 {
+        animation: cvxSparkMove 2s linear infinite, cvxGate3 11s ease infinite
+      }
+
+      .cvx-run .cvx-spark.s4 {
+        animation: cvxSparkMove 2.3s linear infinite, cvxGate4 11s ease infinite
+      }
+
+      @keyframes cvxSparkMove {
+        from {
+          stroke-dashoffset: 243
+        }
+
+        to {
+          stroke-dashoffset: -8
+        }
+      }
+
+      @keyframes cvxGate1 {
+
+        0%,
+        27% {
+          opacity: 0
+        }
+
+        30%,
+        86% {
+          opacity: .9
+        }
+
+        92%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxGate2 {
+
+        0%,
+        39% {
+          opacity: 0
+        }
+
+        42%,
+        86% {
+          opacity: .9
+        }
+
+        92%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxGate3 {
+
+        0%,
+        49% {
+          opacity: 0
+        }
+
+        52%,
+        86% {
+          opacity: .9
+        }
+
+        92%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      @keyframes cvxGate4 {
+
+        0%,
+        59% {
+          opacity: 0
+        }
+
+        62%,
+        86% {
+          opacity: .9
+        }
+
+        92%,
+        100% {
+          opacity: 0
+        }
+      }
+
+      /* Respiración muy sutil de todo el lienzo: vida continua entre eventos. */
+      .cvx-run .cvx-svg {
+        animation: cvxBreathe 11s ease-in-out infinite;
+        transform-origin: center
+      }
+
+      @keyframes cvxBreathe {
+
+        0%,
+        100% {
+          transform: scale(1)
+        }
+
+        50% {
+          transform: scale(1.008)
+        }
+      }
+
+      /* Segundo anillo del momento "pwned": doble pulso, más dramático. */
+      .cvx-run .cvx-ring2 {
+        animation: cvxRing2 11s ease infinite
+      }
+
+      @keyframes cvxRing2 {
+
+        0%,
+        66% {
+          opacity: 0;
+          transform: scale(.5)
+        }
+
+        72% {
+          opacity: .5
+        }
+
+        88%,
+        100% {
+          opacity: 0;
+          transform: scale(2.1)
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .cvx-node {
           opacity: 1 !important;
           transform: none !important;
+          animation: none !important
+        }
+
+        .cvx-spark {
+          opacity: 0 !important;
           animation: none !important
         }
 
@@ -6157,6 +6329,11 @@
               <text class="cvx-elbl cvxE2" x="500" y="262">ntlmrelayx (SMB)</text>
               <text class="cvx-elbl cvxE3" x="612" y="150">BloodHound · LDAP</text>
               <text class="cvx-elbl cvxE4" x="812" y="330">Kerberoast → DCSync</text>
+              <!-- Pulsos de "datos" que recorren cada flecha (una vez dibujada) -->
+              <path class="cvx-spark s1" d="M250 122 C 320 122, 320 110, 380 110" />
+              <path class="cvx-spark s2" d="M485 150 C 485 260, 490 270, 490 360" />
+              <path class="cvx-spark s3" d="M590 110 C 664 110, 674 190, 682 214" />
+              <path class="cvx-spark s4" d="M796 266 C 796 340, 762 360, 756 380" />
               <!-- N1: Responder (violeta) -->
               <g class="cvx-node cvxN1">
                 <rect x="40" y="80" width="210" height="84" rx="13" fill="rgba(157,92,255,.14)" stroke="#9d5cff"
@@ -6190,6 +6367,7 @@
               <!-- N5: Objetivo Domain Admin (gris → PWNED) -->
               <g class="cvx-node cvxN5">
                 <circle class="cvx-ring" cx="754" cy="430" r="64" />
+                <circle class="cvx-ring cvx-ring2" cx="754" cy="430" r="64" />
                 <rect class="cvx-objrect" x="620" y="378" width="270" height="104" rx="16" stroke-width="1.8" />
                 <rect class="cvx-objbar" x="620" y="378" width="7" height="104" rx="3.5" />
                 <circle cx="654" cy="410" r="8.5" fill="none" stroke="#c9cee0" stroke-width="1.7" />

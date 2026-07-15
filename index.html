@@ -4281,6 +4281,72 @@
       margin-right: 8px;
     }
 
+    /* ===== Lado IZQUIERDO del hero: vida y diseño (no un verde soso) ===== */
+    /* La aurora de marca (antes estática) ahora deriva y respira. */
+    .hero::after {
+      opacity: .7;
+      animation: heroGlow 18s ease-in-out infinite alternate;
+      will-change: transform, opacity;
+    }
+
+    @keyframes heroGlow {
+      0% { transform: translate(0, 0) scale(1); opacity: .55; }
+      100% { transform: translate(5%, -4%) scale(1.14); opacity: .85; }
+    }
+
+    /* Capa decorativa: rejilla de puntos sutil + segunda aurora esmeralda. */
+    .hero-fx {
+      position: absolute;
+      z-index: 0;
+      inset: 0 auto 0 0;
+      width: 54%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-fx::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(color-mix(in srgb, var(--accent) 24%, transparent) 1px, transparent 1.5px);
+      background-size: 26px 26px;
+      -webkit-mask: linear-gradient(90deg, #000 36%, transparent 82%);
+      mask: linear-gradient(90deg, #000 36%, transparent 82%);
+      opacity: .5;
+    }
+
+    .hero-fx::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      top: 30%;
+      width: 60%;
+      height: 66%;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 70%);
+      filter: blur(66px);
+      opacity: .6;
+      will-change: transform, opacity;
+      animation: heroAurora2 13s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroAurora2 {
+      0% { transform: translate(0, 0) scale(1); opacity: .45; }
+      100% { transform: translate(-6%, 6%) scale(1.2); opacity: .8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero::after, .hero-fx::after { animation: none; }
+    }
+
+    /* En pantallas GRANDES el texto no se queda pegado a la izquierda: se centra
+       dentro de la banda izquierda (sin invadir el vídeo, que empieza al 54%). */
+    @media (min-width: 1440px) {
+      .hero-text {
+        padding-left: 44px;
+        margin-left: clamp(44px, calc((46vw - 600px) / 2), 340px);
+      }
+    }
+
     @media (max-width: 900px) {
 
       /* En móvil se APILA: texto arriba, vídeo debajo (nunca encima del texto). */
@@ -4300,6 +4366,13 @@
         height: 40%;
         transform: translateX(-50%);
         opacity: .5;
+        animation: none;
+      }
+
+      /* La capa decorativa (rejilla/aurora del lado izq) es solo para el split
+         ancho; en móvil, apilado, no aplica. */
+      .hero-fx {
+        display: none;
       }
 
       .hero-text {
@@ -5234,6 +5307,7 @@
   <main id="top">
 
     <section class="hero">
+      <div class="hero-fx" aria-hidden="true"></div>
       <div class="hero-media">
         <video class="hero-video" id="heroVideo" autoplay loop muted playsinline preload="auto"
           poster="./assets/video_poster.jpg">
@@ -6568,8 +6642,8 @@
                 <path class="ln" d="M15 9.5h3.6c.8 0 1.4.6 1.4 1.4v9.6M3.5 20.5h17" />
                 <path class="ac" d="M8 8h4M8 11.5h4M8 15h4" />
               </svg></div>
-            <h3 data-i18n="roles.r4.t">Cliente</h3>
-            <p data-i18n="roles.r4.d">Portal de solo lectura para seguir el avance y descargar informes.</p>
+            <h3 data-i18n="roles.r4.t">Espectador</h3>
+            <p data-i18n="roles.r4.d">Solo lectura: sigue el avance y marca hallazgos para retest.</p>
           </div>
         </div>
       </div>
@@ -6994,7 +7068,7 @@
           "roles.r1.t": "Administrador", "roles.r1.d": "Control total: usuarios, workspaces, calendario y configuración.",
           "roles.r2.t": "Pentester", "roles.r2.d": "Crea y gestiona hallazgos, solicita cambios y prepara informes.",
           "roles.r3.t": "Consultor", "roles.r3.d": "Revisa y comenta sin modificar el alcance del trabajo.",
-          "roles.r4.t": "Cliente", "roles.r4.d": "Portal de solo lectura para seguir el avance y descargar informes.",
+          "roles.r4.t": "Espectador", "roles.r4.d": "Solo lectura: sigue el avance y marca hallazgos para retest.",
           "met.title": "Hecho para ir rápido.", "met.m1": "archivo, sin instalación", "met.m2": "dependencias externas", "met.m3": "sistemas operativos", "met.m4": "roles con permisos",
           "flow.eyebrow": "Cómo funciona", "flow.title": "De cero a informe en cuatro pasos.",
           "flow.s1.t": "Descarga y abre", "flow.s1.d": "Ejecuta el binario. Crisol-RX levanta su panel local al instante.",
@@ -7059,7 +7133,7 @@
           "roles.r1.t": "Administrator", "roles.r1.d": "Full control: users, workspaces, calendar and settings.",
           "roles.r2.t": "Pentester", "roles.r2.d": "Create and manage findings, request changes and prepare reports.",
           "roles.r3.t": "Consultant", "roles.r3.d": "Review and comment without changing the scope of work.",
-          "roles.r4.t": "Client", "roles.r4.d": "Read-only portal to follow progress and download reports.",
+          "roles.r4.t": "Viewer", "roles.r4.d": "Read-only: follow progress and flag findings for retest.",
           "met.title": "Built to move fast.", "met.m1": "file, no install", "met.m2": "external dependencies", "met.m3": "operating systems", "met.m4": "roles with permissions",
           "flow.eyebrow": "How it works", "flow.title": "From zero to report in four steps.",
           "flow.s1.t": "Download and open", "flow.s1.d": "Run the binary. Crisol-RX spins up its local panel instantly.",

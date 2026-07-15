@@ -4192,6 +4192,10 @@
       bottom: 0;
       width: 54%;
       z-index: 0;
+      /* El propio vídeo se disuelve por su borde izquierdo sobre el fondo:
+         sin banda de color, no hay costura visible entre los dos lados. */
+      -webkit-mask: linear-gradient(100deg, transparent 3%, rgba(0, 0, 0, .35) 22%, #000 46%);
+      mask: linear-gradient(100deg, transparent 3%, rgba(0, 0, 0, .35) 22%, #000 46%);
     }
 
     .hero-video {
@@ -4205,13 +4209,13 @@
       filter: saturate(108%) contrast(104%);
     }
 
-    /* Fundido del borde izquierdo del video con el fondo (sin efectos encima). */
+    /* El borde izquierdo lo funde la máscara del propio vídeo (.hero-media).
+       Aquí solo queda un leve grano de color y oscurecido inferior. */
     .hero-media-fade {
       position: absolute;
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(100deg, var(--hero-bg) 0%, color-mix(in srgb, var(--hero-bg) 90%, transparent) 20%, color-mix(in srgb, var(--hero-bg) 55%, transparent) 34%, transparent 52%),
         linear-gradient(0deg, rgba(6, 8, 13, .5) 0%, transparent 40%),
         radial-gradient(85% 60% at 72% 30%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 72%);
     }
@@ -4315,80 +4319,69 @@
       opacity: .5;
     }
 
+    /* Resplandor ambiental ESTÁTICO (sin barrido ni auroras que se mueven): da
+       calidez al lado izquierdo sin distraer del efecto protagonista. */
     .hero-fx::after {
       content: "";
       position: absolute;
-      left: 4%;
-      top: 30%;
-      width: 60%;
-      height: 66%;
-      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 70%);
-      filter: blur(66px);
-      opacity: .6;
-      will-change: transform, opacity;
-      animation: heroAurora2 13s ease-in-out infinite alternate;
+      left: 2%;
+      top: 32%;
+      width: 62%;
+      height: 62%;
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 20%, transparent), transparent 70%);
+      filter: blur(74px);
+      opacity: .5;
     }
 
-    @keyframes heroAurora2 {
-      0% { transform: translate(0, 0) scale(1); opacity: .45; }
-      100% { transform: translate(-6%, 6%) scale(1.2); opacity: .8; }
-    }
-
-    /* Haz de luz que barre despacio (como un reflector), detrás del texto. */
-    .hx-beam {
-      position: absolute;
-      top: -30%;
-      left: 0;
-      width: 34%;
-      height: 160%;
-      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-2) 20%, transparent), transparent);
-      filter: blur(26px);
-      transform: translateX(-60%) skewX(-14deg);
-      opacity: 0;
-      will-change: transform, opacity;
-      animation: hxBeam 10s ease-in-out infinite;
-    }
-
-    @keyframes hxBeam {
-      0%, 100% { transform: translateX(-60%) skewX(-14deg); opacity: 0; }
-      45% { opacity: .5; }
-      65% { transform: translateX(210%) skewX(-14deg); opacity: 0; }
-    }
-
-    /* Chispas ascendentes (guiño a "crisol" = crisol de fundición). */
+    /* ===== Brasas ascendentes del "crisol": el ÚNICO efecto animado del lado izq.
+       Suben desde la base, con brillo, deriva y parpadeo — protagonista. ===== */
     .hx-spark {
       position: absolute;
-      width: 5px;
-      height: 5px;
+      bottom: -16px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: color-mix(in srgb, var(--accent-2) 85%, #fff);
-      box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent-2) 55%, transparent);
+      background: radial-gradient(circle at 50% 45%, #fff 0%, color-mix(in srgb, var(--accent-2) 92%, #fff) 42%, color-mix(in srgb, var(--accent-2) 55%, transparent) 100%);
+      box-shadow:
+        0 0 8px 2px color-mix(in srgb, var(--accent-2) 65%, transparent),
+        0 0 20px 6px color-mix(in srgb, var(--accent-2) 28%, transparent);
       opacity: 0;
       will-change: transform, opacity;
-      animation: hxSpark 7s ease-in-out infinite;
+      animation: hxSpark 10s ease-in-out infinite;
     }
 
-    .hx-spark.s2, .hx-spark.s4 {
-      background: color-mix(in srgb, var(--accent) 85%, #fff);
-      box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent) 55%, transparent);
+    /* Algunas brasas en el verde de marca para dar variedad cromática. */
+    .hx-spark.g {
+      background: radial-gradient(circle at 50% 45%, #fff 0%, color-mix(in srgb, var(--accent) 92%, #fff) 42%, color-mix(in srgb, var(--accent) 55%, transparent) 100%);
+      box-shadow:
+        0 0 8px 2px color-mix(in srgb, var(--accent) 65%, transparent),
+        0 0 20px 6px color-mix(in srgb, var(--accent) 28%, transparent);
     }
 
-    .hx-spark.s1 { left: 12%; top: 74%; animation-delay: 0s; }
-    .hx-spark.s2 { left: 28%; top: 84%; animation-delay: 1.5s; }
-    .hx-spark.s3 { left: 7%;  top: 58%; animation-delay: 3s; }
-    .hx-spark.s4 { left: 22%; top: 46%; animation-delay: 4.3s; width: 4px; height: 4px; }
-    .hx-spark.s5 { left: 34%; top: 66%; animation-delay: 5.6s; width: 3px; height: 3px; }
+    .hx-spark.s1  { left: 8%;  animation-delay: 0s;   animation-duration: 9s; }
+    .hx-spark.s2  { left: 15%; animation-delay: 2.4s; animation-duration: 11s;   width: 4px; height: 4px; }
+    .hx-spark.s3  { left: 21%; animation-delay: 5.1s; animation-duration: 8.5s; }
+    .hx-spark.s4  { left: 27%; animation-delay: 1.2s; animation-duration: 12s;   width: 5px; height: 5px; }
+    .hx-spark.s5  { left: 33%; animation-delay: 3.8s; animation-duration: 10s;   width: 3px; height: 3px; }
+    .hx-spark.s6  { left: 11%; animation-delay: 6.5s; animation-duration: 10.5s; width: 4px; height: 4px; }
+    .hx-spark.s7  { left: 39%; animation-delay: 4.4s; animation-duration: 13s;   width: 3px; height: 3px; }
+    .hx-spark.s8  { left: 5%;  animation-delay: 7.7s; animation-duration: 9.5s;  width: 5px; height: 5px; }
+    .hx-spark.s9  { left: 24%; animation-delay: 8.9s; animation-duration: 11.5s; width: 4px; height: 4px; }
+    .hx-spark.s10 { left: 30%; animation-delay: 3.0s; animation-duration: 14s;   width: 7px; height: 7px; }
+    .hx-spark.s11 { left: 18%; animation-delay: 9.6s; animation-duration: 10s;   width: 3px; height: 3px; }
+    .hx-spark.s12 { left: 36%; animation-delay: 1.9s; animation-duration: 12.5s; width: 4px; height: 4px; }
 
     @keyframes hxSpark {
-      0% { transform: translateY(12px) scale(.5); opacity: 0; }
-      25% { opacity: .95; }
-      70% { opacity: .65; }
-      100% { transform: translateY(-46px) scale(1); opacity: 0; }
+      0%   { transform: translate(0, 0) scale(.4); opacity: 0; }
+      12%  { opacity: .95; }
+      50%  { transform: translate(9px, -46vh) scale(1); opacity: .85; }
+      82%  { opacity: .5; }
+      100% { transform: translate(-6px, -82vh) scale(.65); opacity: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero::after, .hero-fx::after, .hx-beam, .hx-spark { animation: none; }
-      .hx-beam, .hx-spark { opacity: 0; }
+      .hero::after, .hx-spark { animation: none; }
+      .hx-spark { opacity: 0; }
     }
 
     /* En pantallas GRANDES el texto no se queda pegado a la izquierda: se centra
@@ -4459,6 +4452,9 @@
         border-radius: 18px;
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, .1);
+        /* En móvil el vídeo es una tarjeta redondeada: sin máscara lateral. */
+        -webkit-mask: none;
+        mask: none;
       }
 
       .hero-media-fade {
@@ -5361,12 +5357,18 @@
 
     <section class="hero">
       <div class="hero-fx" aria-hidden="true">
-        <span class="hx-beam"></span>
         <span class="hx-spark s1"></span>
-        <span class="hx-spark s2"></span>
+        <span class="hx-spark s2 g"></span>
         <span class="hx-spark s3"></span>
-        <span class="hx-spark s4"></span>
+        <span class="hx-spark s4 g"></span>
         <span class="hx-spark s5"></span>
+        <span class="hx-spark s6 g"></span>
+        <span class="hx-spark s7"></span>
+        <span class="hx-spark s8 g"></span>
+        <span class="hx-spark s9"></span>
+        <span class="hx-spark s10 g"></span>
+        <span class="hx-spark s11"></span>
+        <span class="hx-spark s12 g"></span>
       </div>
       <div class="hero-media">
         <video class="hero-video" id="heroVideo" autoplay loop muted playsinline preload="auto"

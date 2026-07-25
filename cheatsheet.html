@@ -860,6 +860,18 @@
       .cs-toc {
         display: none !important
       }
+
+      /* En Fragua, la descarga sigue accesible en móvil: se muestra solo la
+         tarjeta de descarga del TOC (sin los enlaces de navegación). */
+      #view-fragua .cs-toc {
+        display: block !important;
+        position: static
+      }
+
+      #view-fragua .cs-toc .toc-group,
+      #view-fragua .cs-toc a.toc-sub {
+        display: none
+      }
     }
 
     @media(max-width:560px) {
@@ -2020,131 +2032,398 @@
       background: var(--bg2);
       border-top: 1px solid var(--border)
     }
-  
+
     /* ---------- skin index.html ---------- */
-    nav .brand, nav .brand .name { color: var(--text); }
-    nav .nav-links a:not(.btn):not(.nav-buy) { color: var(--muted); }
-    nav .nav-links a:not(.btn):not(.nav-buy):hover { color: var(--text); }
-    nav .lang-btn, nav .theme-btn {
+    nav .brand,
+    nav .brand .name {
+      color: var(--text);
+    }
+
+    nav .nav-links a:not(.btn):not(.nav-buy) {
+      color: var(--muted);
+    }
+
+    nav .nav-links a:not(.btn):not(.nav-buy):hover {
+      color: var(--text);
+    }
+
+    nav .lang-btn,
+    nav .theme-btn {
       color: var(--muted) !important;
       border-color: var(--border) !important;
       background: transparent !important;
     }
-    nav .lang-btn:hover, nav .theme-btn:hover {
+
+    nav .lang-btn:hover,
+    nav .theme-btn:hover {
       color: var(--text) !important;
       border-color: var(--border) !important;
       background: var(--panel2) !important;
     }
-    nav .theme-btn svg, nav .theme-btn .ln { stroke: currentColor; color: var(--muted); }
-    nav .theme-btn:hover svg, nav .theme-btn:hover .ln { color: var(--text); }
-    nav .nav-burger { border-color: var(--border) !important; background: transparent !important; }
-    nav .nav-burger span { background: var(--text); }
-    ::selection { background: rgba(168, 107, 255, .35); color: #fff; }
-    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    nav .theme-btn svg,
+    nav .theme-btn .ln {
+      stroke: currentColor;
+      color: var(--muted);
+    }
+
+    nav .theme-btn:hover svg,
+    nav .theme-btn:hover .ln {
+      color: var(--text);
+    }
+
+    nav .nav-burger {
+      border-color: var(--border) !important;
+      background: transparent !important;
+    }
+
+    nav .nav-burger span {
+      background: var(--text);
+    }
+
+    ::selection {
+      background: rgba(168, 107, 255, .35);
+      color: #fff;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
     .progress {
-      position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 200;
-      transform-origin: left; transform: scaleX(0);
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      z-index: 200;
+      transform-origin: left;
+      transform: scaleX(0);
       background: linear-gradient(120deg, #a86bff, #6f3ad6 55%, #2fd6a6 130%);
     }
 
     /* ── Selector Crisol-RX / Fragua ── */
     .cs-switch {
-      display: flex; justify-content: center; gap: 6px;
-      width: max-content; max-width: 100%; margin: 4px auto 26px; padding: 6px;
-      border: 1px solid var(--border); border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      width: max-content;
+      max-width: 100%;
+      margin: 4px auto 26px;
+      padding: 6px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
       background: linear-gradient(180deg, var(--panel), var(--panel2));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
     }
+
     .cs-switch-btn {
-      display: inline-flex; align-items: center; gap: 9px;
-      padding: 10px 18px; border: 0; border-radius: 11px; cursor: pointer;
-      background: transparent; color: var(--muted);
-      font: inherit; font-weight: 700; font-size: 14px; letter-spacing: .2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 11px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .2px;
       transition: color .18s, background .18s, box-shadow .18s, transform .18s;
     }
-    .cs-switch-btn svg { width: 20px; height: 20px; flex: 0 0 auto; border-radius: 5px; }
-    .cs-switch-btn:hover { color: var(--text); }
+
+    .cs-switch-btn svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      border-radius: 5px;
+    }
+
+    .cs-switch-btn:hover {
+      color: var(--text);
+    }
+
     .cs-switch-btn[aria-selected="true"] {
       color: #fff;
       background: linear-gradient(135deg, var(--accent), var(--accent-dim));
       box-shadow: 0 8px 22px -8px var(--accent);
     }
-    .cs-view[hidden] { display: none; }
+
+    .cs-view[hidden] {
+      display: none;
+    }
 
     /* ── Cursor personalizado (coherente con index.html) ── */
     @media (hover:hover) and (pointer:fine) {
-      body, a, button, .tab, input, select, textarea, label,
-      .cs-fhead, .copy-btn, .cs-switch-btn, .toc-sub, .cs-sec, .fr-dl-btn { cursor: none; }
+
+      body,
+      a,
+      button,
+      .tab,
+      input,
+      select,
+      textarea,
+      label,
+      .cs-fhead,
+      .copy-btn,
+      .cs-switch-btn,
+      .toc-sub,
+      .cs-sec,
+      .fr-dl-btn {
+        cursor: none;
+      }
     }
-    .cur-dot, .cur-tri { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9999; display: none; }
-    @media (hover:hover) and (pointer:fine) { .cur-dot, .cur-tri { display: block; } }
+
+    .cur-dot,
+    .cur-tri {
+      position: fixed;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+    }
+
+    @media (hover:hover) and (pointer:fine) {
+
+      .cur-dot,
+      .cur-tri {
+        display: block;
+      }
+    }
+
     .cur-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--accent2);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
       box-shadow: 0 0 10px rgba(47, 214, 166, .8);
       transition: width .25s, height .25s, background .25s;
     }
-    .cur-tri { width: 36px; height: 36px; will-change: transform; }
-    .cur-tri svg { width: 100%; height: 100%; animation: curSpin 14s linear infinite; transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
-    .cur-tri path { transition: stroke .25s, fill .25s; }
-    @keyframes curSpin { to { transform: rotate(360deg); } }
-    body.cur-hover .cur-tri svg { transform: scale(1.45) rotate(180deg); animation-play-state: paused; }
-    body.cur-hover .cur-tri path { stroke: var(--accent2); fill: rgba(47, 214, 166, .12); }
-    body.cur-hover .cur-dot { width: 4px; height: 4px; background: var(--accent); }
-    @media (prefers-reduced-motion: reduce) { .cur-tri svg { animation: none; } }
+
+    .cur-tri {
+      width: 36px;
+      height: 36px;
+      will-change: transform;
+    }
+
+    .cur-tri svg {
+      width: 100%;
+      height: 100%;
+      animation: curSpin 14s linear infinite;
+      transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .cur-tri path {
+      transition: stroke .25s, fill .25s;
+    }
+
+    @keyframes curSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    body.cur-hover .cur-tri svg {
+      transform: scale(1.45) rotate(180deg);
+      animation-play-state: paused;
+    }
+
+    body.cur-hover .cur-tri path {
+      stroke: var(--accent2);
+      fill: rgba(47, 214, 166, .12);
+    }
+
+    body.cur-hover .cur-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cur-tri svg {
+        animation: none;
+      }
+    }
 
     /* ── Cabecera con dos títulos que hacen crossfade (Crisol / Fragua) ── */
-    .head-titles { display: grid; }
-    .head-title { grid-area: 1 / 1; transition: opacity .45s ease, transform .45s ease, filter .45s ease; }
-    .head-title:not(.is-active) { opacity: 0; transform: translateY(14px) scale(.985); filter: blur(3px); pointer-events: none; }
-    .head-title.is-active { opacity: 1; transform: none; filter: none; }
-    @media (prefers-reduced-motion: reduce) {
-      .head-title { transition: opacity .2s ease; }
-      .head-title:not(.is-active) { transform: none; filter: none; }
+    .head-titles {
+      display: grid;
     }
 
-    /* ── Drawer lateral de descarga (solo en la vista Fragua) ── */
-    .dl-dock { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 85; }
-    .dl-dock[hidden] { display: none; }
-    .dl-panel {
-      position: relative; width: min(300px, 86vw); max-height: 84vh; overflow: auto;
-      padding: 18px 16px 16px;
-      background: linear-gradient(180deg, var(--panel), var(--panel2));
-      border: 1px solid var(--border); border-right: 0; border-radius: 16px 0 0 16px;
-      box-shadow: -22px 0 60px -24px rgba(0, 0, 0, .65);
-      transform: translateX(100%);
-      transition: transform .42s cubic-bezier(.22, .85, .2, 1);
+    .head-title {
+      grid-area: 1 / 1;
+      transition: opacity .45s ease, transform .45s ease, filter .45s ease;
     }
-    .dl-dock.open .dl-panel { transform: translateX(0); }
-    .dl-handle {
-      position: absolute; top: 22px; right: 100%;
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 9px; border: 1px solid var(--border); border-right: 0;
-      border-radius: 13px 0 0 13px; cursor: pointer;
-      color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-dim));
-      writing-mode: vertical-rl; font-weight: 700; font-size: 12.5px; letter-spacing: .4px;
-      box-shadow: -10px 0 26px -14px var(--accent); transition: filter .18s;
+
+    .head-title:not(.is-active) {
+      opacity: 0;
+      transform: translateY(14px) scale(.985);
+      filter: blur(3px);
+      pointer-events: none;
     }
-    .dl-handle:hover { filter: brightness(1.08); }
-    .dl-handle svg { width: 16px; height: 16px; transition: transform .42s cubic-bezier(.22, .85, .2, 1); }
-    .dl-dock.open .dl-handle svg { transform: rotate(180deg); }
-    .dl-panel h3 { margin: 0 0 2px; font-size: 16px; }
-    .fr-dl-sub { color: var(--muted); font-size: 13px; margin: 4px 0 14px; }
-    .fr-dl-grid { display: grid; grid-template-columns: 1fr; gap: 9px; }
+
+    .head-title.is-active {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .head-title {
+        transition: opacity .2s ease;
+      }
+
+      .head-title:not(.is-active) {
+        transform: none;
+        filter: none;
+      }
+    }
+
+    /* ── Descarga de Fragua: desplegable integrado en el TOC lateral ── */
+    .fr-dlcard {
+      margin: 0 0 14px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
+      background: radial-gradient(120% 130% at 12% 0%, rgba(168, 107, 255, .16), transparent 62%), linear-gradient(180deg, var(--panel), var(--panel2));
+      box-shadow: 0 12px 30px -20px var(--accent);
+    }
+
+    .fr-dlcard-head {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      padding: 12px 13px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      font-size: 13.5px;
+      text-align: left;
+    }
+
+    .fr-dlcard-ic {
+      display: inline-flex;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .fr-dlcard-ic svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .fr-dlcard-t {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .fr-dlcard-chev {
+      flex: 0 0 auto;
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform .28s ease;
+    }
+
+    .fr-dlcard.open .fr-dlcard-chev {
+      transform: rotate(180deg);
+    }
+
+    .fr-dlcard-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .3s cubic-bezier(.22, .85, .2, 1);
+    }
+
+    .fr-dlcard.open .fr-dlcard-body {
+      grid-template-rows: 1fr;
+    }
+
+    .fr-dlcard-inner {
+      overflow: hidden;
+      min-height: 0;
+      padding: 0 11px;
+    }
+
+    .fr-dlcard.open .fr-dlcard-inner {
+      padding-top: 2px;
+      padding-bottom: 12px;
+    }
+
+    .fr-dl-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
     .fr-dl-btn {
-      display: flex; align-items: center; gap: 11px; padding: 11px 13px; border-radius: 12px;
-      border: 1px solid var(--border); background: var(--panel); color: var(--text); text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
       transition: border-color .18s, transform .18s, box-shadow .18s;
     }
-    .fr-dl-btn:hover { border-color: var(--accent); transform: translateX(-3px); box-shadow: 0 12px 26px -14px var(--accent); }
-    .fr-dl-btn > svg { width: 24px; height: 24px; flex: 0 0 auto; color: var(--muted); transition: color .18s; }
-    .fr-dl-btn:hover > svg { color: var(--accent); }
-    .fr-dl-txt { display: flex; flex-direction: column; line-height: 1.25; }
-    .fr-dl-txt b { font-size: 13.5px; font-weight: 700; }
-    .fr-dl-txt small { font-size: 12px; color: var(--muted); }
-    .fr-dl-foot { margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
-    .fr-dl-foot a { color: var(--accent); font-weight: 600; }
-    @media (max-width: 560px) { .dl-panel { max-height: 76vh; } .dl-handle { top: 14px; } }
-</style>
+
+    .fr-dl-btn:hover {
+      border-color: var(--accent);
+      transform: translateX(3px);
+      box-shadow: 0 10px 22px -14px var(--accent);
+    }
+
+    .fr-dl-btn>svg {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      color: var(--muted);
+      transition: color .18s;
+    }
+
+    .fr-dl-btn:hover>svg {
+      color: var(--accent);
+    }
+
+    .fr-dl-txt {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.22;
+    }
+
+    .fr-dl-txt b {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .fr-dl-txt small {
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .fr-dl-foot {
+      margin: 12px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .fr-dl-foot a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
 </head>
 
 <body>
@@ -2213,7 +2492,8 @@
         </div>
         <div class="head-title" id="headFragua" aria-hidden="true">
           <h1 data-i18n="fr.head.title">Cheat Sheet de <span class="grad">Fragua</span></h1>
-          <p data-i18n="fr.head.sub">El escáner de <b>Crisol-RX</b>: todas sus flags agrupadas por tipo de prueba — reconocimiento, web, auditoría interna y bastionado.</p>
+          <p data-i18n="fr.head.sub">El escáner de <b>Crisol-RX</b>: todas sus flags agrupadas por tipo de prueba —
+            reconocimiento, web, auditoría interna y bastionado.</p>
         </div>
       </div>
     </div>
@@ -2226,14 +2506,19 @@
     <div class="cs-switch" role="tablist" aria-label="Elegir cheat sheet">
       <button class="cs-switch-btn" id="sw-crisol" role="tab" aria-selected="true" aria-controls="view-crisol">
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <defs><linearGradient id="swcG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a86bff"/><stop offset="1" stop-color="#6f3ad6"/></linearGradient></defs>
-          <rect x="1" y="1" width="46" height="46" rx="12" fill="#0e1424"/>
-          <rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.10"/>
+          <defs>
+            <linearGradient id="swcG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#a86bff" />
+              <stop offset="1" stop-color="#6f3ad6" />
+            </linearGradient>
+          </defs>
+          <rect x="1" y="1" width="46" height="46" rx="12" fill="#0e1424" />
+          <rect x="1" y="1" width="46" height="46" rx="12" fill="none" stroke="#ffffff" stroke-opacity="0.10" />
           <g transform="translate(4.8 4.8) scale(0.8)">
-            <path d="M24 4 L38 16 H10 Z" fill="url(#swcG)"/>
-            <path d="M10 16 H38 L24 44 Z" fill="url(#swcG)" opacity="0.82"/>
-            <path d="M17 16 L24 26 L31 16 L24 14 Z" fill="#2fd6a6"/>
-            <circle cx="24" cy="17.5" r="2.1" fill="#2fd6a6"/>
+            <path d="M24 4 L38 16 H10 Z" fill="url(#swcG)" />
+            <path d="M10 16 H38 L24 44 Z" fill="url(#swcG)" opacity="0.82" />
+            <path d="M17 16 L24 26 L31 16 L24 14 Z" fill="#2fd6a6" />
+            <circle cx="24" cy="17.5" r="2.1" fill="#2fd6a6" />
           </g>
         </svg>
         <span>Crisol-RX</span>
@@ -2241,120 +2526,147 @@
       <button class="cs-switch-btn" id="sw-fragua" role="tab" aria-selected="false" aria-controls="view-fragua">
         <svg viewBox="0 0 1024 1024" fill="none" aria-hidden="true">
           <defs>
-            <linearGradient id="swfBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a50"/><stop offset="1" stop-color="#0c0918"/></linearGradient>
-            <radialGradient id="swfGlow" cx="0.5" cy="0.35" r="0.55"><stop offset="0" stop-color="#a974ff" stop-opacity="0.34"/><stop offset="1" stop-color="#a974ff" stop-opacity="0"/></radialGradient>
-            <linearGradient id="swfAnvil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfa6ff"/><stop offset="1" stop-color="#844de6"/></linearGradient>
-            <linearGradient id="swfDrop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9dffdd"/><stop offset="1" stop-color="#0fc28b"/></linearGradient>
-            <radialGradient id="swfDropGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#18e6a2" stop-opacity="0.45"/><stop offset="1" stop-color="#18e6a2" stop-opacity="0"/></radialGradient>
-            <radialGradient id="swfPool" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2bf0b0" stop-opacity="0.55"/><stop offset="1" stop-color="#2bf0b0" stop-opacity="0"/></radialGradient>
+            <linearGradient id="swfBg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2a1a50" />
+              <stop offset="1" stop-color="#0c0918" />
+            </linearGradient>
+            <radialGradient id="swfGlow" cx="0.5" cy="0.35" r="0.55">
+              <stop offset="0" stop-color="#a974ff" stop-opacity="0.34" />
+              <stop offset="1" stop-color="#a974ff" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="swfAnvil" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cfa6ff" />
+              <stop offset="1" stop-color="#844de6" />
+            </linearGradient>
+            <linearGradient id="swfDrop" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#9dffdd" />
+              <stop offset="1" stop-color="#0fc28b" />
+            </linearGradient>
+            <radialGradient id="swfDropGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#18e6a2" stop-opacity="0.45" />
+              <stop offset="1" stop-color="#18e6a2" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="swfPool" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#2bf0b0" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#2bf0b0" stop-opacity="0" />
+            </radialGradient>
           </defs>
-          <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#swfBg)"/>
-          <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#swfGlow)"/>
-          <ellipse cx="500" cy="362" rx="150" ry="200" fill="url(#swfDropGlow)"/>
+          <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#swfBg)" />
+          <rect x="0" y="0" width="1024" height="1024" rx="232" fill="url(#swfGlow)" />
+          <ellipse cx="500" cy="362" rx="150" ry="200" fill="url(#swfDropGlow)" />
           <g>
-            <path d="M330 690 L694 690 L648 610 L376 610 Z" fill="url(#swfAnvil)"/>
-            <rect x="454" y="536" width="116" height="80" fill="url(#swfAnvil)"/>
-            <path d="M300 470 h372 a22 22 0 0 1 22 22 v36 a22 22 0 0 1 -22 22 h-372 a24 24 0 0 1 -24 -24 v-32 a24 24 0 0 1 24 -24 Z" fill="url(#swfAnvil)"/>
-            <path d="M300 482 L190 512 L300 554 Z" fill="url(#swfAnvil)"/>
-            <rect x="312" y="484" width="372" height="18" rx="9" fill="#ffffff" fill-opacity="0.22"/>
+            <path d="M330 690 L694 690 L648 610 L376 610 Z" fill="url(#swfAnvil)" />
+            <rect x="454" y="536" width="116" height="80" fill="url(#swfAnvil)" />
+            <path
+              d="M300 470 h372 a22 22 0 0 1 22 22 v36 a22 22 0 0 1 -22 22 h-372 a24 24 0 0 1 -24 -24 v-32 a24 24 0 0 1 24 -24 Z"
+              fill="url(#swfAnvil)" />
+            <path d="M300 482 L190 512 L300 554 Z" fill="url(#swfAnvil)" />
+            <rect x="312" y="484" width="372" height="18" rx="9" fill="#ffffff" fill-opacity="0.22" />
           </g>
-          <ellipse cx="500" cy="486" rx="86" ry="20" fill="url(#swfPool)"/>
-          <path d="M500 236 C540 300 560 318 560 362 A60 60 0 0 1 440 362 C440 318 460 300 500 236 Z" fill="url(#swfDrop)"/>
-          <ellipse cx="484" cy="346" rx="16" ry="20" fill="#ffffff" fill-opacity="0.42" transform="rotate(-20 484 346)"/>
+          <ellipse cx="500" cy="486" rx="86" ry="20" fill="url(#swfPool)" />
+          <path d="M500 236 C540 300 560 318 560 362 A60 60 0 0 1 440 362 C440 318 460 300 500 236 Z"
+            fill="url(#swfDrop)" />
+          <ellipse cx="484" cy="346" rx="16" ry="20" fill="#ffffff" fill-opacity="0.42"
+            transform="rotate(-20 484 346)" />
         </svg>
         <span>Fragua</span>
       </button>
     </div>
 
     <div class="cs-view" id="view-crisol" role="tabpanel" aria-labelledby="sw-crisol">
-    <div class="cs-layout">
+      <div class="cs-layout">
 
-      <aside class="cs-toc" id="toc">
-        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="3" />
-              <path
-                d="M12 2.5v2.3M12 19.2v2.3M21.5 12h-2.3M4.8 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3" />
-            </svg></span><span data-i18n="grp.start.t">Configuración</span></div>
-        <a class="toc-sub" href="#config" data-i18n="toc.config">El archivo crisol.json</a>
-        <a class="toc-sub" href="#flags" data-i18n="toc.flags">Flags y variables de entorno</a>
-
-        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M3 12h18" />
-              <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" />
-            </svg></span><span data-i18n="grp.network.t">Servidor y red</span></div>
-        <a class="toc-sub" href="#red" data-i18n="toc.network">Servidor en red</a>
-        <a class="toc-sub" href="#https" data-i18n="toc.https">HTTPS / TLS</a>
-        <a class="toc-sub" href="#proxy" data-i18n="toc.proxy">Reverse proxy</a>
-        <a class="toc-sub" href="#red-privada" data-i18n="toc.privnet">Config. red privada</a>
-
-        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
-              <path d="m8.7 12 2.3 2.3 4.3-4.6" />
-            </svg></span><span data-i18n="grp.security.t">Seguridad y datos</span></div>
-        <a class="toc-sub" href="#cifrado" data-i18n="toc.encryption">Cifrado de datos</a>
-        <a class="toc-sub" href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
-        <a class="toc-sub" href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
-        <a class="toc-sub" href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
-        <a class="toc-sub" href="#despliegue" data-i18n="toc.deploy">Despliegue seguro</a>
-
-        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 3v9" />
-              <path d="m8 8.5 4 4 4-4" />
-              <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
-            </svg></span><span data-i18n="grp.tools.t">Herramientas de importación</span></div>
-        <a class="toc-sub" href="#herramientas" data-i18n="toc.tools">Escáneres compatibles</a>
-        <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span><span data-i18n="grp.reqs.t">Requisitos y despliegue</span></div>
-        <a class="toc-sub" href="#requisitos" data-i18n="toc.reqs">Requisitos de hardware</a>
-        <a class="toc-sub" href="#sistemas" data-i18n="toc.os">Despliegue seguro</a>
-      </aside>
-
-      <main>
-
-        <section class="cs-folder reveal open" id="grp-start">
-          <button class="cs-fhead" aria-expanded="true" aria-controls="grp-start-body" id="grp-start-head">
-            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        <aside class="cs-toc" id="toc">
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3" />
                 <path
-                  d="M12 3c2.7 1.4 4.4 4.3 4.4 7.6 0 2-.5 3.6-1.2 5.1H8.8c-.7-1.5-1.2-3.1-1.2-5.1C7.6 7.3 9.3 4.4 12 3Z" />
-                <circle cx="12" cy="9.6" r="1.7" />
-                <path d="M8.8 15.7l-2.2 1.5.9-3.4M15.2 15.7l2.2 1.5-.9-3.4" />
-                <path d="M9.7 18.6c.6 1.1 1.5 1.9 2.3 2.4.8-.5 1.7-1.3 2.3-2.4" />
-              </svg></span>
-            <span class="cs-fmeta">
-              <span class="cs-ftop">
-                <span class="cs-fnum">[ 01 ]</span>
-                <h2 data-i18n="grp.start.t">Configuración</h2>
-              </span>
-              <span class="cs-fcount"><span data-i18n="grp.start.c">2 temas</span></span>
-            </span>
-            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg></span>
-          </button>
-          <div class="cs-fbody" id="grp-start-body" role="region" aria-labelledby="grp-start-head">
-            <div class="cs-fbody-inner">
-              <div class="cs-fbody-pad">
+                  d="M12 2.5v2.3M12 19.2v2.3M21.5 12h-2.3M4.8 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3" />
+              </svg></span><span data-i18n="grp.start.t">Configuración</span></div>
+          <a class="toc-sub" href="#config" data-i18n="toc.config">El archivo crisol.json</a>
+          <a class="toc-sub" href="#flags" data-i18n="toc.flags">Flags y variables de entorno</a>
 
-                <section class="cs-sec reveal" id="config">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="3" />
-                        <path
-                          d="M12 2.5v2.3M12 19.2v2.3M21.5 12h-2.3M4.8 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3" />
-                      </svg></span> <span data-i18n="sec.config.h">El archivo</span> <code
-                      style="font-size:.7em">crisol.json</code></h2>
-                  <p class="lead" data-i18n="sec.config.lead">Se crea solo junto al ejecutable en el primer arranque.
-                    Edítalo
-                    con cualquier editor de texto
-                    y reinicia la app para aplicar los cambios.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18" />
+                <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" />
+              </svg></span><span data-i18n="grp.network.t">Servidor y red</span></div>
+          <a class="toc-sub" href="#red" data-i18n="toc.network">Servidor en red</a>
+          <a class="toc-sub" href="#https" data-i18n="toc.https">HTTPS / TLS</a>
+          <a class="toc-sub" href="#proxy" data-i18n="toc.proxy">Reverse proxy</a>
+          <a class="toc-sub" href="#red-privada" data-i18n="toc.privnet">Config. red privada</a>
+
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
+                <path d="m8.7 12 2.3 2.3 4.3-4.6" />
+              </svg></span><span data-i18n="grp.security.t">Seguridad y datos</span></div>
+          <a class="toc-sub" href="#cifrado" data-i18n="toc.encryption">Cifrado de datos</a>
+          <a class="toc-sub" href="#passphrase" data-i18n="toc.passphrase">Cambiar passphrase</a>
+          <a class="toc-sub" href="#backup" data-i18n="toc.backup">Copias de seguridad</a>
+          <a class="toc-sub" href="#tips" data-i18n="toc.tips">Buenas prácticas</a>
+          <a class="toc-sub" href="#despliegue" data-i18n="toc.deploy">Despliegue seguro</a>
+
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3v9" />
+                <path d="m8 8.5 4 4 4-4" />
+                <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
+              </svg></span><span data-i18n="grp.tools.t">Herramientas de importación</span></div>
+          <a class="toc-sub" href="#herramientas" data-i18n="toc.tools">Escáneres compatibles</a>
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" rx="1" />
+                <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+              </svg></span><span data-i18n="grp.reqs.t">Requisitos y despliegue</span></div>
+          <a class="toc-sub" href="#requisitos" data-i18n="toc.reqs">Requisitos de hardware</a>
+          <a class="toc-sub" href="#sistemas" data-i18n="toc.os">Despliegue seguro</a>
+        </aside>
+
+        <main>
+
+          <section class="cs-folder reveal open" id="grp-start">
+            <button class="cs-fhead" aria-expanded="true" aria-controls="grp-start-body" id="grp-start-head">
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M12 3c2.7 1.4 4.4 4.3 4.4 7.6 0 2-.5 3.6-1.2 5.1H8.8c-.7-1.5-1.2-3.1-1.2-5.1C7.6 7.3 9.3 4.4 12 3Z" />
+                  <circle cx="12" cy="9.6" r="1.7" />
+                  <path d="M8.8 15.7l-2.2 1.5.9-3.4M15.2 15.7l2.2 1.5-.9-3.4" />
+                  <path d="M9.7 18.6c.6 1.1 1.5 1.9 2.3 2.4.8-.5 1.7-1.3 2.3-2.4" />
+                </svg></span>
+              <span class="cs-fmeta">
+                <span class="cs-ftop">
+                  <span class="cs-fnum">[ 01 ]</span>
+                  <h2 data-i18n="grp.start.t">Configuración</h2>
+                </span>
+                <span class="cs-fcount"><span data-i18n="grp.start.c">2 temas</span></span>
+              </span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
+            </button>
+            <div class="cs-fbody" id="grp-start-body" role="region" aria-labelledby="grp-start-head">
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+
+                  <section class="cs-sec reveal" id="config">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="3" />
+                          <path
+                            d="M12 2.5v2.3M12 19.2v2.3M21.5 12h-2.3M4.8 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3" />
+                        </svg></span> <span data-i18n="sec.config.h">El archivo</span> <code
+                        style="font-size:.7em">crisol.json</code></h2>
+                    <p class="lead" data-i18n="sec.config.lead">Se crea solo junto al ejecutable en el primer arranque.
+                      Edítalo
+                      con cualquier editor de texto
+                      y reinicia la app para aplicar los cambios.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"127.0.0.1:8723"</span>,
   <span class="k">"db"</span>: <span class="s">""</span>,
   <span class="k">"org_name"</span>: <span class="s">""</span>,
@@ -2374,149 +2686,151 @@
   <span class="k">"backup_keep"</span>: <span class="b">14</span>,
   <span class="k">"backup_passphrase"</span>: <span class="s">""</span>
 }</pre>
-                  </div>
-                  <table class="tbl">
-                    <tr>
-                      <th data-i18n="config.th.field">Campo</th>
-                      <th data-i18n="config.th.type">Tipo</th>
-                      <th data-i18n="config.th.default">Por defecto</th>
-                      <th data-i18n="config.th.does">Qué hace</th>
-                    </tr>
-                    <tr>
-                      <td><code>listen</code></td>
-                      <td>string</td>
-                      <td><code>"127.0.0.1:8723"</code></td>
-                      <td data-i18n="config.listen">Dónde escucha. <code>127.0.0.1:8723</code> = solo este equipo.
-                        <code>0.0.0.0:8723</code> = accesible desde la red.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>db</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.db">Ruta del archivo SQLite. Vacío = junto al ejecutable.</td>
-                    </tr>
-                    <tr>
-                      <td><code>org_name</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.org_name">Nombre de tu entidad. Aparece junto al logo y en los informes.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>open_browser</code></td>
-                      <td>bool</td>
-                      <td><code>true</code></td>
-                      <td data-i18n="config.open_browser">Abre el navegador al arrancar. Ponlo a <code>false</code> en
-                        un servidor.</td>
-                    </tr>
-                    <tr>
-                      <td><code>secure_cookies</code></td>
-                      <td>bool</td>
-                      <td><code>false</code></td>
-                      <td data-i18n="config.secure_cookies">Marca las cookies como Secure. Actívalo si sirves por HTTPS
-                        (o tras un proxy TLS).</td>
-                    </tr>
-                    <tr>
-                      <td><code>trust_proxy</code></td>
-                      <td>bool</td>
-                      <td><code>false</code></td>
-                      <td data-i18n="config.trust_proxy">Detrás de un reverse proxy de confianza: usa X-Forwarded-For
-                        para mostrar la IP real en la auditoría.</td>
-                    </tr>
-                    <tr>
-                      <td><code>allowed_hosts</code></td>
-                      <td>string[]</td>
-                      <td><code>[]</code></td>
-                      <td data-i18n="config.allowed_hosts">Nombres de host permitidos (anti DNS-rebinding). Añade tu
-                        dominio, p. ej. <code>["crisol.miempresa.com"]</code>.</td>
-                    </tr>
-                    <tr>
-                      <td><code>allowed_ips</code></td>
-                      <td>string[]</td>
-                      <td><code>[]</code></td>
-                      <td data-i18n="config.allowed_ips">Lista blanca de IPs/CIDR de cliente. Vacío = sin restricción.
-                        Loopback siempre permitido.</td>
-                    </tr>
-                    <tr>
-                      <td><code>tls_enabled</code></td>
-                      <td>bool</td>
-                      <td><code>false</code></td>
-                      <td data-i18n="config.tls_enabled">Activa HTTPS en el propio binario (autofirmado si no das
-                        cert/key).</td>
-                    </tr>
-                    <tr>
-                      <td><code>cert_file / key_file</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.cert_file">Rutas del certificado y clave PEM. Vacíos = certificado
-                        autofirmado.</td>
-                    </tr>
-                    <tr>
-                      <td><code>encrypt_db</code></td>
-                      <td>bool</td>
-                      <td><code>false</code></td>
-                      <td data-i18n="config.encrypt_db">Cifra la base en reposo (<code>&lt;db&gt;.enc</code>). Requiere
-                        passphrase.</td>
-                    </tr>
-                    <tr>
-                      <td><code>db_passphrase</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.db_passphrase">Passphrase de cifrado. Mejor usar la variable
-                        <code>CRISOL_KEY</code> (no queda en disco).
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_enabled</code></td>
-                      <td>bool</td>
-                      <td><code>false</code></td>
-                      <td data-i18n="config.backup_enabled">Copias automáticas: una al arrancar y otra cada N horas.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_dir</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.backup_dir">Carpeta de copias. Vacío =
-                        <code>&lt;carpeta de la BD&gt;/backups</code>.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_interval_hours</code></td>
-                      <td>int</td>
-                      <td><code>12</code></td>
-                      <td data-i18n="config.backup_interval">Cada cuántas horas se copia (mínimo efectivo: 1).</td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_keep</code></td>
-                      <td>int</td>
-                      <td><code>14</code></td>
-                      <td data-i18n="config.backup_keep">Cuántas copias se conservan (las más antiguas se borran). 0 =
-                        no rotar.</td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_passphrase</code></td>
-                      <td>string</td>
-                      <td><code>""</code></td>
-                      <td data-i18n="config.backup_pass">Passphrase para cifrar las copias. Si está vacía usa
-                        db_passphrase / CRISOL_KEY.</td>
-                    </tr>
-                  </table>
-                </section>
+                    </div>
+                    <table class="tbl">
+                      <tr>
+                        <th data-i18n="config.th.field">Campo</th>
+                        <th data-i18n="config.th.type">Tipo</th>
+                        <th data-i18n="config.th.default">Por defecto</th>
+                        <th data-i18n="config.th.does">Qué hace</th>
+                      </tr>
+                      <tr>
+                        <td><code>listen</code></td>
+                        <td>string</td>
+                        <td><code>"127.0.0.1:8723"</code></td>
+                        <td data-i18n="config.listen">Dónde escucha. <code>127.0.0.1:8723</code> = solo este equipo.
+                          <code>0.0.0.0:8723</code> = accesible desde la red.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>db</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.db">Ruta del archivo SQLite. Vacío = junto al ejecutable.</td>
+                      </tr>
+                      <tr>
+                        <td><code>org_name</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.org_name">Nombre de tu entidad. Aparece junto al logo y en los informes.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>open_browser</code></td>
+                        <td>bool</td>
+                        <td><code>true</code></td>
+                        <td data-i18n="config.open_browser">Abre el navegador al arrancar. Ponlo a <code>false</code> en
+                          un servidor.</td>
+                      </tr>
+                      <tr>
+                        <td><code>secure_cookies</code></td>
+                        <td>bool</td>
+                        <td><code>false</code></td>
+                        <td data-i18n="config.secure_cookies">Marca las cookies como Secure. Actívalo si sirves por
+                          HTTPS
+                          (o tras un proxy TLS).</td>
+                      </tr>
+                      <tr>
+                        <td><code>trust_proxy</code></td>
+                        <td>bool</td>
+                        <td><code>false</code></td>
+                        <td data-i18n="config.trust_proxy">Detrás de un reverse proxy de confianza: usa X-Forwarded-For
+                          para mostrar la IP real en la auditoría.</td>
+                      </tr>
+                      <tr>
+                        <td><code>allowed_hosts</code></td>
+                        <td>string[]</td>
+                        <td><code>[]</code></td>
+                        <td data-i18n="config.allowed_hosts">Nombres de host permitidos (anti DNS-rebinding). Añade tu
+                          dominio, p. ej. <code>["crisol.miempresa.com"]</code>.</td>
+                      </tr>
+                      <tr>
+                        <td><code>allowed_ips</code></td>
+                        <td>string[]</td>
+                        <td><code>[]</code></td>
+                        <td data-i18n="config.allowed_ips">Lista blanca de IPs/CIDR de cliente. Vacío = sin restricción.
+                          Loopback siempre permitido.</td>
+                      </tr>
+                      <tr>
+                        <td><code>tls_enabled</code></td>
+                        <td>bool</td>
+                        <td><code>false</code></td>
+                        <td data-i18n="config.tls_enabled">Activa HTTPS en el propio binario (autofirmado si no das
+                          cert/key).</td>
+                      </tr>
+                      <tr>
+                        <td><code>cert_file / key_file</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.cert_file">Rutas del certificado y clave PEM. Vacíos = certificado
+                          autofirmado.</td>
+                      </tr>
+                      <tr>
+                        <td><code>encrypt_db</code></td>
+                        <td>bool</td>
+                        <td><code>false</code></td>
+                        <td data-i18n="config.encrypt_db">Cifra la base en reposo (<code>&lt;db&gt;.enc</code>).
+                          Requiere
+                          passphrase.</td>
+                      </tr>
+                      <tr>
+                        <td><code>db_passphrase</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.db_passphrase">Passphrase de cifrado. Mejor usar la variable
+                          <code>CRISOL_KEY</code> (no queda en disco).
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_enabled</code></td>
+                        <td>bool</td>
+                        <td><code>false</code></td>
+                        <td data-i18n="config.backup_enabled">Copias automáticas: una al arrancar y otra cada N horas.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_dir</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.backup_dir">Carpeta de copias. Vacío =
+                          <code>&lt;carpeta de la BD&gt;/backups</code>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_interval_hours</code></td>
+                        <td>int</td>
+                        <td><code>12</code></td>
+                        <td data-i18n="config.backup_interval">Cada cuántas horas se copia (mínimo efectivo: 1).</td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_keep</code></td>
+                        <td>int</td>
+                        <td><code>14</code></td>
+                        <td data-i18n="config.backup_keep">Cuántas copias se conservan (las más antiguas se borran). 0 =
+                          no rotar.</td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_passphrase</code></td>
+                        <td>string</td>
+                        <td><code>""</code></td>
+                        <td data-i18n="config.backup_pass">Passphrase para cifrar las copias. Si está vacía usa
+                          db_passphrase / CRISOL_KEY.</td>
+                      </tr>
+                    </table>
+                  </section>
 
-                <section class="cs-sec reveal" id="flags">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="4.5" width="18" height="15" rx="2.4" />
-                        <path d="m7 10 2.8 2.4L7 14.8" />
-                        <path d="M12.5 15h4.5" />
-                      </svg></span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
-                  <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad
-                      sobre el
-                    </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>./crisol                          <span class="c" data-i18n="cmt.flag1"># arranca según crisol.json</span>
+                  <section class="cs-sec reveal" id="flags">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="3" y="4.5" width="18" height="15" rx="2.4" />
+                          <path d="m7 10 2.8 2.4L7 14.8" />
+                          <path d="M12.5 15h4.5" />
+                        </svg></span> <span data-i18n="sec.flags.h">Flags de arranque</span></h2>
+                    <p class="lead"><span data-i18n="sec.flags.leadA">Opciones de línea de comandos. Tienen prioridad
+                        sobre el
+                      </span><code>crisol.json</code><span data-i18n="sec.flags.leadB">.</span></p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>./crisol                          <span class="c" data-i18n="cmt.flag1"># arranca según crisol.json</span>
 ./crisol -addr 127.0.0.1:9000     <span class="c" data-i18n="cmt.flag2"># otra dirección/puerto</span>
 ./crisol -db /ruta/otra.db        <span class="c" data-i18n="cmt.flag3"># otra base de datos</span>
 ./crisol -config /ruta/otra.json  <span class="c" data-i18n="cmt.flag4"># otra configuración</span>
@@ -2528,200 +2842,219 @@ CRISOL_KEY=&lt;clave&gt; ./crisol
 <span class="c" data-i18n="cmt.tools"># Herramientas manuales de cifrado</span>
 ./crisol -encrypt datos.db -out datos.db.enc
 ./crisol -decrypt datos.db.enc -out datos.db</pre>
-                  </div>
-                </section>
+                    </div>
+                  </section>
 
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section class="cs-folder reveal" id="grp-network">
-          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-network-body" id="grp-network-head">
-            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M3 12h18" />
-                <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" />
-              </svg></span>
-            <span class="cs-fmeta">
-              <span class="cs-ftop">
-                <span class="cs-fnum">[ 02 ]</span>
-                <h2 data-i18n="grp.network.t">Servidor y red</h2>
+          </section>
+          <section class="cs-folder reveal" id="grp-network">
+            <button class="cs-fhead" aria-expanded="false" aria-controls="grp-network-body" id="grp-network-head">
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18" />
+                  <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" />
+                </svg></span>
+              <span class="cs-fmeta">
+                <span class="cs-ftop">
+                  <span class="cs-fnum">[ 02 ]</span>
+                  <h2 data-i18n="grp.network.t">Servidor y red</h2>
+                </span>
+                <span class="cs-fcount"><span data-i18n="grp.network.c">4 temas</span></span>
               </span>
-              <span class="cs-fcount"><span data-i18n="grp.network.c">4 temas</span></span>
-            </span>
-            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg></span>
-          </button>
-          <div class="cs-fbody" id="grp-network-body" role="region" aria-labelledby="grp-network-head">
-            <div class="cs-fbody-inner">
-              <div class="cs-fbody-pad">
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
+            </button>
+            <div class="cs-fbody" id="grp-network-body" role="region" aria-labelledby="grp-network-head">
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
 
-                <section class="cs-sec reveal" id="red">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="4.5" r="2.3" />
-                        <circle cx="5" cy="18.5" r="2.3" />
-                        <circle cx="19" cy="18.5" r="2.3" />
-                        <path d="M12 6.8v4.4M11 12.6 6.2 16.6M13 12.6l4.8 4M6.8 18.5h10.4" />
-                      </svg></span> <span data-i18n="sec.net.h">Levantarlo como servidor en red</span></h2>
-                  <p class="lead" data-i18n="sec.net.lead">Para que otros equipos de tu red entren a la misma instancia.
-                  </p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                  <section class="cs-sec reveal" id="red">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="4.5" r="2.3" />
+                          <circle cx="5" cy="18.5" r="2.3" />
+                          <circle cx="19" cy="18.5" r="2.3" />
+                          <path d="M12 6.8v4.4M11 12.6 6.2 16.6M13 12.6l4.8 4M6.8 18.5h10.4" />
+                        </svg></span> <span data-i18n="sec.net.h">Levantarlo como servidor en red</span></h2>
+                    <p class="lead" data-i18n="sec.net.lead">Para que otros equipos de tu red entren a la misma
+                      instancia.
+                    </p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>
 }</pre>
-                  </div>
-                  <p style="font-size:13.5px;color:var(--muted)"><span data-i18n="sec.net.pA">Los demás acceden por
-                    </span><code>http://&lt;IP-del-servidor&gt;:8723</code><span data-i18n="sec.net.pB">. Averigua tu IP
-                      con
-                    </span><code>ipconfig</code><span data-i18n="sec.net.pC"> (Windows) o
-                    </span><code>ip a</code> / <code>ifconfig</code><span data-i18n="sec.net.pD"> (Linux/macOS).
-                    </span></p>
-                  <div class="note warn"><span class="ni">⚠️</span>
-                    <div data-i18n="sec.net.warn">Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de
-                        confianza</b> y
-                      activa el cifrado de
-                      comunicaciones (siguiente sección). Cambia antes la contraseña de admin.</div>
-                  </div>
+                    </div>
+                    <p style="font-size:13.5px;color:var(--muted)"><span data-i18n="sec.net.pA">Los demás acceden por
+                      </span><code>http://&lt;IP-del-servidor&gt;:8723</code><span data-i18n="sec.net.pB">. Averigua tu
+                        IP
+                        con
+                      </span><code>ipconfig</code><span data-i18n="sec.net.pC"> (Windows) o
+                      </span><code>ip a</code> / <code>ifconfig</code><span data-i18n="sec.net.pD"> (Linux/macOS).
+                      </span></p>
+                    <div class="note warn"><span class="ni">⚠️</span>
+                      <div data-i18n="sec.net.warn">Sin HTTPS el tráfico va en claro. Úsalo solo en una <b>red de
+                          confianza</b> y
+                        activa el cifrado de
+                        comunicaciones (siguiente sección). Cambia antes la contraseña de admin.</div>
+                    </div>
 
-                  <h3 data-i18n="net.acl.h">Control de acceso por IP (lista blanca)</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.acl.p">Limita quién puede entrar
-                    combinando
-                    <code>allowed_hosts</code> (por nombre) y <code>allowed_ips</code> (por dirección de cliente). Solo
-                    los
-                    equipos de la lista entran; el resto recibe <code>403</code>.
-                  </p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                    <h3 data-i18n="net.acl.h">Control de acceso por IP (lista blanca)</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.acl.p">Limita quién puede entrar
+                      combinando
+                      <code>allowed_hosts</code> (por nombre) y <code>allowed_ips</code> (por dirección de cliente).
+                      Solo
+                      los
+                      equipos de la lista entran; el resto recibe <code>403</code>.
+                    </p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>,
   <span class="k">"allowed_hosts"</span>: [<span class="s">"crisol.miempresa.local"</span>],
   <span class="k">"allowed_ips"</span>: [<span class="s">"192.168.1.50"</span>, <span class="s">"192.168.1.0/24"</span>]
 }</pre>
-                  </div>
-                  <table class="tbl">
-                    <tr>
-                      <th data-i18n="net.acl.th.field">Campo</th>
-                      <th data-i18n="net.acl.th.does">Qué hace</th>
-                    </tr>
-                    <tr>
-                      <td><code>allowed_ips</code></td>
-                      <td data-i18n="net.acl.ips">Lista blanca de IPs de cliente que pueden acceder. Acepta IPs sueltas
-                        y rangos
-                        <b>CIDR</b> (p. ej. <code>192.168.1.0/24</code>). La IP loopback
-                        (<code>127.0.0.1</code>/<code>::1</code>)
-                        <b>siempre</b> se permite: el propio equipo nunca se autobloquea. <b>Vacío = sin restricción por
-                          IP.</b>
-                        Útil para exponer en LAN solo a equipos concretos.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>allowed_hosts</code></td>
-                      <td data-i18n="net.acl.hosts">Lista blanca por nombre de host. Se rechazan las peticiones cuyo
-                        <code>Host</code> no esté listado. Vacío = sin restricción por nombre.
-                      </td>
-                    </tr>
-                  </table>
-
-                  <h3 data-i18n="net.dns.h">Acceso por nombre DNS propio</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.dns.p">Para entrar por un nombre amable
-                    en vez de
-                    por IP, pon tu nombre en <code>allowed_hosts</code> (p. ej. <code>crisol.miempresa.local</code>) y
-                    haz que ese
-                    nombre <b>resuelva a la IP del servidor</b>: en el DNS interno de la empresa, o en el fichero
-                    <code>hosts</code> de cada equipo cliente. Así el acceso pasa a ser
-                    <code>http://crisol.miempresa.local:8723</code>.
-                  </p>
-                  <div class="note tip"><span class="ni">💡</span>
-                    <div data-i18n="net.dns.tip">Combina ambos: <code>allowed_hosts</code> fija el nombre y
-                      <code>allowed_ips</code> restringe las direcciones de origen. El loopback queda siempre permitido
-                      para que
-                      administres desde el propio servidor.
                     </div>
-                  </div>
-                </section>
+                    <table class="tbl">
+                      <tr>
+                        <th data-i18n="net.acl.th.field">Campo</th>
+                        <th data-i18n="net.acl.th.does">Qué hace</th>
+                      </tr>
+                      <tr>
+                        <td><code>allowed_ips</code></td>
+                        <td data-i18n="net.acl.ips">Lista blanca de IPs de cliente que pueden acceder. Acepta IPs
+                          sueltas
+                          y rangos
+                          <b>CIDR</b> (p. ej. <code>192.168.1.0/24</code>). La IP loopback
+                          (<code>127.0.0.1</code>/<code>::1</code>)
+                          <b>siempre</b> se permite: el propio equipo nunca se autobloquea. <b>Vacío = sin restricción
+                            por
+                            IP.</b>
+                          Útil para exponer en LAN solo a equipos concretos.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>allowed_hosts</code></td>
+                        <td data-i18n="net.acl.hosts">Lista blanca por nombre de host. Se rechazan las peticiones cuyo
+                          <code>Host</code> no esté listado. Vacío = sin restricción por nombre.
+                        </td>
+                      </tr>
+                    </table>
 
-                <section class="cs-sec reveal" id="https">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
-                        <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
-                        <path d="M13.6 14.1a1.6 1.6 0 0 0-3 .5c0 1.6 2.8 1 2.8 2.6a1.6 1.6 0 0 1-3 .5" />
-                      </svg></span> HTTPS <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
-                  <p class="lead" data-i18n="sec.https.lead">Cifra las comunicaciones. Con tu certificado propio o uno
-                    automático.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                    <h3 data-i18n="net.dns.h">Acceso por nombre DNS propio</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="net.dns.p">Para entrar por un nombre
+                      amable
+                      en vez de
+                      por IP, pon tu nombre en <code>allowed_hosts</code> (p. ej. <code>crisol.miempresa.local</code>) y
+                      haz que ese
+                      nombre <b>resuelva a la IP del servidor</b>: en el DNS interno de la empresa, o en el fichero
+                      <code>hosts</code> de cada equipo cliente. Así el acceso pasa a ser
+                      <code>http://crisol.miempresa.local:8723</code>.
+                    </p>
+                    <div class="note tip"><span class="ni">💡</span>
+                      <div data-i18n="net.dns.tip">Combina ambos: <code>allowed_hosts</code> fija el nombre y
+                        <code>allowed_ips</code> restringe las direcciones de origen. El loopback queda siempre
+                        permitido
+                        para que
+                        administres desde el propio servidor.
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="cs-sec reveal" id="https">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="4.5" y="10.5" width="15" height="9.5" rx="2" />
+                          <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" />
+                          <path d="M13.6 14.1a1.6 1.6 0 0 0-3 .5c0 1.6 2.8 1 2.8 2.6a1.6 1.6 0 0 1-3 .5" />
+                        </svg></span> HTTPS <span class="pill opt" data-i18n="pill.optional">opcional</span></h2>
+                    <p class="lead" data-i18n="sec.https.lead">Cifra las comunicaciones. Con tu certificado propio o uno
+                      automático.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>,
   <span class="k">"tls_enabled"</span>: <span class="b">true</span>,
   <span class="k">"cert_file"</span>: <span class="s">""</span>,
   <span class="k">"key_file"</span>: <span class="s">""</span>
 }</pre>
-                  </div>
-                  <table class="tbl">
-                    <tr>
-                      <th data-i18n="https.th.scenario">Escenario</th>
-                      <th data-i18n="https.th.set">Qué poner</th>
-                    </tr>
-                    <tr>
-                      <td data-i18n="https.auto.t">Certificado automático</td>
-                      <td data-i18n="https.auto.d">Deja <code>cert_file</code> y <code>key_file</code> vacíos: se genera
-                        uno
-                        solo. El navegador avisará
-                        la primera vez (normal en red interna).</td>
-                    </tr>
-                    <tr>
-                      <td data-i18n="https.own.t">Certificado propio</td>
-                      <td data-i18n="https.own.d">Indica las rutas de tu certificado y su clave en
-                        <code>cert_file</code> y
-                        <code>key_file</code>.
-                      </td>
-                    </tr>
-                  </table>
-                  <div class="note tip"><span class="ni">💡</span>
-                    <div data-i18n="https.tip">Bajo HTTPS, el acceso es por <code>https://&lt;IP&gt;:8723</code> y las
-                      cookies
-                      se marcan seguras
-                      automáticamente.</div>
-                  </div>
-                </section>
+                    </div>
+                    <table class="tbl">
+                      <tr>
+                        <th data-i18n="https.th.scenario">Escenario</th>
+                        <th data-i18n="https.th.set">Qué poner</th>
+                      </tr>
+                      <tr>
+                        <td data-i18n="https.auto.t">Certificado automático</td>
+                        <td data-i18n="https.auto.d">Deja <code>cert_file</code> y <code>key_file</code> vacíos: se
+                          genera
+                          uno
+                          solo. El navegador avisará
+                          la primera vez (normal en red interna).</td>
+                      </tr>
+                      <tr>
+                        <td data-i18n="https.own.t">Certificado propio</td>
+                        <td data-i18n="https.own.d">Indica las rutas de tu certificado y su clave en
+                          <code>cert_file</code> y
+                          <code>key_file</code>.
+                        </td>
+                      </tr>
+                    </table>
+                    <div class="note tip"><span class="ni">💡</span>
+                      <div data-i18n="https.tip">Bajo HTTPS, el acceso es por <code>https://&lt;IP&gt;:8723</code> y las
+                        cookies
+                        se marcan seguras
+                        automáticamente.</div>
+                    </div>
+                  </section>
 
-                <section class="cs-sec reveal" id="proxy">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="4.5" width="18" height="6" rx="1.6" />
-                        <rect x="3" y="13.5" width="18" height="6" rx="1.6" />
-                        <path d="M7 7.5h.01M7 16.5h.01" />
-                      </svg></span> <span data-i18n="sec.proxy.h">Detrás de un proxy (nginx / Caddy)</span></h2>
-                  <p class="lead" data-i18n="sec.proxy.lead">Si sirves Crisol-RX detrás de un reverse proxy, activa
-                    <code>trust_proxy</code> en <code>crisol.json</code> para que el registro de actividad y la página
-                    de error
-                    muestren la IP real del visitante en vez de la del proxy.
-                  </p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                  <section class="cs-sec reveal" id="proxy">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="3" y="4.5" width="18" height="6" rx="1.6" />
+                          <rect x="3" y="13.5" width="18" height="6" rx="1.6" />
+                          <path d="M7 7.5h.01M7 16.5h.01" />
+                        </svg></span> <span data-i18n="sec.proxy.h">Detrás de un proxy (nginx / Caddy)</span></h2>
+                    <p class="lead" data-i18n="sec.proxy.lead">Si sirves Crisol-RX detrás de un reverse proxy, activa
+                      <code>trust_proxy</code> en <code>crisol.json</code> para que el registro de actividad y la página
+                      de error
+                      muestren la IP real del visitante en vez de la del proxy.
+                    </p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"secure_cookies"</span>: <span class="k">true</span>,
   <span class="k">"trust_proxy"</span>: <span class="k">true</span>
 }</pre>
-                  </div>
-                  <p style="font-size:13px;color:var(--muted);margin-top:10px" data-i18n="proxy.note"><b>Importante:</b>
-                    esto solo
-                    afecta a la IP que se <i>muestra</i>. La seguridad (lista blanca de IPs, límite de intentos de
-                    login) usa
-                    siempre la IP real de la conexión, que no se puede falsear con cabeceras. Déjalo en
-                    <code>false</code> si
-                    <b>no</b> usas proxy.
-                  </p>
-                </section>
-                <section class="cs-sec reveal" id="red-privada">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z"/><path d="M12 8v4M12 15h.01"/></svg></span> <span data-i18n="sec.pn.h">Configuración recomendada (red privada)</span></h2>
-                  <p class="lead" data-i18n="sec.pn.lead">Ejemplo de <code>crisol.json</code> para exponer la instancia en una red interna con la mínima superficie: acceso restringido por IP/host, TLS, cifrado en reposo y copias cifradas.</p>
+                    </div>
+                    <p style="font-size:13px;color:var(--muted);margin-top:10px" data-i18n="proxy.note">
+                      <b>Importante:</b>
+                      esto solo
+                      afecta a la IP que se <i>muestra</i>. La seguridad (lista blanca de IPs, límite de intentos de
+                      login) usa
+                      siempre la IP real de la conexión, que no se puede falsear con cabeceras. Déjalo en
+                      <code>false</code> si
+                      <b>no</b> usas proxy.
+                    </p>
+                  </section>
+                  <section class="cs-sec reveal" id="red-privada">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
+                          <path d="M12 8v4M12 15h.01" />
+                        </svg></span> <span data-i18n="sec.pn.h">Configuración recomendada (red privada)</span></h2>
+                    <p class="lead" data-i18n="sec.pn.lead">Ejemplo de <code>crisol.json</code> para exponer la
+                      instancia en una red interna con la mínima superficie: acceso restringido por IP/host, TLS,
+                      cifrado en reposo y copias cifradas.</p>
 
-                  <h3 data-i18n="pn.a.h">Opción A — Detrás de un proxy inverso (recomendada)</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="pn.a.p">La aplicación escucha solo en <code>127.0.0.1</code>; el proxy inverso (Caddy) es lo único que da la cara en la red y aporta TLS. En este modo el <b>filtrado por IP se aplica en Caddy o en el firewall</b> (la app solo ve la IP del proxy, por eso <code>allowed_ips</code> va vacío aquí).</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>{
+                    <h3 data-i18n="pn.a.h">Opción A — Detrás de un proxy inverso (recomendada)</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="pn.a.p">La aplicación escucha solo en
+                      <code>127.0.0.1</code>; el proxy inverso (Caddy) es lo único que da la cara en la red y aporta
+                      TLS. En este modo el <b>filtrado por IP se aplica en Caddy o en el firewall</b> (la app solo ve la
+                      IP del proxy, por eso <code>allowed_ips</code> va vacío aquí).</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"127.0.0.1:8723"</span>,
   <span class="k">"db"</span>: <span class="s">"/opt/crisol/crisol.db"</span>,
   <span class="k">"org_name"</span>: <span class="s">"Mi organización"</span>,
@@ -2740,11 +3073,15 @@ CRISOL_KEY=&lt;clave&gt; ./crisol
   <span class="k">"backup_interval_hours"</span>: <span class="b">6</span>,
   <span class="k">"backup_keep"</span>: <span class="b">7</span>,
   <span class="k">"backup_passphrase"</span>: <span class="s">""</span>
-}</pre></div>
+}</pre>
+                    </div>
 
-                  <h3 data-i18n="pn.b.h">Opción B — TLS propio en la LAN</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="pn.b.p">Sin proxy: la aplicación sirve HTTPS directamente. Con <code>cert_file</code>/<code>key_file</code> vacíos genera un certificado autofirmado (el navegador avisa la primera vez, normal en red interna).</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>{
+                    <h3 data-i18n="pn.b.h">Opción B — TLS propio en la LAN</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="pn.b.p">Sin proxy: la aplicación sirve
+                      HTTPS directamente. Con <code>cert_file</code>/<code>key_file</code> vacíos genera un certificado
+                      autofirmado (el navegador avisa la primera vez, normal en red interna).</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"listen"</span>: <span class="s">"0.0.0.0:8723"</span>,
   <span class="k">"db"</span>: <span class="s">"/opt/crisol/crisol.db"</span>,
   <span class="k">"org_name"</span>: <span class="s">"Mi organización"</span>,
@@ -2763,87 +3100,104 @@ CRISOL_KEY=&lt;clave&gt; ./crisol
   <span class="k">"backup_interval_hours"</span>: <span class="b">6</span>,
   <span class="k">"backup_keep"</span>: <span class="b">7</span>,
   <span class="k">"backup_passphrase"</span>: <span class="s">""</span>
-}</pre></div>
+}</pre>
+                    </div>
 
-                  <div class="note warn"><span class="ni">&#9888;&#65039;</span><div data-i18n="pn.note">La passphrase de cifrado <b>no</b> se guarda en el fichero: se toma de la variable de entorno <code>CRISOL_KEY</code> (deja <code>db_passphrase</code> y <code>backup_passphrase</code> vacíos).</div></div>
+                    <div class="note warn"><span class="ni">&#9888;&#65039;</span>
+                      <div data-i18n="pn.note">La passphrase de cifrado <b>no</b> se guarda en el fichero: se toma de la
+                        variable de entorno <code>CRISOL_KEY</code> (deja <code>db_passphrase</code> y
+                        <code>backup_passphrase</code> vacíos).</div>
+                    </div>
 
-                  <h3 data-i18n="pn.check.h">Checklist operativo</h3>
-                  <div data-i18n="pn.check"><ul class="cs-list"><li>Cortafuegos: abrir el puerto <b>solo a la subred</b> (o solo 443 con proxy).</li><li>Permisos <code>600</code> en <code>crisol.json</code> y el fichero de entorno; carpeta de datos restringida.</li><li>Cambiar la contraseña de administrador y activar <b>2FA</b>.</li><li>Base de datos en <b>disco local SSD</b> (no en recursos de red/SMB).</li><li>Usar la unidad <b>systemd endurecida</b> y guardar las copias en un volumen aparte.</li></ul></div>
-                </section>
+                    <h3 data-i18n="pn.check.h">Checklist operativo</h3>
+                    <div data-i18n="pn.check">
+                      <ul class="cs-list">
+                        <li>Cortafuegos: abrir el puerto <b>solo a la subred</b> (o solo 443 con proxy).</li>
+                        <li>Permisos <code>600</code> en <code>crisol.json</code> y el fichero de entorno; carpeta de
+                          datos restringida.</li>
+                        <li>Cambiar la contraseña de administrador y activar <b>2FA</b>.</li>
+                        <li>Base de datos en <b>disco local SSD</b> (no en recursos de red/SMB).</li>
+                        <li>Usar la unidad <b>systemd endurecida</b> y guardar las copias en un volumen aparte.</li>
+                      </ul>
+                    </div>
+                  </section>
 
 
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
 
-        <section class="cs-folder reveal" id="grp-security">
-          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-security-body" id="grp-security-head">
-            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
-                <path d="m8.7 12 2.3 2.3 4.3-4.6" />
-              </svg></span>
-            <span class="cs-fmeta">
-              <span class="cs-ftop">
-                <span class="cs-fnum">[ 03 ]</span>
-                <h2 data-i18n="grp.security.t">Seguridad y datos</h2>
+          <section class="cs-folder reveal" id="grp-security">
+            <button class="cs-fhead" aria-expanded="false" aria-controls="grp-security-body" id="grp-security-head">
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
+                  <path d="m8.7 12 2.3 2.3 4.3-4.6" />
+                </svg></span>
+              <span class="cs-fmeta">
+                <span class="cs-ftop">
+                  <span class="cs-fnum">[ 03 ]</span>
+                  <h2 data-i18n="grp.security.t">Seguridad y datos</h2>
+                </span>
+                <span class="cs-fcount"><span data-i18n="grp.security.c">5 temas</span></span>
               </span>
-              <span class="cs-fcount"><span data-i18n="grp.security.c">5 temas</span></span>
-            </span>
-            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg></span>
-          </button>
-          <div class="cs-fbody" id="grp-security-body" role="region" aria-labelledby="grp-security-head">
-            <div class="cs-fbody-inner">
-              <div class="cs-fbody-pad">
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
+            </button>
+            <div class="cs-fbody" id="grp-security-body" role="region" aria-labelledby="grp-security-head">
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
 
-                <section class="cs-sec reveal" id="cifrado">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M4.5 6c0-1.4 3.4-2.5 7.5-2.5S19.5 4.6 19.5 6v4c0 1.4-3.4 2.5-7.5 2.5" />
-                        <path d="M4.5 6v6c0 1.2 2.5 2.2 5.8 2.4" />
-                        <rect x="13" y="14" width="8" height="6.5" rx="1.5" />
-                        <path d="M15 14v-1.5a2 2 0 0 1 4 0V14" />
-                      </svg></span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt"
-                      data-i18n="pill.optional">opcional</span></h2>
-                  <p class="lead" data-i18n="sec.enc.lead">Con la app cerrada, tus datos quedan ilegibles para terceros.
-                  </p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                  <section class="cs-sec reveal" id="cifrado">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M4.5 6c0-1.4 3.4-2.5 7.5-2.5S19.5 4.6 19.5 6v4c0 1.4-3.4 2.5-7.5 2.5" />
+                          <path d="M4.5 6v6c0 1.2 2.5 2.2 5.8 2.4" />
+                          <rect x="13" y="14" width="8" height="6.5" rx="1.5" />
+                          <path d="M15 14v-1.5a2 2 0 0 1 4 0V14" />
+                        </svg></span> <span data-i18n="sec.enc.h">Cifrado de tus datos</span> <span class="pill opt"
+                        data-i18n="pill.optional">opcional</span></h2>
+                    <p class="lead" data-i18n="sec.enc.lead">Con la app cerrada, tus datos quedan ilegibles para
+                      terceros.
+                    </p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"encrypt_db"</span>: <span class="b">true</span>,
   <span class="k">"db_passphrase"</span>: <span class="s">"una-frase-larga-y-secreta"</span>
 }</pre>
-                  </div>
-                  <div class="note tip"><span class="ni">🔑</span>
-                    <div data-i18n="enc.note1"><b>¿No ves el archivo cifrado?</b> Es normal: <b>se crea al cerrar la app
-                        con
-                        Ctrl-C</b>, no al
-                      arrancar. Mientras trabajas, los datos están descifrados; al cerrar ordenadamente se cifran y se
-                      borra la
-                      copia en claro.</div>
-                  </div>
-                  <div class="note danger"><span class="ni">🚨</span>
-                    <div data-i18n="enc.note2">Cierra siempre con <b>Ctrl-C</b>. Si matas el proceso de golpe, el
-                      cifrado no se
-                      ejecuta. Y guarda bien
-                      la passphrase: <b>si la pierdes, los datos no se recuperan</b>.</div>
-                  </div>
-                  <div class="note tip"><span class="ni">🛡️</span>
-                    <div><span data-i18n="enc.note3"><b>Opción más segura:</b> en vez de poner la passphrase en el
-                      </span><code>crisol.json</code><span data-i18n="enc.note3b">, déjala vacía y
-                        pásala por variable de entorno al arrancar — así no queda en disco:</span>
-                      <div class="code" style="margin-top:8px"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                        <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol</pre>
+                    </div>
+                    <div class="note tip"><span class="ni">🔑</span>
+                      <div data-i18n="enc.note1"><b>¿No ves el archivo cifrado?</b> Es normal: <b>se crea al cerrar la
+                          app
+                          con
+                          Ctrl-C</b>, no al
+                        arrancar. Mientras trabajas, los datos están descifrados; al cerrar ordenadamente se cifran y se
+                        borra la
+                        copia en claro.</div>
+                    </div>
+                    <div class="note danger"><span class="ni">🚨</span>
+                      <div data-i18n="enc.note2">Cierra siempre con <b>Ctrl-C</b>. Si matas el proceso de golpe, el
+                        cifrado no se
+                        ejecuta. Y guarda bien
+                        la passphrase: <b>si la pierdes, los datos no se recuperan</b>.</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🛡️</span>
+                      <div><span data-i18n="enc.note3"><b>Opción más segura:</b> en vez de poner la passphrase en el
+                        </span><code>crisol.json</code><span data-i18n="enc.note3b">, déjala vacía y
+                          pásala por variable de entorno al arrancar — así no queda en disco:</span>
+                        <div class="code" style="margin-top:8px"><button class="copy-btn"
+                            data-i18n="copy">Copiar</button>
+                          <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol</pre>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <h3 data-i18n="enc.h3">Abrir y consultar tus datos a mano</h3>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c" data-i18n="cmt.dec1"># Descifrar (pide la passphrase o usa la variable CRISOL_KEY)</span>
+                    <h3 data-i18n="enc.h3">Abrir y consultar tus datos a mano</h3>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c" data-i18n="cmt.dec1"># Descifrar (pide la passphrase o usa la variable CRISOL_KEY)</span>
 CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -decrypt crisol.db.enc -out crisol.db
 
 <span class="c" data-i18n="cmt.dec2"># Consultar con cualquier cliente SQLite</span>
@@ -2852,22 +3206,23 @@ sqlite3 crisol.db <span class="s">".tables"</span>
 <span class="c" data-i18n="cmt.dec3"># Volver a cifrar y borrar la copia en claro</span>
 CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -encrypt crisol.db -out crisol.db.enc
 rm -f crisol.db crisol.db-wal crisol.db-shm</pre>
-                  </div>
-                </section>
+                    </div>
+                  </section>
 
-                <section class="cs-sec reveal" id="passphrase">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="8.5" cy="14" r="3.3" />
-                        <path d="m10.8 11.7 6.4-6.4M14.8 7.3l2 2M12.6 9.5l1.6 1.6" />
-                        <path d="M14.6 3.6A6 6 0 0 1 20 7M20 3.6V7h-3.4" />
-                      </svg></span> <span data-i18n="sec.pass.h">Cambiar la passphrase</span></h2>
-                  <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el
-                    </span><code>crisol.json</code><span data-i18n="sec.pass.leadB"> no basta si ya hay datos cifrados:
-                      el archivo
-                      sigue cerrado con la frase anterior.</span></p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c" data-i18n="cmt.pass0"># Con el servidor PARADO:</span>
+                  <section class="cs-sec reveal" id="passphrase">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="8.5" cy="14" r="3.3" />
+                          <path d="m10.8 11.7 6.4-6.4M14.8 7.3l2 2M12.6 9.5l1.6 1.6" />
+                          <path d="M14.6 3.6A6 6 0 0 1 20 7M20 3.6V7h-3.4" />
+                        </svg></span> <span data-i18n="sec.pass.h">Cambiar la passphrase</span></h2>
+                    <p class="lead"><span data-i18n="sec.pass.leadA">Cambiar la frase en el
+                      </span><code>crisol.json</code><span data-i18n="sec.pass.leadB"> no basta si ya hay datos
+                        cifrados:
+                        el archivo
+                        sigue cerrado con la frase anterior.</span></p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c" data-i18n="cmt.pass0"># Con el servidor PARADO:</span>
 <span class="c" data-i18n="cmt.pass1"># 1) Descifra con la frase VIEJA</span>
 CRISOL_KEY=<span class="s">'frase-vieja'</span> ./crisol -decrypt crisol.db.enc -out crisol.db
 
@@ -2878,159 +3233,161 @@ CRISOL_KEY=<span class="s">'frase-nueva'</span> ./crisol -encrypt crisol.db -out
 rm -f crisol.db crisol.db-wal crisol.db-shm
 
 <span class="c" data-i18n="cmt.pass4"># 4) Pon la frase NUEVA en crisol.json</span></pre>
-                  </div>
-                  <div class="note tip"><span class="ni">💡</span>
-                    <div><span data-i18n="pass.tipA">Si <b>todavía no has generado</b> el archivo cifrado (no has
-                        cerrado con
-                        Ctrl-C con el cifrado activo),
-                        basta con editar </span><code>db_passphrase</code><span data-i18n="pass.tipB"> en el
-                      </span><code>crisol.json</code><span data-i18n="pass.tipC">.</span></div>
-                  </div>
-                </section>
+                    </div>
+                    <div class="note tip"><span class="ni">💡</span>
+                      <div><span data-i18n="pass.tipA">Si <b>todavía no has generado</b> el archivo cifrado (no has
+                          cerrado con
+                          Ctrl-C con el cifrado activo),
+                          basta con editar </span><code>db_passphrase</code><span data-i18n="pass.tipB"> en el
+                        </span><code>crisol.json</code><span data-i18n="pass.tipC">.</span></div>
+                    </div>
+                  </section>
 
-                <section class="cs-sec reveal" id="backup">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M4.5 5.5c0-1.3 3.4-2.3 7.5-2.3s7.5 1 7.5 2.3-3.4 2.3-7.5 2.3" />
-                        <path d="M4.5 5.5v5.7M19.5 5.5v3" />
-                        <path d="M4.5 11.2c0 1.2 2.6 2.1 6 2.3" />
-                        <path d="M19.6 18a4.4 4.4 0 0 1-7.5 2.6M11.4 16.7A4.4 4.4 0 0 1 19 14.5" />
-                        <path d="M19 11.6v2.9h-2.9M11.6 21.4v-2.9h2.9" />
-                      </svg></span> <span data-i18n="sec.backup.h">Copias de seguridad automáticas</span></h2>
-                  <p class="lead" data-i18n="sec.backup.lead">La app hace copias automáticas, <b>cifradas con
-                      AES-256-GCM</b> y
-                    con retención. Se configuran en <code>crisol.json</code>.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>{
+                  <section class="cs-sec reveal" id="backup">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M4.5 5.5c0-1.3 3.4-2.3 7.5-2.3s7.5 1 7.5 2.3-3.4 2.3-7.5 2.3" />
+                          <path d="M4.5 5.5v5.7M19.5 5.5v3" />
+                          <path d="M4.5 11.2c0 1.2 2.6 2.1 6 2.3" />
+                          <path d="M19.6 18a4.4 4.4 0 0 1-7.5 2.6M11.4 16.7A4.4 4.4 0 0 1 19 14.5" />
+                          <path d="M19 11.6v2.9h-2.9M11.6 21.4v-2.9h2.9" />
+                        </svg></span> <span data-i18n="sec.backup.h">Copias de seguridad automáticas</span></h2>
+                    <p class="lead" data-i18n="sec.backup.lead">La app hace copias automáticas, <b>cifradas con
+                        AES-256-GCM</b> y
+                      con retención. Se configuran en <code>crisol.json</code>.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>{
   <span class="k">"backup_enabled"</span>: <span class="b">true</span>,
   <span class="k">"backup_dir"</span>: <span class="s">""</span>,
   <span class="k">"backup_interval_hours"</span>: <span class="b">24</span>,
   <span class="k">"backup_keep"</span>: <span class="b">7</span>,
   <span class="k">"backup_passphrase"</span>: <span class="s">""</span>
 }</pre>
-                  </div>
-                  <table class="tbl">
-                    <tr>
-                      <th data-i18n="backup.th.field">Campo</th>
-                      <th data-i18n="backup.th.does">Qué hace</th>
-                    </tr>
-                    <tr>
-                      <td><code>backup_enabled</code></td>
-                      <td data-i18n="backup.enabled"><code>true</code>/<code>false</code>. Activa las copias
-                        automáticas.</td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_dir</code></td>
-                      <td data-i18n="backup.dir">Carpeta de destino. Vacío =
-                        <code>&lt;carpeta de la BD&gt;/backups</code>.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_interval_hours</code></td>
-                      <td data-i18n="backup.interval">Horas entre copias. Por defecto <code>24</code>, mínimo
-                        <code>1</code>.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_keep</code></td>
-                      <td data-i18n="backup.keep">Cuántas copias conservar. Por defecto <code>7</code>.</td>
-                    </tr>
-                    <tr>
-                      <td><code>backup_passphrase</code></td>
-                      <td data-i18n="backup.pass">Si está vacío usa <code>db_passphrase</code> /
-                        <code>CRISOL_KEY</code>. Si no
-                        hay ninguna, la copia se guarda <b>sin cifrar</b> y se avisa.
-                      </td>
-                    </tr>
-                  </table>
-                  <h3 data-i18n="backup.restore.h">Restaurar una copia</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="backup.restore.p">Con la herramienta de
-                    descifrado
-                    incluida, indicando la passphrase de la copia:</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -decrypt backups/crisol-AAAAMMDD-HHMMSS.db.enc -out restaurada.db</pre>
-                  </div>
-                  <div class="note tip"><span class="ni">📋</span>
-                    <div data-i18n="backup.compliance">Copias cifradas de extremo a extremo: te ayudan a mantener una
-                      buena práctica de respaldo y a proteger los datos en reposo.</div>
-                  </div>
-                </section>
+                    </div>
+                    <table class="tbl">
+                      <tr>
+                        <th data-i18n="backup.th.field">Campo</th>
+                        <th data-i18n="backup.th.does">Qué hace</th>
+                      </tr>
+                      <tr>
+                        <td><code>backup_enabled</code></td>
+                        <td data-i18n="backup.enabled"><code>true</code>/<code>false</code>. Activa las copias
+                          automáticas.</td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_dir</code></td>
+                        <td data-i18n="backup.dir">Carpeta de destino. Vacío =
+                          <code>&lt;carpeta de la BD&gt;/backups</code>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_interval_hours</code></td>
+                        <td data-i18n="backup.interval">Horas entre copias. Por defecto <code>24</code>, mínimo
+                          <code>1</code>.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_keep</code></td>
+                        <td data-i18n="backup.keep">Cuántas copias conservar. Por defecto <code>7</code>.</td>
+                      </tr>
+                      <tr>
+                        <td><code>backup_passphrase</code></td>
+                        <td data-i18n="backup.pass">Si está vacío usa <code>db_passphrase</code> /
+                          <code>CRISOL_KEY</code>. Si no
+                          hay ninguna, la copia se guarda <b>sin cifrar</b> y se avisa.
+                        </td>
+                      </tr>
+                    </table>
+                    <h3 data-i18n="backup.restore.h">Restaurar una copia</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="backup.restore.p">Con la herramienta de
+                      descifrado
+                      incluida, indicando la passphrase de la copia:</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>CRISOL_KEY=<span class="s">'tu-passphrase'</span> ./crisol -decrypt backups/crisol-AAAAMMDD-HHMMSS.db.enc -out restaurada.db</pre>
+                    </div>
+                    <div class="note tip"><span class="ni">📋</span>
+                      <div data-i18n="backup.compliance">Copias cifradas de extremo a extremo: te ayudan a mantener una
+                        buena práctica de respaldo y a proteger los datos en reposo.</div>
+                    </div>
+                  </section>
 
-                <section class="cs-sec reveal" id="tips">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="12" r="9" />
-                        <path d="m8 12.2 2.7 2.7L16 9.3" />
-                      </svg></span> <span data-i18n="sec.tips.h">Buenas prácticas</span></h2>
-                  <table class="tbl">
-                    <tr>
-                      <td>🔑</td>
-                      <td data-i18n="tips.t1">Cambia la contraseña inicial de <b>admin</b> cuanto antes.</td>
-                    </tr>
-                    <tr>
-                      <td>🌐</td>
-                      <td data-i18n="tips.t2">Si lo expones a la red, usa <b>HTTPS</b> y solo en redes de confianza.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>🔒</td>
-                      <td><span data-i18n="tips.t3a">Si activas el cifrado, guarda la passphrase en un gestor de
-                          contraseñas y
-                          protege el
-                        </span><code>crisol.json</code><span data-i18n="tips.t3b">.</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>⏻</td>
-                      <td data-i18n="tips.t4">Cierra siempre con <b>Ctrl-C</b> para que el cifrado y la limpieza se
-                        completen.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>🙈</td>
-                      <td><span data-i18n="tips.t5a">No subas a ningún sitio público tus archivos de datos, el
-                        </span><code>crisol.json</code><span data-i18n="tips.t5b"> ni los
-                          certificados.</span></td>
-                    </tr>
-                    <tr>
-                      <td>📦</td>
-                      <td data-i18n="tips.t6">Los exports de workspace contienen datos reales de clientes: trátalos como
-                        información sensible.</td>
-                    </tr>
-                  </table>
-                </section>
+                  <section class="cs-sec reveal" id="tips">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="9" />
+                          <path d="m8 12.2 2.7 2.7L16 9.3" />
+                        </svg></span> <span data-i18n="sec.tips.h">Buenas prácticas</span></h2>
+                    <table class="tbl">
+                      <tr>
+                        <td>🔑</td>
+                        <td data-i18n="tips.t1">Cambia la contraseña inicial de <b>admin</b> cuanto antes.</td>
+                      </tr>
+                      <tr>
+                        <td>🌐</td>
+                        <td data-i18n="tips.t2">Si lo expones a la red, usa <b>HTTPS</b> y solo en redes de confianza.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>🔒</td>
+                        <td><span data-i18n="tips.t3a">Si activas el cifrado, guarda la passphrase en un gestor de
+                            contraseñas y
+                            protege el
+                          </span><code>crisol.json</code><span data-i18n="tips.t3b">.</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>⏻</td>
+                        <td data-i18n="tips.t4">Cierra siempre con <b>Ctrl-C</b> para que el cifrado y la limpieza se
+                          completen.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>🙈</td>
+                        <td><span data-i18n="tips.t5a">No subas a ningún sitio público tus archivos de datos, el
+                          </span><code>crisol.json</code><span data-i18n="tips.t5b"> ni los
+                            certificados.</span></td>
+                      </tr>
+                      <tr>
+                        <td>📦</td>
+                        <td data-i18n="tips.t6">Los exports de workspace contienen datos reales de clientes: trátalos
+                          como
+                          información sensible.</td>
+                      </tr>
+                    </table>
+                  </section>
 
-                <section class="cs-sec reveal" id="despliegue">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="7" rx="1.5" />
-                        <rect x="3" y="13" width="18" height="7" rx="1.5" />
-                        <path d="M7 7.5h.01M7 16.5h.01" />
-                      </svg></span> <span data-i18n="sec.deploy.h">Despliegue seguro (Linux y macOS)</span></h2>
-                  <p class="lead"><span data-i18n="sec.deploy.lead">Para un servidor: usuario dedicado, permisos
-                      mínimos,
-                      servicio del sistema y cortafuegos. Guía completa en
-                    </span><code>docs/DESPLIEGUE-SEGURO.md</code>.</p>
+                  <section class="cs-sec reveal" id="despliegue">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="3" y="4" width="18" height="7" rx="1.5" />
+                          <rect x="3" y="13" width="18" height="7" rx="1.5" />
+                          <path d="M7 7.5h.01M7 16.5h.01" />
+                        </svg></span> <span data-i18n="sec.deploy.h">Despliegue seguro (Linux y macOS)</span></h2>
+                    <p class="lead"><span data-i18n="sec.deploy.lead">Para un servidor: usuario dedicado, permisos
+                        mínimos,
+                        servicio del sistema y cortafuegos. Guía completa en
+                      </span><code>docs/DESPLIEGUE-SEGURO.md</code>.</p>
 
-                  <h3 data-i18n="deploy.perms.h">1. Usuario dedicado y permisos mínimos</h3>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c"># Usuario de servicio sin login (Linux)</span>
+                    <h3 data-i18n="deploy.perms.h">1. Usuario dedicado y permisos mínimos</h3>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c"># Usuario de servicio sin login (Linux)</span>
 sudo useradd --system --home /opt/crisol --shell /usr/sbin/nologin crisol
 sudo chown -R crisol:crisol /opt/crisol
 
 <span class="c"># Solo el servicio lee la config, la clave TLS y la base</span>
 sudo chmod 600 /opt/crisol/crisol.json crisol-key.pem crisol.db*
 sudo chmod 700 /opt/crisol/backups</pre>
-                  </div>
-                  <div class="note tip"><span class="ni">🔑</span>
-                    <div data-i18n="deploy.note.key">No pongas la passphrase en el <code>crisol.json</code>: pásala por
-                      la
-                      variable <code>CRISOL_KEY</code> desde el propio servicio, así no queda en disco.</div>
-                  </div>
+                    </div>
+                    <div class="note tip"><span class="ni">🔑</span>
+                      <div data-i18n="deploy.note.key">No pongas la passphrase en el <code>crisol.json</code>: pásala
+                        por
+                        la
+                        variable <code>CRISOL_KEY</code> desde el propio servicio, así no queda en disco.</div>
+                    </div>
 
-                  <h3 data-i18n="deploy.systemd.h">2. Servicio en Linux (systemd endurecido)</h3>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c"># /etc/systemd/system/crisol.service</span>
+                    <h3 data-i18n="deploy.systemd.h">2. Servicio en Linux (systemd endurecido)</h3>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c"># /etc/systemd/system/crisol.service</span>
 [Service]
 User=crisol
 WorkingDirectory=/opt/crisol
@@ -3048,285 +3405,345 @@ Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target</pre>
-                  </div>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>sudo systemctl daemon-reload
+                    </div>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo systemctl daemon-reload
 sudo systemctl enable --now crisol
 sudo journalctl -u crisol -f   <span class="c"># contraseña admin del 1er arranque</span></pre>
-                  </div>
+                    </div>
 
-                  <h3 data-i18n="deploy.launchd.h">3. Servicio en macOS (launchd)</h3>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c"># /Library/LaunchDaemons/com.crisol.rx.plist (extracto)</span>
+                    <h3 data-i18n="deploy.launchd.h">3. Servicio en macOS (launchd)</h3>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c"># /Library/LaunchDaemons/com.crisol.rx.plist (extracto)</span>
 &lt;key&gt;ProgramArguments&lt;/key&gt;
 &lt;array&gt;&lt;string&gt;/usr/local/crisol/crisol&lt;/string&gt;&lt;string&gt;-no-open&lt;/string&gt;&lt;/array&gt;
 &lt;key&gt;UserName&lt;/key&gt;&lt;string&gt;_crisol&lt;/string&gt;
 &lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;
 &lt;key&gt;EnvironmentVariables&lt;/key&gt;
 &lt;dict&gt;&lt;key&gt;CRISOL_KEY&lt;/key&gt;&lt;string&gt;tu-passphrase&lt;/string&gt;&lt;/dict&gt;</pre>
-                  </div>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre>sudo chown root:wheel /Library/LaunchDaemons/com.crisol.rx.plist
+                    </div>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo chown root:wheel /Library/LaunchDaemons/com.crisol.rx.plist
 sudo chmod 600 /Library/LaunchDaemons/com.crisol.rx.plist   <span class="c"># oculta la clave</span>
 sudo launchctl load -w /Library/LaunchDaemons/com.crisol.rx.plist</pre>
-                  </div>
+                    </div>
 
-                  <h3 data-i18n="deploy.fw.h">4. Cortafuegos y acceso</h3>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
-                    <pre><span class="c"># Linux (ufw): abre el puerto solo a tu subred de confianza</span>
+                    <h3 data-i18n="deploy.fw.h">4. Cortafuegos y acceso</h3>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c"># Linux (ufw): abre el puerto solo a tu subred de confianza</span>
 sudo ufw allow from 192.168.1.0/24 to any port 8723 proto tcp
 
 <span class="c"># macOS: firewall de aplicaciones</span>
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/local/crisol/crisol</pre>
-                  </div>
-                  <div class="note danger"><span class="ni">🛡️</span>
-                    <div data-i18n="deploy.note.check">Refuerza con <code>allowed_ips</code> en el
-                      <code>crisol.json</code>,
-                      activa <b>TLS</b> (abre por <code>https://</code>), <code>encrypt_db</code> y copias replicadas
-                      fuera
-                      del host. Activa <b>2FA</b> en todas las cuentas.
                     </div>
-                  </div>
-                </section>
+                    <div class="note danger"><span class="ni">🛡️</span>
+                      <div data-i18n="deploy.note.check">Refuerza con <code>allowed_ips</code> en el
+                        <code>crisol.json</code>,
+                        activa <b>TLS</b> (abre por <code>https://</code>), <code>encrypt_db</code> y copias replicadas
+                        fuera
+                        del host. Activa <b>2FA</b> en todas las cuentas.
+                      </div>
+                    </div>
+                  </section>
 
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <style>
-          /* Herramientas de importación compatibles */
-          .imp-lead {
-            color: var(--muted);
-            font-size: 13.5px;
-            margin: 2px 0 16px;
-          }
+          <style>
+            /* Herramientas de importación compatibles */
+            .imp-lead {
+              color: var(--muted);
+              font-size: 13.5px;
+              margin: 2px 0 16px;
+            }
 
-          .imp-featured {
-            position: relative;
-            border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
-            border-radius: 14px;
-            padding: 15px 18px;
-            margin: 0 0 22px;
-            background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 72%);
-          }
+            .imp-featured {
+              position: relative;
+              border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+              border-radius: 14px;
+              padding: 15px 18px;
+              margin: 0 0 22px;
+              background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 72%);
+            }
 
-          .imp-seal {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 10.5px;
-            font-weight: 800;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            background: color-mix(in srgb, var(--accent) 14%, transparent);
-            border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
-            border-radius: 99px;
-            padding: 4px 11px;
-            margin-bottom: 10px;
-          }
+            .imp-seal {
+              display: inline-flex;
+              align-items: center;
+              gap: 5px;
+              font-size: 10.5px;
+              font-weight: 800;
+              letter-spacing: .5px;
+              text-transform: uppercase;
+              color: var(--accent);
+              background: color-mix(in srgb, var(--accent) 14%, transparent);
+              border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+              border-radius: 99px;
+              padding: 4px 11px;
+              margin-bottom: 10px;
+            }
 
-          .imp-featured h3 {
-            margin: 0 0 6px;
-            font-size: 17px;
-          }
+            .imp-featured h3 {
+              margin: 0 0 6px;
+              font-size: 17px;
+            }
 
-          .imp-featured p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13.5px;
-          }
+            .imp-featured p {
+              margin: 0;
+              color: var(--muted);
+              font-size: 13.5px;
+            }
 
-          .imp-featured a {
-            color: var(--accent);
-            font-weight: 600;
-          }
+            .imp-featured a {
+              color: var(--accent);
+              font-weight: 600;
+            }
 
-          .imp-sub {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: .6px;
-            color: var(--muted);
-            margin: 0 0 10px;
-            font-weight: 700;
-          }
+            .imp-sub {
+              font-size: 11.5px;
+              text-transform: uppercase;
+              letter-spacing: .6px;
+              color: var(--muted);
+              margin: 0 0 10px;
+              font-weight: 700;
+            }
 
-          .imp-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-          }
+            .imp-grid {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+            }
 
-          .imp-chip {
-            font-size: 13px;
-            color: var(--ink, #e7ebf3);
-            background: rgba(255, 255, 255, .04);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 10px;
-            padding: 7px 12px;
-          }
-        </style>
-        <section class="cs-folder reveal" id="grp-tools">
-          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-tools-body" id="grp-tools-head">
-            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 3v9" />
-                <path d="m8 8.5 4 4 4-4" />
-                <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
-              </svg></span>
-            <span class="cs-fmeta">
-              <span class="cs-ftop">
-                <span class="cs-fnum">[ 04 ]</span>
-                <h2 data-i18n="grp.tools.t">Herramientas de importación</h2>
+            .imp-chip {
+              font-size: 13px;
+              color: var(--ink, #e7ebf3);
+              background: rgba(255, 255, 255, .04);
+              border: 1px solid rgba(255, 255, 255, .12);
+              border-radius: 10px;
+              padding: 7px 12px;
+            }
+          </style>
+          <section class="cs-folder reveal" id="grp-tools">
+            <button class="cs-fhead" aria-expanded="false" aria-controls="grp-tools-body" id="grp-tools-head">
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v9" />
+                  <path d="m8 8.5 4 4 4-4" />
+                  <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
+                </svg></span>
+              <span class="cs-fmeta">
+                <span class="cs-ftop">
+                  <span class="cs-fnum">[ 04 ]</span>
+                  <h2 data-i18n="grp.tools.t">Herramientas de importación</h2>
+                </span>
+                <span class="cs-fcount"><span data-i18n="grp.tools.c">escáneres compatibles</span></span>
               </span>
-              <span class="cs-fcount"><span data-i18n="grp.tools.c">escáneres compatibles</span></span>
-            </span>
-            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg></span>
-          </button>
-          <div class="cs-fbody" id="grp-tools-body" role="region" aria-labelledby="grp-tools-head">
-            <div class="cs-fbody-inner">
-              <div class="cs-fbody-pad">
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
+            </button>
+            <div class="cs-fbody" id="grp-tools-body" role="region" aria-labelledby="grp-tools-head">
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
 
-                <section class="cs-sec reveal" id="herramientas">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 3v9" />
-                        <path d="m8 8.5 4 4 4-4" />
-                        <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
-                      </svg></span> <span data-i18n="sec.tools.h">Escáneres compatibles</span></h2>
-                  <p class="imp-lead" data-i18n="sec.tools.lead">Crisol-RX importa los resultados de estos escáneres
-                    —todas
-                    herramientas <b>externas</b>— detectando el formato automáticamente y deduplicando por activo.
-                    Además,
-                    tienes la nuestra:</p>
+                  <section class="cs-sec reveal" id="herramientas">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 3v9" />
+                          <path d="m8 8.5 4 4 4-4" />
+                          <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
+                        </svg></span> <span data-i18n="sec.tools.h">Escáneres compatibles</span></h2>
+                    <p class="imp-lead" data-i18n="sec.tools.lead">Crisol-RX importa los resultados de estos escáneres
+                      —todas
+                      herramientas <b>externas</b>— detectando el formato automáticamente y deduplicando por activo.
+                      Además,
+                      tienes la nuestra:</p>
 
-                  <div class="imp-featured">
-                    <span class="imp-seal">★ <span data-i18n="tools.seal">Del autor de Crisol-RX</span></span>
-                    <h3>Fragua</h3>
-                    <p data-i18n="import.fragua"><b>¿Automatizar el escaneo?</b> <a
-                        href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank" rel="noopener">Fragua</a> es un
-                      escáner web ligero (mismo autor) que analiza un activo y genera un fichero listo para importar
-                      aquí.
-                      Es un proyecto aparte y <b>en desarrollo</b>.</p>
-                  </div>
+                    <div class="imp-featured">
+                      <span class="imp-seal">★ <span data-i18n="tools.seal">Del autor de Crisol-RX</span></span>
+                      <h3>Fragua</h3>
+                      <p data-i18n="import.fragua"><b>¿Automatizar el escaneo?</b> <a
+                          href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank" rel="noopener">Fragua</a> es un
+                        escáner web ligero (mismo autor) que analiza un activo y genera un fichero listo para importar
+                        aquí.
+                        Es un proyecto aparte y <b>en desarrollo</b>.</p>
+                    </div>
 
-                  <p class="imp-sub" data-i18n="tools.third">Escáneres de terceros (externos)</p>
-                  <div class="imp-grid">
-                    <span class="imp-chip">Nessus</span>
-                    <span class="imp-chip">Burp Suite</span>
-                    <span class="imp-chip">OWASP ZAP</span>
-                    <span class="imp-chip">Nmap</span>
-                    <span class="imp-chip">Nuclei</span>
-                    <span class="imp-chip">OpenVAS</span>
-                    <span class="imp-chip">Qualys</span>
-                    <span class="imp-chip">Trivy</span>
-                    <span class="imp-chip">Semgrep</span>
-                    <span class="imp-chip">Acunetix</span>
-                  </div>
-                </section>
+                    <p class="imp-sub" data-i18n="tools.third">Escáneres de terceros (externos)</p>
+                    <div class="imp-grid">
+                      <span class="imp-chip">Nessus</span>
+                      <span class="imp-chip">Burp Suite</span>
+                      <span class="imp-chip">OWASP ZAP</span>
+                      <span class="imp-chip">Nmap</span>
+                      <span class="imp-chip">Nuclei</span>
+                      <span class="imp-chip">OpenVAS</span>
+                      <span class="imp-chip">Qualys</span>
+                      <span class="imp-chip">Trivy</span>
+                      <span class="imp-chip">Semgrep</span>
+                      <span class="imp-chip">Acunetix</span>
+                    </div>
+                  </section>
 
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-      
-      
-        <section class="cs-folder reveal" id="grp-reqs">
-          <button class="cs-fhead" aria-expanded="false" aria-controls="grp-reqs-body" id="grp-reqs-head">
-            <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span>
-            <span class="cs-fmeta">
-              <span class="cs-ftop">
-                <span class="cs-fnum">[ 05 ]</span>
-                <h2 data-i18n="grp.reqs.t">Requisitos y despliegue</h2>
+
+
+          <section class="cs-folder reveal" id="grp-reqs">
+            <button class="cs-fhead" aria-expanded="false" aria-controls="grp-reqs-body" id="grp-reqs-head">
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <rect x="9" y="9" width="6" height="6" rx="1" />
+                  <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+                </svg></span>
+              <span class="cs-fmeta">
+                <span class="cs-ftop">
+                  <span class="cs-fnum">[ 05 ]</span>
+                  <h2 data-i18n="grp.reqs.t">Requisitos y despliegue</h2>
+                </span>
+                <span class="cs-fcount"><span data-i18n="grp.reqs.c">2 temas</span></span>
               </span>
-              <span class="cs-fcount"><span data-i18n="grp.reqs.c">2 temas</span></span>
-            </span>
-            <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-          </button>
-          <div class="cs-fbody" id="grp-reqs-body" role="region" aria-labelledby="grp-reqs-head">
-            <div class="cs-fbody-inner">
-              <div class="cs-fbody-pad">
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
+            </button>
+            <div class="cs-fbody" id="grp-reqs-body" role="region" aria-labelledby="grp-reqs-head">
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
 
-                <section class="cs-sec reveal" id="requisitos">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span> <span data-i18n="sec.req.h">Requisitos de hardware (CPU, RAM, disco)</span></h2>
-                  <p class="lead" data-i18n="sec.req.lead">Binario &uacute;nico est&aacute;tico (sin CGO) con SQLite embebido: no requiere servidor de base de datos ni dependencias externas. El consumo de RAM y CPU es estable e independiente del tama&ntilde;o de la base de datos.</p>
-                  <table class="tbl">
-                    <tr>
-                      <th data-i18n="req.th.profile">Perfil</th>
-                      <th data-i18n="req.th.cpu">CPU</th>
-                      <th data-i18n="req.th.ram">RAM</th>
-                      <th data-i18n="req.th.disk">Disco</th>
-                      <th data-i18n="req.th.use">Notas</th>
-                    </tr>
-                    <tr>
-                      <td data-i18n="req.min.p">M&iacute;nimo &middot; 1 usuario</td>
-                      <td data-i18n="req.min.cpu">1 n&uacute;cleo (x86-64 / ARM64)</td>
-                      <td>256 MB</td>
-                      <td>150 MB</td>
-                      <td data-i18n="req.min.use">Uso en reposo: 30&ndash;80 MB</td>
-                    </tr>
-                    <tr>
-                      <td data-i18n="req.rec.p">Recomendado &middot; equipo peque&ntilde;o</td>
-                      <td data-i18n="req.rec.cpu">2 n&uacute;cleos</td>
-                      <td>1 GB</td>
-                      <td>5&ndash;20 GB SSD</td>
-                      <td data-i18n="req.rec.use">Margen para informes y copias de seguridad</td>
-                    </tr>
-                    <tr>
-                      <td data-i18n="req.big.p">Grande &middot; alto volumen de evidencia</td>
-                      <td data-i18n="req.big.cpu">2&ndash;4 n&uacute;cleos</td>
-                      <td>2 GB</td>
-                      <td>100 GB &ndash; 1 TB SSD</td>
-                      <td data-i18n="req.big.use">Escala con la evidencia y las copias</td>
-                    </tr>
-                  </table>
-                  <h3 data-i18n="req.disk.h">Dimensionamiento del disco</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="req.disk.p">El espacio en disco depende del volumen de capturas de evidencia almacenadas y de la retenci&oacute;n de copias de seguridad:</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre><span data-i18n="req.disk.formula">Disco &asymp; (&Sigma; tama&ntilde;o de las capturas) + (retenci&oacute;n de backups &times; tama&ntilde;o de la BD) + margen</span></pre></div>
-                  <div class="note tip"><span class="ni">&#128161;</span><div data-i18n="req.disk.note">Cada copia de seguridad ocupa aproximadamente el tama&ntilde;o de la base de datos. Se recomienda almacenar las copias en un volumen independiente, ajustar la retenci&oacute;n con <code>backup_keep</code> y ejecutar <code>VACUUM</code> tras eliminaciones masivas para recuperar espacio.</div></div>
-                </section>
+                  <section class="cs-sec reveal" id="requisitos">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="5" y="5" width="14" height="14" rx="2" />
+                          <rect x="9" y="9" width="6" height="6" rx="1" />
+                          <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" />
+                        </svg></span> <span data-i18n="sec.req.h">Requisitos de hardware (CPU, RAM, disco)</span></h2>
+                    <p class="lead" data-i18n="sec.req.lead">Binario &uacute;nico est&aacute;tico (sin CGO) con SQLite
+                      embebido: no requiere servidor de base de datos ni dependencias externas. El consumo de RAM y CPU
+                      es estable e independiente del tama&ntilde;o de la base de datos.</p>
+                    <table class="tbl">
+                      <tr>
+                        <th data-i18n="req.th.profile">Perfil</th>
+                        <th data-i18n="req.th.cpu">CPU</th>
+                        <th data-i18n="req.th.ram">RAM</th>
+                        <th data-i18n="req.th.disk">Disco</th>
+                        <th data-i18n="req.th.use">Notas</th>
+                      </tr>
+                      <tr>
+                        <td data-i18n="req.min.p">M&iacute;nimo &middot; 1 usuario</td>
+                        <td data-i18n="req.min.cpu">1 n&uacute;cleo (x86-64 / ARM64)</td>
+                        <td>256 MB</td>
+                        <td>150 MB</td>
+                        <td data-i18n="req.min.use">Uso en reposo: 30&ndash;80 MB</td>
+                      </tr>
+                      <tr>
+                        <td data-i18n="req.rec.p">Recomendado &middot; equipo peque&ntilde;o</td>
+                        <td data-i18n="req.rec.cpu">2 n&uacute;cleos</td>
+                        <td>1 GB</td>
+                        <td>5&ndash;20 GB SSD</td>
+                        <td data-i18n="req.rec.use">Margen para informes y copias de seguridad</td>
+                      </tr>
+                      <tr>
+                        <td data-i18n="req.big.p">Grande &middot; alto volumen de evidencia</td>
+                        <td data-i18n="req.big.cpu">2&ndash;4 n&uacute;cleos</td>
+                        <td>2 GB</td>
+                        <td>100 GB &ndash; 1 TB SSD</td>
+                        <td data-i18n="req.big.use">Escala con la evidencia y las copias</td>
+                      </tr>
+                    </table>
+                    <h3 data-i18n="req.disk.h">Dimensionamiento del disco</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="req.disk.p">El espacio en disco depende
+                      del volumen de capturas de evidencia almacenadas y de la retenci&oacute;n de copias de seguridad:
+                    </p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span data-i18n="req.disk.formula">Disco &asymp; (&Sigma; tama&ntilde;o de las capturas) + (retenci&oacute;n de backups &times; tama&ntilde;o de la BD) + margen</span></pre>
+                    </div>
+                    <div class="note tip"><span class="ni">&#128161;</span>
+                      <div data-i18n="req.disk.note">Cada copia de seguridad ocupa aproximadamente el tama&ntilde;o de
+                        la base de datos. Se recomienda almacenar las copias en un volumen independiente, ajustar la
+                        retenci&oacute;n con <code>backup_keep</code> y ejecutar <code>VACUUM</code> tras eliminaciones
+                        masivas para recuperar espacio.</div>
+                    </div>
+                  </section>
 
-                <section class="cs-sec reveal" id="sistemas">
-                  <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z"/><path d="m8.7 12 2.3 2.3 4.3-4.6"/></svg></span> <span data-i18n="sec.os.h">Despliegue seguro</span></h2>
-                  <p class="lead" data-i18n="sec.os.lead">Crisol-RX se distribuye como binario nativo por plataforma. Para uso en servidor se recomienda Linux (x86-64 o ARM64), con la unidad systemd endurecida y un proxy inverso (Caddy) que proporciona HTTPS autom&aacute;tico.</p>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.support">Compatible con Windows (x64 / ARM64), macOS (Apple Silicon e Intel) y Linux (x64 / ARM64), con soporte ARM64 de primera clase.</p>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.local">Ejecute la base de datos en disco local SSD (no en recursos de red/SMB) sobre un sistema de 64 bits. Cambie la contrase&ntilde;a de administrador y active el cifrado de datos antes de exponer la instancia.</p>
-                  <h3 data-i18n="os.deb.h">Despliegue paso a paso en Ubuntu / Debian</h3>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.p">Sobre la unidad systemd endurecida del kit (arranque automático, reinicio ante caídas y sandbox estricto). El binario es estático: no instala nada en el sistema.</p>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s1"><b>1.</b> Usuario de servicio y binario en <code>/opt/crisol</code>:</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>sudo useradd --system --home /opt/crisol --shell /usr/sbin/nologin crisol
+                  <section class="cs-sec reveal" id="sistemas">
+                    <h2><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M12 2.6 4.6 5.5v5.1c0 4.6 3.1 8.5 7.4 10 4.3-1.5 7.4-5.4 7.4-10V5.5L12 2.6Z" />
+                          <path d="m8.7 12 2.3 2.3 4.3-4.6" />
+                        </svg></span> <span data-i18n="sec.os.h">Despliegue seguro</span></h2>
+                    <p class="lead" data-i18n="sec.os.lead">Crisol-RX se distribuye como binario nativo por plataforma.
+                      Para uso en servidor se recomienda Linux (x86-64 o ARM64), con la unidad systemd endurecida y un
+                      proxy inverso (Caddy) que proporciona HTTPS autom&aacute;tico.</p>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.support">Compatible con Windows (x64 /
+                      ARM64), macOS (Apple Silicon e Intel) y Linux (x64 / ARM64), con soporte ARM64 de primera clase.
+                    </p>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.local">Ejecute la base de datos en
+                      disco local SSD (no en recursos de red/SMB) sobre un sistema de 64 bits. Cambie la
+                      contrase&ntilde;a de administrador y active el cifrado de datos antes de exponer la instancia.</p>
+                    <h3 data-i18n="os.deb.h">Despliegue paso a paso en Ubuntu / Debian</h3>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.p">Sobre la unidad systemd
+                      endurecida del kit (arranque automático, reinicio ante caídas y sandbox estricto). El binario es
+                      estático: no instala nada en el sistema.</p>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s1"><b>1.</b> Usuario de servicio y
+                      binario en <code>/opt/crisol</code>:</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo useradd --system --home /opt/crisol --shell /usr/sbin/nologin crisol
 sudo mkdir -p /opt/crisol &amp;&amp; sudo cp crisol-linux-amd64 /opt/crisol/crisol
-sudo chown -R crisol:crisol /opt/crisol</pre></div>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s2"><b>2.</b> Crea el <code>crisol.json</code> (usa la config de «Servidor y red») y guarda la passphrase en <code>CRISOL_KEY</code>, nunca en el fichero:</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>sudo install -d -m 700 /etc/crisol
+sudo chown -R crisol:crisol /opt/crisol</pre>
+                    </div>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s2"><b>2.</b> Crea el
+                      <code>crisol.json</code> (usa la config de «Servidor y red») y guarda la passphrase en
+                      <code>CRISOL_KEY</code>, nunca en el fichero:</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo install -d -m 700 /etc/crisol
 echo 'CRISOL_KEY=&lt;clave-larga-aleatoria&gt;' | sudo tee /etc/crisol/crisol.env
-sudo chmod 600 /etc/crisol/crisol.env /opt/crisol/crisol.json</pre></div>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s3"><b>3.</b> Servicio systemd endurecido (incluido en <code>deploy/</code>):</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>sudo cp deploy/crisol.service /etc/systemd/system/
-sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now crisol</pre></div>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s4"><b>4.</b> Cortafuegos (<code>ufw</code>) restringido a tu subred:</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>sudo ufw allow from 192.168.1.0/24 to any port 8723 proto tcp</pre></div>
-                  <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s5"><b>5.</b> HTTPS con Caddy (proxy inverso, certificado automático):</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>sudo apt install -y caddy
+sudo chmod 600 /etc/crisol/crisol.env /opt/crisol/crisol.json</pre>
+                    </div>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s3"><b>3.</b> Servicio systemd
+                      endurecido (incluido en <code>deploy/</code>):</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo cp deploy/crisol.service /etc/systemd/system/
+sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now crisol</pre>
+                    </div>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s4"><b>4.</b> Cortafuegos
+                      (<code>ufw</code>) restringido a tu subred:</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo ufw allow from 192.168.1.0/24 to any port 8723 proto tcp</pre>
+                    </div>
+                    <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s5"><b>5.</b> HTTPS con Caddy
+                      (proxy inverso, certificado automático):</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>sudo apt install -y caddy
 sudo cp deploy/Caddyfile /etc/caddy/Caddyfile   # edita el dominio
-sudo systemctl reload caddy</pre></div>
-                  <div class="note tip"><span class="ni">&#128161;</span><div data-i18n="os.deb.docker">Alternativa con contenedores: en Ubuntu/Debian usa <b>Docker</b>; el <code>Dockerfile</code> y <code>docker-compose.yml</code> incluidos funcionan tal cual (<code>docker compose up -d</code>).</div></div>
-                  <div class="note"><span class="ni">&#128039;</span><div data-i18n="os.deb.other">Otras distros: en <b>RHEL / Rocky / Alma / Fedora</b> usa <code>firewalld</code> en vez de <code>ufw</code>, ten en cuenta <b>SELinux</b> (etiqueta el puerto o ejecútalo tras Caddy en <code>127.0.0.1</code>) y <b>Podman</b> en vez de Docker.</div></div>
-                </section>
+sudo systemctl reload caddy</pre>
+                    </div>
+                    <div class="note tip"><span class="ni">&#128161;</span>
+                      <div data-i18n="os.deb.docker">Alternativa con contenedores: en Ubuntu/Debian usa <b>Docker</b>;
+                        el <code>Dockerfile</code> y <code>docker-compose.yml</code> incluidos funcionan tal cual
+                        (<code>docker compose up -d</code>).</div>
+                    </div>
+                    <div class="note"><span class="ni">&#128039;</span>
+                      <div data-i18n="os.deb.other">Otras distros: en <b>RHEL / Rocky / Alma / Fedora</b> usa
+                        <code>firewalld</code> en vez de <code>ufw</code>, ten en cuenta <b>SELinux</b> (etiqueta el
+                        puerto o ejecútalo tras Caddy en <code>127.0.0.1</code>) y <b>Podman</b> en vez de Docker.</div>
+                    </div>
+                  </section>
 
 
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-      </main>
-    </div>
+        </main>
+      </div>
     </div><!-- /#view-crisol -->
 
     <!-- ══════════════════ VISTA FRAGUA ══════════════════ -->
@@ -3334,11 +3751,102 @@ sudo systemctl reload caddy</pre></div>
       <div class="cs-layout">
 
         <aside class="cs-toc" id="tocFragua">
-          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><span data-i18n="fr.toc.g1">Objetivos</span></div>
+          <!-- Descarga de Fragua: desplegable integrado en el lateral -->
+          <div class="fr-dlcard" id="frDlCard">
+            <button class="fr-dlcard-head" id="frDlHead" aria-expanded="false" aria-controls="frDlBody">
+              <span class="fr-dlcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v11" />
+                  <path d="m7 10 5 5 5-5" />
+                  <path d="M5 20h14" />
+                </svg></span>
+              <span class="fr-dlcard-t" data-i18n="fr.dl.h">Descargar Fragua</span>
+              <span class="fr-dlcard-chev" aria-hidden="true">▾</span>
+            </button>
+            <div class="fr-dlcard-body" id="frDlBody" role="region" aria-labelledby="frDlHead">
+              <div class="fr-dlcard-inner">
+                <div class="fr-dl-grid">
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-amd64"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z" />
+                      <circle cx="10.4" cy="7.3" r=".75" fill="#0e1424" />
+                      <circle cx="13.6" cy="7.3" r=".75" fill="#0e1424" />
+                      <path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>Linux</b><small>x86-64</small></span>
+                  </a>
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-arm64"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z" />
+                      <circle cx="10.4" cy="7.3" r=".75" fill="#0e1424" />
+                      <circle cx="13.6" cy="7.3" r=".75" fill="#0e1424" />
+                      <path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>Linux</b><small>ARM64</small></span>
+                  </a>
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-apple-silicon"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>macOS</b><small>Apple Silicon</small></span>
+                  </a>
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-intel"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>macOS</b><small>Intel</small></span>
+                  </a>
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-amd64.exe"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>Windows</b><small>x64 · .exe</small></span>
+                  </a>
+                  <a class="fr-dl-btn"
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-arm64.exe"
+                    target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path
+                        d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z" />
+                    </svg>
+                    <span class="fr-dl-txt"><b>Windows</b><small>ARM64 · .exe</small></span>
+                  </a>
+                </div>
+                <p class="fr-dl-foot" data-i18n="fr.dl.foot">¿Otra arquitectura o prefieres compilar? <a
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases" target="_blank" rel="noopener">Todas las
+                    versiones</a> · <a href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank"
+                    rel="noopener">código y <code>build.sh</code></a>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="m9 12 2 2 4-4" />
+              </svg></span><span data-i18n="fr.toc.g1">Objetivos</span></div>
           <a class="toc-sub" href="#fr-install" data-i18n="fr.toc.install">Instalación y uso</a>
           <a class="toc-sub" href="#fr-host" data-i18n="fr.toc.host">Reconocimiento (host)</a>
           <a class="toc-sub" href="#fr-web" data-i18n="fr.toc.web">Aplicación web</a>
-          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span data-i18n="fr.toc.g2">Interno y salida</span></div>
+          <div class="toc-group"><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="10" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg></span><span data-i18n="fr.toc.g2">Interno y salida</span></div>
           <a class="toc-sub" href="#fr-ssh" data-i18n="fr.toc.ssh">Auditoría interna + bastionado</a>
           <a class="toc-sub" href="#fr-out" data-i18n="fr.toc.out">Salida e informes</a>
           <a class="toc-sub" href="#fr-ctl" data-i18n="fr.toc.ctl">Rendimiento y control</a>
@@ -3350,155 +3858,274 @@ sudo systemctl reload caddy</pre></div>
           <!-- [01] Instalación y uso -->
           <section class="cs-folder open" id="grp-fr-inicio">
             <button class="cs-fhead" aria-expanded="true" aria-controls="grp-fr-inicio-body" id="grp-fr-inicio-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 7.5 12 12l9-4.5L12 3Z"/><path d="M3 12l9 4.5L21 12M3 16.5 12 21l9-4.5"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 01 ]</span><h2 data-i18n="fr.install.h">Instalación y uso básico</h2></span><span class="cs-fcount">4 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3 3 7.5 12 12l9-4.5L12 3Z" />
+                  <path d="M3 12l9 4.5L21 12M3 16.5 12 21l9-4.5" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 01 ]</span>
+                  <h2 data-i18n="fr.install.h">Instalación y uso básico</h2>
+                </span><span class="cs-fcount">4 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-inicio-body" role="region" aria-labelledby="grp-fr-inicio-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-install">
-                  <p class="lead" data-i18n="fr.install.lead">Fragua es un <b>binario único</b> (Go, sin dependencias). Descarga el de tu sistema desde <code>dist/</code> o compílalo con <code>./build.sh</code>. Sintaxis: <code>./fragua [flags]</code>.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>./fragua --url https://objetivo.ejemplo   <span class="c" data-i18n="fr.install.c1"># escaneo de un activo web</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-install">
+                    <p class="lead" data-i18n="fr.install.lead">Fragua es un <b>binario único</b> (Go, sin
+                      dependencias). Descarga el de tu sistema desde <code>dist/</code> o compílalo con
+                      <code>./build.sh</code>. Sintaxis: <code>./fragua [flags]</code>.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>./fragua --url https://objetivo.ejemplo   <span class="c" data-i18n="fr.install.c1"># escaneo de un activo web</span>
 ./fragua --host 10.0.0.5                   <span class="c" data-i18n="fr.install.c2"># auditoría de una máquina</span>
 ./fragua --version                         <span class="c" data-i18n="fr.install.c3"># ver la versión</span>
-./fragua -h                                <span class="c" data-i18n="fr.install.c4"># ayuda con todas las flags</span></pre></div>
-                  <div class="note warn"><span class="ni">⚠️</span><div data-i18n="fr.install.note">Uso ético: audita <b>solo</b> sistemas para los que tengas autorización explícita.</div></div>
-                </section>
-              </div></div>
+./fragua -h                                <span class="c" data-i18n="fr.install.c4"># ayuda con todas las flags</span></pre>
+                    </div>
+                    <div class="note warn"><span class="ni">⚠️</span>
+                      <div data-i18n="fr.install.note">Uso ético: audita <b>solo</b> sistemas para los que tengas
+                        autorización explícita.</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [02] Reconocimiento (host) -->
           <section class="cs-folder" id="grp-fr-recon">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-recon-body" id="grp-fr-recon-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 02 ]</span><h2 data-i18n="fr.host.h">Reconocimiento de host / red</h2></span><span class="cs-fcount">6 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m20 20-3.5-3.5" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 02 ]</span>
+                  <h2 data-i18n="fr.host.h">Reconocimiento de host / red</h2>
+                </span><span class="cs-fcount">6 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-recon-body" role="region" aria-labelledby="grp-fr-recon-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-host">
-                  <p class="lead" data-i18n="fr.host.lead">Escaneo de puertos y servicios «por fuera» (TCP connect, estilo <code>-Pn</code>). Un puerto abierto es <code>info</code>; solo se marca vulnerabilidad ante un problema real (versión vulnerable, servicio sin auth…).</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>--host 10.0.0.0/24            <span class="c" data-i18n="fr.host.c1"># IP, rango CIDR o varios con comas</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-host">
+                    <p class="lead" data-i18n="fr.host.lead">Escaneo de puertos y servicios «por fuera» (TCP connect,
+                      estilo <code>-Pn</code>). Un puerto abierto es <code>info</code>; solo se marca vulnerabilidad
+                      ante un problema real (versión vulnerable, servicio sin auth…).</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>--host 10.0.0.0/24            <span class="c" data-i18n="fr.host.c1"># IP, rango CIDR o varios con comas</span>
 --targets objetivos.txt       <span class="c" data-i18n="fr.host.c2"># objetivos desde fichero (uno por línea)</span>
 --ports 22,80,443             <span class="c" data-i18n="fr.host.c3"># puertos concretos (o un rango 1-1024)</span>
 --all-ports                   <span class="c" data-i18n="fr.host.c4"># los 65535 puertos (lento)</span>
 --no-portscan                 <span class="c" data-i18n="fr.host.c5"># no escanear puertos</span>
---scope alcance.txt           <span class="c" data-i18n="fr.host.c6"># lista blanca de hosts/IP autorizados</span></pre></div>
-                  <div class="note tip"><span class="ni">💡</span><div data-i18n="fr.host.note">Sin <code>--ports</code> se escanean los <b>1000 puertos top de nmap</b>. Ejemplo: <code>./fragua --host 10.0.0.5 --ports 1-1024</code>.</div></div>
-                </section>
-              </div></div>
+--scope alcance.txt           <span class="c" data-i18n="fr.host.c6"># lista blanca de hosts/IP autorizados</span></pre>
+                    </div>
+                    <div class="note tip"><span class="ni">💡</span>
+                      <div data-i18n="fr.host.note">Sin <code>--ports</code> se escanean los <b>1000 puertos top de
+                          nmap</b>. Ejemplo: <code>./fragua --host 10.0.0.5 --ports 1-1024</code>.</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [03] Aplicación web -->
           <section class="cs-folder" id="grp-fr-web">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-web-body" id="grp-fr-web-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 03 ]</span><h2 data-i18n="fr.web.h">Escaneo de aplicación web</h2></span><span class="cs-fcount">5 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18" />
+                  <path d="M12 3c2.6 2.4 4 5.6 4 9s-1.4 6.6-4 9c-2.6-2.4-4-5.6-4-9s1.4-6.6 4-9Z" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 03 ]</span>
+                  <h2 data-i18n="fr.web.h">Escaneo de aplicación web</h2>
+                </span><span class="cs-fcount">5 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-web-body" role="region" aria-labelledby="grp-fr-web-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-web">
-                  <p class="lead" data-i18n="fr.web.lead">Rastrea el dominio y comprueba TLS, cabeceras, configuración, <b>XSS/SQLi</b> reflejados y <b>secretos</b> en HTML/JS.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>--url https://objetivo.ejemplo   <span class="c" data-i18n="fr.web.c1"># escaneo con rastreo del dominio</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-web">
+                    <p class="lead" data-i18n="fr.web.lead">Rastrea el dominio y comprueba TLS, cabeceras,
+                      configuración, <b>XSS/SQLi</b> reflejados y <b>secretos</b> en HTML/JS.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>--url https://objetivo.ejemplo   <span class="c" data-i18n="fr.web.c1"># escaneo con rastreo del dominio</span>
 --max-pages 40                   <span class="c" data-i18n="fr.web.c2"># límite de páginas a rastrear</span>
 --no-crawl                       <span class="c" data-i18n="fr.web.c3"># escanear solo la URL dada</span>
 --passive                        <span class="c" data-i18n="fr.web.c4"># modo pasivo: sin sondas activas</span>
---insecure                       <span class="c" data-i18n="fr.web.c5"># no verificar el certificado TLS</span></pre></div>
-                </section>
-              </div></div>
+--insecure                       <span class="c" data-i18n="fr.web.c5"># no verificar el certificado TLS</span></pre>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [04] Auditoría interna + bastionado -->
           <section class="cs-folder" id="grp-fr-interno">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-interno-body" id="grp-fr-interno-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 04 ]</span><h2 data-i18n="fr.ssh.h">Auditoría interna (SSH) y bastionado</h2></span><span class="cs-fcount">8 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="10" rx="2" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                  <path d="M12 14v2" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 04 ]</span>
+                  <h2 data-i18n="fr.ssh.h">Auditoría interna (SSH) y bastionado</h2>
+                </span><span class="cs-fcount">8 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-interno-body" role="region" aria-labelledby="grp-fr-interno-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-ssh">
-                  <p class="lead" data-i18n="fr.ssh.lead">Con credenciales SSH, Fragua entra «por dentro» (Linux/Windows) y enumera vías de escalada. El <b>bastionado</b> (hardening) se ejecuta <b>siempre</b> junto a las vulnerabilidades.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>--ssh-user root --ssh-pass 's3cr3t'          <span class="c" data-i18n="fr.ssh.c1"># autenticación por contraseña</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-ssh">
+                    <p class="lead" data-i18n="fr.ssh.lead">Con credenciales SSH, Fragua entra «por dentro»
+                      (Linux/Windows) y enumera vías de escalada. El <b>bastionado</b> (hardening) se ejecuta
+                      <b>siempre</b> junto a las vulnerabilidades.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>--ssh-user root --ssh-pass 's3cr3t'          <span class="c" data-i18n="fr.ssh.c1"># autenticación por contraseña</span>
 --ssh-user ops --ssh-key ~/.ssh/id_ed25519   <span class="c" data-i18n="fr.ssh.c2"># autenticación por clave privada</span>
 --ssh-key-pass 'passphrase'                  <span class="c" data-i18n="fr.ssh.c3"># passphrase si la clave está cifrada</span>
 --ssh-port 2222                              <span class="c" data-i18n="fr.ssh.c4"># puerto SSH distinto del 22</span>
 --ssh-agent                                  <span class="c" data-i18n="fr.ssh.c5"># usar ssh-agent (SSH_AUTH_SOCK)</span>
 --ssh-known-hosts ~/.ssh/known_hosts         <span class="c" data-i18n="fr.ssh.c6"># verificar la clave del host</span>
---ssh-strict                                 <span class="c" data-i18n="fr.ssh.c7"># fallar si la clave del host no coincide</span></pre></div>
-                  <div class="note tip"><span class="ni">🛡️</span><div data-i18n="fr.ssh.note"><b>Bastionado incluido:</b> ASLR, firma SMB, LLMNR, RDP/NLA, BitLocker, política de contraseñas… y <b>localización de credenciales</b> (imprime la ruta y <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.</div></div>
-                </section>
-              </div></div>
+--ssh-strict                                 <span class="c" data-i18n="fr.ssh.c7"># fallar si la clave del host no coincide</span></pre>
+                    </div>
+                    <div class="note tip"><span class="ni">🛡️</span>
+                      <div data-i18n="fr.ssh.note"><b>Bastionado incluido:</b> ASLR, firma SMB, LLMNR, RDP/NLA,
+                        BitLocker, política de contraseñas… y <b>localización de credenciales</b> (imprime la ruta y
+                        <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [05] Salida e informes -->
           <section class="cs-folder" id="grp-fr-salida">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-salida-body" id="grp-fr-salida-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9"/><path d="m8 8.5 4 4 4-4"/><rect x="4" y="16" width="16" height="4.6" rx="1.5"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 05 ]</span><h2 data-i18n="fr.out.h">Salida e informes</h2></span><span class="cs-fcount">4 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v9" />
+                  <path d="m8 8.5 4 4 4-4" />
+                  <rect x="4" y="16" width="16" height="4.6" rx="1.5" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 05 ]</span>
+                  <h2 data-i18n="fr.out.h">Salida e informes</h2>
+                </span><span class="cs-fcount">4 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-salida-body" role="region" aria-labelledby="grp-fr-salida-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-out">
-                  <p class="lead" data-i18n="fr.out.lead">Genera un JSON en formato <code>crisol-workspace</code> listo para <b>Importar</b> en Crisol-RX. Vulnerabilidades y bastionado van a <b>dos ficheros distintos</b>.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>--out informe.json            <span class="c" data-i18n="fr.out.c1"># nombre del fichero de salida</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-out">
+                    <p class="lead" data-i18n="fr.out.lead">Genera un JSON en formato <code>crisol-workspace</code>
+                      listo para <b>Importar</b> en Crisol-RX. Vulnerabilidades y bastionado van a <b>dos ficheros
+                        distintos</b>.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>--out informe.json            <span class="c" data-i18n="fr.out.c1"># nombre del fichero de salida</span>
 --report md,html,csv,sarif    <span class="c" data-i18n="fr.out.c2"># informes legibles además del JSON</span>
 --name "Cliente ACME"         <span class="c" data-i18n="fr.out.c3"># nombre del workspace/proyecto</span>
---lang both                   <span class="c" data-i18n="fr.out.c4"># informe en ES y EN (es | en | both)</span></pre></div>
-                  <div class="note tip"><span class="ni">📄</span><div data-i18n="fr.out.note"><b>Dos ficheros:</b> <code>crisol-&lt;host&gt;.json</code> (vulnerabilidades) y <code>crisol-&lt;host&gt;-bastion.json</code> (bastionado). Cada uno se importa por separado en Crisol-RX.</div></div>
-                </section>
-              </div></div>
+--lang both                   <span class="c" data-i18n="fr.out.c4"># informe en ES y EN (es | en | both)</span></pre>
+                    </div>
+                    <div class="note tip"><span class="ni">📄</span>
+                      <div data-i18n="fr.out.note"><b>Dos ficheros:</b> <code>crisol-&lt;host&gt;.json</code>
+                        (vulnerabilidades) y <code>crisol-&lt;host&gt;-bastion.json</code> (bastionado). Cada uno se
+                        importa por separado en Crisol-RX.</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [06] Rendimiento y control -->
           <section class="cs-folder" id="grp-fr-control">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-control-body" id="grp-fr-control-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 06 ]</span><h2 data-i18n="fr.ctl.h">Rendimiento y control</h2></span><span class="cs-fcount">4 flags</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8" />
+                  <path d="M12 8v4l3 2" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 06 ]</span>
+                  <h2 data-i18n="fr.ctl.h">Rendimiento y control</h2>
+                </span><span class="cs-fcount">4 flags</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-control-body" role="region" aria-labelledby="grp-fr-control-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-ctl">
-                  <p class="lead" data-i18n="fr.ctl.lead">Ajusta los tiempos y el ruido del escaneo.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre>--timeout 20      <span class="c" data-i18n="fr.ctl.c1"># timeout por conexión/petición (segundos)</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-ctl">
+                    <p class="lead" data-i18n="fr.ctl.lead">Ajusta los tiempos y el ruido del escaneo.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre>--timeout 20      <span class="c" data-i18n="fr.ctl.c1"># timeout por conexión/petición (segundos)</span>
 --max-time 600    <span class="c" data-i18n="fr.ctl.c2"># tiempo total máximo del escaneo (segundos)</span>
 --rate 20         <span class="c" data-i18n="fr.ctl.c3"># máximo de peticiones web por segundo</span>
---quiet           <span class="c" data-i18n="fr.ctl.c4"># sin salida en vivo, solo el resumen</span></pre></div>
-                </section>
-              </div></div>
+--quiet           <span class="c" data-i18n="fr.ctl.c4"># sin salida en vivo, solo el resumen</span></pre>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
           <!-- [07] Recetas -->
           <section class="cs-folder" id="grp-fr-recetas">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-recetas-body" id="grp-fr-recetas-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 07 ]</span><h2 data-i18n="fr.recipes.h">Ejemplos completos</h2></span><span class="cs-fcount">3</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 6h16M4 12h16M4 18h10" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 07 ]</span>
+                  <h2 data-i18n="fr.recipes.h">Ejemplos completos</h2>
+                </span><span class="cs-fcount">3</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-recetas-body" role="region" aria-labelledby="grp-fr-recetas-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-recipes">
-                  <p class="lead" data-i18n="fr.recipes.lead">Combinaciones habituales de principio a fin.</p>
-                  <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button><pre><span class="c" data-i18n="fr.recipes.c1"># Web + informe HTML en dos idiomas</span>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-recipes">
+                    <p class="lead" data-i18n="fr.recipes.lead">Combinaciones habituales de principio a fin.</p>
+                    <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
+                      <pre><span class="c" data-i18n="fr.recipes.c1"># Web + informe HTML en dos idiomas</span>
 ./fragua --url https://objetivo.ejemplo --report html --lang both --out acme.json
 
 <span class="c" data-i18n="fr.recipes.c2"># Reconocimiento de una subred con límite de tiempo</span>
 ./fragua --host 10.0.0.0/24 --max-time 900 --report md
 
 <span class="c" data-i18n="fr.recipes.c3"># Auditoría interna completa (vulns + bastionado) con informes</span>
-./fragua --host 10.0.0.5 --ssh-user ops --ssh-key ~/.ssh/id --report md,html --name "ACME infra"</pre></div>
-                  <div class="note tip"><span class="ni">📥</span><div data-i18n="fr.recipes.note">Después, en Crisol-RX: <b>Importar workspace</b> → selecciona el <code>.json</code> (y el <code>-bastion.json</code> si lo hay).</div></div>
-                </section>
-              </div></div>
+./fragua --host 10.0.0.5 --ssh-user ops --ssh-key ~/.ssh/id --report md,html --name "ACME infra"</pre>
+                    </div>
+                    <div class="note tip"><span class="ni">📥</span>
+                      <div data-i18n="fr.recipes.note">Después, en Crisol-RX: <b>Importar workspace</b> → selecciona el
+                        <code>.json</code> (y el <code>-bastion.json</code> si lo hay).</div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -3517,50 +4144,11 @@ sudo systemctl reload caddy</pre></div>
 
   <!-- ================= CURSOR CRISOL ================= -->
   <div class="cur-tri" id="curTri" aria-hidden="true">
-    <svg viewBox="0 0 48 48"><path d="M24 6 L40 38 H8 Z" fill="none" stroke="#a86bff" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 48 48">
+      <path d="M24 6 L40 38 H8 Z" fill="none" stroke="#a86bff" stroke-width="2.5" stroke-linejoin="round" />
+    </svg>
   </div>
   <div class="cur-dot" id="curDot" aria-hidden="true"></div>
-
-  <!-- Drawer lateral de descarga (solo visible en la vista Fragua) -->
-  <aside class="dl-dock" id="dlDock" hidden>
-    <div class="dl-panel" id="dlPanel" role="region" aria-label="Descargar Fragua">
-      <button class="dl-handle" id="dlHandle" aria-controls="dlPanel" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
-        <span data-i18n="fr.dl.tab">Descargar</span>
-      </button>
-      <div class="dl-panel-inner">
-        <h3 data-i18n="fr.dl.h">Descargar Fragua</h3>
-        <p class="fr-dl-sub" data-i18n="fr.dl.sub">Binario único, sin dependencias. Elige tu sistema y ejecútalo — sin instalación.</p>
-        <div class="fr-dl-grid">
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-amd64" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z"/><circle cx="10.4" cy="7.3" r=".75" fill="#0e1424"/><circle cx="13.6" cy="7.3" r=".75" fill="#0e1424"/><path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e"/></svg>
-            <span class="fr-dl-txt"><b>Linux</b><small>x86-64</small></span>
-          </a>
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-arm64" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z"/><circle cx="10.4" cy="7.3" r=".75" fill="#0e1424"/><circle cx="13.6" cy="7.3" r=".75" fill="#0e1424"/><path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e"/></svg>
-            <span class="fr-dl-txt"><b>Linux</b><small>ARM64</small></span>
-          </a>
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-apple-silicon" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z"/></svg>
-            <span class="fr-dl-txt"><b>macOS</b><small>Apple Silicon</small></span>
-          </a>
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-intel" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z"/></svg>
-            <span class="fr-dl-txt"><b>macOS</b><small>Intel</small></span>
-          </a>
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-amd64.exe" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z"/></svg>
-            <span class="fr-dl-txt"><b>Windows</b><small>x64 · .exe</small></span>
-          </a>
-          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-arm64.exe" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z"/></svg>
-            <span class="fr-dl-txt"><b>Windows</b><small>ARM64 · .exe</small></span>
-          </a>
-        </div>
-        <p class="fr-dl-foot" data-i18n="fr.dl.foot">¿Otra arquitectura o prefieres compilar? <a href="https://github.com/D3M0NH4NT3R/Fragua/releases" target="_blank" rel="noopener">Todas las versiones</a> · <a href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank" rel="noopener">código y <code>build.sh</code></a>.</p>
-      </div>
-    </div>
-  </aside>
 
   <script>
 
@@ -4651,7 +5239,6 @@ sudo systemctl reload caddy</pre></div>
       var vF = document.getElementById("view-fragua");
       if (!swC || !swF || !vC || !vF) return;
       var hc = document.getElementById("headCrisol"), hf = document.getElementById("headFragua");
-      var dock = document.getElementById("dlDock"), handle = document.getElementById("dlHandle");
       var baseTitle = document.title;
       function show(which) {
         var fragua = which === "fragua";
@@ -4659,17 +5246,12 @@ sudo systemctl reload caddy</pre></div>
         vC.hidden = fragua;
         swF.setAttribute("aria-selected", fragua ? "true" : "false");
         swC.setAttribute("aria-selected", fragua ? "false" : "true");
-        // Cabecera: crossfade entre el título de Crisol-RX y el de Fragua.
+
         if (hc && hf) {
           hc.classList.toggle("is-active", !fragua);
           hf.classList.toggle("is-active", fragua);
           hc.setAttribute("aria-hidden", fragua ? "true" : "false");
           hf.setAttribute("aria-hidden", fragua ? "false" : "true");
-        }
-        // Drawer de descarga: solo existe en la vista Fragua.
-        if (dock) {
-          dock.hidden = !fragua;
-          if (!fragua) { dock.classList.remove("open"); if (handle) handle.setAttribute("aria-expanded", "false"); }
         }
         document.title = fragua ? "Fragua — Cheat Sheet · Crisol-RX" : baseTitle;
         try { localStorage.setItem("crisol-cheat-view", which); } catch (e) { }
@@ -4678,14 +5260,15 @@ sudo systemctl reload caddy</pre></div>
       }
       swC.addEventListener("click", function () { show("crisol"); });
       swF.addEventListener("click", function () { show("fragua"); });
-      if (handle && dock) {
-        handle.addEventListener("click", function () {
-          var open = dock.classList.toggle("open");
-          handle.setAttribute("aria-expanded", open ? "true" : "false");
+
+      var dlCard = document.getElementById("frDlCard"), dlHead = document.getElementById("frDlHead");
+      if (dlCard && dlHead) {
+        dlHead.addEventListener("click", function () {
+          var open = dlCard.classList.toggle("open");
+          dlHead.setAttribute("aria-expanded", open ? "true" : "false");
         });
       }
-      // Enlace directo: .../cheatsheet.html#fragua abre la vista de Fragua (y
-      // #crisol la de Crisol-RX). Si no hay hash, se respeta la última elección.
+
       function fromHash(h) {
         h = (h || "").toLowerCase();
         if (h === "#fragua") { show("fragua"); return true; }

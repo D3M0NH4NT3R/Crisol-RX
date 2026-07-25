@@ -2070,6 +2070,80 @@
       box-shadow: 0 8px 22px -8px var(--accent);
     }
     .cs-view[hidden] { display: none; }
+
+    /* ── Cursor personalizado (coherente con index.html) ── */
+    @media (hover:hover) and (pointer:fine) {
+      body, a, button, .tab, input, select, textarea, label,
+      .cs-fhead, .copy-btn, .cs-switch-btn, .toc-sub, .cs-sec, .fr-dl-btn { cursor: none; }
+    }
+    .cur-dot, .cur-tri { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9999; display: none; }
+    @media (hover:hover) and (pointer:fine) { .cur-dot, .cur-tri { display: block; } }
+    .cur-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent2);
+      box-shadow: 0 0 10px rgba(47, 214, 166, .8);
+      transition: width .25s, height .25s, background .25s;
+    }
+    .cur-tri { width: 36px; height: 36px; will-change: transform; }
+    .cur-tri svg { width: 100%; height: 100%; animation: curSpin 14s linear infinite; transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+    .cur-tri path { transition: stroke .25s, fill .25s; }
+    @keyframes curSpin { to { transform: rotate(360deg); } }
+    body.cur-hover .cur-tri svg { transform: scale(1.45) rotate(180deg); animation-play-state: paused; }
+    body.cur-hover .cur-tri path { stroke: var(--accent2); fill: rgba(47, 214, 166, .12); }
+    body.cur-hover .cur-dot { width: 4px; height: 4px; background: var(--accent); }
+    @media (prefers-reduced-motion: reduce) { .cur-tri svg { animation: none; } }
+
+    /* ── Cabecera con dos títulos que hacen crossfade (Crisol / Fragua) ── */
+    .head-titles { display: grid; }
+    .head-title { grid-area: 1 / 1; transition: opacity .45s ease, transform .45s ease, filter .45s ease; }
+    .head-title:not(.is-active) { opacity: 0; transform: translateY(14px) scale(.985); filter: blur(3px); pointer-events: none; }
+    .head-title.is-active { opacity: 1; transform: none; filter: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .head-title { transition: opacity .2s ease; }
+      .head-title:not(.is-active) { transform: none; filter: none; }
+    }
+
+    /* ── Drawer lateral de descarga (solo en la vista Fragua) ── */
+    .dl-dock { position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 85; }
+    .dl-dock[hidden] { display: none; }
+    .dl-panel {
+      position: relative; width: min(300px, 86vw); max-height: 84vh; overflow: auto;
+      padding: 18px 16px 16px;
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border: 1px solid var(--border); border-right: 0; border-radius: 16px 0 0 16px;
+      box-shadow: -22px 0 60px -24px rgba(0, 0, 0, .65);
+      transform: translateX(100%);
+      transition: transform .42s cubic-bezier(.22, .85, .2, 1);
+    }
+    .dl-dock.open .dl-panel { transform: translateX(0); }
+    .dl-handle {
+      position: absolute; top: 22px; right: 100%;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 9px; border: 1px solid var(--border); border-right: 0;
+      border-radius: 13px 0 0 13px; cursor: pointer;
+      color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+      writing-mode: vertical-rl; font-weight: 700; font-size: 12.5px; letter-spacing: .4px;
+      box-shadow: -10px 0 26px -14px var(--accent); transition: filter .18s;
+    }
+    .dl-handle:hover { filter: brightness(1.08); }
+    .dl-handle svg { width: 16px; height: 16px; transition: transform .42s cubic-bezier(.22, .85, .2, 1); }
+    .dl-dock.open .dl-handle svg { transform: rotate(180deg); }
+    .dl-panel h3 { margin: 0 0 2px; font-size: 16px; }
+    .fr-dl-sub { color: var(--muted); font-size: 13px; margin: 4px 0 14px; }
+    .fr-dl-grid { display: grid; grid-template-columns: 1fr; gap: 9px; }
+    .fr-dl-btn {
+      display: flex; align-items: center; gap: 11px; padding: 11px 13px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--panel); color: var(--text); text-decoration: none;
+      transition: border-color .18s, transform .18s, box-shadow .18s;
+    }
+    .fr-dl-btn:hover { border-color: var(--accent); transform: translateX(-3px); box-shadow: 0 12px 26px -14px var(--accent); }
+    .fr-dl-btn > svg { width: 24px; height: 24px; flex: 0 0 auto; color: var(--muted); transition: color .18s; }
+    .fr-dl-btn:hover > svg { color: var(--accent); }
+    .fr-dl-txt { display: flex; flex-direction: column; line-height: 1.25; }
+    .fr-dl-txt b { font-size: 13.5px; font-weight: 700; }
+    .fr-dl-txt small { font-size: 12px; color: var(--muted); }
+    .fr-dl-foot { margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
+    .fr-dl-foot a { color: var(--accent); font-weight: 600; }
+    @media (max-width: 560px) { .dl-panel { max-height: 76vh; } .dl-handle { top: 14px; } }
 </style>
 </head>
 
@@ -2130,10 +2204,18 @@
         <span class="hud"><span class="dot-live"></span><span class="br">[</span><span data-i18n="head.hud">GUÍA
             RÁPIDA</span><span class="br">]</span></span>
       </div>
-      <h1 data-i18n="head.title">Cheat Sheet de <span class="grad">configuración</span></h1>
-      <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo
-        </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
-          cifrado y comandos esenciales.</span></p>
+      <div class="head-titles">
+        <div class="head-title is-active" id="headCrisol">
+          <h1 data-i18n="head.title">Cheat Sheet de <span class="grad">configuración</span></h1>
+          <p><span data-i18n="head.subA">Todo lo que necesitas para configurar Crisol-RX: el archivo
+            </span><code>crisol.json</code><span data-i18n="head.subB">, modo servidor, HTTPS,
+              cifrado y comandos esenciales.</span></p>
+        </div>
+        <div class="head-title" id="headFragua" aria-hidden="true">
+          <h1 data-i18n="fr.head.title">Cheat Sheet de <span class="grad">Fragua</span></h1>
+          <p data-i18n="fr.head.sub">El escáner de <b>Crisol-RX</b>: todas sus flags agrupadas por tipo de prueba — reconocimiento, web, auditoría interna y bastionado.</p>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -3433,6 +3515,53 @@ sudo systemctl reload caddy</pre></div>
     </div>
   </footer>
 
+  <!-- ================= CURSOR CRISOL ================= -->
+  <div class="cur-tri" id="curTri" aria-hidden="true">
+    <svg viewBox="0 0 48 48"><path d="M24 6 L40 38 H8 Z" fill="none" stroke="#a86bff" stroke-width="2.5" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="cur-dot" id="curDot" aria-hidden="true"></div>
+
+  <!-- Drawer lateral de descarga (solo visible en la vista Fragua) -->
+  <aside class="dl-dock" id="dlDock" hidden>
+    <div class="dl-panel" id="dlPanel" role="region" aria-label="Descargar Fragua">
+      <button class="dl-handle" id="dlHandle" aria-controls="dlPanel" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+        <span data-i18n="fr.dl.tab">Descargar</span>
+      </button>
+      <div class="dl-panel-inner">
+        <h3 data-i18n="fr.dl.h">Descargar Fragua</h3>
+        <p class="fr-dl-sub" data-i18n="fr.dl.sub">Binario único, sin dependencias. Elige tu sistema y ejecútalo — sin instalación.</p>
+        <div class="fr-dl-grid">
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-amd64" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z"/><circle cx="10.4" cy="7.3" r=".75" fill="#0e1424"/><circle cx="13.6" cy="7.3" r=".75" fill="#0e1424"/><path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e"/></svg>
+            <span class="fr-dl-txt"><b>Linux</b><small>x86-64</small></span>
+          </a>
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-linux-arm64" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.6c-1.9 0-3 1.5-3 3.6 0 1 .1 1.6-.5 2.5C7.2 10.4 6 11.9 6 14c0 1.2.6 2.1 1.3 2.8-.4.5-.9 1.1-.9 1.7 0 1 2.1 1.4 5.6 1.4s5.6-.4 5.6-1.4c0-.6-.5-1.2-.9-1.7.7-.7 1.3-1.6 1.3-2.8 0-2.1-1.2-3.6-2.5-5.3-.6-.9-.5-1.5-.5-2.5 0-2.1-1.1-3.6-3-3.6Z"/><circle cx="10.4" cy="7.3" r=".75" fill="#0e1424"/><circle cx="13.6" cy="7.3" r=".75" fill="#0e1424"/><path d="M10.9 9.2 12 10l1.1-.8L12 8.6z" fill="#ffb02e"/></svg>
+            <span class="fr-dl-txt"><b>Linux</b><small>ARM64</small></span>
+          </a>
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-apple-silicon" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z"/></svg>
+            <span class="fr-dl-txt"><b>macOS</b><small>Apple Silicon</small></span>
+          </a>
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-macos-intel" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 12.4c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.6-1.3 0-2.6.8-3.2 2-1.4 2.3-.4 5.8 1 7.7.7 1 1.4 2 2.4 2 .9 0 1.3-.6 2.4-.6s1.4.6 2.4.6 1.6-.9 2.3-1.8c.5-.8.8-1.5.9-1.9-.1 0-2-.8-2-3.1Zm-2-5.7c.5-.6.9-1.5.8-2.4-.8 0-1.7.5-2.3 1.2-.5.6-.9 1.5-.8 2.4.9 0 1.8-.5 2.3-1.2Z"/></svg>
+            <span class="fr-dl-txt"><b>macOS</b><small>Intel</small></span>
+          </a>
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-amd64.exe" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z"/></svg>
+            <span class="fr-dl-txt"><b>Windows</b><small>x64 · .exe</small></span>
+          </a>
+          <a class="fr-dl-btn" href="https://github.com/D3M0NH4NT3R/Fragua/releases/latest/download/fragua-windows-arm64.exe" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.4 10.6 4.2v7.1H3zM11.6 4 21 2.6v8.7h-9.4zM3 12.7h7.6v7.1L3 18.6zM11.6 12.7H21v8.7l-9.4-1.3z"/></svg>
+            <span class="fr-dl-txt"><b>Windows</b><small>ARM64 · .exe</small></span>
+          </a>
+        </div>
+        <p class="fr-dl-foot" data-i18n="fr.dl.foot">¿Otra arquitectura o prefieres compilar? <a href="https://github.com/D3M0NH4NT3R/Fragua/releases" target="_blank" rel="noopener">Todas las versiones</a> · <a href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank" rel="noopener">código y <code>build.sh</code></a>.</p>
+      </div>
+    </div>
+  </aside>
+
   <script>
 
     (function () {
@@ -3738,6 +3867,12 @@ sudo systemctl reload caddy</pre></div>
         "btn.download": "⤓ Descargar",
         "copy": "Copiar",
         "fr.toc.g1": "Objetivos", "fr.toc.g2": "Interno y salida",
+        "fr.head.title": "Cheat Sheet de <span class=\"grad\">Fragua</span>",
+        "fr.head.sub": "El escáner de <b>Crisol-RX</b>: todas sus flags agrupadas por tipo de prueba — reconocimiento, web, auditoría interna y bastionado.",
+        "fr.dl.tab": "Descargar",
+        "fr.dl.h": "Descargar Fragua",
+        "fr.dl.sub": "Binario único, sin dependencias. Elige tu sistema y ejecútalo — sin instalación.",
+        "fr.dl.foot": "¿Otra arquitectura o prefieres compilar? <a href=\"https://github.com/D3M0NH4NT3R/Fragua/releases\" target=\"_blank\" rel=\"noopener\">Todas las versiones</a> · <a href=\"https://github.com/D3M0NH4NT3R/Fragua\" target=\"_blank\" rel=\"noopener\">código y <code>build.sh</code></a>.",
         "fr.toc.install": "Instalación y uso", "fr.toc.host": "Reconocimiento (host)", "fr.toc.web": "Aplicación web",
         "fr.toc.ssh": "Auditoría interna + bastionado", "fr.toc.out": "Salida e informes", "fr.toc.ctl": "Rendimiento y control", "fr.toc.recipes": "Ejemplos",
         "fr.install.h": "Instalación y uso básico",
@@ -4123,6 +4258,12 @@ sudo systemctl reload caddy</pre></div>
         "btn.download": "⤓ Download",
         "copy": "Copy",
         "fr.toc.g1": "Targets", "fr.toc.g2": "Internal & output",
+        "fr.head.title": "<span class=\"grad\">Fragua</span> cheat sheet",
+        "fr.head.sub": "Crisol-RX's scanner: all its flags grouped by test type — recon, web, internal audit and hardening.",
+        "fr.dl.tab": "Download",
+        "fr.dl.h": "Download Fragua",
+        "fr.dl.sub": "Single binary, no dependencies. Pick your system and run it — no install.",
+        "fr.dl.foot": "Another architecture or prefer to build it? <a href=\"https://github.com/D3M0NH4NT3R/Fragua/releases\" target=\"_blank\" rel=\"noopener\">All releases</a> · <a href=\"https://github.com/D3M0NH4NT3R/Fragua\" target=\"_blank\" rel=\"noopener\">source and <code>build.sh</code></a>.",
         "fr.toc.install": "Install & usage", "fr.toc.host": "Recon (host)", "fr.toc.web": "Web app",
         "fr.toc.ssh": "Internal audit + hardening", "fr.toc.out": "Output & reports", "fr.toc.ctl": "Performance & control", "fr.toc.recipes": "Examples",
         "fr.install.h": "Install and basic usage",
@@ -4509,19 +4650,78 @@ sudo systemctl reload caddy</pre></div>
       var vC = document.getElementById("view-crisol");
       var vF = document.getElementById("view-fragua");
       if (!swC || !swF || !vC || !vF) return;
+      var hc = document.getElementById("headCrisol"), hf = document.getElementById("headFragua");
+      var dock = document.getElementById("dlDock"), handle = document.getElementById("dlHandle");
+      var baseTitle = document.title;
       function show(which) {
         var fragua = which === "fragua";
         vF.hidden = !fragua;
         vC.hidden = fragua;
         swF.setAttribute("aria-selected", fragua ? "true" : "false");
         swC.setAttribute("aria-selected", fragua ? "false" : "true");
+        // Cabecera: crossfade entre el título de Crisol-RX y el de Fragua.
+        if (hc && hf) {
+          hc.classList.toggle("is-active", !fragua);
+          hf.classList.toggle("is-active", fragua);
+          hc.setAttribute("aria-hidden", fragua ? "true" : "false");
+          hf.setAttribute("aria-hidden", fragua ? "false" : "true");
+        }
+        // Drawer de descarga: solo existe en la vista Fragua.
+        if (dock) {
+          dock.hidden = !fragua;
+          if (!fragua) { dock.classList.remove("open"); if (handle) handle.setAttribute("aria-expanded", "false"); }
+        }
+        document.title = fragua ? "Fragua — Cheat Sheet · Crisol-RX" : baseTitle;
         try { localStorage.setItem("crisol-cheat-view", which); } catch (e) { }
         var anchor = document.querySelector(".cs-switch");
         if (anchor && typeof anchor.scrollIntoView === "function") anchor.scrollIntoView({ block: "nearest" });
       }
       swC.addEventListener("click", function () { show("crisol"); });
       swF.addEventListener("click", function () { show("fragua"); });
-      try { if (localStorage.getItem("crisol-cheat-view") === "fragua") show("fragua"); } catch (e) { }
+      if (handle && dock) {
+        handle.addEventListener("click", function () {
+          var open = dock.classList.toggle("open");
+          handle.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      }
+      // Enlace directo: .../cheatsheet.html#fragua abre la vista de Fragua (y
+      // #crisol la de Crisol-RX). Si no hay hash, se respeta la última elección.
+      function fromHash(h) {
+        h = (h || "").toLowerCase();
+        if (h === "#fragua") { show("fragua"); return true; }
+        if (h === "#crisol" || h === "#crisol-rx") { show("crisol"); return true; }
+        return false;
+      }
+      if (!fromHash(location.hash)) {
+        try { if (localStorage.getItem("crisol-cheat-view") === "fragua") show("fragua"); } catch (e) { }
+      }
+      addEventListener("hashchange", function () { fromHash(location.hash); });
+    })();
+
+    /* ── Cursor personalizado (mismo de index.html) ── */
+    (function () {
+      var curTri = document.getElementById("curTri");
+      var curDot = document.getElementById("curDot");
+      var finePtr = window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+      if (!curTri || !curDot || !finePtr) return;
+      var mx = -100, my = -100, tx = -100, ty = -100, dx = -100, dy = -100, cRun = false;
+      function step() {
+        var a = mx - tx, b = my - ty, c = mx - dx, d = my - dy;
+        tx += a * .14; ty += b * .14; dx += c * .42; dy += d * .42;
+        curTri.style.transform = "translate(" + (tx - 18) + "px," + (ty - 18) + "px)";
+        curDot.style.transform = "translate(" + (dx - 3) + "px," + (dy - 3) + "px)";
+        if (Math.abs(a) < .1 && Math.abs(b) < .1 && Math.abs(c) < .1 && Math.abs(d) < .1) { cRun = false; return; }
+        requestAnimationFrame(step);
+      }
+      function wake() { if (!cRun) { cRun = true; requestAnimationFrame(step); } }
+      window.addEventListener("mousemove", function (ev) {
+        mx = ev.clientX; my = ev.clientY;
+        var hov = ev.target.closest && ev.target.closest("a,button,.cs-fhead,.copy-btn,.cs-switch-btn,.toc-sub,.cs-sec,.fr-dl-btn,input,select,textarea,label");
+        document.body.classList.toggle("cur-hover", !!hov);
+        wake();
+      }, { passive: true });
+      document.addEventListener("mouseleave", function () { mx = my = -100; });
+      wake();
     })();
   </script>
   <script>

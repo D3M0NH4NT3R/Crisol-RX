@@ -3827,6 +3827,10 @@ sudo systemctl reload caddy</pre>
                     <span class="fr-dl-txt"><b>Windows</b><small>ARM64 · .exe</small></span>
                   </a>
                 </div>
+                <p class="fr-dl-foot" data-i18n="fr.dl.foot">¿Otra arquitectura o prefieres compilar? <a
+                    href="https://github.com/D3M0NH4NT3R/Fragua/releases" target="_blank" rel="noopener">Todas las
+                    versiones</a> · <a href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank"
+                    rel="noopener">código y <code>build.sh</code></a>.</p>
               </div>
             </div>
           </div>
@@ -3998,12 +4002,19 @@ sudo systemctl reload caddy</pre>
 --ssh-port 2222                              <span class="c" data-i18n="fr.ssh.c4"># puerto SSH distinto del 22</span>
 --ssh-agent                                  <span class="c" data-i18n="fr.ssh.c5"># usar ssh-agent (SSH_AUTH_SOCK)</span>
 --ssh-known-hosts ~/.ssh/known_hosts         <span class="c" data-i18n="fr.ssh.c6"># verificar la clave del host</span>
---ssh-strict                                 <span class="c" data-i18n="fr.ssh.c7"># fallar si la clave del host no coincide</span></pre>
+--ssh-strict                                 <span class="c" data-i18n="fr.ssh.c7"># fallar si la clave del host no coincide</span>
+
+<span class="c" data-i18n="fr.ssh.deep"># — Escaneo profundo de credenciales (opcional, lento) —</span>
+--deep-creds                                 <span class="c" data-i18n="fr.ssh.c8"># caza EXHAUSTIVA de credenciales por todo el FS</span>
+--deep-creds-bin                             <span class="c" data-i18n="fr.ssh.c9"># además, busca secretos en binarios (muy lento)</span></pre>
                     </div>
                     <div class="note tip"><span class="ni">🛡️</span>
                       <div data-i18n="fr.ssh.note"><b>Bastionado incluido:</b> ASLR, firma SMB, LLMNR, RDP/NLA,
                         BitLocker, política de contraseñas… y <b>localización de credenciales</b> (imprime la ruta y
                         <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.</div>
+                    </div>
+                    <div class="note warn"><span class="ni">🔎</span>
+                      <div data-i18n="fr.deep.note"><b>Escaneo profundo (<code>--deep-creds</code>):</b> recorre <b>todo el sistema de ficheros</b> y los directorios de <b>todos los usuarios</b>, no solo el <i>home</i> del usuario SSH. Para cobertura total, conéctate como <b>root o con sudo</b>: un usuario sin privilegios solo verá lo que pueda leer. Es lento; <code>--deep-creds-bin</code> añade el análisis de binarios (mucho más lento).</div>
                     </div>
                   </section>
                 </div>
@@ -4473,6 +4484,8 @@ sudo systemctl reload caddy</pre>
         "fr.ssh.h": "Auditoría interna (SSH) y bastionado",
         "fr.ssh.lead": "Con credenciales SSH, Fragua entra «por dentro» (Linux/Windows) y enumera vías de escalada. El <b>bastionado</b> (hardening) se ejecuta <b>siempre</b> junto a las vulnerabilidades.",
         "fr.ssh.c1": "# autenticación por contraseña", "fr.ssh.c2": "# autenticación por clave privada", "fr.ssh.c3": "# passphrase si la clave está cifrada", "fr.ssh.c4": "# puerto SSH distinto del 22", "fr.ssh.c5": "# usar ssh-agent (SSH_AUTH_SOCK)", "fr.ssh.c6": "# verificar la clave del host", "fr.ssh.c7": "# fallar si la clave del host no coincide",
+        "fr.ssh.deep": "# — Escaneo profundo de credenciales (opcional, lento) —", "fr.ssh.c8": "# caza EXHAUSTIVA de credenciales por todo el FS", "fr.ssh.c9": "# además, busca secretos en binarios (muy lento)",
+        "fr.deep.note": "<b>Escaneo profundo (<code>--deep-creds</code>):</b> recorre <b>todo el sistema de ficheros</b> y los directorios de <b>todos los usuarios</b>, no solo el <i>home</i> del usuario SSH. Para cobertura total, conéctate como <b>root o con sudo</b>: un usuario sin privilegios solo verá lo que pueda leer. Es lento; <code>--deep-creds-bin</code> añade el análisis de binarios (mucho más lento).",
         "fr.ssh.note": "<b>Bastionado incluido:</b> ASLR, firma SMB, LLMNR, RDP/NLA, BitLocker, política de contraseñas… y <b>localización de credenciales</b> (imprime la ruta y <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.",
         "fr.out.h": "Salida e informes",
         "fr.out.lead": "Genera un JSON en formato <code>crisol-workspace</code> listo para <b>Importar</b> en Crisol-RX. Vulnerabilidades y bastionado van a <b>dos ficheros distintos</b>.",
@@ -4864,6 +4877,8 @@ sudo systemctl reload caddy</pre>
         "fr.ssh.h": "Internal audit (SSH) and hardening",
         "fr.ssh.lead": "With SSH credentials, Fragua goes «inside» (Linux/Windows) and enumerates escalation paths. <b>Hardening</b> runs <b>always</b>, alongside the vulnerabilities.",
         "fr.ssh.c1": "# password authentication", "fr.ssh.c2": "# private-key authentication", "fr.ssh.c3": "# passphrase if the key is encrypted", "fr.ssh.c4": "# SSH port other than 22", "fr.ssh.c5": "# use ssh-agent (SSH_AUTH_SOCK)", "fr.ssh.c6": "# verify the host key", "fr.ssh.c7": "# fail if the host key does not match",
+        "fr.ssh.deep": "# — Deep credential scan (optional, slow) —", "fr.ssh.c8": "# EXHAUSTIVE credential hunt across the whole FS", "fr.ssh.c9": "# also hunt for secrets inside binaries (very slow)",
+        "fr.deep.note": "<b>Deep scan (<code>--deep-creds</code>):</b> it walks the <b>whole filesystem</b> and <b>every user's</b> directories, not just the SSH user's <i>home</i>. For full coverage, connect as <b>root or with sudo</b>: an unprivileged user only sees what it can read. It's slow; <code>--deep-creds-bin</code> adds binary analysis (much slower).",
         "fr.ssh.note": "<b>Hardening included:</b> ASLR, SMB signing, LLMNR, RDP/NLA, BitLocker, password policy… plus <b>credential discovery</b> (prints the path and <b>masks</b> the value). It goes to a separate <code>-bastion</code> file.",
         "fr.out.h": "Output and reports",
         "fr.out.lead": "Produces a JSON in <code>crisol-workspace</code> format ready to <b>Import</b> into Crisol-RX. Vulnerabilities and hardening go to <b>two different files</b>.",

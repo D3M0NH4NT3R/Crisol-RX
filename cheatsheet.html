@@ -3968,7 +3968,13 @@ sudo systemctl reload caddy</pre>
 --max-pages 40                   <span class="c" data-i18n="fr.web.c2"># límite de páginas a rastrear</span>
 --no-crawl                       <span class="c" data-i18n="fr.web.c3"># escanear solo la URL dada</span>
 --passive                        <span class="c" data-i18n="fr.web.c4"># modo pasivo: sin sondas activas</span>
---insecure                       <span class="c" data-i18n="fr.web.c5"># no verificar el certificado TLS</span></pre>
+--insecure                       <span class="c" data-i18n="fr.web.c5"># no verificar el certificado TLS</span>
+
+<span class="c" data-i18n="fr.web.jwtc"># — Analizar un JWT concreto (sin escanear) —</span>
+--jwt 'eyJhbGciOi...'            <span class="c" data-i18n="fr.web.c6"># analiza EXCLUSIVAMENTE ese token y sale</span></pre>
+                    </div>
+                    <div class="note tip"><span class="ni">🔑</span>
+                      <div data-i18n="fr.web.jwtnote"><b><code>--jwt &lt;token&gt;</code>:</b> analiza un token que le pegas a mano (útil porque muchos JWT solo se obtienen <b>ya autenticado</b>). No necesita <code>--url</code>/<code>--host</code>: decodifica, muestra los puntos débiles y el decode <b>resaltado</b> para la captura, y genera su fichero para importar.</div>
                     </div>
                   </section>
                 </div>
@@ -4156,7 +4162,7 @@ sudo systemctl reload caddy</pre>
                   <div class="note tip"><span class="ni">🔗</span><div data-i18n="fr.smart.c2"><b>Cadenas de ataque:</b> cruza hallazgos sueltos en rutas de <b>escalada</b> o <b>pivote</b> (p. ej. SUID + sudo + Docker → un hallazgo compuesto de mayor severidad).</div></div>
                   <div class="note tip"><span class="ni">🗂️</span><div data-i18n="fr.smart.c3"><b>Base CVE offline:</b> mapea versiones/banners a <b>CVE conocidos</b> sin conexión (Apache 2.4.49, ProFTPD, Exim, Samba, PHP/OpenSSL EOL, Jenkins, Grafana…).</div></div>
                   <div class="note tip"><span class="ni">🧭</span><div data-i18n="fr.smart.c4"><b>Escaneo adaptativo:</b> si detecta un stack (WordPress, phpMyAdmin, Tomcat, Drupal, Adminer…) lanza sus <b>comprobaciones específicas</b>.</div></div>
-                  <div class="note tip"><span class="ni">🔑</span><div data-i18n="fr.smart.c5"><b>Análisis de JWT:</b> decodifica los tokens y detecta <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b> (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles para la captura.</div></div>
+                  <div class="note tip"><span class="ni">🔑</span><div data-i18n="fr.smart.c5"><b>Análisis de JWT:</b> decodifica los tokens y detecta <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b> (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles para la captura. Se hace solo al encontrarlos en un escaneo, o a demanda con el flag <code>--jwt '&lt;token&gt;'</code> (sin escanear; ideal para tokens que solo tienes ya autenticado).</div></div>
                   <div class="note tip"><span class="ni">🌐</span><div data-i18n="fr.smart.c6"><b>Contexto:</b> los hallazgos graves sobre una <b>IP pública</b> se marcan como «expuesto a Internet» para ayudarte a priorizar.</div></div>
                   <div class="note tip"><span class="ni">🏷️</span><div data-i18n="fr.smart.c7"><b>IDs estables + marcos:</b> cada hallazgo tiene un <b>ID estable</b> entre escaneos (para diffing/seguimiento) y se etiqueta con su categoría <b>OWASP Top 10</b> y técnica <b>MITRE ATT&amp;CK</b>.</div></div>
                   <div class="note tip"><span class="ni">🧩</span><div data-i18n="fr.smart.c8"><b>APIs y cabeceras a fondo:</b> parsea <b>OpenAPI/Swagger</b> (enumera endpoints y marca los que no exigen auth), analiza la <b>política CSP</b> por directivas y revisa las <b>cookies</b> (SameSite, prefijos <code>__Host-</code>/<code>__Secure-</code>, sesión persistente).</div></div>
@@ -4505,7 +4511,7 @@ sudo systemctl reload caddy</pre>
         "fr.smart.c2": "<b>Cadenas de ataque:</b> cruza hallazgos sueltos en rutas de <b>escalada</b> o <b>pivote</b> (p. ej. SUID + sudo + Docker → un hallazgo compuesto de mayor severidad).",
         "fr.smart.c3": "<b>Base CVE offline:</b> mapea versiones/banners a <b>CVE conocidos</b> sin conexión (Apache 2.4.49, ProFTPD, Exim, Samba, PHP/OpenSSL EOL, Jenkins, Grafana…).",
         "fr.smart.c4": "<b>Escaneo adaptativo:</b> si detecta un stack (WordPress, phpMyAdmin, Tomcat, Drupal, Adminer…) lanza sus <b>comprobaciones específicas</b>.",
-        "fr.smart.c5": "<b>Análisis de JWT:</b> decodifica los tokens y detecta <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b> (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles para la captura.",
+        "fr.smart.c5": "<b>Análisis de JWT:</b> decodifica los tokens y detecta <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b> (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles para la captura. Se hace solo al encontrarlos en un escaneo, o a demanda con el flag <code>--jwt '&lt;token&gt;'</code> (sin escanear; ideal para tokens que solo tienes ya autenticado).",
         "fr.smart.c6": "<b>Contexto:</b> los hallazgos graves sobre una <b>IP pública</b> se marcan como «expuesto a Internet» para ayudarte a priorizar.",
         "fr.smart.c7": "<b>IDs estables + marcos:</b> cada hallazgo tiene un <b>ID estable</b> entre escaneos (para diffing/seguimiento) y se etiqueta con su categoría <b>OWASP Top 10</b> y técnica <b>MITRE ATT&amp;CK</b>.",
         "fr.smart.c8": "<b>APIs y cabeceras a fondo:</b> parsea <b>OpenAPI/Swagger</b> (enumera endpoints y marca los que no exigen auth), analiza la <b>política CSP</b> por directivas y revisa las <b>cookies</b> (SameSite, prefijos <code>__Host-</code>/<code>__Secure-</code>, sesión persistente).",
@@ -4521,6 +4527,8 @@ sudo systemctl reload caddy</pre>
         "fr.web.h": "Escaneo de aplicación web",
         "fr.web.lead": "Rastrea el dominio y comprueba TLS, cabeceras, configuración, <b>XSS/SQLi</b> reflejados, <b>secretos</b> en HTML/JS y <b>análisis de JWT</b>.",
         "fr.web.c1": "# escaneo con rastreo del dominio", "fr.web.c2": "# límite de páginas a rastrear", "fr.web.c3": "# escanear solo la URL dada", "fr.web.c4": "# modo pasivo: sin sondas activas", "fr.web.c5": "# no verificar el certificado TLS",
+        "fr.web.jwtc": "# — Analizar un JWT concreto (sin escanear) —", "fr.web.c6": "# analiza EXCLUSIVAMENTE ese token y sale",
+        "fr.web.jwtnote": "<b><code>--jwt &lt;token&gt;</code>:</b> analiza un token que le pegas a mano (útil porque muchos JWT solo se obtienen <b>ya autenticado</b>). No necesita <code>--url</code>/<code>--host</code>: decodifica, muestra los puntos débiles y el decode <b>resaltado</b> para la captura, y genera su fichero para importar.",
         "fr.ssh.h": "Auditoría interna (SSH) y bastionado",
         "fr.ssh.lead": "Con credenciales SSH, Fragua entra «por dentro» (Linux/Windows) y enumera vías de escalada. El <b>bastionado</b> (hardening) se ejecuta <b>siempre</b> junto a las vulnerabilidades.",
         "fr.ssh.c1": "# autenticación por contraseña", "fr.ssh.c2": "# autenticación por clave privada", "fr.ssh.c3": "# passphrase si la clave está cifrada", "fr.ssh.c4": "# puerto SSH distinto del 22", "fr.ssh.c5": "# usar ssh-agent (SSH_AUTH_SOCK)", "fr.ssh.c6": "# verificar la clave del host", "fr.ssh.c7": "# fallar si la clave del host no coincide",
@@ -4909,7 +4917,7 @@ sudo systemctl reload caddy</pre>
         "fr.smart.c2": "<b>Attack chains:</b> it cross-references loose findings into <b>escalation</b> or <b>pivot</b> paths (e.g. SUID + sudo + Docker → a higher-severity composite finding).",
         "fr.smart.c3": "<b>Offline CVE database:</b> maps versions/banners to <b>known CVEs</b> with no connection (Apache 2.4.49, ProFTPD, Exim, Samba, PHP/OpenSSL EOL, Jenkins, Grafana…).",
         "fr.smart.c4": "<b>Adaptive scanning:</b> when it detects a stack (WordPress, phpMyAdmin, Tomcat, Drupal, Adminer…) it runs its <b>specific checks</b>.",
-        "fr.smart.c5": "<b>JWT analysis:</b> it decodes tokens and detects <code>alg=none</code>, dangerous <code>jku/jwk/kid</code> headers, <b>weak HS secret</b> (offline brute-force), expiry and sensitive data. In the console it <b>underlines</b> the weak points for the screenshot.",
+        "fr.smart.c5": "<b>JWT analysis:</b> it decodes tokens and detects <code>alg=none</code>, dangerous <code>jku/jwk/kid</code> headers, <b>weak HS secret</b> (offline brute-force), expiry and sensitive data. In the console it <b>underlines</b> the weak points for the screenshot. It runs automatically when found in a scan, or on demand with the <code>--jwt '&lt;token&gt;'</code> flag (no scan; ideal for tokens you only have once authenticated).",
         "fr.smart.c6": "<b>Context:</b> serious findings on a <b>public IP</b> are flagged as «Internet-exposed» to help you prioritize.",
         "fr.smart.c7": "<b>Stable IDs + frameworks:</b> every finding has a <b>stable ID</b> across scans (for diffing/tracking) and is tagged with its <b>OWASP Top 10</b> category and <b>MITRE ATT&amp;CK</b> technique.",
         "fr.smart.c8": "<b>APIs and headers in depth:</b> parses <b>OpenAPI/Swagger</b> (enumerates endpoints and flags the unauthenticated ones), analyzes the <b>CSP policy</b> by directive, and reviews <b>cookies</b> (SameSite, <code>__Host-</code>/<code>__Secure-</code> prefixes, persistent sessions).",
@@ -4925,6 +4933,8 @@ sudo systemctl reload caddy</pre>
         "fr.web.h": "Web application scan",
         "fr.web.lead": "Crawls the domain and checks TLS, headers, configuration, reflected <b>XSS/SQLi</b>, <b>secrets</b> in HTML/JS and <b>JWT analysis</b>.",
         "fr.web.c1": "# scan crawling the domain", "fr.web.c2": "# limit of pages to crawl", "fr.web.c3": "# scan only the given URL", "fr.web.c4": "# passive mode: no active probes", "fr.web.c5": "# do not verify the TLS certificate",
+        "fr.web.jwtc": "# — Analyze a specific JWT (no scan) —", "fr.web.c6": "# analyzes ONLY that token and exits",
+        "fr.web.jwtnote": "<b><code>--jwt &lt;token&gt;</code>:</b> analyzes a token you paste in (handy because many JWTs are only obtained <b>once authenticated</b>). No <code>--url</code>/<code>--host</code> needed: it decodes, shows the weak points and the <b>highlighted</b> decode for the screenshot, and writes its file to import.",
         "fr.ssh.h": "Internal audit (SSH) and hardening",
         "fr.ssh.lead": "With SSH credentials, Fragua goes «inside» (Linux/Windows) and enumerates escalation paths. <b>Hardening</b> runs <b>always</b>, alongside the vulnerabilities.",
         "fr.ssh.c1": "# password authentication", "fr.ssh.c2": "# private-key authentication", "fr.ssh.c3": "# passphrase if the key is encrypted", "fr.ssh.c4": "# SSH port other than 22", "fr.ssh.c5": "# use ssh-agent (SSH_AUTH_SOCK)", "fr.ssh.c6": "# verify the host key", "fr.ssh.c7": "# fail if the host key does not match",

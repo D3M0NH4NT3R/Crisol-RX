@@ -3052,7 +3052,8 @@ CRISOL_KEY=&lt;clave&gt; ./crisol
                     <p style="font-size:13.5px;color:var(--muted)" data-i18n="pn.a.p">La aplicación escucha solo en
                       <code>127.0.0.1</code>; el proxy inverso (Caddy) es lo único que da la cara en la red y aporta
                       TLS. En este modo el <b>filtrado por IP se aplica en Caddy o en el firewall</b> (la app solo ve la
-                      IP del proxy, por eso <code>allowed_ips</code> va vacío aquí).</p>
+                      IP del proxy, por eso <code>allowed_ips</code> va vacío aquí).
+                    </p>
                     <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
                       <pre>{
   <span class="k">"listen"</span>: <span class="s">"127.0.0.1:8723"</span>,
@@ -3106,7 +3107,8 @@ CRISOL_KEY=&lt;clave&gt; ./crisol
                     <div class="note warn"><span class="ni">&#9888;&#65039;</span>
                       <div data-i18n="pn.note">La passphrase de cifrado <b>no</b> se guarda en el fichero: se toma de la
                         variable de entorno <code>CRISOL_KEY</code> (deja <code>db_passphrase</code> y
-                        <code>backup_passphrase</code> vacíos).</div>
+                        <code>backup_passphrase</code> vacíos).
+                      </div>
                     </div>
 
                     <h3 data-i18n="pn.check.h">Checklist operativo</h3>
@@ -3700,7 +3702,8 @@ sudo chown -R crisol:crisol /opt/crisol</pre>
                     </div>
                     <p style="font-size:13.5px;color:var(--muted)" data-i18n="os.deb.s2"><b>2.</b> Crea el
                       <code>crisol.json</code> (usa la config de «Servidor y red») y guarda la passphrase en
-                      <code>CRISOL_KEY</code>, nunca en el fichero:</p>
+                      <code>CRISOL_KEY</code>, nunca en el fichero:
+                    </p>
                     <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
                       <pre>sudo install -d -m 700 /etc/crisol
 echo 'CRISOL_KEY=&lt;clave-larga-aleatoria&gt;' | sudo tee /etc/crisol/crisol.env
@@ -3732,7 +3735,8 @@ sudo systemctl reload caddy</pre>
                     <div class="note"><span class="ni">&#128039;</span>
                       <div data-i18n="os.deb.other">Otras distros: en <b>RHEL / Rocky / Alma / Fedora</b> usa
                         <code>firewalld</code> en vez de <code>ufw</code>, ten en cuenta <b>SELinux</b> (etiqueta el
-                        puerto o ejecútalo tras Caddy en <code>127.0.0.1</code>) y <b>Podman</b> en vez de Docker.</div>
+                        puerto o ejecútalo tras Caddy en <code>127.0.0.1</code>) y <b>Podman</b> en vez de Docker.
+                      </div>
                     </div>
                   </section>
 
@@ -3827,10 +3831,6 @@ sudo systemctl reload caddy</pre>
                     <span class="fr-dl-txt"><b>Windows</b><small>ARM64 · .exe</small></span>
                   </a>
                 </div>
-                <p class="fr-dl-foot" data-i18n="fr.dl.foot">¿Otra arquitectura o prefieres compilar? <a
-                    href="https://github.com/D3M0NH4NT3R/Fragua/releases" target="_blank" rel="noopener">Todas las
-                    versiones</a> · <a href="https://github.com/D3M0NH4NT3R/Fragua" target="_blank"
-                    rel="noopener">código y <code>build.sh</code></a>.</p>
               </div>
             </div>
           </div>
@@ -3878,7 +3878,8 @@ sudo systemctl reload caddy</pre>
                   <section class="cs-sec" id="fr-install">
                     <p class="lead" data-i18n="fr.install.lead">Fragua es un <b>binario único</b> (Go, sin
                       dependencias). Descarga el de tu sistema desde <code>dist/</code> o compílalo con
-                      <code>./build.sh</code>. Sintaxis: <code>./fragua [flags]</code>.</p>
+                      <code>./build.sh</code>. Sintaxis: <code>./fragua [flags]</code>.
+                    </p>
                     <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
                       <pre>./fragua --url https://objetivo.ejemplo   <span class="c" data-i18n="fr.install.c1"># escaneo de un activo web</span>
 ./fragua --host 10.0.0.5                   <span class="c" data-i18n="fr.install.c2"># auditoría de una máquina</span>
@@ -3932,7 +3933,15 @@ sudo systemctl reload caddy</pre>
                           nmap</b>. Ejemplo: <code>./fragua --host 10.0.0.5 --ports 1-1024</code>.</div>
                     </div>
                     <div class="note tip"><span class="ni">🔬</span>
-                      <div data-i18n="fr.host.deep"><b>Reconocimiento profundo (<code>--deep-services</code>):</b> sondea cada servicio a nivel de protocolo y reporta lo que observa: <b>SSH</b> (algoritmos débiles), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (versión), <b>HTTP</b> en cualquier puerto, <b>Elasticsearch/Docker API</b> expuestos, <b>VNC</b> y <b>TLS</b> (certificado y protocolos obsoletos). Es activo y más lento.</div>
+                      <div data-i18n="fr.host.deep"><b>Reconocimiento profundo (<code>--deep-services</code>):</b>
+                        sondea cada servicio a nivel de protocolo y reporta lo que observa: <b>SSH</b> (algoritmos
+                        débiles), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (versión),
+                        <b>HTTP</b> en cualquier puerto, <b>Elasticsearch/Docker API</b> expuestos, <b>VNC</b> y
+                        <b>TLS</b> (certificado y protocolos obsoletos). También infiere el <b>SO</b> por los banners
+                        (heurístico, tipo <code>nmap -O</code> light) y cubre <b>cualquier puerto</b> abierto. Incluye
+                        <b>datastores sin auth</b> (CouchDB, etcd, kubelet, MongoDB, LDAP), <b>rsync</b> y <b>recon
+                          UDP</b> (DNS <code>version.bind</code>/recursión, NTP <b>monlist</b>). Es activo y más lento.
+                      </div>
                     </div>
                   </section>
                 </div>
@@ -3962,7 +3971,8 @@ sudo systemctl reload caddy</pre>
                 <div class="cs-fbody-pad">
                   <section class="cs-sec" id="fr-web">
                     <p class="lead" data-i18n="fr.web.lead">Rastrea el dominio y comprueba TLS, cabeceras,
-                      configuración, <b>XSS/SQLi</b> reflejados, <b>secretos</b> en HTML/JS y <b>análisis de JWT</b>.</p>
+                      configuración, <b>XSS/SQLi</b> reflejados, <b>secretos</b> en HTML/JS y <b>análisis de JWT</b>.
+                    </p>
                     <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
                       <pre>--url https://objetivo.ejemplo   <span class="c" data-i18n="fr.web.c1"># escaneo con rastreo del dominio</span>
 --max-pages 40                   <span class="c" data-i18n="fr.web.c2"># límite de páginas a rastrear</span>
@@ -3974,7 +3984,10 @@ sudo systemctl reload caddy</pre>
 --jwt 'eyJhbGciOi...'            <span class="c" data-i18n="fr.web.c6"># analiza EXCLUSIVAMENTE ese token y sale</span></pre>
                     </div>
                     <div class="note tip"><span class="ni">🔑</span>
-                      <div data-i18n="fr.web.jwtnote"><b><code>--jwt &lt;token&gt;</code>:</b> analiza un token que le pegas a mano (útil porque muchos JWT solo se obtienen <b>ya autenticado</b>). No necesita <code>--url</code>/<code>--host</code>: decodifica, muestra los puntos débiles y el decode <b>resaltado</b> para la captura, y genera su fichero para importar.</div>
+                      <div data-i18n="fr.web.jwtnote"><b><code>--jwt &lt;token&gt;</code>:</b> analiza un token que le
+                        pegas a mano (útil porque muchos JWT solo se obtienen <b>ya autenticado</b>). No necesita
+                        <code>--url</code>/<code>--host</code>: decodifica, muestra los puntos débiles y el decode
+                        <b>resaltado</b> para la captura, y genera su fichero para importar.</div>
                     </div>
                   </section>
                 </div>
@@ -4005,7 +4018,8 @@ sudo systemctl reload caddy</pre>
                   <section class="cs-sec" id="fr-ssh">
                     <p class="lead" data-i18n="fr.ssh.lead">Con credenciales SSH, Fragua entra «por dentro»
                       (Linux/Windows) y enumera vías de escalada. El <b>bastionado</b> (hardening) se ejecuta
-                      <b>siempre</b> junto a las vulnerabilidades.</p>
+                      <b>siempre</b> junto a las vulnerabilidades.
+                    </p>
                     <div class="code"><button class="copy-btn" data-i18n="copy">Copiar</button>
                       <pre>--ssh-user root --ssh-pass 's3cr3t'          <span class="c" data-i18n="fr.ssh.c1"># autenticación por contraseña</span>
 --ssh-user ops --ssh-key ~/.ssh/id_ed25519   <span class="c" data-i18n="fr.ssh.c2"># autenticación por clave privada</span>
@@ -4022,10 +4036,15 @@ sudo systemctl reload caddy</pre>
                     <div class="note tip"><span class="ni">🛡️</span>
                       <div data-i18n="fr.ssh.note"><b>Bastionado incluido:</b> ASLR, firma SMB, LLMNR, RDP/NLA,
                         BitLocker, política de contraseñas… y <b>localización de credenciales</b> (imprime la ruta y
-                        <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.</div>
+                        <b>enmascara</b> el valor). Sale en un fichero <code>-bastion</code> aparte.
+                      </div>
                     </div>
                     <div class="note warn"><span class="ni">🔎</span>
-                      <div data-i18n="fr.deep.note"><b>Escaneo profundo (<code>--deep-creds</code>):</b> recorre <b>todo el sistema de ficheros</b> y los directorios de <b>todos los usuarios</b>, no solo el <i>home</i> del usuario SSH. Para cobertura total, conéctate como <b>root o con sudo</b>: un usuario sin privilegios solo verá lo que pueda leer. Es lento; <code>--deep-creds-bin</code> añade el análisis de binarios (mucho más lento).</div>
+                      <div data-i18n="fr.deep.note"><b>Escaneo profundo (<code>--deep-creds</code>):</b> recorre <b>todo
+                          el sistema de ficheros</b> y los directorios de <b>todos los usuarios</b>, no solo el
+                        <i>home</i> del usuario SSH. Para cobertura total, conéctate como <b>root o con sudo</b>: un
+                        usuario sin privilegios solo verá lo que pueda leer. Es lento; <code>--deep-creds-bin</code>
+                        añade el análisis de binarios (mucho más lento).</div>
                     </div>
                   </section>
                 </div>
@@ -4139,7 +4158,8 @@ sudo systemctl reload caddy</pre>
                     </div>
                     <div class="note tip"><span class="ni">📥</span>
                       <div data-i18n="fr.recipes.note">Después, en Crisol-RX: <b>Importar workspace</b> → selecciona el
-                        <code>.json</code> (y el <code>-bastion.json</code> si lo hay).</div>
+                        <code>.json</code> (y el <code>-bastion.json</code> si lo hay).
+                      </div>
                     </div>
                   </section>
                 </div>
@@ -4150,24 +4170,77 @@ sudo systemctl reload caddy</pre>
           <!-- [08] Análisis inteligente -->
           <section class="cs-folder" id="grp-fr-smart">
             <button class="cs-fhead" aria-expanded="false" aria-controls="grp-fr-smart-body" id="grp-fr-smart-head">
-              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a5 5 0 0 0-5 5c0 1.6.7 2.6 1.5 3.6.6.8 1 1.5 1 2.4h5c0-.9.4-1.6 1-2.4.8-1 1.5-2 1.5-3.6a5 5 0 0 0-5-5Z"/><path d="M9.5 18.5h5M10 21h4"/></svg></span>
-              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 08 ]</span><h2 data-i18n="fr.smart.h">Análisis inteligente</h2></span><span class="cs-fcount">auto</span></span>
-              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+              <span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path
+                    d="M12 3a5 5 0 0 0-5 5c0 1.6.7 2.6 1.5 3.6.6.8 1 1.5 1 2.4h5c0-.9.4-1.6 1-2.4.8-1 1.5-2 1.5-3.6a5 5 0 0 0-5-5Z" />
+                  <path d="M9.5 18.5h5M10 21h4" />
+                </svg></span>
+              <span class="cs-fmeta"><span class="cs-ftop"><span class="cs-fnum">[ 08 ]</span>
+                  <h2 data-i18n="fr.smart.h">Análisis inteligente</h2>
+                </span><span class="cs-fcount">auto</span></span>
+              <span class="cs-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg></span>
             </button>
             <div class="cs-fbody" id="grp-fr-smart-body" role="region" aria-labelledby="grp-fr-smart-head">
-              <div class="cs-fbody-inner"><div class="cs-fbody-pad">
-                <section class="cs-sec" id="fr-smart">
-                  <p class="lead" data-i18n="fr.smart.lead">Todo esto ocurre <b>solo, sin flags</b>: Fragua cruza y puntúa lo que encuentra para que priorices mejor.</p>
-                  <div class="note tip"><span class="ni">🎯</span><div data-i18n="fr.smart.c1"><b>Confianza y menos ruido:</b> los secretos se puntúan por <b>entropía</b> y patrón, se descartan los <i>placeholders</i> (ejemplos), y cada hallazgo lleva su nivel de <b>confianza</b> (alta/media/baja).</div></div>
-                  <div class="note tip"><span class="ni">🔗</span><div data-i18n="fr.smart.c2"><b>Cadenas de ataque:</b> cruza hallazgos sueltos en rutas de <b>escalada</b> o <b>pivote</b> (p. ej. SUID + sudo + Docker → un hallazgo compuesto de mayor severidad).</div></div>
-                  <div class="note tip"><span class="ni">🗂️</span><div data-i18n="fr.smart.c3"><b>Base CVE offline:</b> mapea versiones/banners a <b>CVE conocidos</b> sin conexión (Apache 2.4.49, ProFTPD, Exim, Samba, PHP/OpenSSL EOL, Jenkins, Grafana…).</div></div>
-                  <div class="note tip"><span class="ni">🧭</span><div data-i18n="fr.smart.c4"><b>Escaneo adaptativo:</b> si detecta un stack (WordPress, phpMyAdmin, Tomcat, Drupal, Adminer…) lanza sus <b>comprobaciones específicas</b>.</div></div>
-                  <div class="note tip"><span class="ni">🔑</span><div data-i18n="fr.smart.c5"><b>Análisis de JWT:</b> decodifica los tokens y detecta <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b> (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles para la captura. Se hace solo al encontrarlos en un escaneo, o a demanda con el flag <code>--jwt '&lt;token&gt;'</code> (sin escanear; ideal para tokens que solo tienes ya autenticado).</div></div>
-                  <div class="note tip"><span class="ni">🌐</span><div data-i18n="fr.smart.c6"><b>Contexto:</b> los hallazgos graves sobre una <b>IP pública</b> se marcan como «expuesto a Internet» para ayudarte a priorizar.</div></div>
-                  <div class="note tip"><span class="ni">🏷️</span><div data-i18n="fr.smart.c7"><b>IDs estables + marcos:</b> cada hallazgo tiene un <b>ID estable</b> entre escaneos (para diffing/seguimiento) y se etiqueta con su categoría <b>OWASP Top 10</b> y técnica <b>MITRE ATT&amp;CK</b>.</div></div>
-                  <div class="note tip"><span class="ni">🧩</span><div data-i18n="fr.smart.c8"><b>APIs y cabeceras a fondo:</b> parsea <b>OpenAPI/Swagger</b> (enumera endpoints y marca los que no exigen auth), analiza la <b>política CSP</b> por directivas y revisa las <b>cookies</b> (SameSite, prefijos <code>__Host-</code>/<code>__Secure-</code>, sesión persistente).</div></div>
-                </section>
-              </div></div>
+              <div class="cs-fbody-inner">
+                <div class="cs-fbody-pad">
+                  <section class="cs-sec" id="fr-smart">
+                    <p class="lead" data-i18n="fr.smart.lead">Todo esto ocurre <b>solo, sin flags</b>: Fragua cruza y
+                      puntúa lo que encuentra para que priorices mejor.</p>
+                    <div class="note tip"><span class="ni">🎯</span>
+                      <div data-i18n="fr.smart.c1"><b>Confianza y menos ruido:</b> los secretos se puntúan por
+                        <b>entropía</b> y patrón, se descartan los <i>placeholders</i> (ejemplos), y cada hallazgo lleva
+                        su nivel de <b>confianza</b> (alta/media/baja).</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🔗</span>
+                      <div data-i18n="fr.smart.c2"><b>Cadenas de ataque:</b> cruza hallazgos sueltos en rutas de
+                        <b>escalada</b> o <b>pivote</b> (p. ej. SUID + sudo + Docker → un hallazgo compuesto de mayor
+                        severidad).</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🗂️</span>
+                      <div data-i18n="fr.smart.c3"><b>Base CVE offline:</b> mapea versiones/banners a <b>CVE
+                          conocidos</b> sin conexión (Apache 2.4.49, ProFTPD, Exim, Samba, PHP/OpenSSL EOL, Jenkins,
+                        Grafana…).</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🧭</span>
+                      <div data-i18n="fr.smart.c4"><b>Escaneo adaptativo:</b> si detecta un stack (WordPress,
+                        phpMyAdmin, Tomcat, Drupal, Adminer…) lanza sus <b>comprobaciones específicas</b>.</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🔑</span>
+                      <div data-i18n="fr.smart.c5"><b>Análisis de JWT:</b> decodifica los tokens y detecta
+                        <code>alg=none</code>, cabeceras <code>jku/jwk/kid</code> peligrosas, <b>secreto HS débil</b>
+                        (brute-force offline), caducidad y datos sensibles. En consola <b>subraya</b> los puntos débiles
+                        para la captura. Se hace solo al encontrarlos en un escaneo, o a demanda con el flag
+                        <code>--jwt '&lt;token&gt;'</code> (sin escanear; ideal para tokens que solo tienes ya
+                        autenticado).</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🌐</span>
+                      <div data-i18n="fr.smart.c6"><b>Contexto:</b> los hallazgos graves sobre una <b>IP pública</b> se
+                        marcan como «expuesto a Internet» para ayudarte a priorizar.</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🏷️</span>
+                      <div data-i18n="fr.smart.c7"><b>IDs estables + marcos:</b> cada hallazgo tiene un <b>ID
+                          estable</b> entre escaneos (para diffing/seguimiento) y se etiqueta con su categoría <b>OWASP
+                          Top 10</b> y técnica <b>MITRE ATT&amp;CK</b>.</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🧩</span>
+                      <div data-i18n="fr.smart.c8"><b>APIs y cabeceras a fondo:</b> parsea <b>OpenAPI/Swagger</b>
+                        (enumera endpoints y marca los que no exigen auth), analiza la <b>política CSP</b> por
+                        directivas y revisa las <b>cookies</b> (SameSite, prefijos
+                        <code>__Host-</code>/<code>__Secure-</code>, sesión persistente).</div>
+                    </div>
+                    <div class="note tip"><span class="ni">🔭</span>
+                      <div data-i18n="fr.smart.c9"><b>Descubrimiento de superficie:</b> <b>minería del JavaScript</b>
+                        (rutas/endpoints ocultos), <b>descubrimiento de contenido</b> (paneles/directorios con baseline
+                        anti-404), <b>hostnames del certificado</b> (SAN → alcance) y <b>formularios sin anti-CSRF</b>.
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -4515,6 +4588,7 @@ sudo systemctl reload caddy</pre>
         "fr.smart.c6": "<b>Contexto:</b> los hallazgos graves sobre una <b>IP pública</b> se marcan como «expuesto a Internet» para ayudarte a priorizar.",
         "fr.smart.c7": "<b>IDs estables + marcos:</b> cada hallazgo tiene un <b>ID estable</b> entre escaneos (para diffing/seguimiento) y se etiqueta con su categoría <b>OWASP Top 10</b> y técnica <b>MITRE ATT&amp;CK</b>.",
         "fr.smart.c8": "<b>APIs y cabeceras a fondo:</b> parsea <b>OpenAPI/Swagger</b> (enumera endpoints y marca los que no exigen auth), analiza la <b>política CSP</b> por directivas y revisa las <b>cookies</b> (SameSite, prefijos <code>__Host-</code>/<code>__Secure-</code>, sesión persistente).",
+        "fr.smart.c9": "<b>Descubrimiento de superficie:</b> <b>minería del JavaScript</b> (rutas/endpoints ocultos), <b>descubrimiento de contenido</b> (paneles/directorios con baseline anti-404), <b>hostnames del certificado</b> (SAN → alcance) y <b>formularios sin anti-CSRF</b>.",
         "fr.install.h": "Instalación y uso básico",
         "fr.install.lead": "Fragua es un <b>binario único</b> (Go, sin dependencias). Descarga el de tu sistema desde <code>dist/</code> o compílalo con <code>./build.sh</code>. Sintaxis: <code>./fragua [flags]</code>.",
         "fr.install.c1": "# escaneo de un activo web", "fr.install.c2": "# auditoría de una máquina", "fr.install.c3": "# ver la versión", "fr.install.c4": "# ayuda con todas las flags",
@@ -4523,7 +4597,7 @@ sudo systemctl reload caddy</pre>
         "fr.host.lead": "Escaneo de puertos y servicios «por fuera» (TCP connect, estilo <code>-Pn</code>). Un puerto abierto es <code>info</code>; solo se marca vulnerabilidad ante un problema real (versión vulnerable, servicio sin auth…).",
         "fr.host.c1": "# IP, rango CIDR o varios con comas", "fr.host.c2": "# objetivos desde fichero (uno por línea)", "fr.host.c3": "# puertos concretos (o un rango 1-1024)", "fr.host.c4": "# los 65535 puertos (lento)", "fr.host.c5": "# no escanear puertos", "fr.host.c6": "# lista blanca de hosts/IP autorizados", "fr.host.c7": "# reconocimiento PROFUNDO de servicios (sondas por protocolo)",
         "fr.host.note": "Sin <code>--ports</code> se escanean los <b>1000 puertos top de nmap</b>. Ejemplo: <code>./fragua --host 10.0.0.5 --ports 1-1024</code>.",
-        "fr.host.deep": "<b>Reconocimiento profundo (<code>--deep-services</code>):</b> sondea cada servicio a nivel de protocolo y reporta lo que observa: <b>SSH</b> (algoritmos débiles), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (versión), <b>HTTP</b> en cualquier puerto, <b>Elasticsearch/Docker API</b> expuestos, <b>VNC</b> y <b>TLS</b> (certificado y protocolos obsoletos). Es activo y más lento.",
+        "fr.host.deep": "<b>Reconocimiento profundo (<code>--deep-services</code>):</b> sondea cada servicio a nivel de protocolo y reporta lo que observa: <b>SSH</b> (algoritmos débiles), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (versión), <b>HTTP</b> en cualquier puerto, <b>Elasticsearch/Docker API</b> expuestos, <b>VNC</b> y <b>TLS</b> (certificado y protocolos obsoletos). También infiere el <b>SO</b> por los banners (heurístico, tipo <code>nmap -O</code> light) y cubre <b>cualquier puerto</b> abierto. Incluye <b>datastores sin auth</b> (CouchDB, etcd, kubelet, MongoDB, LDAP), <b>rsync</b> y <b>recon UDP</b> (DNS <code>version.bind</code>/recursión, NTP <b>monlist</b>). Es activo y más lento.",
         "fr.web.h": "Escaneo de aplicación web",
         "fr.web.lead": "Rastrea el dominio y comprueba TLS, cabeceras, configuración, <b>XSS/SQLi</b> reflejados, <b>secretos</b> en HTML/JS y <b>análisis de JWT</b>.",
         "fr.web.c1": "# escaneo con rastreo del dominio", "fr.web.c2": "# límite de páginas a rastrear", "fr.web.c3": "# escanear solo la URL dada", "fr.web.c4": "# modo pasivo: sin sondas activas", "fr.web.c5": "# no verificar el certificado TLS",
@@ -4921,6 +4995,7 @@ sudo systemctl reload caddy</pre>
         "fr.smart.c6": "<b>Context:</b> serious findings on a <b>public IP</b> are flagged as «Internet-exposed» to help you prioritize.",
         "fr.smart.c7": "<b>Stable IDs + frameworks:</b> every finding has a <b>stable ID</b> across scans (for diffing/tracking) and is tagged with its <b>OWASP Top 10</b> category and <b>MITRE ATT&amp;CK</b> technique.",
         "fr.smart.c8": "<b>APIs and headers in depth:</b> parses <b>OpenAPI/Swagger</b> (enumerates endpoints and flags the unauthenticated ones), analyzes the <b>CSP policy</b> by directive, and reviews <b>cookies</b> (SameSite, <code>__Host-</code>/<code>__Secure-</code> prefixes, persistent sessions).",
+        "fr.smart.c9": "<b>Surface discovery:</b> <b>JavaScript mining</b> (hidden routes/endpoints), <b>content discovery</b> (panels/directories with an anti-404 baseline), <b>certificate hostnames</b> (SAN → scope) and <b>forms without anti-CSRF</b>.",
         "fr.install.h": "Install and basic usage",
         "fr.install.lead": "Fragua is a <b>single binary</b> (Go, no dependencies). Download the one for your system from <code>dist/</code> or build it with <code>./build.sh</code>. Syntax: <code>./fragua [flags]</code>.",
         "fr.install.c1": "# scan a web asset", "fr.install.c2": "# audit a machine", "fr.install.c3": "# show the version", "fr.install.c4": "# help with all the flags",
@@ -4929,7 +5004,7 @@ sudo systemctl reload caddy</pre>
         "fr.host.lead": "Port and service scan from «outside» (TCP connect, <code>-Pn</code> style). An open port is <code>info</code>; a vulnerability is only flagged on a real problem (vulnerable version, unauthenticated service…).",
         "fr.host.c1": "# IP, CIDR range or several comma-separated", "fr.host.c2": "# targets from a file (one per line)", "fr.host.c3": "# specific ports (or a 1-1024 range)", "fr.host.c4": "# all 65535 ports (slow)", "fr.host.c5": "# do not scan ports", "fr.host.c6": "# allowlist of authorized hosts/IPs", "fr.host.c7": "# DEEP service recon (per-protocol probes)",
         "fr.host.note": "Without <code>--ports</code> it scans nmap's <b>top 1000 ports</b>. Example: <code>./fragua --host 10.0.0.5 --ports 1-1024</code>.",
-        "fr.host.deep": "<b>Deep recon (<code>--deep-services</code>):</b> probes each service at the protocol level and reports what it observes: <b>SSH</b> (weak algorithms), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (version), <b>HTTP</b> on any port, exposed <b>Elasticsearch/Docker API</b>, <b>VNC</b> and <b>TLS</b> (certificate and obsolete protocols). It's active and slower.",
+        "fr.host.deep": "<b>Deep recon (<code>--deep-services</code>):</b> probes each service at the protocol level and reports what it observes: <b>SSH</b> (weak algorithms), <b>SMTP</b> (STARTTLS, AUTH, VRFY), <b>FTP</b> (TLS), <b>MySQL/Redis</b> (version), <b>HTTP</b> on any port, exposed <b>Elasticsearch/Docker API</b>, <b>VNC</b> and <b>TLS</b> (certificate and obsolete protocols). It also infers the <b>OS</b> from banners (heuristic, <code>nmap -O</code> light style) and covers <b>any</b> open port. It also includes <b>unauthenticated datastores</b> (CouchDB, etcd, kubelet, MongoDB, LDAP), <b>rsync</b> and <b>UDP recon</b> (DNS <code>version.bind</code>/recursion, NTP <b>monlist</b>). It's active and slower.",
         "fr.web.h": "Web application scan",
         "fr.web.lead": "Crawls the domain and checks TLS, headers, configuration, reflected <b>XSS/SQLi</b>, <b>secrets</b> in HTML/JS and <b>JWT analysis</b>.",
         "fr.web.c1": "# scan crawling the domain", "fr.web.c2": "# limit of pages to crawl", "fr.web.c3": "# scan only the given URL", "fr.web.c4": "# passive mode: no active probes", "fr.web.c5": "# do not verify the TLS certificate",

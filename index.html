@@ -1729,6 +1729,7 @@
       color: var(--muted)
     }
 
+    /* ---------- canvas / kill-chain ---------- */
     .split {
       display: grid;
       grid-template-columns: 1fr 1.15fr;
@@ -3913,7 +3914,6 @@
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- ================= NAV ================= -->
   <nav class="nav" id="nav">
     <a class="nav-brand" href="#top" aria-label="Crisol-RX">
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -4137,7 +4137,6 @@
     </div>
   </section>
 
-  <!-- ================= DESPLIEGUE ================= -->
   <section id="despliegue">
     <div class="wrap">
       <div class="sec-head center rv">
@@ -4194,7 +4193,6 @@
     </div>
   </section>
 
-  <!-- ================= DASHBOARD ================= -->
   <section id="producto">
     <div class="wrap">
       <div class="sec-head center rv" data-num="02">
@@ -4402,51 +4400,43 @@
           </defs>
           <rect width="640" height="400" fill="url(#kcDots)" />
 
-          <!-- edges -->
           <path class="kc-edge" style="--d:.5s" d="M150,90 C210,90 210,70 262,70" marker-end="url(#kcArr)" />
           <path class="kc-edge" style="--d:.9s" d="M150,130 C200,140 215,170 258,180" marker-end="url(#kcArr)" />
           <path class="kc-edge" style="--d:1.4s" d="M392,70 C440,72 445,95 478,105" marker-end="url(#kcArr)" />
           <path class="kc-edge" style="--d:1.8s" d="M392,190 C430,185 445,160 478,140" marker-end="url(#kcArr)" />
           <path class="kc-edge" style="--d:2.3s" d="M560,160 C560,200 520,230 480,255" marker-end="url(#kcArr)" />
 
-          <!-- node: Responder -->
           <g class="kc-node tech" style="--d:.2s">
             <rect x="40" y="70" width="112" height="58" rx="12" />
             <text x="96" y="95" text-anchor="middle">Responder</text>
             <text x="96" y="112" text-anchor="middle" class="sub2">LLMNR / NBT-NS</text>
           </g>
-          <!-- node: NetNTLMv2 -->
           <g class="kc-node tech" style="--d:.7s">
             <rect x="262" y="40" width="130" height="58" rx="12" />
             <text x="327" y="65" text-anchor="middle">NetNTLMv2</text>
             <text x="327" y="82" text-anchor="middle" class="sub2">ntlmrelayx (SMB)</text>
           </g>
-          <!-- node: WKSTN-07 -->
           <g class="kc-node" style="--d:1.1s">
             <rect x="258" y="160" width="134" height="58" rx="12" />
             <text x="325" y="185" text-anchor="middle">WKSTN-07</text>
             <text x="325" y="202" text-anchor="middle" class="sub2">Win10 · ACME\jdoe</text>
           </g>
-          <!-- node: BloodHound -->
           <g class="kc-node tech" style="--d:1.6s">
             <rect x="478" y="92" width="124" height="58" rx="12" />
             <text x="540" y="117" text-anchor="middle">BloodHound</text>
             <text x="540" y="134" text-anchor="middle" class="sub2">LDAP · Kerberoast</text>
           </g>
-          <!-- node: DC01 -->
           <g class="kc-node" style="--d:2.1s">
             <rect x="70" y="230" width="134" height="58" rx="12" />
             <text x="137" y="255" text-anchor="middle">SRV-FILE01</text>
             <text x="137" y="272" text-anchor="middle" class="sub2">SMB signing: OFF</text>
           </g>
-          <!-- node: Domain Admin pwned -->
           <g class="kc-node pwned" style="--d:2.7s">
             <rect x="360" y="255" width="180" height="70" rx="14" />
             <text x="450" y="284" text-anchor="middle" style="font-weight:600">Domain Admin</text>
             <text x="450" y="301" text-anchor="middle" class="sub2">acme\Administrator</text>
             <text x="450" y="316" text-anchor="middle" class="st own">● PWNED</text>
           </g>
-          <!-- status legend -->
           <g class="kc-node" style="--d:3s">
             <text x="48" y="360" class="st run" data-i18n="kc.st.run">● En curso</text>
             <text x="140" y="360" class="st own">● PWNED</text>
@@ -4457,7 +4447,6 @@
     </div>
   </section>
 
-  <!-- ================= MAPA POR PROYECTOS ================= -->
   <section id="mapa">
     <div class="wrap">
       <div class="sec-head center rv">
@@ -4506,7 +4495,6 @@
     </div>
   </section>
 
-  <!-- ================= EN ACCIÓN (TABS) ================= -->
   <section>
     <div class="wrap">
       <div class="sec-head center rv" data-num="03">
@@ -4527,7 +4515,6 @@
       </div>
 
       <div class="tab-panels rv rv-d2">
-        <!-- Panel -->
         <div class="tab-panel on">
           <div class="dash">
             <div class="dash-bar"><i></i><i></i><i></i><span class="url">crisol-rx · panel global</span><span
@@ -4574,7 +4561,6 @@
           </div>
         </div>
 
-        <!-- Hallazgo -->
         <div class="tab-panel">
           <div class="dash">
             <div class="dash-bar"><i></i><i></i><i></i><span class="url">Vulnerabilidades · Portal Web</span><span
@@ -4613,7 +4599,6 @@
           </div>
         </div>
 
-        <!-- Retest y SLA -->
         <div class="tab-panel">
           <div class="dash">
             <div class="dash-bar"><i></i><i></i><i></i><span class="url">crisol-rx · retest y SLA</span><span
@@ -4640,7 +4625,6 @@
           </div>
         </div>
 
-        <!-- Informe -->
         <div class="tab-panel">
           <div class="report-card">
             <div class="report-cover">
@@ -4677,7 +4661,6 @@
     </div>
   </section>
 
-  <!-- ================= CALENDARIO ================= -->
   <section>
     <div class="wrap split">
       <div class="cal-frame rv">
@@ -4769,7 +4752,6 @@
     </div>
   </section>
 
-  <!-- ================= ROLES ================= -->
   <section id="roles">
     <div class="wrap">
       <div class="sec-head center rv" data-num="04">
@@ -4817,7 +4799,6 @@
     </div>
   </section>
 
-  <!-- ================= STATS BAND ================= -->
   <section style="padding-top:0">
     <div class="wrap">
       <div class="stats-band rv">
@@ -4841,7 +4822,6 @@
     </div>
   </section>
 
-  <!-- ================= PRIVACIDAD ================= -->
   <section class="priv">
     <div class="wrap">
       <div class="priv-card rv">
@@ -4871,7 +4851,6 @@
     </div>
   </section>
 
-  <!-- ================= GUÍA ================= -->
   <section id="guia" class="sec-glued">
     <div class="wrap">
       <div class="sec-head rv" data-num="05">
@@ -4917,7 +4896,6 @@
     </div>
   </section>
 
-  <!-- ================= DESCARGA ================= -->
   <section id="descargar" style="padding-top:0">
     <div class="wrap">
       <div class="dl-card rv">
@@ -5025,7 +5003,6 @@
     </div>
   </section>
 
-  <!-- ================= CONTACTO ================= -->
   <section class="sec-glued">
     <div class="wrap">
       <div class="sec-head center rv" data-num="06">
@@ -5131,7 +5108,6 @@
     </div>
   </footer>
 
-  <!-- ================= MODAL MÓDULO ================= -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-bg" data-close></div>
     <div class="modal-card" role="dialog" aria-modal="true">
@@ -5563,6 +5539,7 @@
           current = i;
           tabs.forEach(function (t, k) {
             t.classList.toggle('on', k === i);
+            /* restart progress bar animation */
             var bar = t.querySelector('.tab-progress');
             bar.style.animation = 'none';
             void bar.offsetWidth;
@@ -5646,6 +5623,7 @@
             }).catch(function () { });
         } catch (e) { }
 
+        /* ---------- OS detection ---------- */
         var OS_ICONS = {
           windows: '<svg viewBox="0 0 24 24"><path class="ln" d="M3.5 6.2 11 5.1v6.1H3.5V6.2Zm0 11.6L11 18.9v-6H3.5v4.9ZM12.2 4.9 20.5 3.7v7.5H12.2V4.9Zm0 14.2 8.3 1.2v-7.4H12.2v6.2Z"/></svg>',
           mac: '<svg viewBox="0 0 24 24"><path class="ln" d="M16.4 12.8c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9s-1.9-.9-3.1-.8c-1.6 0-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.7 2.4 3 2.4 1.2 0 1.6-.8 3.1-.8s1.9.8 3.1.7c1.3 0 2.1-1.2 2.9-2.3.6-.9.9-1.4 1.3-2.3-3.4-1.3-2.6-5.7-1.6-4Z"/><path class="ac" d="M13.8 5.2c.7-.8 1.1-2 1-3.1-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.8-1.3Z"/></svg>',
@@ -5790,9 +5768,8 @@
               for (var c = 0; c < cols; c++) {
                 var x = c * cellW + cellW / 2, y = rowY;
                 var mDist = Math.hypot(x - mouse.x, y - mouse.y), mField = Math.exp(-mDist * 0.0038);
-                var fadeL = clampN((x / width - 0.03) * 2.4, 0, 1);
+                var fadeL = clampN((x / width - 0.03) * 2.4, 0, 1);  /* el campo se desvanece hacia el titular */
                 var ch = '', op = 0, dX = x, dY = y, teal = false;
-
 
                 var mx = ((x - (logoX - half)) / logoS) * L;
                 var my = ((y - (logoY - half)) / logoS) * L;
@@ -5806,6 +5783,7 @@
                 }
 
                 if (aD > 50) {
+
                   var rateD = 2 + hsh2(c * 1.9, r * 1.1) * 5;
                   ch = DIGITS.charAt(Math.floor(hsh2(c * 7.3, r * 4.1 + Math.floor(time * rateD)) * 10) % 10);
                   teal = true;
@@ -5818,10 +5796,10 @@
                   } else {
                     ch = DIGITS.charAt(Math.floor(hsh2(c * 7.7, r * 3.3 + Math.floor(time * rate)) * 10) % 10);
                   }
-                  var edge = aM < 150 ? 0.28 : 0;  /* el contorno brilla más */
+                  var edge = aM < 150 ? 0.28 : 0;
                   var boost = Math.exp(-Math.pow((y - (logoY - half) - scanY) / (logoS * 0.09), 2)) * 0.55;
                   op = clampN(0.50 + edge + boost + hsh2(c * 4.9, r * 8.7) * 0.12, 0, 1);
-                  if (hsh2(c * 3.7, r * 9.1) > 0.96) teal = true;  /* chispas teal de marca */
+                  if (hsh2(c * 3.7, r * 9.1) > 0.96) teal = true;
                 } else {
 
                   var angL = Math.atan2(y - logoY, x - logoX);
@@ -5831,11 +5809,11 @@
                   var fa = noise2D(sx, sy), fb = noise2D(sx * 1.7 + 20, sy * 0.8 - 14);
                   var wave = Math.sin(sx * 1.9 + laneNorm * 14) * 0.5 + Math.cos(sy * 2.4 - time * 2.1) * 0.5;
                   var dens = fa * 0.42 + fb * 0.28 + (wave * 0.5 + 0.5) * 0.3;
-                  var aura = Math.exp(-Math.pow((distL - 0.68) * 4.2, 2));  /* anillo de datos alrededor del logo */
+                  var aura = Math.exp(-Math.pow((distL - 0.68) * 4.2, 2));
                   dens += aura * 0.14;
                   if (dens > 0.38) {
                     var fi = clampN(Math.floor(dens * (FIELD_CHARS.length - 1)), 0, FIELD_CHARS.length - 1);
-                    ch = FIELD_CHARS[fi]; op = (0.028 + dens * 0.17) * fadeL * (1 - prox * 0.85);  /* fundido orgánico hacia la silueta */
+                    ch = FIELD_CHARS[fi]; op = (0.028 + dens * 0.17) * fadeL * (1 - prox * 0.85);
                     if (hsh2(c * 5.3, r * 4.9) > 0.965) teal = true;
                     dX += (1.75 * 8 + fb * 16) % (cellW * 3);
                     dY += Math.sin(sx * 2.2 + time + laneNorm * 8) * 1.8;
@@ -5846,11 +5824,11 @@
                   }
                 }
 
-
+                /* ripple al pasar el cursor */
                 dX += Math.sin(time * 3.6 + r * 0.32 + c * 0.11) * mField * 16;
                 dY += Math.cos(time * 2.8 + c * 0.24) * mField * 5;
 
-
+                /* Culling: por debajo de este umbral la letra es invisible. */
                 if (!ch || op <= 0.05) continue;
                 ctx.fillStyle = teal ? col(lightM ? 'tl' : 'td', Math.min(1, op + 0.12))
                   : col(lightM ? 'dl' : 'dd', op);
@@ -5863,7 +5841,7 @@
         }
         initSphere();
 
-
+        /* ---------- hero: parallax con el cursor ---------- */
         var hero = document.querySelector('.hero');
         var media = document.querySelector('.hero-media');
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5888,6 +5866,7 @@
           }
           function pWake() { if (!pRun) { pRun = true; requestAnimationFrame(pStep); } }
         }
+
 
         var curTri = document.getElementById('curTri');
         var curDot = document.getElementById('curDot');
@@ -6030,7 +6009,6 @@
         window.addEventListener('keydown', function (ev) {
           if (ev.key === 'Escape') closeModal();
         });
-
         var MOD_ORDER = ['hallazgos', 'informes', 'retests', 'lienzos'];
         var curMod = 0;
         var mCount = document.getElementById('mCount');
@@ -6158,6 +6136,7 @@
             var el = reduced ? 99 : (ts - t0) / 1000;
             ctx.clearRect(0, 0, W, H);
 
+            /* rejilla lat/lon */
             ctx.strokeStyle = 'rgba(140,150,190,.07)';
             ctx.lineWidth = 1;
             var g;
@@ -6181,7 +6160,6 @@
               ctx.fillRect(sx, 0, 1.6, H);
             }
 
-
             var cell = Math.max(1.4, W / COLS * 0.46);
             for (var i = 0; i < dots.length; i++) {
               var d = dots[i], dx = d.x * W, dy = d.y * H;
@@ -6196,7 +6174,7 @@
               ctx.fillRect(dx - cell / 2, dy - cell / 2, cell, cell);
             }
 
-
+            /* arcos desde Madrid */
             ctx.setLineDash([5, 8]);
             ctx.lineDashOffset = -el * 26;
             ctx.lineWidth = 1.2;
@@ -6209,6 +6187,7 @@
               ctx.moveTo(HQ.x * W, HQ.y * H);
               ctx.quadraticCurveTo(ctrl.x * W, ctrl.y * H, m.x * W, m.y * H);
               ctx.stroke();
+              /* pulso viajero */
               var tp = ((el * 0.22) + k * 0.31) % 1;
               var pp = arcPoint(HQ, ctrl, m, tp);
               ctx.save();
@@ -6252,7 +6231,8 @@
           }, { threshold: 0.15 });
           io.observe(cv.parentNode);
 
-¡          var clockEl = document.getElementById('mapClock');
+          /* reloj en vivo (Madrid) */
+          var clockEl = document.getElementById('mapClock');
           function tickClock() {
             try {
               clockEl.textContent = new Date().toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'es-ES', { timeZone: 'Europe/Madrid', hour12: false });
@@ -6261,7 +6241,7 @@
           tickClock();
           setInterval(tickClock, 1000);
 
-¡          var feedEl = document.getElementById('mapFeed');
+          var feedEl = document.getElementById('mapFeed');
           var feedIdx = 0, feedItems = [];
           function feedText(i) { return (I18N[LANG] && I18N[LANG]['map.f' + (i + 1)]) || ''; }
           function pushFeed() {
@@ -6286,7 +6266,6 @@
           });
         }
 
-
         var ebText = document.getElementById('ebText');
         if (ebText && reduceMotion === false) {
           var ebFinal = ebText.textContent;
@@ -6303,7 +6282,6 @@
             if (ebFrame >= ebTotal) { ebText.textContent = ebFinal; clearInterval(ebIv); }
           }, 45);
         }
-
 
         var progress = document.getElementById('progress');
         if (progress) {

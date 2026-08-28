@@ -160,6 +160,7 @@
       padding: 0 28px
     }
 
+    /* perf: no renderizar secciones de contenido fuera de pantalla (Chromium/Safari; se ignora donde no hay soporte). Se excluyen mapa/producto (canvas que se auto-mide) y descargar (ancla). */
     #caracteristicas,
     #despliegue,
     #roles,
@@ -168,6 +169,7 @@
       contain-intrinsic-size: auto 900px
     }
 
+    /* icon helper classes (original icon set) */
     .ln {
       fill: none;
       stroke: currentColor;
@@ -188,6 +190,7 @@
       fill: var(--teal)
     }
 
+    /* ---------- background FX ---------- */
     .bg-fx {
       position: fixed;
       inset: 0;
@@ -258,6 +261,7 @@
       }
     }
 
+    /* ---------- reveal animations ---------- */
     .rv {
       opacity: 0;
       transform: translateY(34px);
@@ -293,6 +297,7 @@
       transition-delay: .48s
     }
 
+    /* ---------- nav ---------- */
     .nav {
       position: fixed;
       top: 18px;
@@ -438,6 +443,7 @@
       stroke-linecap: round
     }
 
+    /* ---------- hero ---------- */
     .hero {
       position: relative;
       min-height: 100svh;
@@ -463,6 +469,7 @@
       display: block
     }
 
+    /* ---------- custom cursor (estilo crisol) ---------- */
     @media (hover:hover) and (pointer:fine) {
 
       body,
@@ -817,6 +824,7 @@
       }
     }
 
+    /* ---------- marquee ---------- */
     .marquee {
       border-block: 1px solid var(--line);
       padding: 20px 0;
@@ -860,6 +868,7 @@
       flex: none
     }
 
+    /* ---------- sections ---------- */
     section {
       position: relative;
       padding: 110px 0
@@ -923,6 +932,7 @@
     }
   </style>
   <style>
+    /* ---------- features ---------- */
     .feat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -999,6 +1009,7 @@
       grid-column: span 2
     }
 
+    /* ---------- module cards (editorial, estilo crisol) ---------- */
     .mod-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -1174,6 +1185,7 @@
       opacity: .4
     }
 
+    /* ---------- modal de módulo ---------- */
     .modal {
       position: fixed;
       inset: 0;
@@ -1311,6 +1323,7 @@
       overflow: hidden
     }
 
+    /* ---------- dashboard mockup ---------- */
     .dash {
       border-radius: 26px;
       border: 1px solid var(--line-2);
@@ -1914,6 +1927,7 @@
     }
   </style>
   <style>
+    /* ---------- product tabs ---------- */
     .tabs {
       display: flex;
       gap: 8px;
@@ -2203,6 +2217,7 @@
       border-radius: 20px
     }
 
+    /* ---------- calendar ---------- */
     .cal-frame {
       border-radius: 24px;
       border: 1px solid var(--line-2);
@@ -2322,6 +2337,7 @@
       border-color: rgba(168, 107, 255, .35)
     }
 
+    /* ---------- roles ---------- */
     .roles-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2394,6 +2410,7 @@
       font-weight: 300
     }
 
+    /* ---------- stats band ---------- */
     .stats-band {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2445,6 +2462,7 @@
       font-weight: 600
     }
 
+    /* ---------- steps ---------- */
     .steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -2505,6 +2523,7 @@
       display: none
     }
 
+    /* ---------- deployment modes ---------- */
     .deploy-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -2644,6 +2663,7 @@
       }
     }
 
+    /* ---------- download ---------- */
     .dl-card {
       border-radius: 30px;
       border: 1px solid rgba(168, 107, 255, .3);
@@ -2844,6 +2864,7 @@
       color: #fff
     }
 
+    /* ---------- contact ---------- */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -2916,6 +2937,7 @@
       stroke-linejoin: round
     }
 
+    /* ---------- footer ---------- */
     footer {
       border-top: 1px solid var(--line);
       padding: 56px 0 40px;
@@ -2994,6 +3016,7 @@
       color: var(--teal)
     }
 
+    /* ---------- focus visible ---------- */
     :focus {
       outline: none
     }
@@ -3004,6 +3027,7 @@
       border-radius: 8px
     }
 
+    /* ---------- series por severidad (dashboard) ---------- */
     .sev-line {
       fill: none;
       stroke-width: 2.5;
@@ -3023,6 +3047,7 @@
       box-shadow: 0 10px 26px rgba(0, 0, 0, .35)
     }
 
+    /* ---------- navegación del modal ---------- */
     .modal-nav {
       position: absolute;
       left: 48px;
@@ -3074,6 +3099,7 @@
       }
     }
 
+    /* ---------- privacidad ---------- */
     .priv {
       padding-top: 0
     }
@@ -3232,6 +3258,7 @@
       }
     }
 
+    /* ---------- grano de película ---------- */
     .grain {
       position: fixed;
       inset: -60px;
@@ -3264,6 +3291,7 @@
       }
     }
 
+    /* ---------- barra de progreso de scroll ---------- */
     .progress {
       position: fixed;
       top: 0;
@@ -3275,6 +3303,7 @@
       box-shadow: 0 0 12px rgba(168, 107, 255, .55)
     }
 
+    /* ---------- estela de dígitos del cursor ---------- */
     .trail-digit {
       position: fixed;
       z-index: 9998;
@@ -3298,6 +3327,7 @@
       }
     }
 
+    /* ---------- números gigantes de sección ---------- */
     .sec-head {
       position: relative
     }
@@ -3323,11 +3353,15 @@
       top: -78px
     }
 
-
+    /* Secciones numeradas que van pegadas a la anterior: se les deja el espacio
+   superior justo para que el número gigante (top:-64/-78px) quede DENTRO de la
+   sección y no se solape/corte contra la sección previa. Sigue siendo más
+   compacto que el padding por defecto (110px). */
     .sec-glued {
       padding-top: 84px
     }
 
+    /* ---------- underline animado en la nav ---------- */
     .nav-links a {
       position: relative
     }
@@ -3350,6 +3384,7 @@
       transform: scaleX(1)
     }
 
+    /* ---------- shine en botones ---------- */
     .btn-primary {
       overflow: hidden
     }
@@ -3370,6 +3405,7 @@
       left: 135%
     }
 
+    /* ---------- responsive ---------- */
     @media(max-width:1020px) {
       .feat-grid {
         grid-template-columns: repeat(2, 1fr)
@@ -3519,6 +3555,7 @@
       }
     }
 
+    /* ---------- mapa por proyectos ---------- */
     .map-frame {
       background: var(--bg-2);
       border: 1px solid var(--line);
@@ -3759,12 +3796,17 @@
       }
     }
 
-
+    /* ---- RENDIMIENTO ----
+   content-visibility: el navegador se salta el layout y el pintado de las
+   secciones que aún no se ven. Es la mejora más grande en una página larga como
+   esta. contain-intrinsic-size reserva una altura estimada para que la barra de
+   desplazamiento no dé saltos. El hero se excluye a propósito (se ve al entrar). */
     section:not(.hero) {
       content-visibility: auto;
       contain-intrinsic-size: auto 900px
     }
 
+    /* Avisa al compositor de qué se va a mover, y evita repintados del resto. */
     .hero-media {
       will-change: transform
     }
@@ -3774,7 +3816,8 @@
       will-change: transform
     }
 
-
+    /* Los orbes decorativos son grandes y con blur: sin esto el navegador los
+   repinta al hacer scroll. */
     .orb {
       will-change: opacity;
       contain: strict
@@ -3786,6 +3829,7 @@
       }
     }
 
+    /* ---- botón de guía destacado ---- */
     .nav-guide {
       position: relative;
       padding: 7px 15px;
@@ -3914,7 +3958,6 @@
     </button>
   </nav>
 
-  <!-- ================= HERO ================= -->
   <header class="hero" id="top">
     <div class="hero-media">
       <canvas id="asciiCanvas" aria-hidden="true"></canvas>
@@ -5750,6 +5793,7 @@
                 var fadeL = clampN((x / width - 0.03) * 2.4, 0, 1);
                 var ch = '', op = 0, dX = x, dY = y, teal = false;
 
+
                 var mx = ((x - (logoX - half)) / logoS) * L;
                 var my = ((y - (logoY - half)) / logoS) * L;
                 var inBBox = mx >= 0 && mx < L && my >= 0 && my < L;
@@ -5762,7 +5806,7 @@
                 }
 
                 if (aD > 50) {
-¡                  var rateD = 2 + hsh2(c * 1.9, r * 1.1) * 5;
+                  var rateD = 2 + hsh2(c * 1.9, r * 1.1) * 5;
                   ch = DIGITS.charAt(Math.floor(hsh2(c * 7.3, r * 4.1 + Math.floor(time * rateD)) * 10) % 10);
                   teal = true;
                   var boostD = Math.exp(-Math.pow((y - (logoY - half) - scanY) / (logoS * 0.09), 2)) * 0.5;
@@ -5774,10 +5818,10 @@
                   } else {
                     ch = DIGITS.charAt(Math.floor(hsh2(c * 7.7, r * 3.3 + Math.floor(time * rate)) * 10) % 10);
                   }
-                  var edge = aM < 150 ? 0.28 : 0;
+                  var edge = aM < 150 ? 0.28 : 0;  /* el contorno brilla más */
                   var boost = Math.exp(-Math.pow((y - (logoY - half) - scanY) / (logoS * 0.09), 2)) * 0.55;
                   op = clampN(0.50 + edge + boost + hsh2(c * 4.9, r * 8.7) * 0.12, 0, 1);
-                  if (hsh2(c * 3.7, r * 9.1) > 0.96) teal = true;
+                  if (hsh2(c * 3.7, r * 9.1) > 0.96) teal = true;  /* chispas teal de marca */
                 } else {
 
                   var angL = Math.atan2(y - logoY, x - logoX);
@@ -5787,11 +5831,11 @@
                   var fa = noise2D(sx, sy), fb = noise2D(sx * 1.7 + 20, sy * 0.8 - 14);
                   var wave = Math.sin(sx * 1.9 + laneNorm * 14) * 0.5 + Math.cos(sy * 2.4 - time * 2.1) * 0.5;
                   var dens = fa * 0.42 + fb * 0.28 + (wave * 0.5 + 0.5) * 0.3;
-                  var aura = Math.exp(-Math.pow((distL - 0.68) * 4.2, 2));
+                  var aura = Math.exp(-Math.pow((distL - 0.68) * 4.2, 2));  /* anillo de datos alrededor del logo */
                   dens += aura * 0.14;
                   if (dens > 0.38) {
                     var fi = clampN(Math.floor(dens * (FIELD_CHARS.length - 1)), 0, FIELD_CHARS.length - 1);
-                    ch = FIELD_CHARS[fi]; op = (0.028 + dens * 0.17) * fadeL * (1 - prox * 0.85);
+                    ch = FIELD_CHARS[fi]; op = (0.028 + dens * 0.17) * fadeL * (1 - prox * 0.85);  /* fundido orgánico hacia la silueta */
                     if (hsh2(c * 5.3, r * 4.9) > 0.965) teal = true;
                     dX += (1.75 * 8 + fb * 16) % (cellW * 3);
                     dY += Math.sin(sx * 2.2 + time + laneNorm * 8) * 1.8;
@@ -5806,7 +5850,8 @@
                 dX += Math.sin(time * 3.6 + r * 0.32 + c * 0.11) * mField * 16;
                 dY += Math.cos(time * 2.8 + c * 0.24) * mField * 5;
 
-¡                if (!ch || op <= 0.05) continue;
+
+                if (!ch || op <= 0.05) continue;
                 ctx.fillStyle = teal ? col(lightM ? 'tl' : 'td', Math.min(1, op + 0.12))
                   : col(lightM ? 'dl' : 'dd', op);
                 ctx.fillText(ch, dX, dY);
@@ -5817,6 +5862,7 @@
           resize(); requestAnimationFrame(draw);
         }
         initSphere();
+
 
         var hero = document.querySelector('.hero');
         var media = document.querySelector('.hero-media');
@@ -5984,6 +6030,7 @@
         window.addEventListener('keydown', function (ev) {
           if (ev.key === 'Escape') closeModal();
         });
+
         var MOD_ORDER = ['hallazgos', 'informes', 'retests', 'lienzos'];
         var curMod = 0;
         var mCount = document.getElementById('mCount');
@@ -6052,7 +6099,7 @@
         }
 
 
-¡        (function () {
+        (function () {
           var cv = document.getElementById('mapCanvas');
           if (!cv) return;
           var ctx = cv.getContext('2d');
@@ -6134,6 +6181,7 @@
               ctx.fillRect(sx, 0, 1.6, H);
             }
 
+
             var cell = Math.max(1.4, W / COLS * 0.46);
             for (var i = 0; i < dots.length; i++) {
               var d = dots[i], dx = d.x * W, dy = d.y * H;
@@ -6148,6 +6196,7 @@
               ctx.fillRect(dx - cell / 2, dy - cell / 2, cell, cell);
             }
 
+
             ctx.setLineDash([5, 8]);
             ctx.lineDashOffset = -el * 26;
             ctx.lineWidth = 1.2;
@@ -6160,7 +6209,7 @@
               ctx.moveTo(HQ.x * W, HQ.y * H);
               ctx.quadraticCurveTo(ctrl.x * W, ctrl.y * H, m.x * W, m.y * H);
               ctx.stroke();
-¡              var tp = ((el * 0.22) + k * 0.31) % 1;
+              var tp = ((el * 0.22) + k * 0.31) % 1;
               var pp = arcPoint(HQ, ctrl, m, tp);
               ctx.save();
               ctx.shadowColor = 'rgba(206,190,255,.9)';
@@ -6191,7 +6240,7 @@
             if (!reduced) requestAnimationFrame(draw);
           }
 
-¡          var started = false;
+          var started = false;
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
               if (e.isIntersecting && !started) {
@@ -6212,7 +6261,7 @@
           tickClock();
           setInterval(tickClock, 1000);
 
-          var feedEl = document.getElementById('mapFeed');
+¡          var feedEl = document.getElementById('mapFeed');
           var feedIdx = 0, feedItems = [];
           function feedText(i) { return (I18N[LANG] && I18N[LANG]['map.f' + (i + 1)]) || ''; }
           function pushFeed() {
@@ -6237,6 +6286,7 @@
           });
         }
 
+
         var ebText = document.getElementById('ebText');
         if (ebText && reduceMotion === false) {
           var ebFinal = ebText.textContent;
@@ -6253,6 +6303,7 @@
             if (ebFrame >= ebTotal) { ebText.textContent = ebFinal; clearInterval(ebIv); }
           }, 45);
         }
+
 
         var progress = document.getElementById('progress');
         if (progress) {

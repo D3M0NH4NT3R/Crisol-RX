@@ -1494,6 +1494,10 @@
       grid-template-rows: 1fr
     }
 
+    .cs-nofold .cs-fbody {
+      transition: none !important
+    }
+
     .cs-fbody-inner {
       overflow: hidden;
       min-height: 0
@@ -4706,6 +4710,10 @@ sudo systemctl daemon-reload &amp;&amp; sudo systemctl enable --now crisol</pre>
       var head = folder.querySelector(".cs-fhead");
       if (head) head.setAttribute("aria-expanded", open ? "true" : "false");
     }
+
+    document.documentElement.classList.add("cs-nofold");
+    folders.forEach(function (folder) { setFolderOpen(folder, true); });
+    requestAnimationFrame(function () { document.documentElement.classList.remove("cs-nofold"); });
 
     folders.forEach(function (folder) {
       var head = folder.querySelector(".cs-fhead");

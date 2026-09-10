@@ -2856,6 +2856,61 @@
       color: #fff
     }
 
+    .beta-warn {
+      max-width: 560px;
+      margin: 0 auto;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      text-align: left;
+      transition: max-height .45s cubic-bezier(.16, 1, .3, 1), opacity .3s, margin-top .45s
+    }
+
+    .beta-warn.show {
+      max-height: 320px;
+      opacity: 1;
+      margin-top: 18px
+    }
+
+    .beta-warn-inner {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: rgba(214, 138, 30, .10);
+      border: 1px solid rgba(214, 138, 30, .40);
+      border-radius: 16px;
+      padding: 14px 16px
+    }
+
+    .beta-warn-ic {
+      flex: none;
+      color: #f0a53a;
+      margin-top: 1px
+    }
+
+    .beta-warn-ic svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .beta-warn p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #decaa6
+    }
+
+    .beta-warn b {
+      color: #f4cd93;
+      font-weight: 700
+    }
+
     /* ---------- contact ---------- */
     .contact-grid {
       display: grid;
@@ -4966,6 +5021,19 @@
           <button>Beta</button>
         </div>
 
+        <div class="beta-warn" id="betaWarn">
+          <div class="beta-warn-inner">
+            <span class="beta-warn-ic" aria-hidden="true"><svg viewBox="0 0 24 24">
+                <path d="M12 3 2.6 20.4h18.8L12 3Z" />
+                <path d="M12 10v5M12 18h.01" />
+              </svg></span>
+            <p data-i18n="dl.betawarn">Las versiones <b>beta</b> incorporan tecnologías y mejoras que todavía están en
+              fase de pruebas, por lo que pueden contener errores o comportamientos inestables. Para el uso habitual
+              recomendamos la versión <b>estable</b>: en cuanto una mejora supera los tests, se traslada rápidamente a la
+              rama estable, así que casi siempre es la mejor opción.</p>
+          </div>
+        </div>
+
         <div class="os-grid">
           <div class="os-card">
             <div class="os-head">
@@ -5309,7 +5377,7 @@
             'dl.kicker': 'Descarga',
             'dl.h2': 'Empieza ahora. <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">Es gratis.</span>',
             'dl.sub': 'Detectamos tu sistema automáticamente. También puedes elegir manualmente.',
-            'dl.detecting': 'Detectando…', 'dl.detected': '{os} detectado', 'dl.for': 'para {os}', 'dl.btn': 'Descargar', 'dl.ch1': 'Estable',
+            'dl.detecting': 'Detectando…', 'dl.detected': '{os} detectado', 'dl.for': 'para {os}', 'dl.btn': 'Descargar', 'dl.ch1': 'Estable', 'dl.betawarn': 'Las versiones <b>beta</b> incorporan tecnologías y mejoras que todavía están en fase de pruebas, por lo que pueden contener errores o comportamientos inestables. Para el uso habitual recomendamos la versión <b>estable</b>: en cuanto una mejora supera los tests se traslada rápidamente a la rama estable, así que casi siempre es la mejor opción.',
             'c.kicker': 'Contacto', 'c.h2': '¿Hablamos?',
             'c.p': 'Proyecto abierto y en evolución. Tu feedback marca el rumbo.',
             'c2.b': 'Reportar un problema', 'c2.s': 'Abre un issue en GitHub', 'c3.s': 'Autor del proyecto',
@@ -5442,7 +5510,7 @@
             'dl.kicker': 'Download',
             'dl.h2': 'Start now. <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">It\'s free.</span>',
             'dl.sub': 'We detect your system automatically. You can also choose manually.',
-            'dl.detecting': 'Detecting…', 'dl.detected': '{os} detected', 'dl.for': 'for {os}', 'dl.btn': 'Download', 'dl.ch1': 'Stable',
+            'dl.detecting': 'Detecting…', 'dl.detected': '{os} detected', 'dl.for': 'for {os}', 'dl.btn': 'Download', 'dl.ch1': 'Stable', 'dl.betawarn': 'Beta releases bundle technologies and improvements that are still under testing, so they may contain bugs or unstable behavior. For everyday use we recommend the <b>stable</b> version: as soon as an improvement passes the tests it is quickly moved into the stable branch, so it is almost always the better choice.',
             'c.kicker': 'Contact', 'c.h2': 'Shall we talk?',
             'c.p': 'An open, evolving project. Your feedback sets the course.',
             'c2.b': 'Report an issue', 'c2.s': 'Open an issue on GitHub', 'c3.s': 'Project author',
@@ -5636,6 +5704,8 @@
               chBtns.forEach(function (x) { x.classList.remove('on'); });
               b.classList.add('on');
               dlChannel = (i === 1) ? 'beta' : 'stable';
+              var bw = document.getElementById('betaWarn');
+              if (bw) bw.classList.toggle('show', i === 1);
               renderDownload();
             });
           });

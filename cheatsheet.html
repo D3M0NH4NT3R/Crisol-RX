@@ -555,7 +555,7 @@ añade el análisis de binarios (mucho más lento).</div></div><h3 class=cs-sub 
 que traen los Windows). <b>Ejecuta exactamente los mismos chequeos de solo lectura</b>
 (configuración, superficie de escalada, parches, UAC/LSA/Defender/SMB, admins locales,
 servicios, bastionado…). Reutiliza <b>las mismas credenciales</b> del barrido
-(<code>--user</code> / <code>--pass</code> / <code>--domain</code>): no hay flags nuevas.<div class=code><button class=copy-btn data-i18n=copy>Copiar</button><pre>./fragua --host 10.0.0.5 --user Administrador --pass 'P@ss' --domain CORP   <span class=c data-i18n=fr.winrm.ex1># audita Windows por WinRM si el 22 (SSH) está cerrado</span>
+(<code>--user</code> / <code>--pass</code> / <code>--domain</code>).<div class=code><button class=copy-btn data-i18n=copy>Copiar</button><pre>./fragua --host 10.0.0.5 --user Administrador --pass 'P@ss' --domain CORP   <span class=c data-i18n=fr.winrm.ex1># audita Windows por WinRM si el 22 (SSH) está cerrado</span>
 ./fragua --host 10.0.0.5 --user admin-local --pass 'P@ss'                     <span class=c data-i18n=fr.winrm.ex2># cuenta LOCAL (sin dominio): deja --domain vacío</span></pre></div><div class="note tip"><span class=ni>🪟</span><div data-i18n=fr.winrm.how><b>Cómo lo decide:</b> si <b>no</b> le pasas credenciales SSH
 (<code>--ssh-*</code>) pero sí <code>--user</code>/<code>--pass</code>, Fragua prueba <b>WinRM</b>
 en <code>5985</code> (HTTP) y <code>5986</code> (HTTPS). Si autentica, lanza la auditoría interna

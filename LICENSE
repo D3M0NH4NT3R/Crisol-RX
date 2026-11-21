@@ -1,18 +1,48 @@
 Crisol-RX
 Copyright (c) 2026 D3M0NH4NT3R (https://github.com/D3M0NH4NT3R)
+Todos los derechos reservados.
 
-Se concede permiso para usar, copiar y modificar este software, sujeto a
-las siguientes condiciones:
+LICENCIA DE USO
 
-1. ATRIBUCIÓN OBLIGATORIA. El crédito del autor original, "D3M0NH4NT3R",
-   debe mantenerse visible en la interfaz de usuario (barra inferior),
-   en este archivo LICENSE y en las cabeceras del código fuente.
-   No está permitido eliminarlo, ocultarlo ni atribuir la obra a terceros.
+1. OBJETO. Se concede una licencia personal, no exclusiva, no transferible,
+   gratuita y revocable para USAR este software, es decir, para instalarlo y
+   ejecutarlo con el fin para el que fue creado. Esta licencia NO transmite
+   la propiedad del software ni ningún otro derecho sobre él.
 
-2. El aviso de copyright anterior y este aviso de permiso se incluirán en
-   todas las copias o partes sustanciales del software.
+2. ACTOS PROHIBIDOS. Salvo autorización previa y por escrito del autor, no
+   está permitido:
+   a) copiar el software, total o parcialmente, salvo las copias técnicamente
+      imprescindibles para instalarlo y ejecutarlo y las copias de seguridad
+      de los datos generados con él;
+   b) modificar, adaptar, traducir o crear obras derivadas del software;
+   c) descompilar, desensamblar, aplicar ingeniería inversa o intentar
+      obtener el código fuente, salvo en los casos expresamente permitidos
+      por la ley aplicable;
+   d) distribuir, publicar, vender, alquilar, prestar, ceder, sublicenciar o
+      poner el software a disposición de terceros por cualquier medio;
+   e) eliminar, ocultar o alterar el crédito del autor, este aviso de
+      licencia o cualquier otro aviso de autoría o propiedad.
 
-EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA
-O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO EL
-AUTOR SERÁ RESPONSABLE DE NINGUNA RECLAMACIÓN, DAÑO U OTRA RESPONSABILIDAD.
+3. ATRIBUCIÓN. El crédito del autor original, "D3M0NH4NT3R", forma parte del
+   software y debe permanecer visible tal como se distribuye, en la interfaz
+   de usuario, en la documentación y en este archivo LICENSE. No está
+   permitido atribuir la obra a terceros.
+
+4. TITULARIDAD. El software es una obra protegida por la legislación de
+   propiedad intelectual. El autor conserva la titularidad exclusiva de
+   todos los derechos sobre él, incluidos los derechos morales de autoría,
+   y todos los derechos no concedidos expresamente en esta licencia.
+
+5. EXTINCIÓN AUTOMÁTICA. Cualquier incumplimiento de esta licencia extingue
+   de forma automática e inmediata el permiso de uso, sin necesidad de aviso
+   previo. En ese caso, el usuario deberá dejar de usar el software y
+   eliminar todas las copias en su poder.
+
+6. AUSENCIA DE GARANTÍA. EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA
+   DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A
+   GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO
+   INFRACCIÓN. EN NINGÚN CASO EL AUTOR SERÁ RESPONSABLE DE NINGUNA
+   RECLAMACIÓN, DAÑO U OTRA RESPONSABILIDAD DERIVADA DEL USO DEL SOFTWARE.
+
+Para cualquier uso distinto del permitido en esta licencia, contacta con el
+autor: https://github.com/D3M0NH4NT3R
